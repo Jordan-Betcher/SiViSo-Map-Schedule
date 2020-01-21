@@ -1,14 +1,26 @@
 SiViSo Map Scheduler
 Is a android application that allows you to go to silent, vibrate, and sound based on google map location
 
-Button SiViSo Project
-	SiViSo Button
-		[x]Find Android sound icons (Silent, Vibrate, Sound)
-			https://materialdesignicons.com/
-		Research adding icons
-		Research swapping through icons used for button on button click
-		
 
+SiViSo Map Scheduler Project
+	Locations
+		Add Location 
+			Research how to have a button change the layout in android studio
+		If Add Location show google map to choose location
+			Research how to default to current location
+			Research how to select locations from google Map
+		List locations (location siviso pair)
+			Research layout on how to list pairs
+			
+	Home
+		Title (SiViSo)
+		Google Map with current location teardrop and locations circled
+		Legend for google map
+		Edit Locations
+	
+	Series
+		Track if GPS is in/near location and then SiViSo
+		
 GoogleMap Project
 	GoogleMap
 		[x] Create a Google Map in Android Studio 
@@ -18,5 +30,13 @@ GoogleMap Project
 			The Solution was I was using the API key of a previous google map project and it was restricted so I had to add the package name and "SHA-1 certificate fingerprint" found in google_maps_api.xml to the key
 			Note: this is why it was working in the first project but not the next, couldn't find help because the tutorials just click the create new button
 		Rearrange Map
+
+Button SiViSo Project
+	SiViSo Button
+		[x]Find Android sound icons (Silent, Vibrate, Sound)
+			https://materialdesignicons.com/
+		Research adding icons
+		Research swapping through icons used for button on button click
+	
 
 
