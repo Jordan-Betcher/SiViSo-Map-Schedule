@@ -3,6 +3,7 @@ package com.betcher.jordan.sivisomapschedule;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.widget.ListView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,6 +12,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -18,13 +21,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_locations);
 
         /*
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        //*/
+
+        createList();
+    }
+
+    private void createList() {
+        ListView list = (ListView) findViewById(R.id.listTop);
+
+        ListItemLocationSiViSo location1 = new ListItemLocationSiViSo("location 1", "silent");
+        ListItemLocationSiViSo location2 = new ListItemLocationSiViSo("location 2 test", "vibrate");
+        ListItemLocationSiViSo location3 = new ListItemLocationSiViSo("location 3", "sound");
+        ListItemLocationSiViSo location4 = new ListItemLocationSiViSo("location 4", "silent");
+
+        ArrayList<ListItemLocationSiViSo> listLocationSiViSo = new ArrayList<ListItemLocationSiViSo>();
+        listLocationSiViSo.add(location1);
+        listLocationSiViSo.add(location2);
+        listLocationSiViSo.add(location3);
+        listLocationSiViSo.add(location4);
+
+        LocationSiViSoListAdapter adapter = new LocationSiViSoListAdapter(this, R.layout.layout_list_item, listLocationSiViSo);
+        list.setAdapter(adapter);
+
+        ArrayList<ListItemLocationSiViSo> t = new ArrayList<ListItemLocationSiViSo>();
+        ListItemLocationSiViSo location5 = new ListItemLocationSiViSo("location 5 das", "silent");
+        t.add(location5);
+
+        //*
+        ListView listBottom = (ListView) findViewById(R.id.listBottom);
+        LocationSiViSoListAdapter adapterBottom = new LocationSiViSoListAdapter(this, R.layout.layout_list_item, t);
+        listBottom.setAdapter(adapterBottom);
         //*/
     }
 
