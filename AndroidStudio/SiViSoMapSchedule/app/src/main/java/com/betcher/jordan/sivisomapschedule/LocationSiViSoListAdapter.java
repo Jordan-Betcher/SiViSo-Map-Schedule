@@ -10,13 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class LocationSiViSoListAdapter extends ArrayAdapter<ListItemLocationSiViSo> {
 
     private Context context;
     private int layout_list_item;
 
-    public LocationSiViSoListAdapter(Context context, int layout_list_item, ArrayList<ListItemLocationSiViSo> listLocationSiViSo) {
+    public LocationSiViSoListAdapter(Context context, int layout_list_item, List<ListItemLocationSiViSo> listLocationSiViSo) {
         super(context, layout_list_item, listLocationSiViSo);
         this.context = context;
         this.layout_list_item = layout_list_item;
