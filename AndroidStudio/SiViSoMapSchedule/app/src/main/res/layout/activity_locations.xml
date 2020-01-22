@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="onClick"
     tools:context=".MapsActivity">
 
     <ListView
@@ -26,7 +25,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listTop"
-        tools:context=".Locations" />
+        tools:context=".Locations"
+        />
 
     <ListView
         android:id="@+id/listBottom"
@@ -34,7 +34,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/map">
+        app:layout_constraintTop_toBottomOf="@+id/map"
+        >
 
     </ListView>
 
