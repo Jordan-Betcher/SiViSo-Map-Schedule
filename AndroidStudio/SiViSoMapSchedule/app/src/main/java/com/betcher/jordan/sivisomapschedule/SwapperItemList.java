@@ -30,23 +30,16 @@ class SwapperItemList
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
-				if(focused == list.get(position))
+				if (focused == list.get(position))
 				{
-					if(map.getView().getVisibility() == View.VISIBLE)
-					{
-						map.getView().setVisibility(View.GONE);
-					}
-					else
-					{
-						map.getView().setVisibility(View.VISIBLE);
-					}
+					focused = null;
 				}
 				else
 				{
 					focused = list.get(position);
-					updateTopAndBottomList();
-					map.getView().setVisibility(View.VISIBLE);
 				}
+				
+				updateTopAndBottomList();
 			}
 		});
 		
@@ -57,7 +50,6 @@ class SwapperItemList
 			{
 				focused = list.get(listTopAndBottom.listTop.size() + position);
 				updateTopAndBottomList();
-				map.getView().setVisibility(View.VISIBLE);
 			}
 		});
 		
@@ -73,13 +65,17 @@ class SwapperItemList
 	{
 		ListItemLocationSiViSo locationTest = new ListItemLocationSiViSo("location test", "silent");
 		
-		if(focused == null)
+		if (focused == null)
 		{
 			listTopAndBottom.listTop.removeAll(list);
+			listTopAndBottom.listBottom.removeAll(list);
+			
 			listTopAndBottom.listTop.addAll(list);
 			
 			listTopAndBottom.adapterTop.notifyDataSetChanged();
 			listTopAndBottom.adapterBottom.notifyDataSetChanged();
+			
+			map.getView().setVisibility(View.GONE);
 		}
 		else
 		{
@@ -94,6 +90,8 @@ class SwapperItemList
 			
 			listTopAndBottom.adapterTop.notifyDataSetChanged();
 			listTopAndBottom.adapterBottom.notifyDataSetChanged();
+			
+			map.getView().setVisibility(View.VISIBLE);
 		}
 	}
 }
