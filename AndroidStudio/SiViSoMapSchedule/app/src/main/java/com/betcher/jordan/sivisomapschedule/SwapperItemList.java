@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.android.gms.maps.SupportMapFragment;
+
 import java.util.ArrayList;
 
 class SwapperItemList
@@ -15,17 +17,36 @@ class SwapperItemList
 	
 	private ListItemLocationSiViSo focused;
 	
-	public SwapperItemList(Activity activity, int idLayoutOfItem, int idListTop, int idListBottom)
+	private SupportMapFragment map;
+	
+	public SwapperItemList(Activity activity, int idLayoutOfItem, int idListTop, int idListBottom, SupportMapFragment mapFragment)
 	{
 		listTopAndBottom = new ListTopAndBottom(activity, idLayoutOfItem, idListTop, idListBottom);
+		
+		this.map = mapFragment;
 		
 		listTopAndBottom.listViewTop.setOnItemClickListener(new AdapterView.OnItemClickListener()
 		{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
-				focused = list.get(position);
-				updateTopAndBottomList();
+				if(focused == list.get(position))
+				{
+					if(map.getView().getVisibility() == View.VISIBLE)
+					{
+						map.getView().setVisibility(View.GONE);
+					}
+					else
+					{
+						map.getView().setVisibility(View.VISIBLE);
+					}
+				}
+				else
+				{
+					focused = list.get(position);
+					updateTopAndBottomList();
+					map.getView().setVisibility(View.VISIBLE);
+				}
 			}
 		});
 		
@@ -36,6 +57,7 @@ class SwapperItemList
 			{
 				focused = list.get(listTopAndBottom.listTop.size() + position);
 				updateTopAndBottomList();
+				map.getView().setVisibility(View.VISIBLE);
 			}
 		});
 		

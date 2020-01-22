@@ -29,9 +29,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_locations);
 		
+		mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+		mapFragment.getMapAsync(this);
+		mapFragment.getView().setVisibility(View.GONE);
 		
-		SwapperItemList swapperItemList = new SwapperItemList(this, R.layout.layout_list_item, R.id.listTop, R.id.listBottom);
-		//*
+		SwapperItemList swapperItemList = new SwapperItemList(this, R.layout.layout_list_item, R.id.listTop, R.id.listBottom, mapFragment);
 		
 		ListItemLocationSiViSo location1 = new ListItemLocationSiViSo("location 1", "silent");
 		ListItemLocationSiViSo location2 = new ListItemLocationSiViSo("location 2 test", "vibrate");
@@ -44,13 +46,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		swapperItemList.AddListItem(location3);
 		swapperItemList.AddListItem(location4);
 		swapperItemList.AddListItem(location5);
-		//*/
-		
-		mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-		mapFragment.getMapAsync(this);
-		//mapFragment.getView().setVisibility(View.GONE);
-		
-		
 		
 	}
 	
