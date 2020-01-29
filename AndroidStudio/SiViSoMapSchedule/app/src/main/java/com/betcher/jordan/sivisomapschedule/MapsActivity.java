@@ -31,25 +31,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_locations);
+		setContentView(R.layout.layout_home);
 		
+		/*
 		mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 		mapFragment.getMapAsync(this);
 		mapFragment.getView().setVisibility(View.GONE);
-		
-		SwapperItemList swapperItemList = new SwapperItemList(this, R.layout.layout_list_item, R.id.listTop, R.id.listBottom, mapFragment);
-		
-		ListItemLocationSiViSo location1 = new ListItemLocationSiViSo("location 1", "silent");
-		ListItemLocationSiViSo location2 = new ListItemLocationSiViSo("location 2 test", "vibrate");
-		ListItemLocationSiViSo location3 = new ListItemLocationSiViSo("location 3", "sound");
-		ListItemLocationSiViSo location4 = new ListItemLocationSiViSo("location 4", "silent");
-		ListItemLocationSiViSo location5 = new ListItemLocationSiViSo("location 5 das", "silent");
-		
-		swapperItemList.AddListItem(location1);
-		swapperItemList.AddListItem(location2);
-		swapperItemList.AddListItem(location3);
-		swapperItemList.AddListItem(location4);
-		swapperItemList.AddListItem(location5);
+		//*/
 		
 	}
 	

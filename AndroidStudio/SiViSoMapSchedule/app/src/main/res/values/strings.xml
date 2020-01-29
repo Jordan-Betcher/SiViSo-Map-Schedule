@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">SiViSoMapSchedule</string>
     <string name="title_activity_maps">Map</string>
+    <string name="text_for_add_button">+</string>
+    <string name="text_for_onOff_switch">On/Off</string>
+    <string name="text_for_hint_name">Name</string>
+    <string name="text_for_hint_location">Location</string>
+    <string name="text_for_hint_latitude">Latitude</string>
+    <string name="text_for_hint_longitude">Longitude</string>
 </resources>
