@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SiViSoMapSchedule</string>
+    <string name="app_name">SiViSo Map Schedule</string>
     <string name="title_activity_maps">Map</string>
     <string name="text_for_add_button">+</string>
     <string name="text_for_onOff_switch">On/Off</string>
