@@ -1,42 +1,50 @@
 SiViSo Map Scheduler
 Is a android application that allows you to go to silent, vibrate, and sound based on google map location
 
-
 SiViSo Map Scheduler Project
-	Locations
-		Add Location 
-			Research how to have a button change the layout in android studio
-		If Add Location show google map to choose location
-			Research how to default to current location
-			Research how to select locations from google Map
-		List locations (location siviso pair)
-			Research layout on how to list pairs
-			
-	Home
-		Title (SiViSo)
-		Google Map with current location teardrop and locations circled
-		Legend for google map
-		Edit Locations
-	
-	Series
+	Home Page
+		On Off button
+			Turn on / off the service
+		Map
+			Follow current location
+			Show Locations
+				Locations in the list
+				Locations with the right SiViSo images
+		Form
+			Name
+			SiViSo
+			Location
+				Guess based on text 
+			Cancel  Button (or back button)
+				Cancels current add or current changes
+			Add / Edit Button
+				Adds to the list or edits the list
+		Add Location Button
+		Locations List
+			Able to select one to edit
+			Able to delete
+		
+	Service
+		Run in background
 		Track if GPS is in/near location and then SiViSo
 		
-GoogleMap Project
-	GoogleMap
-		[x] Create a Google Map in Android Studio 
-			https://youtu.be/qS1E-Vrk60E
-			https://developers.google.com/maps/documentation/android-sdk/start
-		[x] Error: Map Blank
-			The Solution was I was using the API key of a previous google map project and it was restricted so I had to add the package name and "SHA-1 certificate fingerprint" found in google_maps_api.xml to the key
-			Note: this is why it was working in the first project but not the next, couldn't find help because the tutorials just click the create new button
-		Rearrange Map
+Research
+	Research how to get and follow current location
+		https://youtu.be/qS1E-Vrk60E?t=711
+		https://youtu.be/qS1E-Vrk60E?t=1638
+	Research how to list items
+	Research how to create a SiViSo drop down
+	Research how to get place name search bar
+		Use Google Places API https://youtu.be/6Trdd9EnmqY
+	Research how to have the back button do something
+	Research how to Store on phone
+		Store text https://youtu.be/EcfUkjlL9RI
+	Research how to operate a service
+		https://youtu.be/FbpD5RZtbCc
+	Research how to tell if you are near a location
+	How To get Text from TextInput
+		Shows how to get text as well as hint and error https://youtu.be/veOZTvAdzJ8
 
-Button SiViSo Project
-	SiViSo Button
-		[x]Find Android sound icons (Silent, Vibrate, Sound)
-			https://materialdesignicons.com/
-		Research adding icons
-		Research swapping through icons used for button on button click
 	
 
 
