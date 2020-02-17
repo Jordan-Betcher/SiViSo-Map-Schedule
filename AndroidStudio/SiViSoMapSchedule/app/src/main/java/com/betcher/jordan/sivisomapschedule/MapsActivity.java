@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,6 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	private GoogleMap mMap;
 	SupportMapFragment mapFragment;
+	Switch onOff;
 	
 	@RequiresApi(api = Build.VERSION_CODES.M)
 	@Override
@@ -45,6 +48,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 		mapFragment.getMapAsync(this);
+		
+		onOff = (Switch) this.findViewById(R.id.onOff);
 		
 		if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) ==
 		    PackageManager.PERMISSION_GRANTED ||
@@ -111,10 +116,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		mMap = googleMap;
 	}
 	
-	public void onClick(View view)
+	public void onOnOffClick(View view)
 	{
-		mapFragment.getView().setVisibility(View.VISIBLE);
+		if(onOff.isChecked())
+		{
+			Toast.makeText(this, "On", Toast.LENGTH_SHORT).show();
+		}
+		else
+		{
+			Toast.makeText(this, "Off", Toast.LENGTH_SHORT).show();
+		}
 	}
+	
 	
 	
 }
