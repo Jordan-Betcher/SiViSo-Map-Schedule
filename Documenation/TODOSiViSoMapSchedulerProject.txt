@@ -33,15 +33,20 @@ Research
 		https://youtu.be/qS1E-Vrk60E?t=711
 		https://youtu.be/qS1E-Vrk60E?t=1638
 	Research how to list items
-	Research how to create a SiViSo drop down
+		https://youtu.be/E6vE8fqQPTE
+		How to add to the list https://youtu.be/ws_p8LJ4Uq8?t=262
+	Research how to create a SiViSo spinner
+		Creating a custom spinner with image and text https://youtu.be/GeO5F0nnzAw
 	Research how to get place name search bar
 		Use Google Places API https://youtu.be/6Trdd9EnmqY
 	Research how to have the back button do something
+		Using onBackPress Method https://youtu.be/1Nmy88n7CZ8
 	Research how to Store on phone
 		Store text https://youtu.be/EcfUkjlL9RI
 	Research how to operate a service
 		https://youtu.be/FbpD5RZtbCc
 	Research how to tell if you are near a location
+		You will have to get a list of nearby locations and see if your location is on the list.
 	How To get Text from TextInput
 		Shows how to get text as well as hint and error https://youtu.be/veOZTvAdzJ8
 
