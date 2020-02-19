@@ -25,33 +25,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:onClick="addToDatabase"
+        android:onClick="addTestToDatabase"
         android:text="@string/text_for_button_add"
-        app:layout_constraintEnd_toStartOf="@+id/buttonDeleteLast"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDeleteTest"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDatabase" />
 
     <Button
-        android:id="@+id/buttonDeleteLast"
+        android:id="@+id/buttonDeleteTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="deleteLastFromDatabase"
-        android:text="@string/text_for_button_delete_last"
-        app:layout_constraintEnd_toStartOf="@+id/buttonAppendTestToLast"
+        android:onClick="deleteTestFromDatabase"
+        android:text="@string/text_for_button_delete_test"
+        app:layout_constraintEnd_toStartOf="@+id/buttonTestToTest2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonAdd"
         app:layout_constraintTop_toTopOf="@+id/buttonAdd" />
 
     <Button
-        android:id="@+id/buttonAppendTestToLast"
+        android:id="@+id/buttonTestToTest2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="appendTestToLastOfDatabase"
-        android:text="@string/text_for_button_append_test_to_last"
+        android:onClick="updateTestToTest2Vibrate"
+        android:text="@string/text_for_button_edit_test_to_test2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonDeleteLast"
-        app:layout_constraintTop_toTopOf="@+id/buttonDeleteLast" />
+        app:layout_constraintStart_toEndOf="@+id/buttonDeleteTest"
+        app:layout_constraintTop_toTopOf="@+id/buttonDeleteTest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

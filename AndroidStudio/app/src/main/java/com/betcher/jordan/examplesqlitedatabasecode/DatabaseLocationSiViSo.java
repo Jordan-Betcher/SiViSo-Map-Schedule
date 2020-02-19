@@ -25,7 +25,7 @@ public class DatabaseLocationSiViSo extends SQLiteOpenHelper
 	}
 	
 	@Override
-	public void onCreate(SQLiteDatabase db)
+	public void onCreate(SQLiteDatabase database)
 	{
 		String createTable = "CREATE TABLE" + " "
 		                     + TABLE_NAME + " "
@@ -33,29 +33,33 @@ public class DatabaseLocationSiViSo extends SQLiteOpenHelper
 		                     + COLUMN_1_NAME + " " + "TEXT" + ", "
 		                     + COLUMN_2_NAME + " " + "TEXT"
 		                     + ")";
-		db.execSQL(createTable);
+		database.execSQL(createTable);
 	}
 	
 	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+	public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion)
 	{
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-		onCreate(db);
+		database.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+		onCreate(database);
 	}
 	
 	
-	public boolean addData(String location, SiViSo siviso) {
-		SQLiteDatabase db = this.getWritableDatabase();
+	public boolean addData(String location, SiViSo siviso)
+	{
+		SQLiteDatabase database = this.getWritableDatabase();
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(COLUMN_1_NAME, location);
 		contentValues.put(COLUMN_2_NAME, siviso.name);
 		
-		long result = db.insert(TABLE_NAME, null, contentValues);
+		long result = database.insert(TABLE_NAME, null, contentValues);
 		
 		//if data as inserted incorrectly it will return -1
-		if (result == -1) {
+		if (result == -1)
+		{
 			return false;
-		} else {
+		}
+		else
+		{
 			return true;
 		}
 	}
@@ -63,13 +67,13 @@ public class DatabaseLocationSiViSo extends SQLiteOpenHelper
 	public String getDatabaseAsString()
 	{
 		ArrayList<String> theList = new ArrayList<>();
-		SQLiteDatabase db = this.getWritableDatabase();
-		Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+		SQLiteDatabase database = this.getWritableDatabase();
+		Cursor data = database.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 		while (data.moveToNext())
 		{
 			String row = "";
 			
-			for(int column = 0; column < data.getColumnCount(); column++)
+			for (int column = 0; column < data.getColumnCount(); column++)
 			{
 				row += data.getString(column);
 				row += " ";
@@ -79,11 +83,31 @@ public class DatabaseLocationSiViSo extends SQLiteOpenHelper
 		}
 		
 		String display = "";
-		for(String line : theList)
+		for (String line : theList)
 		{
 			display += line;
 			display += "\n";
 		}
 		return display;
 	}
+	
+	public int delete()
+	{
+		SQLiteDatabase database = this.getWritableDatabase();
+		int rowsDeleted = database.delete(TABLE_NAME, (COLUMN_1_NAME + "=?"), new String[]{"test"});
+		return rowsDeleted;
+	}
+	
+	public void updateAllToVibrate()
+	{
+		SQLiteDatabase database = this.getWritableDatabase();
+		
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(COLUMN_1_NAME, "test2");
+		contentValues.put(COLUMN_2_NAME, SiViSo.VIBRATE.name);
+		
+		database.update(TABLE_NAME, contentValues, (COLUMN_1_NAME + "=?"), new String[]{"test"});
+		
+	}
+	
 }

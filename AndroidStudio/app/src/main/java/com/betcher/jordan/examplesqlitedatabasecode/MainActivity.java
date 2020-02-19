@@ -32,36 +32,27 @@ public class MainActivity extends AppCompatActivity
 		displayDatabase();
 	}
 	
-	public void addToDatabase(View view)
+	public void addTestToDatabase(View view)
 	{
 		boolean work = databaseLocationSiViSo.addData("test", SiViSo.SILENT);
-		
-		if(work)
-		{
-			Toast.makeText(this, "It work", Toast.LENGTH_LONG).show();
-		}
-		else
-		{
-			Toast.makeText(this, "It no work", Toast.LENGTH_LONG).show();
-		}
 		displayDatabase();
 	}
 	
-	public void deleteLastFromDatabase(View view)
+	public void deleteTestFromDatabase(View view)
 	{
-	
+		int rowsDeleted = databaseLocationSiViSo.delete();
+		Toast.makeText(this, "It deleted " + rowsDeleted, Toast.LENGTH_LONG).show();
+		displayDatabase();
 	}
 	
-	public void appendTestToLastOfDatabase(View view)
+	public void updateTestToTest2Vibrate(View view)
 	{
-		
-	
-		
+		databaseLocationSiViSo.updateAllToVibrate();
+		displayDatabase();
 	}
 	
 	private void displayDatabase()
 	{
-		
 		String display = databaseLocationSiViSo.getDatabaseAsString();
 		textViewDatabase.setText(display);
 	}
