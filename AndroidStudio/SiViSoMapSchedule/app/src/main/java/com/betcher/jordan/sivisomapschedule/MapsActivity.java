@@ -5,6 +5,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -39,7 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	SupportMapFragment mapFragment;
 	Switch onOff;
 	
-	@RequiresApi(api = Build.VERSION_CODES.M)
+	@RequiresApi(api = Build.VERSION_CODES.O)
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -51,6 +53,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		onOff = (Switch) this.findViewById(R.id.onOff);
 		
+		createNotificationChannel();
+		
+		addCurrentLocationListener();
+		
+		
+	}
+	
+	@RequiresApi(api = Build.VERSION_CODES.M)
+	private void addCurrentLocationListener()
+	{
 		if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) ==
 		    PackageManager.PERMISSION_GRANTED ||
 		    checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ==
@@ -104,10 +116,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		else
 		{
 			ActivityCompat.requestPermissions(this, new String[]
-				                                   {Manifest.permission.ACCESS_FINE_LOCATION},
-		                                   REQUEST_LOCATION_PERMISSION);
+					                                  {Manifest.permission.ACCESS_FINE_LOCATION},
+			                                  REQUEST_LOCATION_PERMISSION);
 			return;
 		}
+	}
+	
+	@RequiresApi(api = Build.VERSION_CODES.O)
+	private void createNotificationChannel()
+	{
+		NotificationChannel serviceChannel = new NotificationChannel("ChannelID", "Channel Name",
+		                                                             NotificationManager.IMPORTANCE_DEFAULT
+		);
+		
+		NotificationManager manager = getSystemService(NotificationManager.class);
+		manager.createNotificationChannel(serviceChannel);
+		
 	}
 	
 	@Override
