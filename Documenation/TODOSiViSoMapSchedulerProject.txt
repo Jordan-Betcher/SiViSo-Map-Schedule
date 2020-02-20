@@ -33,6 +33,7 @@ Research
 	Research how to Store data on phone
         Store data in Sqlite and view with list view https://youtu.be/SK98ayjhk1E
         Sqlite Delete data https://stackoverflow.com/questions/7510219/deleting-row-in-sqlite-in-android
+        CRUD beginner examples https://www.journaldev.com/9438/android-sqlite-database-example-tutorial#updating-record-in-android-sqlite-database-table
 		Store text https://youtu.be/EcfUkjlL9RI
 	Research how to list items
 		https://youtu.be/E6vE8fqQPTE
