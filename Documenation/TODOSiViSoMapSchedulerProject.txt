@@ -14,7 +14,7 @@ Database able to add, delete, edit database from code
         [x]Get
         [x]Delete
         [x]Edit
-[]Display Database as list
+[X]Display Database as list
 []Add to database from app
 
 Get locations to add to database
