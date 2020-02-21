@@ -7,34 +7,40 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
 	private static final int REQUEST_LOCATION_PERMISSION = 1;
 	
-	private GoogleMap mMap;
+	public GoogleMap googleMap;
 	SupportMapFragment mapFragment;
-	Switch onOffSwitch;
-	TextInputEditText nameTextInput;
-	Spinner sivisoSpinner;
-	TextInputEditText locationTextInput;
-	ConstraintLayout form;
+	
+	TextView          title;
+	Switch            switchOnOff;
+	ConstraintLayout  form;
+	TextInputEditText textInputName;
+	Spinner           spinnerSiViSo;
+	TextInputEditText textInputLocation;
+	Button            buttonCancel;
+	Button            buttonConfirm;
+	Button   buttonAdd;
+	ListView locationsListView;
+	Button buttonDelete;
+	Button buttonEdit;
 	
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	@Override
@@ -46,21 +52,57 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 		mapFragment.getMapAsync(this);
 		
-		onOffSwitch = (Switch) this.findViewById(R.id.switchOnOff);
-		
-		form = (ConstraintLayout) this.findViewById(R.id.form);
-		nameTextInput = (TextInputEditText) this.findViewById(R.id.textInputName);
-		sivisoSpinner = (Spinner) this.findViewById(R.id.spinnerSiViSo);
-		locationTextInput = (TextInputEditText) this.findViewById(R.id.textInputLocation);
-		
-		form.setVisibility(View.GONE);
-		
+		title             = (TextView) this.findViewById(R.id.textViewTitle);
+		switchOnOff       = (Switch) this.findViewById(R.id.switchOnOff);
+		form              = (ConstraintLayout) this.findViewById(R.id.form);
+		textInputName     = (TextInputEditText) this.findViewById(R.id.textInputName);
+		spinnerSiViSo     = (Spinner) this.findViewById(R.id.spinnerSiViSo);
+		textInputLocation = (TextInputEditText) this.findViewById(R.id.textInputLocation);
+		locationsListView = (ListView) this.findViewById(R.id.listViewLocations);
+		buttonAdd         = (Button) this.findViewById(R.id.buttonAddLocation);
+		buttonCancel      = (Button) this.findViewById(R.id.buttonCancel);
+		buttonConfirm     = (Button) this.findViewById(R.id.buttonConfirm);
+		buttonEdit        = (Button) this.findViewById(R.id.buttonEdit);
+		buttonDelete      = (Button) this.findViewById(R.id.buttonDelete);
 		
 		makeMapFollowCurrentLocation();
 		
-		
+		setStateHome();
 	}
 	
+	public void onClickButtonAdd(View view)
+	{
+		setStateAddLocation();
+	}
+	
+	private void setStateAddLocation()
+	{
+		title.setText(R.string.title_add_location);
+		switchOnOff.setVisibility(View.GONE);
+		form.setVisibility(View.VISIBLE);
+		buttonAdd.setVisibility(View.GONE);
+		buttonEdit.setVisibility(View.GONE);
+		buttonDelete.setVisibility(View.GONE);
+		locationsListView.setVisibility(View.GONE);
+	}
+	
+	public void onClickButtonCancel(View view)
+	{
+		setStateHome();
+	}
+	
+	private void setStateHome()
+	{
+		title.setText(R.string.title_home);
+		switchOnOff.setVisibility(View.VISIBLE);
+		form.setVisibility(View.GONE);
+		buttonAdd.setVisibility(View.VISIBLE);
+		buttonEdit.setVisibility(View.VISIBLE);
+		buttonDelete.setVisibility(View.VISIBLE);
+		locationsListView.setVisibility(View.VISIBLE);
+	}
+	
+	//https://youtu.be/qS1E-Vrk60E?t=711
 	@RequiresApi(api = Build.VERSION_CODES.M)
 	private void makeMapFollowCurrentLocation()
 	{
@@ -69,56 +111,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		    checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ==
 		    PackageManager.PERMISSION_GRANTED)
 		{
-			// TODO: Consider calling
-			//    Activity#requestPermissions
-			// here to request the missing permissions, and then overriding
-			//			//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-			//			//                                          int[] grantResults)
-			//			// to handle the case where the user grants the permission. See the documentation
-			//			// for Activity#requestPermissions for more details.
-			
 			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 			locationManager.requestLocationUpdates(
 					LocationManager.NETWORK_PROVIDER,
 					0,
 					0,
-					new LocationListener()
-					{
-						@Override
-						public void onLocationChanged(Location location)
-						{
-							double latitude = location.getLatitude();
-							double longitude = location.getLongitude();
-							LatLng currentLocation = new LatLng(latitude, longitude);
-							mMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
-							mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f));
-						}
-						
-						@Override
-						public void onStatusChanged(String provider, int status, Bundle extras)
-						{
-						
-						}
-						
-						@Override
-						public void onProviderEnabled(String provider)
-						{
-						
-						}
-						
-						@Override
-						public void onProviderDisabled(String provider)
-						{
-						
-						}
-					}
+					new LocationListenerCurrentLocation(this)
 			);
 		}
 		else
 		{
 			ActivityCompat.requestPermissions(this, new String[]
 					                                  {Manifest.permission.ACCESS_FINE_LOCATION},
-			                                  REQUEST_LOCATION_PERMISSION);
+			                                  REQUEST_LOCATION_PERMISSION
+			);
 			return;
 		}
 	}
@@ -126,9 +132,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	@Override
 	public void onMapReady(GoogleMap googleMap)
 	{
-		mMap = googleMap;
+		this.googleMap = googleMap;
 	}
-	
 	
 	
 }

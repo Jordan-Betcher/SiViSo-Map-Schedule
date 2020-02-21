@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">SiViSo Map Schedule</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_home">SiViSo Map Schedule</string>
+    <string name="title_add_location">Add Location</string>
+    <string name="title_edit_location">Edit Location</string>
     <string name="text_for_add_button">+</string>
     <string name="text_for_cancel_button">Cancel</string>
     <string name="text_for_confirm_button">Confirm</string>
