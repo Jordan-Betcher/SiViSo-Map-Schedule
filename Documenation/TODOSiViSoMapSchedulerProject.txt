@@ -2,7 +2,7 @@ SiViSo Map Scheduler
 Is a android application that allows you to go to silent, vibrate, and sound based on google map location
 
 Steps:
-Database able to add, delete, edit database from code
+[x]Database able to add, delete, edit database from code
 	[x]Create a new project
 	[x]The form has a 
 		[x]Text view that displays the database
@@ -14,7 +14,7 @@ Database able to add, delete, edit database from code
         [x]Get
         [x]Delete
         [x]Edit
-[X]Display Database as list
+[x]Display Database as list
 []Add to database from app
 
 Get locations to add to database

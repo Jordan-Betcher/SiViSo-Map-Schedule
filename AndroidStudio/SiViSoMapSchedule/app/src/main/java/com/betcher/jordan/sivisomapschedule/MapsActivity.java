@@ -1,26 +1,20 @@
 package com.betcher.jordan.sivisomapschedule;
 
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,10 +22,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
@@ -39,7 +30,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	private GoogleMap mMap;
 	SupportMapFragment mapFragment;
-	Switch onOff;
+	Switch onOffSwitch;
+	TextInputEditText nameTextInput;
+	Spinner sivisoSpinner;
+	TextInputEditText locationTextInput;
+	ConstraintLayout form;
 	
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	@Override
@@ -51,17 +46,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 		mapFragment.getMapAsync(this);
 		
-		onOff = (Switch) this.findViewById(R.id.onOff);
+		onOffSwitch = (Switch) this.findViewById(R.id.switchOnOff);
 		
-		createNotificationChannel();
+		form = (ConstraintLayout) this.findViewById(R.id.form);
+		nameTextInput = (TextInputEditText) this.findViewById(R.id.textInputName);
+		sivisoSpinner = (Spinner) this.findViewById(R.id.spinnerSiViSo);
+		locationTextInput = (TextInputEditText) this.findViewById(R.id.textInputLocation);
 		
-		addCurrentLocationListener();
+		form.setVisibility(View.GONE);
+		
+		
+		makeMapFollowCurrentLocation();
 		
 		
 	}
 	
 	@RequiresApi(api = Build.VERSION_CODES.M)
-	private void addCurrentLocationListener()
+	private void makeMapFollowCurrentLocation()
 	{
 		if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) ==
 		    PackageManager.PERMISSION_GRANTED ||
@@ -122,34 +123,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		}
 	}
 	
-	@RequiresApi(api = Build.VERSION_CODES.O)
-	private void createNotificationChannel()
-	{
-		NotificationChannel serviceChannel = new NotificationChannel("ChannelID", "Channel Name",
-		                                                             NotificationManager.IMPORTANCE_DEFAULT
-		);
-		
-		NotificationManager manager = getSystemService(NotificationManager.class);
-		manager.createNotificationChannel(serviceChannel);
-		
-	}
-	
 	@Override
 	public void onMapReady(GoogleMap googleMap)
 	{
 		mMap = googleMap;
-	}
-	
-	public void onOnOffClick(View view)
-	{
-		if(onOff.isChecked())
-		{
-			Toast.makeText(this, "On", Toast.LENGTH_SHORT).show();
-		}
-		else
-		{
-			Toast.makeText(this, "Off", Toast.LENGTH_SHORT).show();
-		}
 	}
 	
 	
