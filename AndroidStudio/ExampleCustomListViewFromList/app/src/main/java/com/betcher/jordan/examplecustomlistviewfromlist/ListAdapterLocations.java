@@ -1,12 +1,10 @@
 package com.betcher.jordan.examplecustomlistviewfromlist;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +16,7 @@ class ListAdapterLocations extends ArrayAdapter<Location>
 {
 	static final int idOfLayout = R.layout.list_item_location;
 	static final int idOfTextViewName = R.id.textViewName;
-	static final int idOfTextViewLocation = R.id.textViewLocation;
+	static final int idOfTextViewLocation = R.id.textViewAddress;
 	static final int idOfTextViewSiViSo = R.id.textViewSiViSo;
 	
 	Context context;
@@ -47,7 +45,7 @@ class ListAdapterLocations extends ArrayAdapter<Location>
 		textViewSiViSo = convertView.findViewById(idOfTextViewSiViSo);
 		
 		textViewName.setText(location.name);
-		textViewLocation.setText(location.location);
+		textViewLocation.setText(location.address);
 		textViewSiViSo.setText(location.siviso.name);
 		
 		return convertView;

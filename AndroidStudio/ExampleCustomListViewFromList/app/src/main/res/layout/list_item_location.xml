@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewLocation"
+        android:id="@+id/textViewAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/textViewSiViSo"
@@ -29,6 +29,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewLocation"
-        app:layout_constraintTop_toTopOf="@+id/textViewLocation" />
+        app:layout_constraintStart_toEndOf="@+id/textViewAddress"
+        app:layout_constraintTop_toTopOf="@+id/textViewAddress" />
 </androidx.constraintlayout.widget.ConstraintLayout>
