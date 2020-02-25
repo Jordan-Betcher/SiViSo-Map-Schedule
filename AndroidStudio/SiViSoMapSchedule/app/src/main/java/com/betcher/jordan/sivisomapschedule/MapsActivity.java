@@ -68,6 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		makeMapFollowCurrentLocation();
 		
 		setStateHome();
+		
 	}
 	
 	public void onClickButtonAdd(View view)
