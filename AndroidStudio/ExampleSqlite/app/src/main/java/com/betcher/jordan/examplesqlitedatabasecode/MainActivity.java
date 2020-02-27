@@ -2,13 +2,8 @@ package com.betcher.jordan.examplesqlitedatabasecode;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
-
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +13,7 @@ public class MainActivity extends AppCompatActivity
 {
 	
 	TextView textViewDatabase;
-	DatabaseLocationSiViSo databaseLocationSiViSo;
+	SQLiteLocation databaseLocation;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -27,33 +22,46 @@ public class MainActivity extends AppCompatActivity
 		setContentView(R.layout.activity_main);
 		
 		textViewDatabase = (TextView) findViewById(R.id.textViewDatabase);
-		databaseLocationSiViSo = new DatabaseLocationSiViSo(this);
+		databaseLocation = new SQLiteLocation(this);
 		
 		displayDatabase();
 	}
 	
 	public void addTestToDatabase(View view)
 	{
-		boolean work = databaseLocationSiViSo.addData("test", SiViSo.SILENT);
+		boolean work = databaseLocation.addData("test", "address 12345", SiViSo.SILENT);
 		displayDatabase();
 	}
 	
 	public void deleteTestFromDatabase(View view)
 	{
-		int rowsDeleted = databaseLocationSiViSo.delete();
+		int rowsDeleted = databaseLocation.delete("test");
 		Toast.makeText(this, "It deleted " + rowsDeleted, Toast.LENGTH_LONG).show();
 		displayDatabase();
 	}
 	
-	public void updateTestToTest2Vibrate(View view)
+	public void updateTestToVibrate(View view)
 	{
-		databaseLocationSiViSo.updateAllToVibrate();
+		databaseLocation.update("test", SiViSo.VIBRATE);
 		displayDatabase();
 	}
 	
 	private void displayDatabase()
 	{
-		String display = databaseLocationSiViSo.getDatabaseAsString();
+		ArrayList<Location> locations = databaseLocation.getDatabaseAsArrayList();
+		
+		String display = "";
+		
+		for(Location location : locations)
+		{
+			display += location.getName();
+			display += " ";
+			display += location.getAddress();
+			display += " ";
+			display += location.getSiviso().name;
+			display += "\n";
+		}
+		
 		textViewDatabase.setText(display);
 	}
 }

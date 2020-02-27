@@ -42,6 +42,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	Button buttonDelete;
 	Button buttonEdit;
 	
+	SQLiteLocation databaseLocation;
+	
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -64,6 +66,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		buttonConfirm     = (Button) this.findViewById(R.id.buttonConfirm);
 		buttonEdit        = (Button) this.findViewById(R.id.buttonEdit);
 		buttonDelete      = (Button) this.findViewById(R.id.buttonDelete);
+		
+		databaseLocation = new SQLiteLocation(this);
 		
 		makeMapFollowCurrentLocation();
 		

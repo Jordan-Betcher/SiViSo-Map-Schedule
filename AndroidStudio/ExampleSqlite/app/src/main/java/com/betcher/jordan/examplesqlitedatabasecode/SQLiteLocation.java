@@ -1,4 +1,4 @@
-package com.betcher.jordan.sivisomapschedule;
+package com.betcher.jordan.examplesqlitedatabasecode;
 
 import android.content.ContentValues;
 import android.content.Context;

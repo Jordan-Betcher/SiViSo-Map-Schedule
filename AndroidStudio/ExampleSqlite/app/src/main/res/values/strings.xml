@@ -2,5 +2,5 @@
     <string name="app_name">ExampleSQLiteDatabaseCode</string>
     <string name="text_for_button_add">Add</string>
     <string name="text_for_button_delete_test">Delete Test</string>
-    <string name="text_for_button_edit_test_to_test2">Edit Test to Test2</string>
+    <string name="text_for_button_edit_test_to_test2">Edit Test to Vibrate</string>
 </resources>

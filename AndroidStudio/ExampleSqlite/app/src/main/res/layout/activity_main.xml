@@ -38,16 +38,16 @@
         android:layout_height="wrap_content"
         android:onClick="deleteTestFromDatabase"
         android:text="@string/text_for_button_delete_test"
-        app:layout_constraintEnd_toStartOf="@+id/buttonTestToTest2"
+        app:layout_constraintEnd_toStartOf="@+id/buttonTestToVibrate"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonAdd"
         app:layout_constraintTop_toTopOf="@+id/buttonAdd" />
 
     <Button
-        android:id="@+id/buttonTestToTest2"
+        android:id="@+id/buttonTestToVibrate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="updateTestToTest2Vibrate"
+        android:onClick="updateTestToVibrate"
         android:text="@string/text_for_button_edit_test_to_test2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
