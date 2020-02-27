@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -21,6 +22,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
@@ -34,15 +37,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	ConstraintLayout  form;
 	TextInputEditText textInputName;
 	Spinner           spinnerSiViSo;
-	TextInputEditText textInputLocation;
+	TextInputEditText textInputAddress;
 	Button            buttonCancel;
 	Button            buttonConfirm;
-	Button   buttonAdd;
-	ListView locationsListView;
-	Button buttonDelete;
-	Button buttonEdit;
+	Button            buttonAdd;
+	ListView          listViewLocations;
 	
 	SQLiteLocation databaseLocation;
+	ListAdapterLocations listAdapterLocations;
 	
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	@Override
@@ -57,27 +59,51 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		title             = (TextView) this.findViewById(R.id.textViewTitle);
 		switchOnOff       = (Switch) this.findViewById(R.id.switchOnOff);
 		form              = (ConstraintLayout) this.findViewById(R.id.form);
-		textInputName     = (TextInputEditText) this.findViewById(R.id.textInputName);
+		textInputName     = (TextInputEditText) this.findViewById(R.id.textViewName);
 		spinnerSiViSo     = (Spinner) this.findViewById(R.id.spinnerSiViSo);
-		textInputLocation = (TextInputEditText) this.findViewById(R.id.textInputLocation);
-		locationsListView = (ListView) this.findViewById(R.id.listViewLocations);
+		textInputAddress  = (TextInputEditText) this.findViewById(R.id.textInputAddress);
+		listViewLocations = (ListView) this.findViewById(R.id.listViewLocations);
 		buttonAdd         = (Button) this.findViewById(R.id.buttonAddLocation);
 		buttonCancel      = (Button) this.findViewById(R.id.buttonCancel);
 		buttonConfirm     = (Button) this.findViewById(R.id.buttonConfirm);
-		buttonEdit        = (Button) this.findViewById(R.id.buttonEdit);
-		buttonDelete      = (Button) this.findViewById(R.id.buttonDelete);
 		
 		databaseLocation = new SQLiteLocation(this);
+		//Test
+		databaseLocation.addData("test", "test address", SiViSo.SILENT);
 		
 		makeMapFollowCurrentLocation();
+		initListView();
 		
 		setStateHome();
 		
 	}
 	
+	private void initListView()
+	{
+		ArrayList<Location> locations = databaseLocation.getDatabaseAsArrayList();
+		listAdapterLocations = new ListAdapterLocations(this, locations);
+		listViewLocations.setAdapter(listAdapterLocations);
+	}
+	
 	public void onClickButtonAdd(View view)
 	{
 		setStateAddLocation();
+	}
+	
+	public void onClickButtonCancel(View view)
+	{
+		setStateHome();
+	}
+	
+	public void onClickButtonConfirm(View view)
+	{
+		String name = textInputName.getText().toString();
+		String address = textInputAddress.getText().toString();
+		String siviso = spinnerSiViSo.getSelectedItem().toString();
+		
+		databaseLocation.addData(name, address, SiViSo.fromString(siviso));
+		setStateHome();
+		initListView();
 	}
 	
 	private void setStateAddLocation()
@@ -86,14 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		switchOnOff.setVisibility(View.GONE);
 		form.setVisibility(View.VISIBLE);
 		buttonAdd.setVisibility(View.GONE);
-		buttonEdit.setVisibility(View.GONE);
-		buttonDelete.setVisibility(View.GONE);
-		locationsListView.setVisibility(View.GONE);
-	}
-	
-	public void onClickButtonCancel(View view)
-	{
-		setStateHome();
+		listViewLocations.setVisibility(View.GONE);
 	}
 	
 	private void setStateHome()
@@ -102,9 +121,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		switchOnOff.setVisibility(View.VISIBLE);
 		form.setVisibility(View.GONE);
 		buttonAdd.setVisibility(View.VISIBLE);
-		buttonEdit.setVisibility(View.VISIBLE);
-		buttonDelete.setVisibility(View.VISIBLE);
-		locationsListView.setVisibility(View.VISIBLE);
+		listViewLocations.setVisibility(View.VISIBLE);
 	}
 	
 	//https://youtu.be/qS1E-Vrk60E?t=711

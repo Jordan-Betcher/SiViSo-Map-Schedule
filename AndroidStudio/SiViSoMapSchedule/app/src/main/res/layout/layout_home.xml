@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/map">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputName"
+            android:id="@+id/textViewName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/text_for_hint_name"
@@ -75,21 +75,21 @@
             android:dropDownWidth="match_parent"
             android:entries="@array/SiViSo"
             android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLocation"
+            app:layout_constraintBottom_toTopOf="@+id/textInputAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textInputName"
+            app:layout_constraintStart_toEndOf="@+id/textViewName"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputLocation"
+            android:id="@+id/textInputAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/text_for_hint_location"
+            android:hint="@string/text_for_hint_address"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputName" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewName" />
 
         <Button
             android:id="@+id/buttonCancel"
@@ -100,17 +100,18 @@
             app:layout_constraintEnd_toStartOf="@+id/buttonConfirm"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLocation" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputAddress" />
 
         <Button
             android:id="@+id/buttonConfirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:onClick="onClickButtonConfirm"
             android:text="@string/text_for_confirm_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/buttonCancel"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLocation" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputAddress" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -145,30 +146,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddLocation" />
-
-    <Button
-        android:id="@+id/buttonEdit"
-        android:layout_width="190dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/text_for_edit_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonDelete"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddLocation" />
-
-    <Button
-        android:id="@+id/buttonDelete"
-        android:layout_width="190dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="@string/text_for_delete_button"
-        app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAddLocation" />
 
