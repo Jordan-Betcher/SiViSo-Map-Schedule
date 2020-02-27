@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,13 @@ class ListAdapterLocations extends ArrayAdapter<Location>
 		textViewName.setText(location.name);
 		textViewLocation.setText(location.address);
 		textViewSiViSo.setText(location.siviso.name);
+		
+		//https://stackoverflow.com/questions/46190386/how-do-i-add-spinner-inside-listview-row-in-android
+		//https://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
+		Spinner spinner = convertView.findViewById(R.id.spinner);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, SiViSo.getValuesAsStrings());
+		spinner.setAdapter(adapter);
+		spinner.setSelection(SiViSo.indexOf(location.siviso.name));
 		
 		return convertView;
 	}
