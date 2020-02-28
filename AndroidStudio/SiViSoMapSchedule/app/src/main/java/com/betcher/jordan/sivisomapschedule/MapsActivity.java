@@ -92,7 +92,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	public void onClickButtonCancel(View view)
 	{
+		formReset();
 		setStateHome();
+	}
+	
+	private void formReset()
+	{
+		textInputName.getText().clear();
+		textInputAddress.getText().clear();
+		spinnerSiViSo.setSelection(0);
 	}
 	
 	public void onClickButtonConfirm(View view)

@@ -15,7 +15,16 @@ Steps:
         [x]Delete
         [x]Edit
 [x]Display Database as list
-[]Add to database from app
+[x]Add to database from app
+
+[x]Bugs
+    [x] ListView not Scrolling
+        https://stackoverflow.com/questions/7210756/why-is-my-listview-not-scrolling
+    [x] When inputting to form, done doesn't close keyboard
+        https://stackoverflow.com/questions/24793045/how-to-have-an-edittext-element-deselect-itself-when-enter-is-pressed
+    [?] When inputting to form clicking off doesn't deselect
+        https://stackoverflow.com/questions/4828636/edittext-clear-focus-on-touch-outside
+    [x]  Clear form on cancel
 
 Get locations to add to database
 	Start at current location
@@ -44,13 +53,11 @@ Research
 		Using onBackPress Method https://youtu.be/1Nmy88n7CZ8
 	How To get Text from TextInput
 		Shows how to get text as well as hint and error https://youtu.be/veOZTvAdzJ8
-		
 	Research how to get and follow current location
 		https://youtu.be/qS1E-Vrk60E?t=711
 		https://youtu.be/qS1E-Vrk60E?t=1638
 	Research how to get place name search bar
 		Use Google Places API https://youtu.be/6Trdd9EnmqY
-	
 	Research how to operate a service
 		https://youtu.be/FbpD5RZtbCc
 	Research how to tell if you are near a location
