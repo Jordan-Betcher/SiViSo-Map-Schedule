@@ -48,6 +48,9 @@ class ListAdapterLocations extends ArrayAdapter<Location>
 		textViewName.setText(location.name);
 		textViewLocation.setText(location.address);
 		textViewSiViSo.setText(location.siviso.name);
+		textViewName.setFocusable(false);
+		textViewLocation.setFocusable(false);
+		textViewSiViSo.setFocusable(false);
 		
 		//https://stackoverflow.com/questions/46190386/how-do-i-add-spinner-inside-listview-row-in-android
 		//https://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
@@ -55,6 +58,8 @@ class ListAdapterLocations extends ArrayAdapter<Location>
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, SiViSo.getValuesAsStrings());
 		spinner.setAdapter(adapter);
 		spinner.setSelection(SiViSo.indexOf(location.siviso.name));
+		spinner.setFocusable(false);
+		
 		
 		return convertView;
 	}

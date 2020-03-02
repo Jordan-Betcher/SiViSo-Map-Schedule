@@ -16,6 +16,8 @@ Steps:
         [x]Edit
 [x]Display Database as list
 [x]Add to database from app
+[]Delete Data from list
+[]Edit Data from list
 
 [x]Bugs
     [x] ListView not Scrolling
@@ -24,7 +26,7 @@ Steps:
         https://stackoverflow.com/questions/24793045/how-to-have-an-edittext-element-deselect-itself-when-enter-is-pressed
     [?] When inputting to form clicking off doesn't deselect
         https://stackoverflow.com/questions/4828636/edittext-clear-focus-on-touch-outside
-    [x]  Clear form on cancel
+    [x] Clear form on cancel
 
 Get locations to add to database
 	Start at current location

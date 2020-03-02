@@ -11,12 +11,14 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -75,7 +77,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		initListView();
 		
 		setStateHome();
-		
+		Toast toast = Toast.makeText(getApplicationContext(), "test", Toast. LENGTH_SHORT);
+		toast. show();
 	}
 	
 	private void initListView()
@@ -83,6 +86,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		ArrayList<Location> locations = databaseLocation.getDatabaseAsArrayList();
 		listAdapterLocations = new ListAdapterLocations(this, locations);
 		listViewLocations.setAdapter(listAdapterLocations);
+		
+		
+		listViewLocations.setOnItemClickListener(new AdapterView.OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				Toast toast = Toast.makeText(getApplicationContext(), "initListView: " + position, Toast. LENGTH_SHORT);
+				toast.show();
+			}
+		});
+		/*
+		listViewLocations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+			{
+				
+				Toast toast = Toast.makeText(getApplicationContext(), "initListView", Toast. LENGTH_SHORT);
+				toast. show();
+			}
+			
+			@Override
+			public void onNothingSelected(AdapterView<?> parent)
+			{
+			
+			}
+		});//*/
+	}
+	
+	public void onClickTest(View view)
+	{
+		Toast toast = Toast.makeText(getApplicationContext(), "onClickTest", Toast. LENGTH_SHORT);
+		toast.show();
 	}
 	
 	public void onClickButtonAdd(View view)
@@ -96,13 +132,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		setStateHome();
 	}
 	
-	private void formReset()
-	{
-		textInputName.getText().clear();
-		textInputAddress.getText().clear();
-		spinnerSiViSo.setSelection(0);
-	}
-	
 	public void onClickButtonConfirm(View view)
 	{
 		String name = textInputName.getText().toString();
@@ -112,6 +141,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		databaseLocation.addData(name, address, SiViSo.fromString(siviso));
 		setStateHome();
 		initListView();
+	}
+	
+	private void formReset()
+	{
+		textInputName.getText().clear();
+		textInputAddress.getText().clear();
+		spinnerSiViSo.setSelection(0);
 	}
 	
 	private void setStateAddLocation()
