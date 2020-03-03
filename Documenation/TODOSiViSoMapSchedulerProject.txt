@@ -27,6 +27,13 @@ Steps:
     [?] When inputting to form clicking off doesn't deselect
         https://stackoverflow.com/questions/4828636/edittext-clear-focus-on-touch-outside
     [x] Clear form on cancel
+    [x] ListView not selectable
+        You have to set focusablity to false for all item parts (textview, button, spinner, etc...) in the adapter class getView method(This will make it so that if a part of the item is not selectable / doesn't have an onclick function then it will call the listview onclicklistener. If it is selectable and isn't focusable it will still select the item)
+        https://stackoverflow.com/questions/8413656/onitemclicklistener-doesnt-work-with-listview-item-containing-button
+        https://youtu.be/wSCIuIbS-nk
+    [x]  ListView item not highlighting
+        Get Color from Drawable  https://youtu.be/Bgy4EhtLzYE?t=191
+        To reset set background color to transparent https://stackoverflow.com/questions/14802354/how-to-reset-a-buttons-background-color-to-default
 
 Get locations to add to database
 	Start at current location

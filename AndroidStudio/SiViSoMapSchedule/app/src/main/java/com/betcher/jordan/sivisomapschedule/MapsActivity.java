@@ -7,12 +7,12 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -74,27 +74,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		databaseLocation.addData("test", "test address", SiViSo.SILENT);
 		
 		makeMapFollowCurrentLocation();
-		initListView();
+		showListViewLocations();
 		
 		setStateHome();
 		Toast toast = Toast.makeText(getApplicationContext(), "test", Toast. LENGTH_SHORT);
 		toast. show();
 	}
 	
-	private void initListView()
+	private void showListViewLocations()
 	{
-		ArrayList<Location> locations = databaseLocation.getDatabaseAsArrayList();
+		final ArrayList<Location> locations = databaseLocation.getDatabaseAsArrayList();
 		listAdapterLocations = new ListAdapterLocations(this, locations);
 		listViewLocations.setAdapter(listAdapterLocations);
 		
 		
 		listViewLocations.setOnItemClickListener(new AdapterView.OnItemClickListener()
 		{
+			View viewPrevious;
+			int colorHighlight = getResources().getColor(R.color.common_google_signin_btn_text_light_default);
+			
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
 				Toast toast = Toast.makeText(getApplicationContext(), "initListView: " + position, Toast. LENGTH_SHORT);
 				toast.show();
+				
+				if(viewPrevious != null)
+				{
+					viewPrevious.setBackgroundColor(Color.TRANSPARENT);
+				}
+				
+				viewPrevious = view;
+				view.setBackgroundColor(colorHighlight);
 			}
 		});
 		/*
@@ -140,7 +151,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		databaseLocation.addData(name, address, SiViSo.fromString(siviso));
 		setStateHome();
-		initListView();
+		showListViewLocations();
 	}
 	
 	private void formReset()
