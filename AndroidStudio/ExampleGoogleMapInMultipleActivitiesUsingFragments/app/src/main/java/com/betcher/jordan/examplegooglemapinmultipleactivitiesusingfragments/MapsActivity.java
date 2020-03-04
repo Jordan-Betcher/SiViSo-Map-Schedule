@@ -2,10 +2,12 @@ package com.betcher.jordan.examplegooglemapinmultipleactivitiesusingfragments;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -24,8 +26,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_map);
+		setContentView(R.layout.map_view);
 		
+		Intent intent = new Intent(this, ActivityMap1.class);
+		startActivity(intent);
+		
+		/*
+		MapView mapView = findViewById(R.id.mapView);
+		mapView.onCreate(null);
+		mapView.getMapAsync(this);
+		
+		/*
 		fragmentMap = new FragmentMap();
 		
 		getSupportFragmentManager().beginTransaction()

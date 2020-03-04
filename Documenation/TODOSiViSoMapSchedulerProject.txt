@@ -34,6 +34,11 @@ Steps:
     [x]  ListView item not highlighting
         Get Color from Drawable  https://youtu.be/Bgy4EhtLzYE?t=191
         To reset set background color to transparent https://stackoverflow.com/questions/14802354/how-to-reset-a-buttons-background-color-to-default
+    
+    []  Need to seperate out the different activity windows instead of having states in the code (this also allows the triangle back button to work because it navigates to previous activities)
+        Seperate out the google map into a fragment and then use the fragment so that you don't have to reload the map each time https://stackoverflow.com/questions/46932430/how-to-use-single-google-map-for-multiple-activities
+        Using Framements https://youtu.be/i22INe14JUc
+        Get googleMap from fragment https://stackoverflow.com/questions/22032815/how-to-get-google-maps-object-inside-a-fragment
 
 Get locations to add to database
 	Start at current location
