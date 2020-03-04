@@ -43,9 +43,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	Button            buttonCancel;
 	Button            buttonConfirm;
 	Button            buttonAdd;
+	Button            buttonDelete;
+	Button            buttonEdit;
 	ListView          listViewLocations;
 	
-	SQLiteLocation databaseLocation;
+	SQLiteLocation       databaseLocation;
 	ListAdapterLocations listAdapterLocations;
 	
 	@RequiresApi(api = Build.VERSION_CODES.O)
@@ -67,6 +69,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		listViewLocations = (ListView) this.findViewById(R.id.listViewLocations);
 		buttonAdd         = (Button) this.findViewById(R.id.buttonAddLocation);
 		buttonCancel      = (Button) this.findViewById(R.id.buttonCancel);
+		buttonDelete      = (Button) this.findViewById(R.id.buttonDelete);
+		buttonEdit        = (Button) this.findViewById(R.id.buttonEdit);
 		buttonConfirm     = (Button) this.findViewById(R.id.buttonConfirm);
 		
 		databaseLocation = new SQLiteLocation(this);
@@ -77,8 +81,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		showListViewLocations();
 		
 		setStateHome();
-		Toast toast = Toast.makeText(getApplicationContext(), "test", Toast. LENGTH_SHORT);
-		toast. show();
 	}
 	
 	private void showListViewLocations()
@@ -87,49 +89,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		listAdapterLocations = new ListAdapterLocations(this, locations);
 		listViewLocations.setAdapter(listAdapterLocations);
 		
-		
 		listViewLocations.setOnItemClickListener(new AdapterView.OnItemClickListener()
 		{
 			View viewPrevious;
-			int colorHighlight = getResources().getColor(R.color.common_google_signin_btn_text_light_default);
+			int
+					colorHighlight
+					= getResources().getColor(R.color.common_google_signin_btn_text_light_default);
 			
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
-				Toast toast = Toast.makeText(getApplicationContext(), "initListView: " + position, Toast. LENGTH_SHORT);
-				toast.show();
-				
-				if(viewPrevious != null)
+				if (viewPrevious != null)
 				{
 					viewPrevious.setBackgroundColor(Color.TRANSPARENT);
 				}
 				
 				viewPrevious = view;
+				setStateLocationSelected();
 				view.setBackgroundColor(colorHighlight);
 			}
 		});
-		/*
-		listViewLocations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-			{
-				
-				Toast toast = Toast.makeText(getApplicationContext(), "initListView", Toast. LENGTH_SHORT);
-				toast. show();
-			}
-			
-			@Override
-			public void onNothingSelected(AdapterView<?> parent)
-			{
-			
-			}
-		});//*/
-	}
-	
-	public void onClickTest(View view)
-	{
-		Toast toast = Toast.makeText(getApplicationContext(), "onClickTest", Toast. LENGTH_SHORT);
-		toast.show();
 	}
 	
 	public void onClickButtonAdd(View view)
@@ -145,9 +124,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	public void onClickButtonConfirm(View view)
 	{
-		String name = textInputName.getText().toString();
+		String name    = textInputName.getText().toString();
 		String address = textInputAddress.getText().toString();
-		String siviso = spinnerSiViSo.getSelectedItem().toString();
+		String siviso  = spinnerSiViSo.getSelectedItem().toString();
 		
 		databaseLocation.addData(name, address, SiViSo.fromString(siviso));
 		setStateHome();
@@ -175,8 +154,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		title.setText(R.string.title_home);
 		switchOnOff.setVisibility(View.VISIBLE);
 		form.setVisibility(View.GONE);
+		buttonDelete.setVisibility(View.GONE);
+		buttonEdit.setVisibility(View.GONE);
 		buttonAdd.setVisibility(View.VISIBLE);
 		listViewLocations.setVisibility(View.VISIBLE);
+	}
+	
+	private void setStateLocationSelected()
+	{
+		buttonDelete.setVisibility(View.VISIBLE);
+		buttonEdit.setVisibility(View.VISIBLE);
 	}
 	
 	//https://youtu.be/qS1E-Vrk60E?t=711
@@ -195,8 +182,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 					0,
 					new LocationListenerCurrentLocation(this)
 			);
-		}
-		else
+		} else
 		{
 			ActivityCompat.requestPermissions(this, new String[]
 					                                  {Manifest.permission.ACCESS_FINE_LOCATION},
