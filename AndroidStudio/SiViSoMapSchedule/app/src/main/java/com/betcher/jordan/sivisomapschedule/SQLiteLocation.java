@@ -9,11 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SQLiteLocation extends SQLiteOpenHelper
 {
 	static final String DATABASE_NAME = "SQLiteLocation";
-	static final String TABLE_NAME = "TableLocation";
+	static final String TABLE_NAME    = "TableLocation";
 	
 	public static final String COLUMN_1_NAME    = "Name";
 	public static final String COLUMN_2_ADDRESS = "Address";
@@ -47,8 +48,8 @@ public class SQLiteLocation extends SQLiteOpenHelper
 	
 	public boolean addData(String name, String address, SiViSo siviso)
 	{
-		SQLiteDatabase database = this.getWritableDatabase();
-		ContentValues contentValues = new ContentValues();
+		SQLiteDatabase database      = this.getWritableDatabase();
+		ContentValues  contentValues = new ContentValues();
 		contentValues.put(COLUMN_1_NAME, name);
 		contentValues.put(COLUMN_2_ADDRESS, address);
 		contentValues.put(COLUMN_3_SIVISO, siviso.name);
@@ -59,36 +60,39 @@ public class SQLiteLocation extends SQLiteOpenHelper
 		if (result == -1)
 		{
 			return false;
-		}
-		else
+		} else
 		{
 			return true;
 		}
 	}
 	
-	public ArrayList<Location> getDatabaseAsArrayList()
+	public HashMap<Location, Integer> getDatabaseAsArrayList()
 	{
-		ArrayList<Location> locations = new ArrayList<>();
-		SQLiteDatabase                                           database   = this.getWritableDatabase();
-		Cursor                                                   query      = database.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+		HashMap<Location, Integer> locationIds = new HashMap<Location, Integer>();
+		SQLiteDatabase      database  = this.getWritableDatabase();
+		Cursor              query     = database.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 		while (query.moveToNext())
 		{
-			String id = query.getString(0);
-			String name = query.getString(1);
+			Integer id      = query.getInt(0);
+			String name    = query.getString(1);
 			String address = query.getString(2);
-			SiViSo siviso = SiViSo.fromString(query.getString(3));
+			SiViSo siviso  = SiViSo.fromString(query.getString(3));
 			
 			Location location = new Location(name, address, siviso);
-			locations.add(location);
+			locationIds.put(location, id);
 		}
 		
-		return locations;
+		return locationIds;
 	}
 	
 	public int delete(String address)
 	{
-		SQLiteDatabase database = this.getWritableDatabase();
-		int rowsDeleted = database.delete(TABLE_NAME, (COLUMN_2_ADDRESS + "=?"), new String[]{address});
+		SQLiteDatabase database    = this.getWritableDatabase();
+		int            rowsDeleted = database.delete(
+				TABLE_NAME,
+				(COLUMN_2_ADDRESS + "=?"),
+				new String[]{address}
+		);
 		return rowsDeleted;
 	}
 	

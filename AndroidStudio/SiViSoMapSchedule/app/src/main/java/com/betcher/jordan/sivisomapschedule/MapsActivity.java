@@ -49,9 +49,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	ListView          listViewLocations;
 	
 	SQLiteLocation       databaseLocation;
-	ListAdapterLocations listAdapterLocations;
+	//ListAdapterLocations listAdapterLocations;
 	
-	Location locationCurrent;
+	HandlerListViewLocations handlerListViewLocations;
 	
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	@Override
@@ -81,41 +81,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		databaseLocation = new SQLiteLocation(this);
 		
 		makeMapFollowCurrentLocation();
-		showListViewLocations();
+		
+		handlerListViewLocations = new HandlerListViewLocations(this, databaseLocation, listViewLocations);
 		
 		setStateHome();
 	}
 	
-	private void showListViewLocations()
-	{
-		final ArrayList<Location> locations = databaseLocation.getDatabaseAsArrayList();
-		listAdapterLocations = new ListAdapterLocations(this, locations);
-		
-		listViewLocations.setAdapter(listAdapterLocations);
-		
-		//TODO default, locationCurrent, create, maintain
-		
-		listViewLocations.setOnItemClickListener(new AdapterView.OnItemClickListener()
-		{
-			View viewPrevious;
-			int
-					colorHighlight
-					= getResources().getColor(R.color.common_google_signin_btn_text_light_default);
-			
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-			{
-				if (viewPrevious != null)
-				{
-					viewPrevious.setBackgroundColor(Color.TRANSPARENT);
-				}
-				
-				viewPrevious = view;
-				view.setBackgroundColor(colorHighlight);
-				locationCurrent = locations.get(position);
-			}
-		});
-	}
+	
 	
 	public void onClickButtonAddLocation(View view)
 	{
@@ -147,21 +119,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		databaseLocation.addData(name, address, SiViSo.fromString(siviso));
 		setStateHome();
-		showListViewLocations();
+		handlerListViewLocations.refresh();
 	}
 	
 	public void onClickButtonDelete(View view)
 	{
-		databaseLocation.delete(locationCurrent);
-		listAdapterLocations.remove(locationCurrent);
+		databaseLocation.delete(handlerListViewLocations.getLocationSelected());
+		handlerListViewLocations.refresh();
 	}
 	
 	public void onClickButtonEdit(View view)
 	{
 		setStateEditLocation();
-		textInputName.setText(locationCurrent.getName());
-		textInputAddress.setText(locationCurrent.getAddress());
-		spinnerSiViSo.setSelection(SiViSo.indexOf(locationCurrent.getSiviso()));
+		Location locationSelected = handlerListViewLocations.getLocationSelected();
+		textInputName.setText(locationSelected.getName());
+		textInputAddress.setText(locationSelected.getAddress());
+		spinnerSiViSo.setSelection(SiViSo.indexOf(locationSelected.getSiviso()));
 	}
 	
 	private void formReset()
