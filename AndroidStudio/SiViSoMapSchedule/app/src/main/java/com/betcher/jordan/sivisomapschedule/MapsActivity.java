@@ -50,6 +50,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	SQLiteLocation       databaseLocation;
 	ListAdapterLocations listAdapterLocations;
 	
+	Location locationCurrent;
+	
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -87,7 +89,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	{
 		final ArrayList<Location> locations = databaseLocation.getDatabaseAsArrayList();
 		listAdapterLocations = new ListAdapterLocations(this, locations);
+		
 		listViewLocations.setAdapter(listAdapterLocations);
+		
+		//TODO default, locationCurrent, create, maintain
 		
 		listViewLocations.setOnItemClickListener(new AdapterView.OnItemClickListener()
 		{
@@ -105,8 +110,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 				}
 				
 				viewPrevious = view;
-				setStateLocationSelected();
 				view.setBackgroundColor(colorHighlight);
+				locationCurrent = locations.get(position);
 			}
 		});
 	}
@@ -133,6 +138,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		showListViewLocations();
 	}
 	
+	public void onClickButtonDelete(View view)
+	{
+		databaseLocation.delete(locationCurrent);
+		listAdapterLocations.remove(locationCurrent);
+	}
+	
 	private void formReset()
 	{
 		textInputName.getText().clear();
@@ -146,6 +157,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		switchOnOff.setVisibility(View.GONE);
 		form.setVisibility(View.VISIBLE);
 		buttonAdd.setVisibility(View.GONE);
+		buttonDelete.setVisibility(View.GONE);
+		buttonEdit.setVisibility(View.GONE);
 		listViewLocations.setVisibility(View.GONE);
 	}
 	
@@ -154,16 +167,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		title.setText(R.string.title_home);
 		switchOnOff.setVisibility(View.VISIBLE);
 		form.setVisibility(View.GONE);
-		buttonDelete.setVisibility(View.GONE);
-		buttonEdit.setVisibility(View.GONE);
-		buttonAdd.setVisibility(View.VISIBLE);
-		listViewLocations.setVisibility(View.VISIBLE);
-	}
-	
-	private void setStateLocationSelected()
-	{
 		buttonDelete.setVisibility(View.VISIBLE);
 		buttonEdit.setVisibility(View.VISIBLE);
+		buttonAdd.setVisibility(View.VISIBLE);
+		listViewLocations.setVisibility(View.VISIBLE);
 	}
 	
 	//https://youtu.be/qS1E-Vrk60E?t=711

@@ -85,11 +85,16 @@ public class SQLiteLocation extends SQLiteOpenHelper
 		return locations;
 	}
 	
-	public int delete(String name)
+	public int delete(String address)
 	{
 		SQLiteDatabase database = this.getWritableDatabase();
-		int rowsDeleted = database.delete(TABLE_NAME, (COLUMN_1_NAME + "=?"), new String[]{name});
+		int rowsDeleted = database.delete(TABLE_NAME, (COLUMN_2_ADDRESS + "=?"), new String[]{address});
 		return rowsDeleted;
+	}
+	
+	public int delete(Location locationCurrent)
+	{
+		return delete(locationCurrent.getAddress());
 	}
 	
 	public void update(String name, String address, SiViSo siviso)
@@ -122,5 +127,4 @@ public class SQLiteLocation extends SQLiteOpenHelper
 		
 		database.update(TABLE_NAME, contentValues, (COLUMN_1_NAME + "=?"), new String[]{name});
 	}
-	
 }
