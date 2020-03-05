@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -41,10 +40,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	Spinner           spinnerSiViSo;
 	TextInputEditText textInputAddress;
 	Button            buttonCancel;
-	Button            buttonConfirm;
 	Button            buttonAdd;
+	Button            buttonAddLocation;
 	Button            buttonDelete;
 	Button            buttonEdit;
+	Button            buttonConfirmEdit;
+	Button            buttonCancelEdit;
 	ListView          listViewLocations;
 	
 	SQLiteLocation       databaseLocation;
@@ -64,20 +65,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		title             = (TextView) this.findViewById(R.id.textViewTitle);
 		switchOnOff       = (Switch) this.findViewById(R.id.switchOnOff);
-		form              = (ConstraintLayout) this.findViewById(R.id.form);
+		form              = (ConstraintLayout) this.findViewById(R.id.formAdd);
 		textInputName     = (TextInputEditText) this.findViewById(R.id.textViewName);
 		spinnerSiViSo     = (Spinner) this.findViewById(R.id.spinnerSiViSo);
 		textInputAddress  = (TextInputEditText) this.findViewById(R.id.textInputAddress);
 		listViewLocations = (ListView) this.findViewById(R.id.listViewLocations);
-		buttonAdd         = (Button) this.findViewById(R.id.buttonAddLocation);
+		buttonAddLocation = (Button) this.findViewById(R.id.buttonAddLocation);
 		buttonCancel      = (Button) this.findViewById(R.id.buttonCancel);
 		buttonDelete      = (Button) this.findViewById(R.id.buttonDelete);
 		buttonEdit        = (Button) this.findViewById(R.id.buttonEdit);
-		buttonConfirm     = (Button) this.findViewById(R.id.buttonConfirm);
+		buttonAdd         = (Button) this.findViewById(R.id.buttonAdd);
+		buttonConfirmEdit = (Button) this.findViewById(R.id.buttonComfirmEdit);
+		buttonCancelEdit  = (Button) this.findViewById(R.id.buttonCancelEdit);
 		
 		databaseLocation = new SQLiteLocation(this);
-		//Test
-		databaseLocation.addData("test", "test address", SiViSo.SILENT);
 		
 		makeMapFollowCurrentLocation();
 		showListViewLocations();
@@ -116,18 +117,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		});
 	}
 	
-	public void onClickButtonAdd(View view)
+	public void onClickButtonAddLocation(View view)
 	{
+		formReset();
 		setStateAddLocation();
 	}
 	
 	public void onClickButtonCancel(View view)
 	{
+		setStateHome();
+	}
+	
+	public void onClickButtonCancelEdit(View view)
+	{
+		setStateHome();
+	}
+	
+	public void onClickButtonConfirmEdit(View view)
+	{
 		formReset();
 		setStateHome();
 	}
 	
-	public void onClickButtonConfirm(View view)
+	public void onClickButtonAdd(View view)
 	{
 		String name    = textInputName.getText().toString();
 		String address = textInputAddress.getText().toString();
@@ -144,6 +156,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		listAdapterLocations.remove(locationCurrent);
 	}
 	
+	public void onClickButtonEdit(View view)
+	{
+		setStateEditLocation();
+		textInputName.setText(locationCurrent.getName());
+		textInputAddress.setText(locationCurrent.getAddress());
+		spinnerSiViSo.setSelection(SiViSo.indexOf(locationCurrent.getSiviso()));
+	}
+	
 	private void formReset()
 	{
 		textInputName.getText().clear();
@@ -156,10 +176,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		title.setText(R.string.title_add_location);
 		switchOnOff.setVisibility(View.GONE);
 		form.setVisibility(View.VISIBLE);
-		buttonAdd.setVisibility(View.GONE);
+		buttonAddLocation.setVisibility(View.GONE);
 		buttonDelete.setVisibility(View.GONE);
 		buttonEdit.setVisibility(View.GONE);
 		listViewLocations.setVisibility(View.GONE);
+		
+		buttonCancel.setVisibility(View.VISIBLE);
+		buttonAdd.setVisibility(View.VISIBLE);
+		buttonConfirmEdit.setVisibility(View.GONE);
+		buttonCancelEdit.setVisibility(View.GONE);
+	}
+	
+	private void setStateEditLocation()
+	{
+		title.setText(R.string.title_add_location);
+		switchOnOff.setVisibility(View.GONE);
+		form.setVisibility(View.VISIBLE);
+		buttonAddLocation.setVisibility(View.GONE);
+		buttonDelete.setVisibility(View.GONE);
+		buttonEdit.setVisibility(View.GONE);
+		listViewLocations.setVisibility(View.GONE);
+		
+		buttonCancel.setVisibility(View.GONE);
+		buttonAdd.setVisibility(View.GONE);
+		buttonConfirmEdit.setVisibility(View.VISIBLE);
+		buttonCancelEdit.setVisibility(View.VISIBLE);
 	}
 	
 	private void setStateHome()
@@ -169,7 +210,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		form.setVisibility(View.GONE);
 		buttonDelete.setVisibility(View.VISIBLE);
 		buttonEdit.setVisibility(View.VISIBLE);
-		buttonAdd.setVisibility(View.VISIBLE);
+		buttonAddLocation.setVisibility(View.VISIBLE);
 		listViewLocations.setVisibility(View.VISIBLE);
 	}
 	

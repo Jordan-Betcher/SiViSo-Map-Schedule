@@ -16,8 +16,10 @@ Steps:
         [x]Edit
 [x]Display Database as list
 [x]Add to database from app
-[]Delete Data from list
+[x]Delete Data from list
 []Edit Data from list
+
+Note: need to close and reopen project sometimes to let R.id.[idfromlayout] be found
 
 [x]Bugs
     [x] ListView not Scrolling
@@ -39,6 +41,8 @@ Steps:
         Seperate out the google map into a fragment and then use the fragment so that you don't have to reload the map each time https://stackoverflow.com/questions/46932430/how-to-use-single-google-map-for-multiple-activities
         Using Framements https://youtu.be/i22INe14JUc
         Get googleMap from fragment https://stackoverflow.com/questions/22032815/how-to-get-google-maps-object-inside-a-fragment
+    []  Deselect Edit Text when click else where
+        https://stackoverflow.com/questions/6677969/tap-outside-edittext-to-lose-focus/36411427
 
 Get locations to add to database
 	Start at current location

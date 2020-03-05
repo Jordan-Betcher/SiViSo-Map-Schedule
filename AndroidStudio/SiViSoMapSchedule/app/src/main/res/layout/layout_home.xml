@@ -47,7 +47,7 @@
         tools:context=".Locations" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/form"
+        android:id="@+id/formAdd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -99,21 +99,43 @@
             android:layout_height="wrap_content"
             android:onClick="onClickButtonCancel"
             android:text="@string/text_for_cancel_button"
-            app:layout_constraintEnd_toStartOf="@+id/buttonConfirm"
+            app:layout_constraintEnd_toStartOf="@+id/buttonAdd"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputAddress" />
 
         <Button
-            android:id="@+id/buttonConfirm"
+            android:id="@+id/buttonAdd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="onClickButtonConfirm"
-            android:text="@string/text_for_confirm_button"
+            android:onClick="onClickButtonAdd"
+            android:text="@string/text_for_add_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/buttonCancel"
             app:layout_constraintTop_toBottomOf="@+id/textInputAddress" />
+
+        <Button
+            android:id="@+id/buttonCancelEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="onClickButtonCancelEdit"
+            android:text="@string/text_for_cancel_button"
+            app:layout_constraintEnd_toStartOf="@+id/buttonComfirmEdit"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonCancel" />
+
+        <Button
+            android:id="@+id/buttonComfirmEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="onClickButtonAdd"
+            android:text="@string/text_for_confirm_edit_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buttonCancelEdit"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAdd" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -136,7 +158,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:onClick="onClickButtonCancel"
+        android:onClick="onClickButtonEdit"
         android:text="@string/text_for_edit_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -151,18 +173,18 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:onClick="onClickButtonAdd"
+        android:onClick="onClickButtonAddLocation"
         android:padding="0dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
-        android:text="@string/text_for_add_button"
+        android:text="@string/text_for_add_location_button"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/form" />
+        app:layout_constraintTop_toBottomOf="@+id/formAdd" />
 
     <ListView
         android:id="@+id/listViewLocations"
