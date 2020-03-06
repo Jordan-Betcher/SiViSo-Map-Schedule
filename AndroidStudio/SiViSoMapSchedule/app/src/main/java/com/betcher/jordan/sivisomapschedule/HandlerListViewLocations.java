@@ -64,4 +64,9 @@ class HandlerListViewLocations implements AdapterView.OnItemClickListener
 	{
 		return locationSelected;
 	}
+	
+	public Integer getLocationSelectedId()
+	{
+		return locationIds.get(locationSelected);
+	}
 }

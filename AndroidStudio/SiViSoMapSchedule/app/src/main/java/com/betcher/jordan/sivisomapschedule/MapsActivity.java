@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -48,7 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	Button            buttonCancelEdit;
 	ListView          listViewLocations;
 	
-	SQLiteLocation       databaseLocation;
+	SQLiteLocation databaseLocation;
 	//ListAdapterLocations listAdapterLocations;
 	
 	HandlerListViewLocations handlerListViewLocations;
@@ -82,11 +83,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		makeMapFollowCurrentLocation();
 		
-		handlerListViewLocations = new HandlerListViewLocations(this, databaseLocation, listViewLocations);
+		handlerListViewLocations = new HandlerListViewLocations(
+				this,
+				databaseLocation,
+				listViewLocations
+		);
 		
 		setStateHome();
 	}
-	
 	
 	
 	public void onClickButtonAddLocation(View view)
@@ -107,8 +111,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	public void onClickButtonConfirmEdit(View view)
 	{
-		formReset();
+		Integer  id               = handlerListViewLocations.getLocationSelectedId();
+		Location locationSelected = handlerListViewLocations.getLocationSelected();
+		
+		Toast.makeText(this, "test " + id, Toast.LENGTH_SHORT).show();
+		
+		databaseLocation.update(id, locationSelected);
+		
 		setStateHome();
+		handlerListViewLocations.refresh();
 	}
 	
 	public void onClickButtonAdd(View view)

@@ -130,7 +130,7 @@
             android:id="@+id/buttonComfirmEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="onClickButtonAdd"
+            android:onClick="onClickButtonConfirmEdit"
             android:text="@string/text_for_confirm_edit_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

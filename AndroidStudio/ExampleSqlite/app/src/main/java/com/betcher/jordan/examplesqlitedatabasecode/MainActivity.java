@@ -7,7 +7,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -42,18 +46,24 @@ public class MainActivity extends AppCompatActivity
 	
 	public void updateTestToVibrate(View view)
 	{
-		databaseLocation.update("test", SiViSo.VIBRATE);
+		//databaseLocation.update("test", SiViSo.VIBRATE);
+		HashMap<Location, Integer> locationIds = databaseLocation.getDatabaseAsArrayList();
+		Integer id = (Integer)locationIds.values().toArray()[0];
+		databaseLocation.update(id, new Location("new name", "new address", SiViSo.SOUND));
 		displayDatabase();
 	}
 	
 	private void displayDatabase()
 	{
-		ArrayList<Location> locations = databaseLocation.getDatabaseAsArrayList();
+		HashMap<Location, Integer> locationIds = databaseLocation.getDatabaseAsArrayList();
+		Set<Location> locations = locationIds.keySet();
 		
 		String display = "";
 		
 		for(Location location : locations)
 		{
+			display += locationIds.get(location);
+			display += " ";
 			display += location.getName();
 			display += " ";
 			display += location.getAddress();
