@@ -114,7 +114,7 @@ public class SQLiteLocation extends SQLiteOpenHelper
 		contentValues.put(COLUMN_2_ADDRESS, location.getAddress());
 		contentValues.put(COLUMN_3_SIVISO, location.getSiviso().name);
 		
-		database.update(TABLE_NAME, contentValues, ( COLUMN_0_ID + " = (?)"), new String[]{id.toString()});
-		database.close();
+		database.update(TABLE_NAME, contentValues, ( COLUMN_0_ID + "=?"), new String[]{id + ""});
 	}
+	
 }

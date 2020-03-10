@@ -112,11 +112,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	public void onClickButtonConfirmEdit(View view)
 	{
 		Integer  id               = handlerListViewLocations.getLocationSelectedId();
-		Location locationSelected = handlerListViewLocations.getLocationSelected();
 		
-		Toast.makeText(this, "test " + id, Toast.LENGTH_SHORT).show();
+		String locationName = textInputName.getText().toString();
+		String locationAddress = textInputAddress.getText().toString();
+		SiViSo locationSiViSo = SiViSo.fromString(spinnerSiViSo.getSelectedItem().toString());
+		Location location = new Location(locationName, locationAddress, locationSiViSo);
 		
-		databaseLocation.update(id, locationSelected);
+		databaseLocation.update(id, location);
 		
 		setStateHome();
 		handlerListViewLocations.refresh();
