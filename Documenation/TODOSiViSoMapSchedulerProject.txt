@@ -17,7 +17,9 @@ Steps:
 [x]Display Database as list
 [x]Add to database from app
 [x]Delete Data from list
-[]Edit Data from list
+[x]Edit Data from list
+[x]SiViSo None
+[]Default
 
 Note: need to close and reopen project sometimes to let R.id.[idfromlayout] be found
 

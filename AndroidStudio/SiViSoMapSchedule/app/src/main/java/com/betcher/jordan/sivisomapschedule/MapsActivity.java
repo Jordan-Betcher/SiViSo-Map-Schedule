@@ -80,6 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		buttonCancelEdit  = (Button) this.findViewById(R.id.buttonCancelEdit);
 		
 		databaseLocation = new SQLiteLocation(this);
+		//databaseLocation.addData(new Location(R.string.name_for_default_location, "", SiViSo.NONE));
 		
 		makeMapFollowCurrentLocation();
 		

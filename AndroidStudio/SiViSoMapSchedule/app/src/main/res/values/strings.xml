@@ -12,4 +12,5 @@
     <string name="text_for_onOff_switch">On/Off</string>
     <string name="text_for_hint_name">Name</string>
     <string name="text_for_hint_address">Location</string>
+    <string name="name_for_default_location">Default</string>
 </resources>

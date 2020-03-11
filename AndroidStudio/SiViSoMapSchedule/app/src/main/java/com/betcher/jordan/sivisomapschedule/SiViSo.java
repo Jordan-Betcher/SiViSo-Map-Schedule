@@ -5,6 +5,7 @@ import java.util.ArrayList;
 //https://www.baeldung.com/java-enum-values
 public enum SiViSo
 {
+	NONE("None"),
 	SILENT("Silent"),
 	VIBRATE("Vibrate"),
 	SOUND("Sound");
@@ -46,7 +47,11 @@ public enum SiViSo
 	
 	public static boolean isSiViSo(String pendingSiViSo)
 	{
-		if(SiViSo.SILENT.name.equals(pendingSiViSo))
+		if(SiViSo.NONE.name.equals(pendingSiViSo))
+		{
+			return true;
+		}
+		else if(SiViSo.SILENT.name.equals(pendingSiViSo))
 		{
 			return true;
 		}
@@ -66,7 +71,11 @@ public enum SiViSo
 	
 	public static SiViSo fromString(String pendingSiViSo)
 	{
-		if(SiViSo.SILENT.name.equals(pendingSiViSo))
+		if(SiViSo.NONE.name.equals(pendingSiViSo))
+		{
+			return SiViSo.NONE;
+		}
+		else if(SiViSo.SILENT.name.equals(pendingSiViSo))
 		{
 			return SiViSo.SILENT;
 		}
