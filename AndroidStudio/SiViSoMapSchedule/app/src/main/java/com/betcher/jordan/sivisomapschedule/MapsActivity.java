@@ -7,25 +7,22 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.betcher.jordan.sivisomapschedule.Locations.LocationsListViewWrapper;
+import com.betcher.jordan.sivisomapschedule.Locations.Location;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
@@ -52,7 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	SQLiteLocation databaseLocation;
 	//ListAdapterLocations listAdapterLocations;
 	
-	HandlerListViewLocations handlerListViewLocations;
+	LocationsListViewWrapper locationsListViewWrapper;
 	
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	@Override
@@ -80,11 +77,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		buttonCancelEdit  = (Button) this.findViewById(R.id.buttonCancelEdit);
 		
 		databaseLocation = new SQLiteLocation(this);
-		//databaseLocation.addData(new Location(R.string.name_for_default_location, "", SiViSo.NONE));
+		Location locationDefault = new Location(getResources().getString(R.string.name_for_default_location), "", SiViSo.NONE);
+		databaseLocation.addData(locationDefault);
 		
 		makeMapFollowCurrentLocation();
 		
-		handlerListViewLocations = new HandlerListViewLocations(
+		locationsListViewWrapper = new LocationsListViewWrapper(
 				this,
 				databaseLocation,
 				listViewLocations
@@ -112,7 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	public void onClickButtonConfirmEdit(View view)
 	{
-		Integer  id               = handlerListViewLocations.getLocationSelectedId();
+		Integer  id               = locationsListViewWrapper.getLocationSelectedId();
 		
 		String locationName = textInputName.getText().toString();
 		String locationAddress = textInputAddress.getText().toString();
@@ -122,7 +120,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		databaseLocation.update(id, location);
 		
 		setStateHome();
-		handlerListViewLocations.refresh();
+		locationsListViewWrapper.refresh();
 	}
 	
 	public void onClickButtonAdd(View view)
@@ -133,19 +131,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		databaseLocation.addData(name, address, SiViSo.fromString(siviso));
 		setStateHome();
-		handlerListViewLocations.refresh();
+		locationsListViewWrapper.refresh();
 	}
 	
 	public void onClickButtonDelete(View view)
 	{
-		databaseLocation.delete(handlerListViewLocations.getLocationSelected());
-		handlerListViewLocations.refresh();
+		databaseLocation.delete(locationsListViewWrapper.getLocationSelected());
+		locationsListViewWrapper.refresh();
 	}
 	
 	public void onClickButtonEdit(View view)
 	{
 		setStateEditLocation();
-		Location locationSelected = handlerListViewLocations.getLocationSelected();
+		Location locationSelected = locationsListViewWrapper.getLocationSelected();
 		textInputName.setText(locationSelected.getName());
 		textInputAddress.setText(locationSelected.getAddress());
 		spinnerSiViSo.setSelection(SiViSo.indexOf(locationSelected.getSiviso()));
@@ -215,7 +213,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 					LocationManager.NETWORK_PROVIDER,
 					0,
 					0,
-					new LocationListenerCurrentLocation(this)
+					new MapListenerGoToCurrentLocation(this)
 			);
 		} else
 		{

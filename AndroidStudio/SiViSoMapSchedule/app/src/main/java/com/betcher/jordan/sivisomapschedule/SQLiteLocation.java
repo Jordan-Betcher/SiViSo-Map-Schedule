@@ -8,7 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
+import com.betcher.jordan.sivisomapschedule.Locations.Location;
+
 import java.util.HashMap;
 
 public class SQLiteLocation extends SQLiteOpenHelper
@@ -69,6 +70,11 @@ public class SQLiteLocation extends SQLiteOpenHelper
 		}
 	}
 	
+	public void addData(Location location)
+	{
+		addData(location.getName(), location.getAddress(), location.getSiviso());
+	}
+	
 	public HashMap<Location, Integer> getDatabaseAsArrayList()
 	{
 		HashMap<Location, Integer> locationIds = new HashMap<Location, Integer>();
@@ -116,5 +122,4 @@ public class SQLiteLocation extends SQLiteOpenHelper
 		
 		database.update(TABLE_NAME, contentValues, ( COLUMN_0_ID + "=?"), new String[]{id + ""});
 	}
-	
 }

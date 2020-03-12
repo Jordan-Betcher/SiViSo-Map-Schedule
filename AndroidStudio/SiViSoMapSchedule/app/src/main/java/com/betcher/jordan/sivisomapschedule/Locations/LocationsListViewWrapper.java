@@ -1,4 +1,4 @@
-package com.betcher.jordan.sivisomapschedule;
+package com.betcher.jordan.sivisomapschedule.Locations;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -6,10 +6,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.betcher.jordan.sivisomapschedule.R;
+import com.betcher.jordan.sivisomapschedule.SQLiteLocation;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class HandlerListViewLocations implements AdapterView.OnItemClickListener
+public class LocationsListViewWrapper implements AdapterView.OnItemClickListener
 {
 	Context        context;
 	SQLiteLocation databaseLocation;
@@ -18,12 +21,12 @@ class HandlerListViewLocations implements AdapterView.OnItemClickListener
 	HashMap<Location, Integer> locationIds;
 	ArrayList<Location>        locations;
 	Location                   locationSelected;
-	ListAdapterLocations       listAdapterLocations;
+	LocationsListAdapter       locationsListAdapter;
 	View                       viewPrevious;
 	
 	int colorHighlight;
 	
-	public HandlerListViewLocations(Context context, SQLiteLocation databaseLocation, ListView listViewLocations)
+	public LocationsListViewWrapper(Context context, SQLiteLocation databaseLocation, ListView listViewLocations)
 	{
 		this.context           = context;
 		this.databaseLocation  = databaseLocation;
@@ -33,9 +36,9 @@ class HandlerListViewLocations implements AdapterView.OnItemClickListener
 		
 		locationIds          = databaseLocation.getDatabaseAsArrayList();
 		locations            = new ArrayList<Location>(locationIds.keySet());
-		listAdapterLocations = new ListAdapterLocations(context, locations);
+		locationsListAdapter = new LocationsListAdapter(context, locations);
 		
-		listViewLocations.setAdapter(listAdapterLocations);
+		listViewLocations.setAdapter(locationsListAdapter);
 		listViewLocations.setOnItemClickListener(this);
 	}
 	
@@ -43,8 +46,8 @@ class HandlerListViewLocations implements AdapterView.OnItemClickListener
 	{
 		locationIds          = databaseLocation.getDatabaseAsArrayList();
 		locations            = new ArrayList<>(locationIds.keySet());
-		listAdapterLocations.clear();
-		listAdapterLocations.addAll(locations);
+		locationsListAdapter.clear();
+		locationsListAdapter.addAll(locations);
 	}
 	
 	@Override

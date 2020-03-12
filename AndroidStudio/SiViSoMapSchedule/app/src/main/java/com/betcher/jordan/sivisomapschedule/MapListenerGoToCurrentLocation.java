@@ -9,11 +9,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class LocationListenerCurrentLocation implements LocationListener
+public class MapListenerGoToCurrentLocation implements LocationListener
 {
 	MapsActivity mapsActivity;
 	
-	public LocationListenerCurrentLocation(MapsActivity mapsActivity)
+	public MapListenerGoToCurrentLocation(MapsActivity mapsActivity)
 	{
 		this.mapsActivity = mapsActivity;
 	}

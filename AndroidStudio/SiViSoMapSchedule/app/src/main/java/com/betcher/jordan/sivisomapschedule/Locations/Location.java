@@ -1,4 +1,6 @@
-package com.betcher.jordan.sivisomapschedule;
+package com.betcher.jordan.sivisomapschedule.Locations;
+
+import com.betcher.jordan.sivisomapschedule.SiViSo;
 
 public class Location
 {
