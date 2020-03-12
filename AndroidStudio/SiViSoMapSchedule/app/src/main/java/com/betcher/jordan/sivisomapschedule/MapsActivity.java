@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.betcher.jordan.sivisomapschedule.Locations.LocationsListViewWrapper;
 import com.betcher.jordan.sivisomapschedule.Locations.Location;
-import com.betcher.jordan.sivisomapschedule.Locations.LocationsOnItemClickListenerSelect;
+import com.betcher.jordan.sivisomapschedule.Locations.LocationsSelectOnItemClickListener;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -51,7 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	//ListAdapterLocations listAdapterLocations;
 	
 	LocationsListViewWrapper           locationsListViewWrapper;
-	LocationsOnItemClickListenerSelect locationListenerSelect;
+	LocationsSelectOnItemClickListener locationSelectItemClickListener;
 	
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	@Override
@@ -90,16 +90,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		makeMapFollowCurrentLocation();
 		
-		locationsListViewWrapper = new LocationsListViewWrapper(
+		locationsListViewWrapper        = new LocationsListViewWrapper(
 				this,
 				databaseLocation,
 				listViewLocations
 		);
-		locationListenerSelect   = new LocationsOnItemClickListenerSelect(
+		locationSelectItemClickListener = new LocationsSelectOnItemClickListener(
 				this,
 				locationsListViewWrapper
 		);
-		listViewLocations.setOnItemClickListener(locationListenerSelect);
+		locationSelectItemClickListener.addOnLocationSelectedListener(new DeleteButtonLocationSelectListener(this, buttonDelete));
+		listViewLocations.setOnItemClickListener(locationSelectItemClickListener);
 		
 		setStateHome();
 	}
@@ -123,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	public void onClickButtonConfirmEdit(View view)
 	{
-		Integer  id              = locationListenerSelect.getLocationSelectedId();
+		Integer  id              = locationSelectItemClickListener.getLocationSelectedId();
 		String   locationName    = textInputName.getText().toString();
 		String   locationAddress = textInputAddress.getText().toString();
 		SiViSo   locationSiViSo  = SiViSo.fromString(spinnerSiViSo.getSelectedItem().toString());
@@ -148,14 +149,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	public void onClickButtonDelete(View view)
 	{
-		databaseLocation.delete(locationListenerSelect.getLocationSelected());
+		databaseLocation.delete(locationSelectItemClickListener.getLocationSelected());
 		locationsListViewWrapper.refresh();
 	}
 	
 	public void onClickButtonEdit(View view)
 	{
 		setStateEditLocation();
-		Location locationSelected = locationListenerSelect.getLocationSelected();
+		Location locationSelected = locationSelectItemClickListener.getLocationSelected();
 		textInputName.setText(locationSelected.getName());
 		textInputAddress.setText(locationSelected.getAddress());
 		spinnerSiViSo.setSelection(SiViSo.indexOf(locationSelected.getSiviso()));

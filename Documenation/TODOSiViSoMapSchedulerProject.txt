@@ -59,6 +59,8 @@ Service SiViSo's
 Service SiViSo's depending on location and database
 
 Research
+    Disable Button
+        https://stackoverflow.com/questions/4384890/how-to-disable-an-android-button
 	Research how to Store data on phone
         Store data in Sqlite and view with list view https://youtu.be/SK98ayjhk1E
         Sqlite Delete data https://stackoverflow.com/questions/7510219/deleting-row-in-sqlite-in-android
