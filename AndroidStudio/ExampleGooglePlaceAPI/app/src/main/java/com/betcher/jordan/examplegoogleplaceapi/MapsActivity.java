@@ -44,6 +44,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	{
 		mMap = googleMap;
 
-		mMap.setMyLocationEnabled(true);
+		//mMap.setMyLocationEnabled(true);
 	}
 }
