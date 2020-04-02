@@ -59,6 +59,16 @@ Service SiViSo's
 Service SiViSo's depending on location and database
 
 Research
+    Map Current Location
+    https://youtu.be/fPFr0So1LmI?t=531
+
+    Override return key on popup keyboard
+    https://youtu.be/MWowf5SkiOE?t=374
+
+    List of addresses from search string
+    https://youtu.be/MWowf5SkiOE?t=566
+    Github of above video
+    https://github.com/mitchtabian/Google-Maps-Google-Places/blob/99301af3e4bcb0ecc9b87da121af1b7fb7b17b8c/app/src/main/java/codingwithmitch/com/googlemapsgoogleplaces/MapActivity.java
     Disable Button
         https://stackoverflow.com/questions/4384890/how-to-disable-an-android-button
 	Research how to Store data on phone
