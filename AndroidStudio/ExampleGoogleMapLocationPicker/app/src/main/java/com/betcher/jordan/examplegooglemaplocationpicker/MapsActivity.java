@@ -3,18 +3,24 @@ package com.betcher.jordan.examplegooglemaplocationpicker;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
 	
 	private GoogleMap mMap;
+	private TextView textViewOutputLatitudeLongitude;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +31,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map);
 		mapFragment.getMapAsync(this);
+		
+		textViewOutputLatitudeLongitude = (TextView) findViewById(R.id.textViewOutputLatitudeLongitude);
 	}
 	
 	
@@ -46,5 +54,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		LatLng sydney = new LatLng(-34, 151);
 		mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 		mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+	}
+	
+	Marker sivisoMarker = null;
+	
+	public void onClickButtonConfirmLocation(View view)
+	{
+		CameraPosition camera = mMap.getCameraPosition();
+		LatLng cameraPosition = camera.target;
+		
+		String cameraPositionString = "";
+		cameraPositionString += "Latitude: ";
+		cameraPositionString += cameraPosition.latitude;
+		cameraPositionString += "\n";
+		cameraPositionString += "Longitude: ";
+		cameraPositionString += cameraPosition.longitude;
+		
+		textViewOutputLatitudeLongitude.setText(cameraPositionString);
+		
+		if(sivisoMarker == null)
+		{
+			sivisoMarker = mMap.addMarker(new MarkerOptions().position(cameraPosition).title("SiViSo"));
+			sivisoMarker.showInfoWindow();
+		}
+		else
+		{
+			sivisoMarker.remove();
+			sivisoMarker = mMap.addMarker(new MarkerOptions().position(cameraPosition).title("SiViSo"));
+			sivisoMarker.showInfoWindow();
+		}
 	}
 }

@@ -59,6 +59,13 @@ Service SiViSo's
 Service SiViSo's depending on location and database
 
 Research
+
+    Always Show Marker Title
+    https://stackoverflow.com/questions/15132174/always-show-map-marker-title-in-android
+
+    Remove Marker
+    https://stackoverflow.com/questions/13692398/remove-a-marker-from-a-googlemap
+
     Map Current Location
     https://youtu.be/fPFr0So1LmI?t=531
 
