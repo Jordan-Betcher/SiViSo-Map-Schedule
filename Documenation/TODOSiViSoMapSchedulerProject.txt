@@ -59,6 +59,14 @@ Service SiViSo's
 Service SiViSo's depending on location and database
 
 Research
+    Go to new activity
+    https://stackoverflow.com/questions/4186021/how-to-start-new-activity-on-button-click
+
+    Get latlng of click
+    https://stackoverflow.com/questions/31291984/android-google-map-get-map-click-location-when-marker-clicked
+
+    Circle in meters around point
+   https://stackoverflow.com/questions/6029529/draw-circle-of-certain-radius-on-map-view-in-android
 
     Always Show Marker Title
     https://stackoverflow.com/questions/15132174/always-show-map-marker-title-in-android
