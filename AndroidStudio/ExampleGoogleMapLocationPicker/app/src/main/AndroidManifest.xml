@@ -15,8 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityLocationPicker"></activity>
-        <activity android:name=".ActivityMapClick" />
+        <activity android:name=".ActivityCircleMarker" android:label="Circle Marker"></activity>
+        <activity android:name=".ActivityLocationPicker" android:label="Location Picker"/>
+        <activity android:name=".ActivityMapClick"
+            android:label="Map Click"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

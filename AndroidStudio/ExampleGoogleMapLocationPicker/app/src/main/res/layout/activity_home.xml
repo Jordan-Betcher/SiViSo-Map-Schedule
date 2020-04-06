@@ -28,4 +28,16 @@
         app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonGoToLayoutPicker" />
+
+    <Button
+        android:id="@+id/buttonGoToCircleMarker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:onClick="onClickButtonGoToCircleMarker"
+        android:text="Go To Circle Marker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGoToMapClick" />
 </androidx.constraintlayout.widget.ConstraintLayout>

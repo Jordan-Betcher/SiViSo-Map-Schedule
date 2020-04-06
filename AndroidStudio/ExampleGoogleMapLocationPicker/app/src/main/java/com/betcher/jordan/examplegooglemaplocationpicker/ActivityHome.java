@@ -28,4 +28,10 @@ public class ActivityHome extends AppCompatActivity
 		Intent IntentGoToMapClick = new Intent(this, ActivityMapClick.class);
 		startActivity(IntentGoToMapClick);
 	}
+	
+	public void onClickButtonGoToCircleMarker(View view)
+	{
+		Intent IntentGoToCircleMarker = new Intent(this, ActivityCircleMarker.class);
+		startActivity(IntentGoToCircleMarker);
+	}
 }
