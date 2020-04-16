@@ -2,6 +2,8 @@ package com.betcher.jordan.examplegooglemaplocationpicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -12,7 +14,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ActivityCircleMarker extends AppCompatActivity implements OnMapReadyCallback
@@ -47,11 +48,12 @@ public class ActivityCircleMarker extends AppCompatActivity implements OnMapRead
 	public void onMapReady(GoogleMap googleMap)
 	{
 		mMap = googleMap;
+		mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		
 		// Add a marker in Sydney and move the camera
-		LatLng sydney = new LatLng(-34, 151);
-		mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12.0f));
+		LatLng canyonHillsCommunityChurch = new LatLng(47.797649,-122.2117209);
+		mMap.addMarker(new MarkerOptions().position(canyonHillsCommunityChurch).title("Canyon Hills Community Church"));
+		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(canyonHillsCommunityChurch, 17f));
 		
 		mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener()
 		{
@@ -59,15 +61,15 @@ public class ActivityCircleMarker extends AppCompatActivity implements OnMapRead
 			public void onMapClick(LatLng latLng)
 			{
 				
-				setSivisoMarker(latLng);
+				setSivisoCircle(latLng);
 				
 			}
 		});
 	}
 	
-	Circle sivisoMarker = null;
+	Circle sivisoCircle = null;
 	
-	public void setSivisoMarker(LatLng latLng)
+	public void setSivisoCircle(LatLng latLng)
 	{
 		String latLngString = "";
 		latLngString += "Latitude: ";
@@ -78,16 +80,21 @@ public class ActivityCircleMarker extends AppCompatActivity implements OnMapRead
 		
 		textViewOutputLatitudeLongitude.setText(latLngString);
 		
-		if (sivisoMarker == null)
+		if (sivisoCircle == null)
 		{
-			sivisoMarker = mMap.addCircle(new CircleOptions().center(latLng)
-			                                                 .radius(1000));
+		
 		}
 		else
 		{
-			sivisoMarker.remove();
-			sivisoMarker = mMap.addCircle(new CircleOptions().center(latLng)
-			                                                 .radius(1000));
+			sivisoCircle.remove();
 		}
+		
+		sivisoCircle = mMap.addCircle(new CircleOptions().center(latLng)
+		                                                 .radius(70)
+		                                                 .strokeColor(Color.RED)
+		                                                 .fillColor(Color.argb(70, 150, 50, 50))
+		                                                 .strokeWidth(4f)
+		                             )
+		;
 	}
 }
