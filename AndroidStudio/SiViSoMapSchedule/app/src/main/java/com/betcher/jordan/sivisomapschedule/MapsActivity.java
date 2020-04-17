@@ -71,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		);
 		locationSelectItemClickListener = new LocationsSelectOnItemClickListener(
 				this,
-				locationsListViewWrapper
+				locationsListViewWrapper, buttonDelete, buttonEdit
 		);
 		locationSelectItemClickListener.addOnLocationSelectedListener(new DeleteButtonLocationSelectListener(this, buttonDelete));
 		listViewLocations.setOnItemClickListener(locationSelectItemClickListener);

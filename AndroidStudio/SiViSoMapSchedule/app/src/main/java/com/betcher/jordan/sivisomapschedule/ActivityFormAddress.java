@@ -44,14 +44,11 @@ public class ActivityFormAddress extends AppCompatActivity implements OnMapReady
 		mapFragment
 				= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.formMap);
 		mapFragment.getMapAsync(this);
-		/*
 		
 		textInputName     = (TextInputEditText) this.findViewById(R.id.textViewName);
 		spinnerSiViSo     = (Spinner) this.findViewById(R.id.spinnerSiViSo);
 		buttonAdd         = (Button) this.findViewById(R.id.buttonAdd);
 		buttonCancel      = (Button) this.findViewById(R.id.buttonCancel);
-		
-		 */
 	}
 	
 	@RequiresApi(api = Build.VERSION_CODES.M)
@@ -105,7 +102,6 @@ public class ActivityFormAddress extends AppCompatActivity implements OnMapReady
 	
 	public void goToActivityHome()
 	{
-		//Go to home activity
 		finish();
 	}
 }

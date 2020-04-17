@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 
 import com.betcher.jordan.sivisomapschedule.DeleteButtonLocationSelectListener;
 import com.betcher.jordan.sivisomapschedule.R;
@@ -17,14 +18,35 @@ public class LocationsSelectOnItemClickListener implements AdapterView.OnItemCli
 	Location                          locationSelected;
 	LocationsListViewWrapper          locationsListViewWrapper;
 	ArrayList<LocationSelectListener> selectListeners = new ArrayList<>();
+	Button[]                          buttons;
 	
-	public LocationsSelectOnItemClickListener(Context context, LocationsListViewWrapper locationsListViewWrapper)
+	public LocationsSelectOnItemClickListener(Context context, LocationsListViewWrapper locationsListViewWrapper, Button... buttons)
 	{
 		
 		this.locationsListViewWrapper = locationsListViewWrapper;
 		colorHighlight                = context.getResources()
 		                                       .getColor(R.color.common_google_signin_btn_text_light_default);
+		this.buttons                  = buttons;
 		
+		disableButtons();
+	}
+	
+	private void disableButtons()
+	{
+		toggleButtons(false);
+	}
+	
+	private void enableButtons()
+	{
+		toggleButtons(true);
+	}
+	
+	private void toggleButtons(boolean onOff)
+	{
+		for (Button button : buttons)
+		{
+			button.setEnabled(onOff);
+		}
 	}
 	
 	@Override
@@ -43,6 +65,8 @@ public class LocationsSelectOnItemClickListener implements AdapterView.OnItemCli
 		{
 			selectListener.OnLocationSelected(locationSelected);
 		}
+		
+		enableButtons();
 	}
 	
 	public Location getLocationSelected()
