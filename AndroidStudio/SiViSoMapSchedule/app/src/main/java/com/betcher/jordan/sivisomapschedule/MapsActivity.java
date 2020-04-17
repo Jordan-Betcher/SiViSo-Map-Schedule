@@ -1,11 +1,11 @@
 package com.betcher.jordan.sivisomapschedule;
 
 import androidx.annotation.RequiresApi;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -23,7 +22,6 @@ import com.betcher.jordan.sivisomapschedule.Locations.LocationsSelectOnItemClick
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.material.textfield.TextInputEditText;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
@@ -34,17 +32,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	TextView          title;
 	Switch            switchOnOff;
-	ConstraintLayout  form;
-	TextInputEditText textInputName;
-	Spinner           spinnerSiViSo;
-	TextInputEditText textInputAddress;
-	Button            buttonCancel;
-	Button            buttonAdd;
 	Button            buttonAddLocation;
 	Button            buttonDelete;
 	Button            buttonEdit;
-	Button            buttonConfirmEdit;
-	Button            buttonCancelEdit;
 	ListView          listViewLocations;
 	
 	SQLiteLocation databaseLocation;
@@ -60,23 +50,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_home);
 		
-		mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+		mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.homeMap);
 		mapFragment.getMapAsync(this);
 		
 		title             = (TextView) this.findViewById(R.id.textViewTitle);
 		switchOnOff       = (Switch) this.findViewById(R.id.switchOnOff);
-		form              = (ConstraintLayout) this.findViewById(R.id.formAdd);
-		textInputName     = (TextInputEditText) this.findViewById(R.id.textViewName);
-		spinnerSiViSo     = (Spinner) this.findViewById(R.id.spinnerSiViSo);
-		textInputAddress  = (TextInputEditText) this.findViewById(R.id.textInputAddress);
 		listViewLocations = (ListView) this.findViewById(R.id.listViewLocations);
 		buttonAddLocation = (Button) this.findViewById(R.id.buttonAddLocation);
-		buttonCancel      = (Button) this.findViewById(R.id.buttonCancel);
 		buttonDelete      = (Button) this.findViewById(R.id.buttonDelete);
 		buttonEdit        = (Button) this.findViewById(R.id.buttonEdit);
-		buttonAdd         = (Button) this.findViewById(R.id.buttonAdd);
-		buttonConfirmEdit = (Button) this.findViewById(R.id.buttonComfirmEdit);
-		buttonCancelEdit  = (Button) this.findViewById(R.id.buttonCancelEdit);
 		
 		databaseLocation = new SQLiteLocation(this);
 		Location
@@ -102,50 +84,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		locationSelectItemClickListener.addOnLocationSelectedListener(new DeleteButtonLocationSelectListener(this, buttonDelete));
 		listViewLocations.setOnItemClickListener(locationSelectItemClickListener);
 		
-		setStateHome();
 	}
 	
-	
+	//https://stackoverflow.com/questions/4186021/how-to-start-new-activity-on-button-click
 	public void onClickButtonAddLocation(View view)
 	{
-		formReset();
-		setStateAddLocation();
+		//Send to ActivityFormAddress
+		Intent myIntent = new Intent(this, ActivityFormAddress.class);
+		//myIntent.putExtra("key", value); //Optional parameters
+		startActivity(myIntent);
 	}
 	
-	public void onClickButtonCancel(View view)
-	{
-		setStateHome();
-	}
-	
-	public void onClickButtonCancelEdit(View view)
-	{
-		setStateHome();
-	}
-	
-	public void onClickButtonConfirmEdit(View view)
-	{
-		Integer  id              = locationSelectItemClickListener.getLocationSelectedId();
-		String   locationName    = textInputName.getText().toString();
-		String   locationAddress = textInputAddress.getText().toString();
-		SiViSo   locationSiViSo  = SiViSo.fromString(spinnerSiViSo.getSelectedItem().toString());
-		Location location        = new Location(locationName, locationAddress, locationSiViSo);
-		
-		databaseLocation.update(id, location);
-		
-		setStateHome();
-		locationsListViewWrapper.refresh();
-	}
-	
-	public void onClickButtonAdd(View view)
-	{
-		String name    = textInputName.getText().toString();
-		String address = textInputAddress.getText().toString();
-		String siviso  = spinnerSiViSo.getSelectedItem().toString();
-		
-		databaseLocation.addData(name, address, SiViSo.fromString(siviso));
-		setStateHome();
-		locationsListViewWrapper.refresh();
-	}
 	
 	public void onClickButtonDelete(View view)
 	{
@@ -155,61 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	public void onClickButtonEdit(View view)
 	{
-		setStateEditLocation();
-		Location locationSelected = locationSelectItemClickListener.getLocationSelected();
-		textInputName.setText(locationSelected.getName());
-		textInputAddress.setText(locationSelected.getAddress());
-		spinnerSiViSo.setSelection(SiViSo.indexOf(locationSelected.getSiviso()));
-	}
-	
-	private void formReset()
-	{
-		textInputName.getText().clear();
-		textInputAddress.getText().clear();
-		spinnerSiViSo.setSelection(0);
-	}
-	
-	private void setStateAddLocation()
-	{
-		title.setText(R.string.title_add_location);
-		switchOnOff.setVisibility(View.GONE);
-		form.setVisibility(View.VISIBLE);
-		buttonAddLocation.setVisibility(View.GONE);
-		buttonDelete.setVisibility(View.GONE);
-		buttonEdit.setVisibility(View.GONE);
-		listViewLocations.setVisibility(View.GONE);
-		
-		buttonCancel.setVisibility(View.VISIBLE);
-		buttonAdd.setVisibility(View.VISIBLE);
-		buttonConfirmEdit.setVisibility(View.GONE);
-		buttonCancelEdit.setVisibility(View.GONE);
-	}
-	
-	private void setStateEditLocation()
-	{
-		title.setText(R.string.title_add_location);
-		switchOnOff.setVisibility(View.GONE);
-		form.setVisibility(View.VISIBLE);
-		buttonAddLocation.setVisibility(View.GONE);
-		buttonDelete.setVisibility(View.GONE);
-		buttonEdit.setVisibility(View.GONE);
-		listViewLocations.setVisibility(View.GONE);
-		
-		buttonCancel.setVisibility(View.GONE);
-		buttonAdd.setVisibility(View.GONE);
-		buttonConfirmEdit.setVisibility(View.VISIBLE);
-		buttonCancelEdit.setVisibility(View.VISIBLE);
-	}
-	
-	private void setStateHome()
-	{
-		title.setText(R.string.title_home);
-		switchOnOff.setVisibility(View.VISIBLE);
-		form.setVisibility(View.GONE);
-		buttonDelete.setVisibility(View.VISIBLE);
-		buttonEdit.setVisibility(View.VISIBLE);
-		buttonAddLocation.setVisibility(View.VISIBLE);
-		listViewLocations.setVisibility(View.VISIBLE);
+		//Send to ActivtyFormEdit
 	}
 	
 	//https://youtu.be/qS1E-Vrk60E?t=711

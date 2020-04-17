@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
-        android:id="@+id/map"
+        android:id="@+id/homeMap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="379dp"
         android:layout_height="0dp"
@@ -46,98 +46,26 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
         tools:context=".Locations" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/formAdd"
+    <Button
+        android:id="@+id/buttonAddLocation"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:onClick="onClickButtonAddLocation"
+        android:padding="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:text="@string/text_for_add_location_button"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/map">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textViewName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_for_hint_name"
-            android:singleLine="true"
-            app:layout_constraintEnd_toStartOf="@+id/spinnerSiViSo"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/spinnerSiViSo"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:dropDownWidth="match_parent"
-            android:entries="@array/SiViSo"
-            android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toTopOf="@+id/textInputAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textViewName"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputAddress"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_for_hint_address"
-            android:singleLine="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewName" />
-
-        <Button
-            android:id="@+id/buttonCancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonCancel"
-            android:text="@string/text_for_cancel_button"
-            app:layout_constraintEnd_toStartOf="@+id/buttonAdd"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputAddress" />
-
-        <Button
-            android:id="@+id/buttonAdd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonAdd"
-            android:text="@string/text_for_add_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/buttonCancel"
-            app:layout_constraintTop_toBottomOf="@+id/textInputAddress" />
-
-        <Button
-            android:id="@+id/buttonCancelEdit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonCancelEdit"
-            android:text="@string/text_for_cancel_button"
-            app:layout_constraintEnd_toStartOf="@+id/buttonComfirmEdit"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonCancel" />
-
-        <Button
-            android:id="@+id/buttonComfirmEdit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButtonConfirmEdit"
-            android:text="@string/text_for_confirm_edit_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/buttonCancelEdit"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAdd" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/homeMap" />
 
     <Button
         android:id="@+id/buttonDelete"
@@ -164,27 +92,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonDelete"
         app:layout_constraintTop_toBottomOf="@+id/buttonAddLocation" />
-
-    <Button
-        android:id="@+id/buttonAddLocation"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:onClick="onClickButtonAddLocation"
-        android:padding="0dp"
-        android:paddingLeft="0dp"
-        android:paddingTop="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="0dp"
-        android:text="@string/text_for_add_location_button"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/formAdd" />
 
     <ListView
         android:id="@+id/listViewLocations"

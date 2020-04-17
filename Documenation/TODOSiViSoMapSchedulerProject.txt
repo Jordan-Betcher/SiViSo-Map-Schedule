@@ -39,18 +39,25 @@ Note: need to close and reopen project sometimes to let R.id.[idfromlayout] be f
         Get Color from Drawable  https://youtu.be/Bgy4EhtLzYE?t=191
         To reset set background color to transparent https://stackoverflow.com/questions/14802354/how-to-reset-a-buttons-background-color-to-default
     
+    
+
+
+
+
+[]Refactor
     []  Need to seperate out the different activity windows instead of having states in the code (this also allows the triangle back button to work because it navigates to previous activities)
         Seperate out the google map into a fragment and then use the fragment so that you don't have to reload the map each time https://stackoverflow.com/questions/46932430/how-to-use-single-google-map-for-multiple-activities
         Using Framements https://youtu.be/i22INe14JUc
-        Get googleMap from fragment https://stackoverflow.com/questions/22032815/how-to-get-google-maps-object-inside-a-fragment
+        Get googleMap from fragment https://stackoverflow.com/questions/22032815/how-to-get-google-maps-object-inside-a-fragment                                        
+        []Refactor form into seperate activity classes
+        []Refactor form into it's own layouts
+    []Store LatLng instead of address
     []  Deselect Edit Text when click else where
         https://stackoverflow.com/questions/6677969/tap-outside-edittext-to-lose-focus/36411427
 
-Get locations to add to database
-	Start at current location
-	Able to select location
-Type and get prompts for location to add to database
-
+[]Select LatLng from Map
+    []Show Selection on Map
+    
 Create Service 
 	Turn on and off
 Service Accesses Database
