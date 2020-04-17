@@ -25,7 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
-	private static final int REQUEST_LOCATION_PERMISSION = 1;
+	public static final int REQUEST_LOCATION_PERMISSION = 1;
 	
 	public GoogleMap googleMap;
 	SupportMapFragment mapFragment;
@@ -61,14 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		buttonEdit        = (Button) this.findViewById(R.id.buttonEdit);
 		
 		databaseLocation = new SQLiteLocation(this);
-		Location
-				locationDefault
-				= new Location(
-				getResources().getString(R.string.name_for_default_location),
-				"",
-				SiViSo.NONE
-		);
-		databaseLocation.addData(locationDefault);
 		
 		makeMapFollowCurrentLocation();
 		
