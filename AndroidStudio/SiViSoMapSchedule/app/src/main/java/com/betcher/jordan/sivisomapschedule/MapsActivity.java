@@ -147,5 +147,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		}
 	}
 	
+	@Override
+	public void onResume()
+	{  // After a pause OR at startup
+		super.onResume();
+		locationsListViewWrapper.refresh();
+	}
+	
 	
 }

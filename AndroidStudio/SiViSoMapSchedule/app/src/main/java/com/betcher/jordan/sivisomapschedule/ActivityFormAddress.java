@@ -55,6 +55,8 @@ public class ActivityFormAddress extends AppCompatActivity implements OnMapReady
 		spinnerSiViSo     = (Spinner) this.findViewById(R.id.spinnerSiViSo);
 		buttonAdd         = (Button) this.findViewById(R.id.buttonAdd);
 		buttonCancel      = (Button) this.findViewById(R.id.buttonCancel);
+		
+		databaseLocation = new SQLiteLocation(this);
 	}
 	
 	@RequiresApi(api = Build.VERSION_CODES.M)
@@ -107,7 +109,7 @@ public class ActivityFormAddress extends AppCompatActivity implements OnMapReady
 	{
 		String name = textInputName.getText().toString().trim();
 		LatLng selectedLatLng = onMapClickListenerSivisoArea.getSelectedLatLng();
-		String siviso = spinnerSiViSo.getSelectedItem().toString();
+		SiViSo siviso = SiViSo.fromString(spinnerSiViSo.getSelectedItem().toString());
 		
 		if(name.equals(""))
 		{
@@ -126,9 +128,9 @@ public class ActivityFormAddress extends AppCompatActivity implements OnMapReady
 			}
 			else
 			{
-				Toast.makeText(this, "Lat: " + selectedLatLng.latitude, Toast.LENGTH_SHORT).show();
-				//databaseLocation.addData(name, selectedLocation, SiViSo.fromString(siviso));
-				//goToActivityHome();
+				databaseLocation.addData(name, selectedLatLng, siviso);
+				int size = databaseLocation.getDatabaseAsArrayList().size();
+				goToActivityHome();
 			}
 		}
 	}
