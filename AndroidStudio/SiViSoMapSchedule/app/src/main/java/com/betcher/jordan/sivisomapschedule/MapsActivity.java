@@ -81,11 +81,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	//https://stackoverflow.com/questions/4186021/how-to-start-new-activity-on-button-click
 	public void onClickButtonAddLocation(View view)
 	{
-		//Send to ActivityFormAddress
 		Intent myIntent = new Intent(this, ActivityFormAddress.class);
-		//myIntent.putExtra("key", value); //Optional parameters
 		startActivity(myIntent);
 	}
+	
+	/* When you start working on Edit Address Activity
+	public void OnClickButtonEdit(View view)
+	{
+		Intent myIntent = new Intent(this, ActivityEditAddress.class);
+		
+		if(locationSelectItemClickListener.getLocationSelected() != null)
+		{
+			myIntent.putExtra("selectedId", locationSelectItemClickListener.getLocationSelected().getId());
+		}
+		else
+		{
+			myIntent.putExtra("selectedId", "");
+		}
+		
+		startActivity(myIntent);
+	}
+	//*/
 	
 	
 	public void onClickButtonDelete(View view)
