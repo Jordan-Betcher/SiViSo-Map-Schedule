@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,11 +18,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.betcher.jordan.sivisomapschedule.Locations.LocationsListViewWrapper;
-import com.betcher.jordan.sivisomapschedule.Locations.Location;
 import com.betcher.jordan.sivisomapschedule.Locations.LocationsSelectOnItemClickListener;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
@@ -62,8 +64,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		databaseLocation = new SQLiteLocation(this);
 		
-		makeMapFollowCurrentLocation();
-		
 		locationsListViewWrapper        = new LocationsListViewWrapper(
 				this,
 				databaseLocation,
@@ -99,9 +99,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		//Send to ActivtyFormEdit
 	}
 	
-	//https://youtu.be/qS1E-Vrk60E?t=711
 	@RequiresApi(api = Build.VERSION_CODES.M)
-	private void makeMapFollowCurrentLocation()
+	@Override
+	public void onMapReady(GoogleMap googleMap)
+	{
+		this.googleMap = googleMap;
+		sendMapToCurrentLocation();
+	}
+	
+	@RequiresApi(api = Build.VERSION_CODES.M)
+	private void sendMapToCurrentLocation()
 	{
 		if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) ==
 		    PackageManager.PERMISSION_GRANTED ||
@@ -109,26 +116,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		    PackageManager.PERMISSION_GRANTED)
 		{
 			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-			locationManager.requestLocationUpdates(
-					LocationManager.NETWORK_PROVIDER,
-					0,
-					0,
-					new MapListenerGoToCurrentLocation(this)
-			);
+			Location
+					loc
+					= locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			LatLng currentLocation = new LatLng(loc.getLatitude(), loc.getLongitude());
+			this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f));
 		} else
 		{
 			ActivityCompat.requestPermissions(this, new String[]
 					                                  {Manifest.permission.ACCESS_FINE_LOCATION},
-			                                  REQUEST_LOCATION_PERMISSION
+			                                  MapsActivity.REQUEST_LOCATION_PERMISSION
 			);
 			return;
 		}
-	}
-	
-	@Override
-	public void onMapReady(GoogleMap googleMap)
-	{
-		this.googleMap = googleMap;
 	}
 	
 	
