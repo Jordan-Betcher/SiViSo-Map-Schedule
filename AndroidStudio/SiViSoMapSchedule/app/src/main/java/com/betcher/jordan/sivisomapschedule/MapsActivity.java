@@ -17,8 +17,8 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.betcher.jordan.sivisomapschedule.Locations.LocationsListViewWrapper;
-import com.betcher.jordan.sivisomapschedule.Locations.LocationsSelectOnItemClickListener;
+import com.betcher.jordan.sivisomapschedule.SivisoLocation.SivisoLocationsListViewWrapper;
+import com.betcher.jordan.sivisomapschedule.SivisoLocation.SivisoLocationsSelectOnItemClickListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -42,8 +42,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	SQLiteLocation databaseLocation;
 	//ListAdapterLocations listAdapterLocations;
 	
-	LocationsListViewWrapper           locationsListViewWrapper;
-	LocationsSelectOnItemClickListener locationSelectItemClickListener;
+	SivisoLocationsListViewWrapper           sivisoLocationsListViewWrapper;
+	SivisoLocationsSelectOnItemClickListener locationSelectItemClickListener;
 	
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	@Override
@@ -64,16 +64,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		databaseLocation = new SQLiteLocation(this);
 		
-		locationsListViewWrapper        = new LocationsListViewWrapper(
+		sivisoLocationsListViewWrapper  = new SivisoLocationsListViewWrapper(
 				this,
 				databaseLocation,
 				listViewLocations
 		);
-		locationSelectItemClickListener = new LocationsSelectOnItemClickListener(
+		locationSelectItemClickListener = new SivisoLocationsSelectOnItemClickListener(
 				this,
-				locationsListViewWrapper, buttonDelete, buttonEdit
+				sivisoLocationsListViewWrapper, buttonDelete, buttonEdit
 		);
-		locationSelectItemClickListener.addOnLocationSelectedListener(new DeleteButtonLocationSelectListener(this, buttonDelete));
+		locationSelectItemClickListener.addOnLocationSelectedListener(new DeleteButtonSivisoLocationSelectListener(this, buttonDelete));
 		listViewLocations.setOnItemClickListener(locationSelectItemClickListener);
 		
 	}
@@ -90,9 +90,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	{
 		Intent myIntent = new Intent(this, ActivityEditAddress.class);
 		
-		if(locationSelectItemClickListener.getLocationSelected() != null)
+		if(locationSelectItemClickListener.getSivisoLocationSelected() != null)
 		{
-			myIntent.putExtra("selectedId", locationSelectItemClickListener.getLocationSelected().getId());
+			myIntent.putExtra("selectedId", locationSelectItemClickListener.getSivisoLocationSelected().getId());
 		}
 		else
 		{
@@ -106,8 +106,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	public void onClickButtonDelete(View view)
 	{
-		databaseLocation.delete(locationSelectItemClickListener.getLocationSelected());
-		locationsListViewWrapper.refresh();
+		databaseLocation.delete(locationSelectItemClickListener.getSivisoLocationSelected());
+		sivisoLocationsListViewWrapper.refresh();
 	}
 	
 	public void onClickButtonEdit(View view)
@@ -151,7 +151,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	public void onResume()
 	{  // After a pause OR at startup
 		super.onResume();
-		locationsListViewWrapper.refresh();
+		sivisoLocationsListViewWrapper.refresh();
 	}
 	
 	

@@ -1,16 +1,16 @@
-package com.betcher.jordan.sivisomapschedule.Locations;
+package com.betcher.jordan.sivisomapschedule.SivisoLocation;
 
-import com.betcher.jordan.sivisomapschedule.SiViSo;
+import com.betcher.jordan.sivisomapschedule.Siviso;
 import com.google.android.gms.maps.model.LatLng;
 
-public class Location
+public class SivisoLocation
 {
 	private String name;
 	private String latitude;
 	private String longitude;
-	private SiViSo siviso;
+	private Siviso siviso;
 	
-	public Location(String name, String latitude, String longitude, SiViSo siviso)
+	public SivisoLocation(String name, String latitude, String longitude, Siviso siviso)
 	{
 		this.name = name;
 		this.latitude = latitude;
@@ -18,7 +18,7 @@ public class Location
 		this.siviso = siviso;
 	}
 	
-	public Location(String name, LatLng latLng, SiViSo siviso)
+	public SivisoLocation(String name, LatLng latLng, Siviso siviso)
 	{
 		this(name, latLng.latitude + "", latLng.longitude + "", siviso);
 	}
@@ -28,7 +28,7 @@ public class Location
 		return name;
 	}
 	
-	public SiViSo getSiviso()
+	public Siviso getSiviso()
 	{
 		return siviso;
 	}

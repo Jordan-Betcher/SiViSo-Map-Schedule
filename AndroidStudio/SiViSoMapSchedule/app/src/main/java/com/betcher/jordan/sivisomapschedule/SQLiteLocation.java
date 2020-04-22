@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.betcher.jordan.sivisomapschedule.Locations.Location;
+import com.betcher.jordan.sivisomapschedule.SivisoLocation.SivisoLocation;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.HashMap;
@@ -53,7 +53,7 @@ public class SQLiteLocation extends SQLiteOpenHelper
 	}
 	
 	
-	public boolean addData(String name, String latitude, String longitude, SiViSo siviso)
+	public boolean addData(String name, String latitude, String longitude, Siviso siviso)
 	{
 		SQLiteDatabase database      = this.getWritableDatabase();
 		ContentValues  contentValues = new ContentValues();
@@ -75,31 +75,31 @@ public class SQLiteLocation extends SQLiteOpenHelper
 		}
 	}
 	
-	public void addData(String name, LatLng latLng, SiViSo siviso)
+	public void addData(String name, LatLng latLng, Siviso siviso)
 	{
 		addData(name, latLng.latitude + "", latLng.longitude + "", siviso);
 	}
 	
-	public void addData(Location location)
+	public void addData(SivisoLocation sivisoLocation)
 	{
-		addData(location.getName(), location.getLatLng(), location.getSiviso());
+		addData(sivisoLocation.getName(), sivisoLocation.getLatLng(), sivisoLocation.getSiviso());
 	}
 	
-	public HashMap<Location, Integer> getDatabaseAsArrayList()
+	public HashMap<SivisoLocation, Integer> getDatabaseAsArrayList()
 	{
-		HashMap<Location, Integer> locationIds = new HashMap<Location, Integer>();
-		SQLiteDatabase      database  = this.getWritableDatabase();
-		Cursor              query     = database.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+		HashMap<SivisoLocation, Integer> locationIds = new HashMap<SivisoLocation, Integer>();
+		SQLiteDatabase                   database    = this.getWritableDatabase();
+		Cursor                           query       = database.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 		while (query.moveToNext())
 		{
-			Integer id      = query.getInt(0);
-			String name    = query.getString(1);
-			String latitude    = query.getString(2);
-			String longitude    = query.getString(3);
-			SiViSo siviso  = SiViSo.fromString(query.getString(4));
+			Integer id        = query.getInt(0);
+			String  name      = query.getString(1);
+			String  latitude  = query.getString(2);
+			String  longitude = query.getString(3);
+			Siviso  siviso    = Siviso.fromString(query.getString(4));
 			
-			Location location = new Location(name, latitude, longitude, siviso);
-			locationIds.put(location, id);
+			SivisoLocation sivisoLocation = new SivisoLocation(name, latitude, longitude, siviso);
+			locationIds.put(sivisoLocation, id);
 		}
 		
 		return locationIds;
@@ -116,20 +116,20 @@ public class SQLiteLocation extends SQLiteOpenHelper
 		return rowsDeleted;
 	}
 	
-	public int delete(Location locationCurrent)
+	public int delete(SivisoLocation sivisoLocationCurrent)
 	{
-		return delete(locationCurrent.getLatitude(), locationCurrent.getLongitude());
+		return delete(sivisoLocationCurrent.getLatitude(), sivisoLocationCurrent.getLongitude());
 	}
 	
-	public void update(Integer id, Location location)
+	public void update(Integer id, SivisoLocation sivisoLocation)
 	{
 		SQLiteDatabase database = this.getWritableDatabase();
 		
 		ContentValues contentValues = new ContentValues();
-		contentValues.put(COLUMN_1_NAME, location.getName());
-		contentValues.put(COLUMN_2_LATITUDE, location.getLatitude());
-		contentValues.put(COLUMN_3_LONGITUDE, location.getLongitude());
-		contentValues.put(COLUMN_4_SIVISO, location.getSiviso().name);
+		contentValues.put(COLUMN_1_NAME, sivisoLocation.getName());
+		contentValues.put(COLUMN_2_LATITUDE, sivisoLocation.getLatitude());
+		contentValues.put(COLUMN_3_LONGITUDE, sivisoLocation.getLongitude());
+		contentValues.put(COLUMN_4_SIVISO, sivisoLocation.getSiviso().name);
 		
 		database.update(TABLE_NAME, contentValues, ( COLUMN_0_ID + "=?"), new String[]{id + ""});
 	}

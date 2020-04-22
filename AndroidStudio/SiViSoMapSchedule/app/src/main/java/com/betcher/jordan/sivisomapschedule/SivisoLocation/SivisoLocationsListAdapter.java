@@ -1,4 +1,4 @@
-package com.betcher.jordan.sivisomapschedule.Locations;
+package com.betcher.jordan.sivisomapschedule.SivisoLocation;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,21 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.betcher.jordan.sivisomapschedule.R;
-import com.betcher.jordan.sivisomapschedule.SiViSo;
+import com.betcher.jordan.sivisomapschedule.Siviso;
 
 import java.util.ArrayList;
 
-class LocationsListAdapter extends ArrayAdapter<Location>
+class SivisoLocationsListAdapter extends ArrayAdapter<SivisoLocation>
 {
 	static final int idOfLayout = R.layout.list_item_location;
 	static final int idOfTextViewName = R.id.textViewName;
 	
 	Context context;
 	
-	public LocationsListAdapter(@NonNull Context context,
-	                            ArrayList<Location> locations)
+	public SivisoLocationsListAdapter(@NonNull Context context,
+	                                  ArrayList<SivisoLocation> sivisoLocations)
 	{
-		super(context, idOfLayout, locations);
+		super(context, idOfLayout, sivisoLocations);
 		this.context = context;
 	}
 	
@@ -35,7 +35,7 @@ class LocationsListAdapter extends ArrayAdapter<Location>
 	@Override
 	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
 	{
-		Location location = getItem(position);
+		SivisoLocation sivisoLocation = getItem(position);
 		
 		LayoutInflater layoutInflater = LayoutInflater.from(context);
 		convertView = layoutInflater.inflate(idOfLayout, parent, false);
@@ -44,16 +44,16 @@ class LocationsListAdapter extends ArrayAdapter<Location>
 		
 		textViewName = convertView.findViewById(idOfTextViewName);
 		
-		textViewName.setText(location.getName());
+		textViewName.setText(sivisoLocation.getName());
 		textViewName.setFocusable(false);
 		
 		//https://stackoverflow.com/questions/46190386/how-do-i-add-spinner-inside-listview-row-in-android
 		//https://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
 		Spinner spinner = convertView.findViewById(R.id.spinner);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, SiViSo
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, Siviso
 				.getValuesAsStrings());
 		spinner.setAdapter(adapter);
-		spinner.setSelection(SiViSo.indexOf(location.getSiviso().name));
+		spinner.setSelection(Siviso.indexOf(sivisoLocation.getSiviso().name));
 		spinner.setFocusable(false);
 		
 		return convertView;

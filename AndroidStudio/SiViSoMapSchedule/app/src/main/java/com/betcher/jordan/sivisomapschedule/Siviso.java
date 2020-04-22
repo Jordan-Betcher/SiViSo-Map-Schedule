@@ -3,7 +3,7 @@ package com.betcher.jordan.sivisomapschedule;
 import java.util.ArrayList;
 
 //https://www.baeldung.com/java-enum-values
-public enum SiViSo
+public enum Siviso
 {
 	NONE("None"),
 	SILENT("Silent"),
@@ -13,13 +13,13 @@ public enum SiViSo
 	public final   String            name;
 	private static ArrayList<String> valuesAsStrings = createValuesAsStrings();
 	
-	private SiViSo(String name) {
+	private Siviso(String name) {
 		this.name = name;
 	}
 	
 	private static ArrayList<String> createValuesAsStrings()
 	{
-		SiViSo[] sivisos = SiViSo.values();
+		Siviso[]          sivisos         = Siviso.values();
 		ArrayList<String> sivisosAsString = new ArrayList<String>(sivisos.length);
 		
 		for(int index = 0; index < sivisos.length; index++)
@@ -35,7 +35,7 @@ public enum SiViSo
 		return valuesAsStrings.indexOf(name);
 	}
 	
-	public static int indexOf(SiViSo siViSo)
+	public static int indexOf(Siviso siViSo)
 	{
 		return indexOf(siViSo.name);
 	}
@@ -47,19 +47,19 @@ public enum SiViSo
 	
 	public static boolean isSiViSo(String pendingSiViSo)
 	{
-		if(SiViSo.NONE.name.equals(pendingSiViSo))
+		if(Siviso.NONE.name.equals(pendingSiViSo))
 		{
 			return true;
 		}
-		else if(SiViSo.SILENT.name.equals(pendingSiViSo))
+		else if(Siviso.SILENT.name.equals(pendingSiViSo))
 		{
 			return true;
 		}
-		else if(SiViSo.VIBRATE.name.equals(pendingSiViSo))
+		else if(Siviso.VIBRATE.name.equals(pendingSiViSo))
 		{
 			return true;
 		}
-		else if(SiViSo.SOUND.name.equals(pendingSiViSo))
+		else if(Siviso.SOUND.name.equals(pendingSiViSo))
 		{
 			return true;
 		}
@@ -69,23 +69,23 @@ public enum SiViSo
 		}
 	}
 	
-	public static SiViSo fromString(String pendingSiViSo)
+	public static Siviso fromString(String pendingSiViSo)
 	{
-		if(SiViSo.NONE.name.equals(pendingSiViSo))
+		if(Siviso.NONE.name.equals(pendingSiViSo))
 		{
-			return SiViSo.NONE;
+			return Siviso.NONE;
 		}
-		else if(SiViSo.SILENT.name.equals(pendingSiViSo))
+		else if(Siviso.SILENT.name.equals(pendingSiViSo))
 		{
-			return SiViSo.SILENT;
+			return Siviso.SILENT;
 		}
-		else if(SiViSo.VIBRATE.name.equals(pendingSiViSo))
+		else if(Siviso.VIBRATE.name.equals(pendingSiViSo))
 		{
-			return SiViSo.VIBRATE;
+			return Siviso.VIBRATE;
 		}
-		else if(SiViSo.SOUND.name.equals(pendingSiViSo))
+		else if(Siviso.SOUND.name.equals(pendingSiViSo))
 		{
-			return SiViSo.SOUND;
+			return Siviso.SOUND;
 		}
 		else
 		{

@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -15,16 +13,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class ActivityFormAddress extends AppCompatActivity implements OnMapReadyCallback
@@ -107,9 +101,9 @@ public class ActivityFormAddress extends AppCompatActivity implements OnMapReady
 	
 	public void onClickButtonAdd(View view)
 	{
-		String name = textInputName.getText().toString().trim();
+		String name           = textInputName.getText().toString().trim();
 		LatLng selectedLatLng = onMapClickListenerSivisoArea.getSelectedLatLng();
-		SiViSo siviso = SiViSo.fromString(spinnerSiViSo.getSelectedItem().toString());
+		Siviso siviso         = Siviso.fromString(spinnerSiViSo.getSelectedItem().toString());
 		
 		if(name.equals(""))
 		{
