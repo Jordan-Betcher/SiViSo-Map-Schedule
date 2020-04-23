@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
@@ -80,6 +82,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	public void onClickButtonAddLocation(View view)
 	{
 		Intent myIntent = new Intent(this, ActivityFormAddress.class);
+		myIntent.putExtra("latitude", googleMap.getCameraPosition().target.latitude);
+		myIntent.putExtra("longitude", googleMap.getCameraPosition().target.longitude);
 		startActivity(myIntent);
 	}
 	
@@ -148,7 +152,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	
 	public void onMapReady(GoogleMap googleMap)
 	{
+		LatLng seattleLatLng = new LatLng(47.6160775,-122.3340157);
+		LatLng defaultLocation = seattleLatLng;
+		float defaultZoom = 15f;
+		
 		this.googleMap = googleMap;
+		this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, defaultZoom));
 	}
 	
 	

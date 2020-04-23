@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -41,6 +42,8 @@ public class ActivityFormAddress extends AppCompatActivity implements OnMapReady
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_form_map);
+		
+		
 		mapFragment
 				= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.formMap);
 		mapFragment.getMapAsync(this);
@@ -63,6 +66,13 @@ public class ActivityFormAddress extends AppCompatActivity implements OnMapReady
 		
 		onMapClickListenerSivisoArea = new OnMapClickListenerSivisoArea(googleMap, buttonAdd);
 		this.googleMap.setOnMapClickListener(onMapClickListenerSivisoArea);
+		
+		Intent intent = getIntent();
+		Double latitude  = intent.getDoubleExtra("latitude", 0);
+		Double longitude  = intent.getDoubleExtra("longitude", 0);
+		LatLng previousActivityLatLng = new LatLng(latitude, longitude);
+		
+		this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(previousActivityLatLng, 15f));
 	}
 	
 	
