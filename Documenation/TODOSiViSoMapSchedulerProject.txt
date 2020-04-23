@@ -48,15 +48,24 @@ Note: need to close and reopen project sometimes to let R.id.[idfromlayout] be f
     []  Need to seperate out the different activity windows instead of having states in the code (this also allows the triangle back button to work because it navigates to previous activities)
         Seperate out the google map into a fragment and then use the fragment so that you don't have to reload the map each time https://stackoverflow.com/questions/46932430/how-to-use-single-google-map-for-multiple-activities
         Using Framements https://youtu.be/i22INe14JUc
-        Get googleMap from fragment https://stackoverflow.com/questions/22032815/how-to-get-google-maps-object-inside-a-fragment                                        
-        []Refactor form into seperate activity classes
-        []Refactor form into it's own layouts
-    []Store LatLng instead of address
+        Get googleMap from fragment https://stackoverflow.com/questions/22032815/how-to-get-google-maps-object-inside-a-fragment                                   
+        []Home
+            []Map shows locations
+            []On selection
+                []Delete and Edit enabled
+                []Map goes to selection
+                []Selection is highlighted
+            []Can Deselect
+                []Delete and Edit disabled
+                []Map goes to current location
+        []Add Form
+        []Edit Form
+    [x]Store LatLng instead of address
     []  Deselect Edit Text when click else where
         https://stackoverflow.com/questions/6677969/tap-outside-edittext-to-lose-focus/36411427
 
-[]Select LatLng from Map
-    []Show Selection on Map
+
+    
     
 Create Service 
 	Turn on and off
