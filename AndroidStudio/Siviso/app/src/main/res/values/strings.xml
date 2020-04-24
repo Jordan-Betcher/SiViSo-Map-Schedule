@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">Siviso</string>
+    <string name="app_name">SiViSo</string>
+    <string name="title_home">SiViSo Home</string>
+    <string name="title_add">SiViSo Add</string>
+    <string name="title_edit">SiViSo Edit</string>
+    <string name="text_for_switch_on_off">On/Off</string>
+    <string name="text_for_button_add">+</string>
+    <string name="text_for_button_delete">Delete</string>
+    <string name="text_for_button_edit">Edit</string>
+    <string name="text_for_button_cancel">Cancel</string>
+    <string name="text_for_button_confirm_add">Add</string>
+    <string name="text_for_button_confirm_edit">Confirm</string>
+    <string name="text_for_hint_name">Name</string>
+    <string name="name_for_default_location">Default</string>
 </resources>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsActivity">
+    tools:context=".activities.Home">
 
     <Switch
         android:id="@+id/switchOnOff"
@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/text_for_onOff_switch"
+        android:text="@string/text_for_switch_on_off"
         android:textColorLink="#8BC34A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,20 +48,20 @@
         tools:context=".Locations" />
 
     <Button
-        android:id="@+id/buttonAddLocation"
+        android:id="@+id/buttonAdd"
         android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:onClick="onClickButtonAddLocation"
+        android:onClick="onClickButtonAdd"
         android:padding="0dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
-        android:text="@string/text_for_add_location_button"
+        android:text="@string/text_for_button_add"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,11 +75,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:onClick="onClickButtonDelete"
-        android:text="@string/text_for_delete_button"
+        android:text="@string/text_for_button_delete"
         app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAdd" />
 
     <Button
         android:id="@+id/buttonEdit"
@@ -88,11 +88,11 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:onClick="onClickButtonEdit"
-        android:text="@string/text_for_edit_button"
+        android:text="@string/text_for_button_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonDelete"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAdd" />
 
     <ListView
         android:id="@+id/listViewLocations"
