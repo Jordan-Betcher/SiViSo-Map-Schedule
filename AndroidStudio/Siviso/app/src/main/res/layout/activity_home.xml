@@ -49,7 +49,7 @@
         tools:context=".Locations" />
 
     <Button
-        android:id="@+id/buttonAdd"
+        android:id="@+id/buttonConfirmAdd"
         android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginStart="16dp"
@@ -81,7 +81,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAdd" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonConfirmAdd" />
 
     <Button
         android:id="@+id/buttonEdit"
@@ -95,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonDelete"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAdd" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonConfirmAdd" />
 
     <ListView
         android:id="@+id/listViewLocations"
