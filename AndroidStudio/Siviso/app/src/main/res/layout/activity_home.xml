@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.Home">
 
+    <TextView
+        android:id="@+id/homeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/switchOnOff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/switchOnOff" />
+
     <Switch
         android:id="@+id/switchOnOff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/text_for_switch_on_off"
@@ -19,18 +29,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/app_name"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
         android:id="@+id/homeMap"
@@ -39,12 +37,13 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/homeTitle"
         tools:context=".Locations" />
 
     <Button
@@ -74,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:enabled="false"
         android:onClick="onClickButtonDelete"
         android:text="@string/text_for_button_delete"
         app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
@@ -87,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:enabled="false"
         android:onClick="onClickButtonEdit"
         android:text="@string/text_for_button_edit"
         app:layout_constraintEnd_toEndOf="parent"
