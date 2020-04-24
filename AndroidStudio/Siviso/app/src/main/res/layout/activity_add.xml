@@ -7,13 +7,13 @@
     tools:context=".activities.Add">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/titleAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/app_name"
+        android:text="@string/title_add"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/titleAdd"
         tools:context=".Locations" />
 
     <com.google.android.material.textfield.TextInputEditText
@@ -41,7 +41,6 @@
         android:hint="@string/text_for_hint_name"
         android:singleLine="true"
         app:layout_constraintEnd_toStartOf="@+id/spinnerSiViSo"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/addMap"
         app:layout_constraintTop_toBottomOf="@+id/addMap" />
 
@@ -50,12 +49,10 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:dropDownWidth="match_parent"
-        android:entries="@array/SiViSo"
+        android:entries="@array/siviso"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="@+id/addMap"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewName"
         app:layout_constraintTop_toTopOf="@+id/textViewName" />
 
     <Button

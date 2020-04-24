@@ -23,6 +23,6 @@ public class Edit extends AppCompatActivity
 	
 	public void onClickButtonConfirmEdit(View view)
 	{
-		
+	
 	}
 }
