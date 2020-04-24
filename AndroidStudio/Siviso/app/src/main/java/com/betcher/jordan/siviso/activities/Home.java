@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.betcher.jordan.siviso.Constants;
 import com.betcher.jordan.siviso.R;
+import com.betcher.jordan.siviso.actions.SetMapHomePosition;
 import com.betcher.jordan.siviso.actions.StartActivityAdd;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,6 +32,7 @@ public class Home extends AppCompatActivity
 			public void onMapReady(GoogleMap googleMap)
 			{
 				map = googleMap;
+				SetMapHomePosition.run(map);
 			}
 		});
 	}
