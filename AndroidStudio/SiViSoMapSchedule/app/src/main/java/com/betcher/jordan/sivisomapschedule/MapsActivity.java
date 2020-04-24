@@ -52,6 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_home);
 		
+		/*
 		mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.homeMap);
 		mapFragment.getMapAsync(this);
 		
@@ -75,6 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		);
 		locationSelectItemClickListener.addOnLocationSelectedListener(new DeleteButtonSivisoLocationSelectListener(this, buttonDelete));
 		listViewLocations.setOnItemClickListener(locationSelectItemClickListener);
+		//*/
 		
 	}
 	

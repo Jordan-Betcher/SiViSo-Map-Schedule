@@ -59,7 +59,10 @@ Note: need to close and reopen project sometimes to let R.id.[idfromlayout] be f
                 []Delete and Edit disabled
                 []Map goes to current location
         []Add Form
+            [x]Get's the location on home and moves the map there
+            ?
         []Edit Form
+            ?
     [x]Store LatLng instead of address
     []  Deselect Edit Text when click else where
         https://stackoverflow.com/questions/6677969/tap-outside-edittext-to-lose-focus/36411427

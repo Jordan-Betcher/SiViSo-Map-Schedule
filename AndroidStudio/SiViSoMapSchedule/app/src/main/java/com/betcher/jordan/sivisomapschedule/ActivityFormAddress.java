@@ -125,6 +125,7 @@ public class ActivityFormAddress extends AppCompatActivity implements OnMapReady
 		}
 		else
 		{
+			/*
 			if(selectedLatLng == null)
 			{
 				textInputName.setError("No spot on the map is selected. The add button is suppose to be disabled so I don't know how you got here. Props.");
@@ -135,7 +136,7 @@ public class ActivityFormAddress extends AppCompatActivity implements OnMapReady
 				databaseLocation.addData(name, selectedLatLng, siviso);
 				int size = databaseLocation.getDatabaseAsArrayList().size();
 				goToActivityHome();
-			}
+			}///*/
 		}
 	}
 	
