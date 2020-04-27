@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.add.CancelAdd;
@@ -13,6 +14,8 @@ import com.betcher.jordan.siviso.actions.add.SetMapAddPosition;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class Add extends AppCompatActivity
 {
@@ -20,6 +23,8 @@ public class Add extends AppCompatActivity
 	AppCompatActivity activity;
 	Button buttonConfirmAdd;
 	SelectAddSiviso selectAddSiviso;
+	TextInputEditText inputName;
+	Spinner inputSiviso;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -42,6 +47,9 @@ public class Add extends AppCompatActivity
 				map.setOnMapClickListener(selectAddSiviso);
 			}
 		});
+		
+		inputName = this.findViewById(R.id.addName);
+		inputSiviso = this.findViewById(R.id.addSiviso);
 	}
 	
 	public void onClickButtonCancel(View view)
@@ -51,6 +59,10 @@ public class Add extends AppCompatActivity
 	
 	public void onClickButtonConfirmAdd(View view)
 	{
-	
+		String name = inputName.getText().toString().trim();
+		//Siviso siviso = Siviso.fromString(inputSiviso.getSelectedItem().toString());
+		LatLng latLng = selectAddSiviso.getSelectedLatLng();
+		
+		//https://developer.android.com/training/data-storage/room
 	}
 }

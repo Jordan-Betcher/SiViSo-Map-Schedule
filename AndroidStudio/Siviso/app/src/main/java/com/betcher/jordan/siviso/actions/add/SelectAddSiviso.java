@@ -45,4 +45,9 @@ public class SelectAddSiviso implements GoogleMap.OnMapClickListener
 		selected.remove();
 		selected = null;
 	}
+	
+	public LatLng getSelectedLatLng()
+	{
+		return selected.getCenter();
+	}
 }

@@ -35,17 +35,17 @@
         tools:context=".Locations" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textViewName"
+        android:id="@+id/addName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/text_for_hint_name"
         android:singleLine="true"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerSiViSo"
+        app:layout_constraintEnd_toStartOf="@+id/addSiviso"
         app:layout_constraintStart_toStartOf="@+id/addMap"
         app:layout_constraintTop_toBottomOf="@+id/addMap" />
 
     <Spinner
-        android:id="@+id/spinnerSiViSo"
+        android:id="@+id/addSiviso"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:dropDownWidth="match_parent"
@@ -53,7 +53,7 @@
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@+id/buttonConfirmAdd"
         app:layout_constraintEnd_toEndOf="@+id/addMap"
-        app:layout_constraintTop_toTopOf="@+id/textViewName" />
+        app:layout_constraintTop_toTopOf="@+id/addName" />
 
     <Button
         android:id="@+id/buttonCancel"
@@ -63,8 +63,8 @@
         android:text="@string/text_for_button_cancel"
         app:layout_constraintEnd_toStartOf="@+id/buttonConfirmAdd"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/textViewName"
-        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+        app:layout_constraintStart_toStartOf="@+id/addName"
+        app:layout_constraintTop_toBottomOf="@+id/addName" />
 
     <Button
         android:id="@+id/buttonConfirmAdd"
@@ -73,9 +73,9 @@
         android:enabled="false"
         android:onClick="onClickButtonConfirmAdd"
         android:text="@string/text_for_button_confirm_add"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerSiViSo"
+        app:layout_constraintEnd_toEndOf="@+id/addSiviso"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonCancel"
-        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+        app:layout_constraintTop_toBottomOf="@+id/addName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

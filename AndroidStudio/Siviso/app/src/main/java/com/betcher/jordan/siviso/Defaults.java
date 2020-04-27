@@ -14,4 +14,6 @@ public class Defaults
 	public static final int ADD_SIVISO_FILL_COLOR = Color.argb(70, 50, 50, 50);
 	public static final float ADD_SIVISO_STROKE_WIDTH = 1f;
 	public static final int ADD_SIVISO_STROKE_COLOR = Color.BLACK;
+	
+	public static final String DATABASE_NAME = "Siviso";
 }
