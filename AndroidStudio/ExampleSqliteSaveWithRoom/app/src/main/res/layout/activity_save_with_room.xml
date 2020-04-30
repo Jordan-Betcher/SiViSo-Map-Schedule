@@ -91,6 +91,7 @@
         android:id="@+id/recyclerViewSiviso"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#67CD13"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/buttonEdit"
         app:layout_constraintStart_toStartOf="@+id/buttonDelete"

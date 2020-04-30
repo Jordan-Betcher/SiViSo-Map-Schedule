@@ -2,6 +2,7 @@ package com.betcher.jordan.examplesqlitesavewithroom.database;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -15,6 +16,8 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 @Database(entities = {SivisoData.class}, version = 1)
 public abstract class SivisoDatabase extends RoomDatabase
 {
+	private static final String TAG = "SivisoDatabase";
+	
 	private static SivisoDatabase instance;
 	
 	public abstract SivisoDao sivisoDao();
@@ -49,6 +52,7 @@ public abstract class SivisoDatabase extends RoomDatabase
 		@Override
 		protected Void doInBackground(Void... voids) {
 			sivisoDao.insert(new SivisoData("Default", "None", 0, 0));
+			Log.d(TAG, "doInBackground: ");
 			return null;
 		}
 	}

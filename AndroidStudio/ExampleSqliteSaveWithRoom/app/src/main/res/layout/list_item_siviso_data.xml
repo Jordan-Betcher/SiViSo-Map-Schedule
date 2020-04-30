@@ -3,21 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#C54B4B"
     android:padding="8dp"
     tools:context=".activities.SaveWithRoom">
 
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/textViewHoldName"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner"
-        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerHoldSiviso"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerHoldSiviso"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinner" />
+        app:layout_constraintTop_toTopOf="@+id/spinnerHoldSiviso" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerHoldSiviso"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:entries="@array/siviso"

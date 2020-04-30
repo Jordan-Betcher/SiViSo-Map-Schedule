@@ -1,5 +1,6 @@
 package com.betcher.jordan.examplesqlitesavewithroom.activities;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import java.util.List;
 
 public class SivisoAdapter  extends RecyclerView.Adapter<SivisoHolder>
 {
+	private static final String TAG = "SivisoAdapter";
+	
 	private List<SivisoData> sivisoDatas = new ArrayList<>();
 	
 	@NonNull
@@ -38,6 +41,7 @@ public class SivisoAdapter  extends RecyclerView.Adapter<SivisoHolder>
 	@Override
 	public int getItemCount()
 	{
+		Log.d(TAG, "getItemCount: " + sivisoDatas.size());
 		return sivisoDatas.size();
 	}
 	
@@ -45,5 +49,6 @@ public class SivisoAdapter  extends RecyclerView.Adapter<SivisoHolder>
 	{
 		this.sivisoDatas = sivisoDatas;
 		notifyDataSetChanged();
+		Log.d(TAG, "setSivisoDatas: " + sivisoDatas.size());
 	}
 }

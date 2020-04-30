@@ -4,9 +4,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ import java.util.List;
 
 public class SaveWithRoom extends AppCompatActivity
 {
+	private static final String TAG = "SaveWithRoom";
+	
 	TextView textLatitude;
 	TextView textLongitude;
 	TextInputEditText inputName;
@@ -40,6 +44,7 @@ public class SaveWithRoom extends AppCompatActivity
 		inputName = findViewById(R.id.inputName);
 		spinnerSiviso = findViewById(R.id.spinnerSiviso);
 		recyclerViewSiviso = findViewById(R.id.recyclerViewSiviso);
+		recyclerViewSiviso.setLayoutManager(new LinearLayoutManager(this));
 		
 		CreateDataForTextLatitudeAndTextLongitude.run(textLatitude, textLongitude);
 		
@@ -53,6 +58,7 @@ public class SaveWithRoom extends AppCompatActivity
 			public void onChanged(@Nullable List<SivisoData> sivisoDatas)
 			{
 				adapter.setSivisoDatas(sivisoDatas);
+				Log.d(TAG, "onChanged: " + sivisoDatas.size());
 			}
 		});
 		

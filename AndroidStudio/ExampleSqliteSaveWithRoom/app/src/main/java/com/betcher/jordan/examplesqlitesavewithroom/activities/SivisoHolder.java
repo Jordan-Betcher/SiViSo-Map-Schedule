@@ -16,8 +16,8 @@ class SivisoHolder extends RecyclerView.ViewHolder
 	
 	public SivisoHolder(View itemView) {
 		super(itemView);
-		textViewName = itemView.findViewById(R.id.textViewName);
-		spinnerSiviso = itemView.findViewById(R.id.spinnerSiviso);
+		textViewName = itemView.findViewById(R.id.textViewHoldName);
+		spinnerSiviso = itemView.findViewById(R.id.spinnerHoldSiviso);
 	}
 	
 	public void setName(String name)
