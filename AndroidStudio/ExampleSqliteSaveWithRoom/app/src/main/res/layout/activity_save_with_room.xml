@@ -41,12 +41,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Name"
-        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerSiviso"
         app:layout_constraintStart_toStartOf="@+id/textLatitiude"
         app:layout_constraintTop_toBottomOf="@+id/textLatitiude" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerSiviso"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:entries="@array/siviso"
@@ -59,8 +59,9 @@
         android:id="@+id/buttonAdd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="onClickButtonAdd"
         android:text="Add"
-        app:layout_constraintEnd_toEndOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerSiviso"
         app:layout_constraintStart_toStartOf="@+id/inputName"
         app:layout_constraintTop_toBottomOf="@+id/inputName" />
 
@@ -68,6 +69,7 @@
         android:id="@+id/buttonEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="onClickButtonEdit"
         android:text="Edit"
         app:layout_constraintEnd_toEndOf="@+id/buttonAdd"
         app:layout_constraintHorizontal_bias="0.5"
@@ -78,6 +80,7 @@
         android:id="@+id/buttonDelete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="onClickButtonDelete"
         android:text="Delete"
         app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
         app:layout_constraintHorizontal_bias="0.5"
@@ -85,6 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonAdd" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSiviso"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
