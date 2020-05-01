@@ -32,6 +32,7 @@ public class SaveWithRoom extends AppCompatActivity
 	RecyclerView recyclerViewSiviso;
 	
 	private SivisoModel sivisoModel;
+	private SivisoAdapter sivisoAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -48,8 +49,8 @@ public class SaveWithRoom extends AppCompatActivity
 		
 		CreateDataForTextLatitudeAndTextLongitude.run(textLatitude, textLongitude);
 		
-		final SivisoAdapter adapter = new SivisoAdapter();
-		recyclerViewSiviso.setAdapter(adapter);
+		sivisoAdapter = new SivisoAdapter();
+		recyclerViewSiviso.setAdapter(sivisoAdapter);
 		
 		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
 		sivisoModel.getAllSivisoData().observe(this, new Observer<List<SivisoData>>()
@@ -57,7 +58,7 @@ public class SaveWithRoom extends AppCompatActivity
 			@Override
 			public void onChanged(@Nullable List<SivisoData> sivisoDatas)
 			{
-				adapter.setSivisoDatas(sivisoDatas);
+				sivisoAdapter.setSivisoDatas(sivisoDatas);
 				Log.d(TAG, "onChanged: " + sivisoDatas.size());
 			}
 		});
@@ -77,7 +78,13 @@ public class SaveWithRoom extends AppCompatActivity
 	
 	public void onClickButtonDelete(View view)
 	{
-	
+		boolean isSelected = sivisoAdapter.getIsSivisoSelected();
+		if(isSelected)
+		{
+			SivisoData selectedSiviso = sivisoAdapter.getSelectedSiviso();
+			sivisoModel.delete(selectedSiviso);
+		}
+		
 	}
 	
 	public void onClickButtonEdit(View view)
