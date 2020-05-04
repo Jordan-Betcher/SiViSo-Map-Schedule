@@ -89,6 +89,20 @@ public class SaveWithRoom extends AppCompatActivity
 	
 	public void onClickButtonEdit(View view)
 	{
-	
+		boolean isSelected = sivisoAdapter.getIsSivisoSelected();
+		if(isSelected)
+		{
+			SivisoData selectedSiviso = sivisoAdapter.getSelectedSiviso();
+			
+			String name = inputName.getText().toString().trim();
+			String siviso = spinnerSiviso.getSelectedItem().toString();
+			double latitude = Double.parseDouble(textLatitude.getText().toString());
+			double longitude = Double.parseDouble(textLongitude.getText().toString());
+			
+			SivisoData updatedSiviso = new SivisoData(name, siviso, latitude, longitude);
+			updatedSiviso.setId(selectedSiviso.getId());
+			
+			sivisoModel.update(updatedSiviso);
+		}
 	}
 }
