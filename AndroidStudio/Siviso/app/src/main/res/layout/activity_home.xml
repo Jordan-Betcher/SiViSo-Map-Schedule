@@ -97,21 +97,13 @@
         app:layout_constraintStart_toEndOf="@+id/buttonDelete"
         app:layout_constraintTop_toBottomOf="@+id/buttonConfirmAdd" />
 
-    <ListView
-        android:id="@+id/listViewLocations"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSiviso"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:choiceMode="singleChoice"
-        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonDelete">
-
-    </ListView>
+        app:layout_constraintEnd_toEndOf="@+id/buttonEdit"
+        app:layout_constraintStart_toStartOf="@+id/buttonDelete"
+        app:layout_constraintTop_toBottomOf="@+id/buttonDelete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

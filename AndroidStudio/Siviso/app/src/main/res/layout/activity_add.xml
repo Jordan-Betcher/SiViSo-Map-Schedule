@@ -31,7 +31,7 @@
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleAdd"
+        app:layout_constraintTop_toBottomOf="@+id/addName"
         tools:context=".Locations" />
 
     <com.google.android.material.textfield.TextInputEditText
@@ -42,7 +42,7 @@
         android:singleLine="true"
         app:layout_constraintEnd_toStartOf="@+id/addSiviso"
         app:layout_constraintStart_toStartOf="@+id/addMap"
-        app:layout_constraintTop_toBottomOf="@+id/addMap" />
+        app:layout_constraintTop_toBottomOf="@+id/titleAdd" />
 
     <Spinner
         android:id="@+id/addSiviso"
@@ -51,9 +51,10 @@
         android:dropDownWidth="match_parent"
         android:entries="@array/siviso"
         android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/buttonConfirmAdd"
+        app:layout_constraintBottom_toBottomOf="@+id/addName"
         app:layout_constraintEnd_toEndOf="@+id/addMap"
-        app:layout_constraintTop_toTopOf="@+id/addName" />
+        app:layout_constraintTop_toTopOf="@+id/addName"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonCancel"
@@ -64,7 +65,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonConfirmAdd"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/addName"
-        app:layout_constraintTop_toBottomOf="@+id/addName" />
+        app:layout_constraintTop_toBottomOf="@+id/addMap" />
 
     <Button
         android:id="@+id/buttonConfirmAdd"
@@ -76,6 +77,6 @@
         app:layout_constraintEnd_toEndOf="@+id/addSiviso"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonCancel"
-        app:layout_constraintTop_toBottomOf="@+id/addName" />
+        app:layout_constraintTop_toTopOf="@+id/buttonCancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

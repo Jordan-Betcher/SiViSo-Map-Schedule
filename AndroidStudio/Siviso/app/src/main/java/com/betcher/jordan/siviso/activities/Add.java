@@ -1,6 +1,7 @@
 package com.betcher.jordan.siviso.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,8 @@ import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.add.CancelAdd;
 import com.betcher.jordan.siviso.actions.add.SelectAddSiviso;
 import com.betcher.jordan.siviso.actions.add.SetMapAddPosition;
+import com.betcher.jordan.siviso.database.SivisoData;
+import com.betcher.jordan.siviso.database.SivisoModel;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -26,6 +29,8 @@ public class Add extends AppCompatActivity
 	TextInputEditText inputName;
 	Spinner inputSiviso;
 	
+	SivisoModel sivisoModel;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -33,6 +38,7 @@ public class Add extends AppCompatActivity
 		setContentView(R.layout.activity_add);
 		
 		activity = this;
+		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
 		buttonConfirmAdd = (Button) this.findViewById(R.id.buttonConfirmAdd);
 		
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.addMap);
@@ -60,8 +66,12 @@ public class Add extends AppCompatActivity
 	public void onClickButtonConfirmAdd(View view)
 	{
 		String name = inputName.getText().toString().trim();
-		//Siviso siviso = Siviso.fromString(inputSiviso.getSelectedItem().toString());
+		String siviso = inputSiviso.getSelectedItem().toString();
 		LatLng latLng = selectAddSiviso.getSelectedLatLng();
+		Double radius = selectAddSiviso.getSelectedRadius();
+		
+		SivisoData sivisoData = new SivisoData(name, siviso, latLng.latitude, latLng.longitude, radius);
+		sivisoModel.insert(sivisoData);
 		
 		//https://developer.android.com/training/data-storage/room
 	}
