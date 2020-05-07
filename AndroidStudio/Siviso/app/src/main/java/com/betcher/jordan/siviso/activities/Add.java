@@ -68,11 +68,10 @@ public class Add extends AppCompatActivity
 		String name = inputName.getText().toString().trim();
 		String siviso = inputSiviso.getSelectedItem().toString();
 		LatLng latLng = selectAddSiviso.getSelectedLatLng();
-		Double radius = selectAddSiviso.getSelectedRadius();
 		
-		SivisoData sivisoData = new SivisoData(name, siviso, latLng.latitude, latLng.longitude, radius);
+		SivisoData sivisoData = new SivisoData(name, siviso, latLng.latitude, latLng.longitude);
 		sivisoModel.insert(sivisoData);
-		
+		this.finish();
 		//https://developer.android.com/training/data-storage/room
 	}
 }

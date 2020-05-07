@@ -10,7 +10,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {SivisoData.class}, version = 1)
+@Database(entities = {SivisoData.class}, version = 2)
 public abstract class SivisoDatabase extends RoomDatabase
 {
 	private static final String TAG = "SivisoDatabase";
@@ -48,7 +48,7 @@ public abstract class SivisoDatabase extends RoomDatabase
 		
 		@Override
 		protected Void doInBackground(Void... voids) {
-			sivisoDao.insert(new SivisoData("Default", "None", 0, 0, 0));
+			sivisoDao.insert(new SivisoData("Default", "None", 0, 0));
 			Log.d(TAG, "doInBackground: ");
 			return null;
 		}

@@ -50,9 +50,4 @@ public class SelectAddSiviso implements GoogleMap.OnMapClickListener
 	{
 		return selected.getCenter();
 	}
-	
-	public double getSelectedRadius()
-	{
-		return selected.getRadius();
-	}
 }

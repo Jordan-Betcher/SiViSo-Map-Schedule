@@ -13,15 +13,13 @@ public class SivisoData
 	private String siviso;
 	private double latitude;
 	private double longitude;
-	private double radius;
 	
-	public SivisoData(String name, String siviso, double latitude, double longitude, double radius)
+	public SivisoData(String name, String siviso, double latitude, double longitude)
 	{
 		this.name = name;
 		this.siviso = siviso;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.radius = radius;
 	}
 	
 	public void setId(int id)
@@ -54,6 +52,4 @@ public class SivisoData
 	{
 		return longitude;
 	}
-	
-	public double getRadius() { return radius; }
 }
