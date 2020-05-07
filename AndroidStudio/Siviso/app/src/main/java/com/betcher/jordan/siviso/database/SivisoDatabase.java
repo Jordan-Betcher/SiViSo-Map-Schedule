@@ -24,33 +24,8 @@ public abstract class SivisoDatabase extends RoomDatabase
 			instance = Room.databaseBuilder(context.getApplicationContext(),
 			                                SivisoDatabase.class, "SivisoDatabase")
 			               .fallbackToDestructiveMigration()
-			               .addCallback(roomCallback)
 			               .build();
 		}
 		return instance;
-	}
-	
-	private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
-		@Override
-		public void onCreate(@NonNull SupportSQLiteDatabase db) {
-			super.onCreate(db);
-			new PopulateDbAsyncTask(instance).execute();
-		}
-	};
-	
-	private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void>
-	{
-		private SivisoDao sivisoDao;
-		
-		private PopulateDbAsyncTask(SivisoDatabase sivisoDatabase) {
-			sivisoDao = sivisoDatabase.sivisoDao();
-		}
-		
-		@Override
-		protected Void doInBackground(Void... voids) {
-			sivisoDao.insert(new SivisoData("Default", "None", 0, 0));
-			Log.d(TAG, "doInBackground: ");
-			return null;
-		}
 	}
 }
