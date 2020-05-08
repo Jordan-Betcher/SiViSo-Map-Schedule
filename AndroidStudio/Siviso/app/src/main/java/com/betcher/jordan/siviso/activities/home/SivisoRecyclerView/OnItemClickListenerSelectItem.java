@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.home;
+package com.betcher.jordan.siviso.activities.home.SivisoRecyclerView;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,15 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.database.SivisoData;
 
-public class SelectOnItemClickListener implements OnItemClickListener
+public class OnItemClickListenerSelectItem
+		implements OnItemClickListener
 {
 	private View selectedView = null;
 	private int previousViewColor = 0;
 	private int highlightColor = Color.LTGRAY;
 	private SivisoData selectedSiviso = null;
-	private SivisoRecyclerViewItemAdapter sivisoRecyclerViewItemAdapter;
+	private ItemAdapter sivisoRecyclerViewItemAdapter;
 	
-	public SelectOnItemClickListener(SivisoRecyclerViewItemAdapter sivisoRecyclerViewItemAdapter)
+	public OnItemClickListenerSelectItem(ItemAdapter sivisoRecyclerViewItemAdapter)
 	{
 		this.sivisoRecyclerViewItemAdapter = sivisoRecyclerViewItemAdapter;
 	}

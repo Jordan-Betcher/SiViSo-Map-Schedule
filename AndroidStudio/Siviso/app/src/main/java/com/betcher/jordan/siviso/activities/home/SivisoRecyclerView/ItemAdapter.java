@@ -1,7 +1,5 @@
-package com.betcher.jordan.siviso.activities.home;
+package com.betcher.jordan.siviso.activities.home.SivisoRecyclerView;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +17,8 @@ import com.betcher.jordan.siviso.database.SivisoData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SivisoRecyclerViewItemAdapter
-		extends RecyclerView.Adapter<SivisoRecyclerViewItemAdapter.SivisoHolder>
+public class ItemAdapter
+		extends RecyclerView.Adapter<ItemAdapter.SivisoHolder>
 {
 	private static final String TAG = "SVSRecyclerViewAdapter";
 	
@@ -80,18 +78,6 @@ public class SivisoRecyclerViewItemAdapter
 		private Spinner spinnerSiviso;
 		SivisoHolder sivisoHolder;
 		
-		public void setName(String name)
-		{
-			textViewName.setText(name);
-		}
-		
-		public void setSiviso(String siviso)
-		{
-			ArrayAdapter arrayAdapter = (ArrayAdapter) spinnerSiviso.getAdapter();
-			int arrayPositionOfSiviso = arrayAdapter.getPosition(siviso);
-			spinnerSiviso.setSelection(arrayPositionOfSiviso);
-		}
-		
 		public SivisoHolder(View itemView)
 		{
 			super(itemView);
@@ -118,6 +104,18 @@ public class SivisoRecyclerViewItemAdapter
 				}
 			});
 		}
+		
+		public void setName(String name)
+		{
+			textViewName.setText(name);
+		}
+		
+		public void setSiviso(String siviso)
+		{
+			ArrayAdapter arrayAdapter = (ArrayAdapter) spinnerSiviso.getAdapter();
+			int arrayPositionOfSiviso = arrayAdapter.getPosition(siviso);
+			spinnerSiviso.setSelection(arrayPositionOfSiviso);
+		}
 	}
 	
 	ArrayList<OnItemClickListener> onItemClickListeners = new ArrayList<>();
@@ -130,7 +128,3 @@ public class SivisoRecyclerViewItemAdapter
 }
 
 
-interface OnItemClickListener
-{
-	void onItemClick(View view, int itemPosition);
-}
