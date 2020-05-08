@@ -16,4 +16,9 @@ public class Defaults
 	public static final int ADD_SIVISO_STROKE_COLOR = Color.BLACK;
 	
 	public static final String DATABASE_NAME = "Siviso";
+	public static final String EXTRA_NAME_ID = "id";
+	public static final String EXTRA_NAME_NAME = "name";
+	public static final String EXTRA_NAME_SIVISO = "siviso";
+	public static final String EXTRA_NAME_LATITUDE = "latitude";
+	public static final String EXTRA_NAME_LONGITUDE = "longitude";
 }

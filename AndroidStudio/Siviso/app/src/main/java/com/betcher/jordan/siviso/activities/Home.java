@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.betcher.jordan.siviso.R;
+import com.betcher.jordan.siviso.actions.home.StartActivityEdit;
 import com.betcher.jordan.siviso.actions.home.SetMapHomePosition;
 import com.betcher.jordan.siviso.actions.home.StartActivityAdd;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.EnableButton;
@@ -83,7 +84,10 @@ public class Home extends AppCompatActivity
 	public void onClickButtonAdd(View view)
 	{
 		LatLng mapPosition = map.getCameraPosition().target;
-		StartActivityAdd.run(this, mapPosition);
+		double latitude = mapPosition.latitude;
+		double longitude = mapPosition.longitude;
+		
+		StartActivityAdd.run(this, latitude, longitude);
 	}
 	
 	public void onClickButtonDelete(View view)
@@ -97,6 +101,8 @@ public class Home extends AppCompatActivity
 	
 	public void onClickButtonEdit(View view)
 	{
-	
+		SivisoData selectedItem = selectItem.getSelectedSiviso();
+		
+		StartActivityEdit.run(this, selectedItem);
 	}
 }

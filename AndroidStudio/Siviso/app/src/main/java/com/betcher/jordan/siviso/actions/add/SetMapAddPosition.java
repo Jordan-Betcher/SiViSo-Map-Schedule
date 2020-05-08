@@ -14,8 +14,8 @@ public class SetMapAddPosition
 	public static void run(AppCompatActivity activity, GoogleMap map)
 	{
 		Intent intent = activity.getIntent();
-		Double latitude  = intent.getDoubleExtra("latitude", 0);
-		Double longitude  = intent.getDoubleExtra("longitude", 0);
+		Double latitude  = intent.getDoubleExtra(Defaults.EXTRA_NAME_LATITUDE, 0);
+		Double longitude  = intent.getDoubleExtra(Defaults.EXTRA_NAME_LONGITUDE, 0);
 		LatLng previousActivityLatLng = new LatLng(latitude, longitude);
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(previousActivityLatLng,
 		                                                 Defaults.ADD_ZOOM));
