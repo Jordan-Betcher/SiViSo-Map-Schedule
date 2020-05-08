@@ -8,14 +8,14 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 
-public class SelectAddSiviso implements GoogleMap.OnMapClickListener
+public class SelectSivisoOnMap implements GoogleMap.OnMapClickListener
 {
 	Button buttonConfirmAdd;
 	GoogleMap map;
 	
 	Circle selected = null;
 	
-	public SelectAddSiviso(GoogleMap map, Button buttonConfirmAdd)
+	public SelectSivisoOnMap(GoogleMap map, Button buttonConfirmAdd)
 	{
 		this.buttonConfirmAdd = buttonConfirmAdd;
 		this.map = map;

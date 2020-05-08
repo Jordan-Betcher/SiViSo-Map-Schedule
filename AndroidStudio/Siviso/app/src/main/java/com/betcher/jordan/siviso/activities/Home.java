@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.home.SetMapHomePosition;
 import com.betcher.jordan.siviso.actions.home.StartActivityAdd;
-import com.betcher.jordan.siviso.activities.home.SivisoRecyclerView.OnItemClickListenerSelectItem;
-import com.betcher.jordan.siviso.activities.home.SivisoRecyclerView.ItemAdapter;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.EnableButton;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.SelectItem;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,6 +32,11 @@ public class Home extends AppCompatActivity
 	RecyclerView recyclerViewSiviso;
 	ItemAdapter sivisoRecyclerViewItemAdapter;
 	SivisoModel sivisoModel;
+	
+	Button buttonDelete;
+	Button buttonEdit;
+	
+	SelectItem selectItem;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -48,6 +55,9 @@ public class Home extends AppCompatActivity
 			}
 		});
 		
+		buttonDelete = findViewById(R.id.buttonDelete);
+		buttonEdit = findViewById(R.id.buttonEdit);
+		
 		recyclerViewSiviso = findViewById(R.id.recyclerViewSiviso);
 		recyclerViewSiviso.setLayoutManager(new LinearLayoutManager(this));
 		
@@ -64,7 +74,10 @@ public class Home extends AppCompatActivity
 			}
 		});
 		
-		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(new OnItemClickListenerSelectItem(sivisoRecyclerViewItemAdapter));
+		selectItem = new SelectItem(sivisoRecyclerViewItemAdapter);
+		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(selectItem);
+		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(new EnableButton(buttonDelete));
+		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(new EnableButton(buttonEdit));
 	}
 	
 	public void onClickButtonAdd(View view)
@@ -75,7 +88,11 @@ public class Home extends AppCompatActivity
 	
 	public void onClickButtonDelete(View view)
 	{
-	
+		sivisoModel.delete(selectItem.getSelectedSiviso());
+		
+		selectItem.unselect();
+		buttonDelete.setEnabled(false);
+		buttonEdit.setEnabled(false);
 	}
 	
 	public void onClickButtonEdit(View view)

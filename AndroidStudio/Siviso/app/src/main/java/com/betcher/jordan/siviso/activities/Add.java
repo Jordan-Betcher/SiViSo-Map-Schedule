@@ -10,7 +10,7 @@ import android.widget.Spinner;
 
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.add.CancelAdd;
-import com.betcher.jordan.siviso.actions.add.SelectAddSiviso;
+import com.betcher.jordan.siviso.actions.add.SelectSivisoOnMap;
 import com.betcher.jordan.siviso.actions.add.SetMapAddPosition;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
@@ -25,7 +25,7 @@ public class Add extends AppCompatActivity
 	GoogleMap map;
 	AppCompatActivity activity;
 	Button buttonConfirmAdd;
-	SelectAddSiviso selectAddSiviso;
+	SelectSivisoOnMap selectSivisoOnMap;
 	TextInputEditText inputName;
 	Spinner inputSiviso;
 	
@@ -49,8 +49,8 @@ public class Add extends AppCompatActivity
 			{
 				map = googleMap;
 				SetMapAddPosition.run(activity, map);
-				selectAddSiviso = new SelectAddSiviso(map, buttonConfirmAdd);
-				map.setOnMapClickListener(selectAddSiviso);
+				selectSivisoOnMap = new SelectSivisoOnMap(map, buttonConfirmAdd);
+				map.setOnMapClickListener(selectSivisoOnMap);
 			}
 		});
 		
@@ -67,7 +67,7 @@ public class Add extends AppCompatActivity
 	{
 		String name = inputName.getText().toString().trim();
 		String siviso = inputSiviso.getSelectedItem().toString();
-		LatLng latLng = selectAddSiviso.getSelectedLatLng();
+		LatLng latLng = selectSivisoOnMap.getSelectedLatLng();
 		
 		SivisoData sivisoData = new SivisoData(name, siviso, latLng.latitude, latLng.longitude);
 		sivisoModel.insert(sivisoData);

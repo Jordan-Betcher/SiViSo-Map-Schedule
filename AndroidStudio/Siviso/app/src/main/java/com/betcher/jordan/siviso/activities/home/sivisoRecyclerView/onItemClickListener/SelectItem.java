@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.home.SivisoRecyclerView;
+package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -6,9 +6,11 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemClickListener;
 import com.betcher.jordan.siviso.database.SivisoData;
 
-public class OnItemClickListenerSelectItem
+public class SelectItem
 		implements OnItemClickListener
 {
 	private View selectedView = null;
@@ -17,7 +19,7 @@ public class OnItemClickListenerSelectItem
 	private SivisoData selectedSiviso = null;
 	private ItemAdapter sivisoRecyclerViewItemAdapter;
 	
-	public OnItemClickListenerSelectItem(ItemAdapter sivisoRecyclerViewItemAdapter)
+	public SelectItem(ItemAdapter sivisoRecyclerViewItemAdapter)
 	{
 		this.sivisoRecyclerViewItemAdapter = sivisoRecyclerViewItemAdapter;
 	}
@@ -53,6 +55,14 @@ public class OnItemClickListenerSelectItem
 		else
 		{
 			return false;
+		}
+	}
+	
+	public void unselect()
+	{
+		if(selectedView != null)
+		{
+			selectedView.setBackgroundColor(previousViewColor);
 		}
 	}
 }

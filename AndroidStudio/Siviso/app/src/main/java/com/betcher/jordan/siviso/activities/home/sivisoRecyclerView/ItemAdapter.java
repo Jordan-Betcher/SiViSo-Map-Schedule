@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.home.SivisoRecyclerView;
+package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
