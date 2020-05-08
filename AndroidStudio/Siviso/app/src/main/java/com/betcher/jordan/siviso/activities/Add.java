@@ -72,6 +72,5 @@ public class Add extends AppCompatActivity
 		SivisoData sivisoData = new SivisoData(name, siviso, latLng.latitude, latLng.longitude);
 		sivisoModel.insert(sivisoData);
 		this.finish();
-		//https://developer.android.com/training/data-storage/room
 	}
 }

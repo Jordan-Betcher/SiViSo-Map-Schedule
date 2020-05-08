@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.home.SetMapHomePosition;
 import com.betcher.jordan.siviso.actions.home.StartActivityAdd;
-import com.betcher.jordan.siviso.activities.add.SivisoAdapter;
+import com.betcher.jordan.siviso.activities.home.SelectOnItemClickListener;
+import com.betcher.jordan.siviso.activities.home.SivisoRecyclerViewItemAdapter;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,7 +28,7 @@ public class Home extends AppCompatActivity
 {
 	GoogleMap map;
 	RecyclerView recyclerViewSiviso;
-	SivisoAdapter sivisoAdapter;
+	SivisoRecyclerViewItemAdapter sivisoRecyclerViewItemAdapter;
 	SivisoModel sivisoModel;
 	
 	@Override
@@ -51,8 +51,8 @@ public class Home extends AppCompatActivity
 		recyclerViewSiviso = findViewById(R.id.recyclerViewSiviso);
 		recyclerViewSiviso.setLayoutManager(new LinearLayoutManager(this));
 		
-		sivisoAdapter = new SivisoAdapter();
-		recyclerViewSiviso.setAdapter(sivisoAdapter);
+		sivisoRecyclerViewItemAdapter = new SivisoRecyclerViewItemAdapter();
+		recyclerViewSiviso.setAdapter(sivisoRecyclerViewItemAdapter);
 		
 		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
 		sivisoModel.getAllSivisoData().observe(this, new Observer<List<SivisoData>>()
@@ -60,10 +60,11 @@ public class Home extends AppCompatActivity
 			@Override
 			public void onChanged(@Nullable List<SivisoData> sivisoDatas)
 			{
-				sivisoAdapter.setSivisoDatas(sivisoDatas);
+				sivisoRecyclerViewItemAdapter.setSivisoDatas(sivisoDatas);
 			}
 		});
 		
+		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(new SelectOnItemClickListener(sivisoRecyclerViewItemAdapter));
 	}
 	
 	public void onClickButtonAdd(View view)

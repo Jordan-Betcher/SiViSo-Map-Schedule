@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.add;
+package com.betcher.jordan.siviso.activities.home;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -19,16 +19,12 @@ import com.betcher.jordan.siviso.database.SivisoData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SivisoAdapter extends RecyclerView.Adapter<SivisoAdapter.SivisoHolder>
+public class SivisoRecyclerViewItemAdapter
+		extends RecyclerView.Adapter<SivisoRecyclerViewItemAdapter.SivisoHolder>
 {
-	private static final String TAG = "SivisoAdapter";
+	private static final String TAG = "SVSRecyclerViewAdapter";
 	
 	private List<SivisoData> sivisoDatas = new ArrayList<>();
-	private SivisoData selectedSiviso = null;
-	
-	private View selectedView = null;
-	private int previousViewColor = 0;
-	private int highlightColor = Color.LTGRAY;
 	
 	@NonNull
 	@Override
@@ -61,14 +57,14 @@ public class SivisoAdapter extends RecyclerView.Adapter<SivisoAdapter.SivisoHold
 		Log.d(TAG, "setSivisoDatas: " + sivisoDatas.size());
 	}
 	
-	public SivisoData getSelectedSiviso()
+	public SivisoData getItem(int itemPosition)
 	{
-		return selectedSiviso;
+		return sivisoDatas.get(itemPosition);
 	}
 	
-	public boolean getIsSivisoSelected()
+	public boolean containItem(SivisoData selectedSiviso)
 	{
-		if (selectedSiviso != null && sivisoDatas.contains(selectedSiviso))
+		if(sivisoDatas.contains(selectedSiviso))
 		{
 			return true;
 		}
@@ -78,21 +74,11 @@ public class SivisoAdapter extends RecyclerView.Adapter<SivisoAdapter.SivisoHold
 		}
 	}
 	
-	class SivisoHolder extends RecyclerView.ViewHolder
+	public class SivisoHolder extends RecyclerView.ViewHolder
 	{
 		private TextView textViewName;
 		private Spinner spinnerSiviso;
 		SivisoHolder sivisoHolder;
-		
-		public SivisoHolder(View itemView)
-		{
-			super(itemView);
-			textViewName = itemView.findViewById(R.id.textViewHoldName);
-			spinnerSiviso = itemView.findViewById(R.id.spinnerHoldSiviso);
-			sivisoHolder = this;
-			
-			itemView.setOnClickListener(new SivisoItemClickListener());
-		}
 		
 		public void setName(String name)
 		{
@@ -106,25 +92,45 @@ public class SivisoAdapter extends RecyclerView.Adapter<SivisoAdapter.SivisoHold
 			spinnerSiviso.setSelection(arrayPositionOfSiviso);
 		}
 		
-		private class SivisoItemClickListener implements View.OnClickListener
+		public SivisoHolder(View itemView)
 		{
-			@Override
-			public void onClick(View view)
-			{
-				int position = getAdapterPosition();
-				if (position != RecyclerView.NO_POSITION)
+			super(itemView);
+			textViewName = itemView.findViewById(R.id.textViewHoldName);
+			spinnerSiviso = itemView.findViewById(R.id.spinnerHoldSiviso);
+			sivisoHolder = this;
+			
+			itemView.setOnClickListener(new View.OnClickListener(){
+				
+				@Override
+				public void onClick(View view)
 				{
-					if(selectedView != null)
-					{
-						selectedView.setBackgroundColor(previousViewColor);
-					}
-					
-					selectedSiviso = sivisoDatas.get(position);
-					selectedView = view;
-					previousViewColor = ((ColorDrawable)view.getBackground()).getColor();
-					view.setBackgroundColor(highlightColor);
+					callAllOnClickListeners(view);
 				}
-			}
+				
+				public void callAllOnClickListeners(View view)
+				{
+					int position = getAdapterPosition();
+					
+					for (OnItemClickListener onItemClickListener: onItemClickListeners)
+					{
+						onItemClickListener.onItemClick(view, position);
+					}
+				}
+			});
 		}
 	}
+	
+	ArrayList<OnItemClickListener> onItemClickListeners = new ArrayList<>();
+	
+	public void addOnItemClickedListener(OnItemClickListener onItemClickListener)
+	{
+		onItemClickListeners.add(onItemClickListener);
+	}
+	
+}
+
+
+interface OnItemClickListener
+{
+	void onItemClick(View view, int itemPosition);
 }
