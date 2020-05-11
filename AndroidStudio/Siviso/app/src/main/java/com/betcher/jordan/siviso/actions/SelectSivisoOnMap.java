@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.actions.add;
+package com.betcher.jordan.siviso.actions;
 
 import android.widget.Button;
 
@@ -32,10 +32,10 @@ public class SelectSivisoOnMap implements GoogleMap.OnMapClickListener
 		}
 		
 		selected = map.addCircle(new CircleOptions().center(latLng)
-		                                            .radius(Defaults.ADD_SIVISO_RADIUS)
-		                                            .fillColor(Defaults.ADD_SIVISO_FILL_COLOR)
-		                                            .strokeColor(Defaults.ADD_SIVISO_STROKE_COLOR)
-		                                            .strokeWidth(Defaults.ADD_SIVISO_STROKE_WIDTH)
+		                                            .radius(Defaults.SIVISO_RADIUS)
+		                                            .fillColor(Defaults.SIVISO_FILL_COLOR)
+		                                            .strokeColor(Defaults.SIVISO_STROKE_COLOR)
+		                                            .strokeWidth(Defaults.SIVISO_STROKE_WIDTH)
 		                        )
 		;
 	}

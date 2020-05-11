@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.actions.add.CancelAdd;
-import com.betcher.jordan.siviso.actions.add.SelectSivisoOnMap;
+import com.betcher.jordan.siviso.actions.CancelActivity;
+import com.betcher.jordan.siviso.actions.SelectSivisoOnMap;
 import com.betcher.jordan.siviso.actions.add.SetMapAddPosition;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
@@ -60,7 +60,7 @@ public class Add extends AppCompatActivity
 	
 	public void onClickButtonCancel(View view)
 	{
-		CancelAdd.run(this);
+		CancelActivity.run(this);
 	}
 	
 	public void onClickButtonConfirmAdd(View view)

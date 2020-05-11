@@ -17,7 +17,7 @@ Steps:
 [x]Display Database as list
 [x]Add to database from app
 [x]Delete Data from list
-[x]Edit Data from list
+[ ]Edit Data from list
 [x]SiViSo None
 []Default
 
@@ -45,31 +45,8 @@ Note: need to close and reopen project sometimes to let R.id.[idfromlayout] be f
 
 
 []Refactor
-    []  Need to seperate out the different activity windows instead of having states in the code (this also allows the triangle back button to work because it navigates to previous activities)
-        Seperate out the google map into a fragment and then use the fragment so that you don't have to reload the map each time https://stackoverflow.com/questions/46932430/how-to-use-single-google-map-for-multiple-activities
-        Using Framements https://youtu.be/i22INe14JUc
-        Get googleMap from fragment https://stackoverflow.com/questions/22032815/how-to-get-google-maps-object-inside-a-fragment                                   
-        []Home
-            []Map shows locations
-            []On selection
-                []Delete and Edit enabled
-                []Map goes to selection
-                []Selection is highlighted
-            []Can Deselect
-                []Delete and Edit disabled
-                []Map goes to current location
-        []Add Form
-            [x]Get's the location on home and moves the map there
-            ?
-        []Edit Form
-            ?
-    [x]Store LatLng instead of address
-    []  Deselect Edit Text when click else where
-        https://stackoverflow.com/questions/6677969/tap-outside-edittext-to-lose-focus/36411427
+    []  
 
-[]ExampleSqliteSaveWithRooms
-    [] Save with rooms tutorial https://www.youtube.com/watch?v=0cg09tlAAQ0&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118&index=3
-    [] 
     
     
 Create Service 
@@ -86,6 +63,9 @@ Research
     How to change the border of a layout object programmatically
     https://stackoverflow.com/questions/34075131/how-to-set-a-button-border-color-programmatically-in-android/34075906
 
+    How to save sqlite database with Room
+    https://www.youtube.com/watch?v=0cg09tlAAQ0&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118&index=3
+    
     Distance between to LatLng
     Use Sphere Util https://stackoverflow.com/questions/14394366/find-distance-between-two-points-on-map-using-google-map-api-v2/15351351#15351351
 
@@ -139,7 +119,26 @@ Research
 		https://youtu.be/FbpD5RZtbCc
 	Research how to tell if you are near a location
 		You will have to get a list of nearby locations and see if your location is on the list.
-
+    [x] ListView not Scrolling
+        https://stackoverflow.com/questions/7210756/why-is-my-listview-not-scrolling
+    [x] When inputting to form, done doesn't close keyboard
+        https://stackoverflow.com/questions/24793045/how-to-have-an-edittext-element-deselect-itself-when-enter-is-pressed
+    [?] When inputting to form clicking off doesn't deselect
+        https://stackoverflow.com/questions/4828636/edittext-clear-focus-on-touch-outside
+    [x] Clear form on cancel
+    [x] ListView not selectable
+        You have to set focusablity to false for all item parts (textview, button, spinner, etc...) in the adapter class getView method(This will make it so that if a part of the item is not selectable / doesn't have an onclick function then it will call the listview onclicklistener. If it is selectable and isn't focusable it will still select the item)
+        https://stackoverflow.com/questions/8413656/onitemclicklistener-doesnt-work-with-listview-item-containing-button
+        https://youtu.be/wSCIuIbS-nk
+    [x]  ListView item not highlighting
+        Get Color from Drawable  https://youtu.be/Bgy4EhtLzYE?t=191
+        To reset set background color to transparent https://stackoverflow.com/questions/14802354/how-to-reset-a-buttons-background-color-to-default
+    Deselect Edit Text when click else where
+        https://stackoverflow.com/questions/6677969/tap-outside-edittext-to-lose-focus/36411427
+    Need to seperate out the different activity windows instead of having states in the code (this also allows the triangle back button to work because it navigates to previous activities)
+        Seperate out the google map into a fragment and then use the fragment so that you don't have to reload the map each time https://stackoverflow.com/questions/46932430/how-to-use-single-google-map-for-multiple-activities
+        Using Framements https://youtu.be/i22INe14JUc
+        Get googleMap from fragment https://stackoverflow.com/questions/22032815/how-to-get-google-maps-object-inside-a-fragment 
 
 SiViSo Map Scheduler Project
 	Home Page

@@ -3,7 +3,9 @@ package com.betcher.jordan.siviso.database;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Siviso")
+import com.betcher.jordan.siviso.Defaults;
+
+@Entity(tableName = Defaults.DATABASE_NAME)
 public class SivisoData
 {
 	
