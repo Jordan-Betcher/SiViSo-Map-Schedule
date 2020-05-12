@@ -6,9 +6,12 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.betcher.jordan.siviso.actions.home.ZoomToSelected;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemClickListener;
 import com.betcher.jordan.siviso.database.SivisoData;
+
+import java.util.ArrayList;
 
 public class SelectItem
 		implements OnItemClickListener
@@ -38,6 +41,8 @@ public class SelectItem
 			selectedView = view;
 			previousViewColor = ((ColorDrawable)view.getBackground()).getColor();
 			view.setBackgroundColor(highlightColor);
+			
+			callAllOnSelectItemListeners(selectedSiviso);
 		}
 	}
 	
@@ -64,5 +69,20 @@ public class SelectItem
 		{
 			selectedView.setBackgroundColor(previousViewColor);
 		}
+	}
+	
+	ArrayList<OnItemSelectedListener> onItemSelectedListeners = new ArrayList<>();
+	
+	public void callAllOnSelectItemListeners(SivisoData selectedSiviso)
+	{
+		for (OnItemSelectedListener onItemClickListener: onItemSelectedListeners)
+		{
+			onItemClickListener.onItemSelect(selectedSiviso);
+		}
+	}
+	
+	public void addOnItemSelectedListener(OnItemSelectedListener onItemClickListener)
+	{
+		onItemSelectedListeners.add(onItemClickListener);
 	}
 }

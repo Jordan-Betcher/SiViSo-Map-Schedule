@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.betcher.jordan.siviso.R;
+import com.betcher.jordan.siviso.actions.home.ZoomToSelected;
 import com.betcher.jordan.siviso.activities.home.sivisoMapCircles.SivisoMapCircles;
 import com.betcher.jordan.siviso.actions.home.StartActivityEdit;
 import com.betcher.jordan.siviso.actions.home.SetMapHomePosition;
@@ -81,7 +82,10 @@ public class Home extends AppCompatActivity
 			{
 				map = googleMap;
 				SetMapHomePosition.run(map);
-				sivisoModel.getAllSivisoData().observe(Home.this, new SivisoMapCircles(map));
+				
+				SivisoMapCircles sivisoMapCircles = new SivisoMapCircles(map);
+				sivisoModel.getAllSivisoData().observe(Home.this, sivisoMapCircles);
+				selectItem.addOnItemSelectedListener(new ZoomToSelected(map));
 				//Add on circle click listener
 			}
 		});

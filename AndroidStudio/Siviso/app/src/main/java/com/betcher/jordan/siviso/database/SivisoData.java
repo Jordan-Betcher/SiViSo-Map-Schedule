@@ -1,9 +1,11 @@
 package com.betcher.jordan.siviso.database;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.betcher.jordan.siviso.Defaults;
+import com.google.android.gms.maps.model.LatLng;
 
 @Entity(tableName = Defaults.DATABASE_NAME)
 public class SivisoData
@@ -54,4 +56,7 @@ public class SivisoData
 	{
 		return longitude;
 	}
+	
+	@Ignore
+	public LatLng getLatLng(){return new LatLng(latitude, longitude);}
 }
