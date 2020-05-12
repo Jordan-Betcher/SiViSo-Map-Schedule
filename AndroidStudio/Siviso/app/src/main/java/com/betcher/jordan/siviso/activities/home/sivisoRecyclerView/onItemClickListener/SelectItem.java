@@ -81,7 +81,7 @@ public class SelectItem
 		}
 	}
 	
-	public void addOnItemSelectedListener(OnItemSelectedListener onItemClickListener)
+	public void addOnItemSelectListener(OnItemSelectedListener onItemClickListener)
 	{
 		onItemSelectedListeners.add(onItemClickListener);
 	}

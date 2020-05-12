@@ -47,7 +47,7 @@ public class SivisoMapCircles
 			                                                            .strokeColor(Defaults.SIVISO_STROKE_COLOR)
 			                                                            .strokeWidth(Defaults.SIVISO_STROKE_WIDTH)
 			                                        );
-			
+			sivisoMapCircles.setClickable(true);
 			circleSivisoData.put(sivisoMapCircles, sivisoData);
 		}
 	}
@@ -60,5 +60,10 @@ public class SivisoMapCircles
 		}
 		
 		circleSivisoData.clear();
+	}
+	
+	public SivisoData getSiviso(Circle circle)
+	{
+		return circleSivisoData.get(circle);
 	}
 }

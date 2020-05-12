@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.betcher.jordan.siviso.R;
+import com.betcher.jordan.siviso.actions.home.SelectSivisoFromMap;
 import com.betcher.jordan.siviso.actions.home.ZoomToSelected;
 import com.betcher.jordan.siviso.activities.home.sivisoMapCircles.SivisoMapCircles;
 import com.betcher.jordan.siviso.actions.home.StartActivityEdit;
@@ -68,9 +69,9 @@ public class Home extends AppCompatActivity
 		
 		selectItem = new SelectItem(sivisoRecyclerViewItemAdapter);
 		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(selectItem);
-		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(new EnableButton(buttonDelete));
-		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(new EnableButton(buttonEdit));
-		
+		selectItem.addOnItemSelectListener(new EnableButton(buttonDelete));
+		selectItem.addOnItemSelectListener(new EnableButton(buttonEdit));
+		//selectItem.addOnItemSelectListener(new HighlightSelect(recyclerViewSiviso));
 		
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(
 				R.id.homeMap);
@@ -85,8 +86,8 @@ public class Home extends AppCompatActivity
 				
 				SivisoMapCircles sivisoMapCircles = new SivisoMapCircles(map);
 				sivisoModel.getAllSivisoData().observe(Home.this, sivisoMapCircles);
-				selectItem.addOnItemSelectedListener(new ZoomToSelected(map));
-				//Add on circle click listener
+				selectItem.addOnItemSelectListener(new ZoomToSelected(map));
+				map.setOnCircleClickListener(new SelectSivisoFromMap(selectItem, sivisoMapCircles));
 			}
 		});
 	}

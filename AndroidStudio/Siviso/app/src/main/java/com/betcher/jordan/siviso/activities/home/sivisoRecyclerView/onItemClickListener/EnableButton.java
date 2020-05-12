@@ -4,8 +4,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemClickListener;
+import com.betcher.jordan.siviso.database.SivisoData;
 
-public class EnableButton implements OnItemClickListener
+public class EnableButton implements OnItemSelectedListener
 {
 	Button button;
 	
@@ -15,7 +16,7 @@ public class EnableButton implements OnItemClickListener
 	}
 	
 	@Override
-	public void onItemClick(View view, int itemPosition)
+	public void onItemSelect(SivisoData selectedSivisoData)
 	{
 		button.setEnabled(true);
 	}
