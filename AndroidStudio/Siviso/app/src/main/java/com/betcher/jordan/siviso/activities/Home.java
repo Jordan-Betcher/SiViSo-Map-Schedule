@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.home.StartActivityEdit;
 import com.betcher.jordan.siviso.actions.home.SetMapHomePosition;
@@ -23,6 +25,7 @@ import com.betcher.jordan.siviso.database.SivisoModel;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
@@ -44,17 +47,6 @@ public class Home extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		
-		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.homeMap);
-		mapFragment.getMapAsync(new OnMapReadyCallback()
-		{
-			@Override
-			public void onMapReady(GoogleMap googleMap)
-			{
-				map = googleMap;
-				SetMapHomePosition.run(map);
-			}
-		});
 		
 		buttonDelete = findViewById(R.id.buttonDelete);
 		buttonEdit = findViewById(R.id.buttonEdit);
@@ -79,6 +71,42 @@ public class Home extends AppCompatActivity
 		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(selectItem);
 		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(new EnableButton(buttonDelete));
 		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(new EnableButton(buttonEdit));
+		
+		
+		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(
+				R.id.homeMap);
+		mapFragment.getMapAsync(new OnMapReadyCallback()
+		{
+			@Override
+			public void onMapReady(GoogleMap googleMap)
+			{
+				map = googleMap;
+				SetMapHomePosition.run(map);
+				sivisoModel.getAllSivisoData().observe(Home.this, new Observer<List<SivisoData>>()
+				{
+					@Override
+					public void onChanged(@Nullable List<SivisoData> sivisoDatas)
+					{
+						//Delete previous Circles
+						//Create circles
+						for (SivisoData sivisoData : sivisoDatas)
+						{
+							double latitude = sivisoData.getLatitude();
+							double longitude = sivisoData.getLongitude();
+							LatLng latLng = new LatLng(latitude, longitude);
+							
+							map.addCircle(new CircleOptions().center(latLng)
+							                                 .radius(Defaults.SIVISO_RADIUS)
+							                                 .fillColor(Defaults.SIVISO_FILL_COLOR)
+							                                 .strokeColor(Defaults.SIVISO_STROKE_COLOR)
+							                                 .strokeWidth(Defaults.SIVISO_STROKE_WIDTH)
+							             );
+						}
+					}
+				});
+				//Add on circle click listener
+			}
+		});
 	}
 	
 	public void onClickButtonAdd(View view)
