@@ -34,13 +34,15 @@ public class Home extends AppCompatActivity
 {
 	GoogleMap map;
 	RecyclerView recyclerViewSiviso;
-	ItemAdapter sivisoRecyclerViewItemAdapter;
+	ItemAdapter itemAdapter;
 	SivisoModel sivisoModel;
 	
 	Button buttonDelete;
 	Button buttonEdit;
 	
 	SelectItem selectItem;
+	
+	LinearLayoutManager linearLayoutManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -52,10 +54,11 @@ public class Home extends AppCompatActivity
 		buttonEdit = findViewById(R.id.buttonEdit);
 		
 		recyclerViewSiviso = findViewById(R.id.recyclerViewSiviso);
-		recyclerViewSiviso.setLayoutManager(new LinearLayoutManager(this));
+		linearLayoutManager = new LinearLayoutManager(this);
+		recyclerViewSiviso.setLayoutManager(linearLayoutManager);
 		
-		sivisoRecyclerViewItemAdapter = new ItemAdapter();
-		recyclerViewSiviso.setAdapter(sivisoRecyclerViewItemAdapter);
+		itemAdapter = new ItemAdapter();
+		recyclerViewSiviso.setAdapter(itemAdapter);
 		
 		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
 		sivisoModel.getAllSivisoData().observe(this, new Observer<List<SivisoData>>()
@@ -63,15 +66,14 @@ public class Home extends AppCompatActivity
 			@Override
 			public void onChanged(@Nullable List<SivisoData> sivisoDatas)
 			{
-				sivisoRecyclerViewItemAdapter.setSivisoDatas(sivisoDatas);
+				itemAdapter.setSivisoDatas(sivisoDatas);
 			}
 		});
 		
-		selectItem = new SelectItem(sivisoRecyclerViewItemAdapter);
-		sivisoRecyclerViewItemAdapter.addOnItemClickedListener(selectItem);
+		selectItem = new SelectItem(itemAdapter);
+		itemAdapter.addOnItemClickedListener(selectItem);
 		selectItem.addOnItemSelectListener(new EnableButton(buttonDelete));
 		selectItem.addOnItemSelectListener(new EnableButton(buttonEdit));
-		//selectItem.addOnItemSelectListener(new HighlightSelect(recyclerViewSiviso));
 		
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(
 				R.id.homeMap);
@@ -87,7 +89,7 @@ public class Home extends AppCompatActivity
 				SivisoMapCircles sivisoMapCircles = new SivisoMapCircles(map);
 				sivisoModel.getAllSivisoData().observe(Home.this, sivisoMapCircles);
 				selectItem.addOnItemSelectListener(new ZoomToSelected(map));
-				map.setOnCircleClickListener(new SelectSivisoFromMap(selectItem, sivisoMapCircles));
+				map.setOnCircleClickListener(new SelectSivisoFromMap(selectItem, sivisoMapCircles, recyclerViewSiviso));
 			}
 		});
 	}

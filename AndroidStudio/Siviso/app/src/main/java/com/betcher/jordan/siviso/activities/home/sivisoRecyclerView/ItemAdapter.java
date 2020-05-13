@@ -72,6 +72,11 @@ public class ItemAdapter
 		}
 	}
 	
+	public int getPosition(SivisoData selectedSiviso)
+	{
+		return sivisoDatas.indexOf(selectedSiviso);
+	}
+	
 	public class SivisoHolder extends RecyclerView.ViewHolder
 	{
 		private TextView textViewName;
