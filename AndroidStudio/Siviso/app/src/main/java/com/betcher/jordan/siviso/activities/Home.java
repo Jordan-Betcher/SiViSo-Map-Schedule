@@ -1,5 +1,9 @@
 package com.betcher.jordan.siviso.activities;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -7,20 +11,16 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.actions.home.TriggerSelectItem;
-import com.betcher.jordan.siviso.actions.home.ZoomToSelected;
-import com.betcher.jordan.siviso.activities.home.sivisoMapCircles.SivisoMapCircles;
-import com.betcher.jordan.siviso.actions.home.StartActivityEdit;
 import com.betcher.jordan.siviso.actions.home.SetMapHomePosition;
 import com.betcher.jordan.siviso.actions.home.StartActivityAdd;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.EnableButton;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.HighlightSelectionInList;
+import com.betcher.jordan.siviso.actions.home.StartActivityEdit;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.TriggerSelectItem;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.ZoomToSelect;
+import com.betcher.jordan.siviso.activities.home.sivisoMapCircles.SivisoMapCircles;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.EnableButton;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.HighlightSelectionInList;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.SelectItem;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
@@ -90,7 +90,7 @@ public class Home extends AppCompatActivity
 				
 				SivisoMapCircles sivisoMapCircles = new SivisoMapCircles(map);
 				sivisoModel.getAllSivisoData().observe(Home.this, sivisoMapCircles);
-				selectItem.addOnItemSelectListener(new ZoomToSelected(map));
+				selectItem.addOnItemSelectListener(new ZoomToSelect(map));
 				map.setOnCircleClickListener(new TriggerSelectItem(selectItem, sivisoMapCircles));
 			}
 		});

@@ -1,18 +1,13 @@
 package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.betcher.jordan.siviso.actions.home.ZoomToSelected;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemClickListener;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemSelectListener;
 import com.betcher.jordan.siviso.database.SivisoData;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.Circle;
 
 import java.util.ArrayList;
 
@@ -42,26 +37,26 @@ public class SelectItem
 		return selectedSiviso;
 	}
 	
-	ArrayList<OnItemSelectedListener> onItemSelectedListeners = new ArrayList<>();
+	ArrayList<OnItemSelectListener> onItemSelectListeners = new ArrayList<>();
 	
 	public void callAllOnSelectItemListeners(SivisoData selectedSiviso)
 	{
-		for (OnItemSelectedListener onItemClickListener: onItemSelectedListeners)
+		for (OnItemSelectListener onItemClickListener: onItemSelectListeners)
 		{
 			onItemClickListener.onItemSelect(selectedSiviso);
 		}
 	}
 	
-	public void addOnItemSelectListener(OnItemSelectedListener onItemClickListener)
+	public void addOnItemSelectListener(OnItemSelectListener onItemClickListener)
 	{
-		onItemSelectedListeners.add(onItemClickListener);
+		onItemSelectListeners.add(onItemClickListener);
 	}
 	
 	public void deselect()
 	{
 		if(selectedSiviso != null)
 		{
-			for (OnItemSelectedListener onItemClickListener: onItemSelectedListeners)
+			for (OnItemSelectListener onItemClickListener: onItemSelectListeners)
 			{
 				onItemClickListener.onItemDeselect();
 			}

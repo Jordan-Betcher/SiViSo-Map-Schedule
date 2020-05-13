@@ -1,12 +1,4 @@
-package com.betcher.jordan.siviso.actions.home;
-
-import android.graphics.Color;
-import android.media.audiofx.DynamicsProcessing;
-import android.util.Log;
-import android.view.View;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener;
 
 import com.betcher.jordan.siviso.activities.home.sivisoMapCircles.SivisoMapCircles;
 import com.betcher.jordan.siviso.database.SivisoData;

@@ -11,9 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.HighlightSelectionInList;
 import com.betcher.jordan.siviso.database.SivisoData;
 
 import java.util.ArrayList;

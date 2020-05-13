@@ -1,12 +1,11 @@
-package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener;
+package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener;
 
-import android.view.View;
 import android.widget.Button;
 
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemClickListener;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemSelectListener;
 import com.betcher.jordan.siviso.database.SivisoData;
 
-public class EnableButton implements OnItemSelectedListener
+public class EnableButton implements OnItemSelectListener
 {
 	Button button;
 	

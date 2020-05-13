@@ -10,7 +10,7 @@ import android.widget.Spinner;
 
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.CancelActivity;
-import com.betcher.jordan.siviso.actions.SelectSivisoOnMap;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.SelectSivisoOnMap;
 import com.betcher.jordan.siviso.actions.add.SetMapAddPosition;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
