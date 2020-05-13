@@ -34,15 +34,7 @@ public class HighlightSelectionInList implements OnItemSelectedListener, ItemAda
 		
 		if(view == null)
 		{
-			linearLayoutManager.scrollToPosition(selectedPosition);
-			/*
-			The linear layout manager will eventually scroll,
-			that will create a view that will need to bound in itemAdapter,
-			which will call this class as a listener,
-			which will check the currentSelect,
-			which will then call the highlight methods
-			AN: This is so long an annoying
-			 */
+			createViewAndThenHighlightAsOnBindViewListener(selectedPosition);
 		}
 		else if(!linearLayoutManager.isViewPartiallyVisible(view, true, true))
 		{
@@ -55,6 +47,19 @@ public class HighlightSelectionInList implements OnItemSelectedListener, ItemAda
 			RevertSelectedViewHighlight();
 			Highlight(view);
 		}
+	}
+	
+	/*
+	The linear layout manager will eventually scroll,
+	that will create a view that will need to bound in itemAdapter,
+	which will call this class as a listener,
+	which will check the currentSelect,
+	which will then call the highlight methods
+	AN: This is so long an annoying
+	 */
+	private void createViewAndThenHighlightAsOnBindViewListener(int selectedPosition)
+	{
+		linearLayoutManager.scrollToPosition(selectedPosition);
 	}
 	
 	@Override
