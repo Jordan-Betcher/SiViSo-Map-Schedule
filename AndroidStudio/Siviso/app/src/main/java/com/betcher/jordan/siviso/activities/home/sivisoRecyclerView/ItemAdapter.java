@@ -11,7 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.HighlightSelectionInList;
 import com.betcher.jordan.siviso.database.SivisoData;
 
 import java.util.ArrayList;
@@ -23,6 +25,8 @@ public class ItemAdapter
 	private static final String TAG = "SVSRecyclerViewAdapter";
 	
 	private List<SivisoData> sivisoDatas = new ArrayList<>();
+	
+	private ArrayList<OnBindViewListener> onBindViewListeners = new ArrayList<>();
 	
 	@NonNull
 	@Override
@@ -39,6 +43,17 @@ public class ItemAdapter
 		SivisoData currentSivisoData = sivisoDatas.get(position);
 		holder.setName(currentSivisoData.getName());
 		holder.setSiviso(currentSivisoData.getSiviso());
+		
+		callAllOnBindViewListeners(currentSivisoData, holder.itemView);
+	}
+	
+	private void callAllOnBindViewListeners(SivisoData currentSivisoData, View itemView)
+	{
+		for (OnBindViewListener listener : onBindViewListeners
+		     )
+		{
+			listener.OnBindView(currentSivisoData, itemView);
+		}
 	}
 	
 	@Override
@@ -75,6 +90,11 @@ public class ItemAdapter
 	public int getPosition(SivisoData selectedSiviso)
 	{
 		return sivisoDatas.indexOf(selectedSiviso);
+	}
+	
+	public void addOnBindViewListener(OnBindViewListener listener)
+	{
+		onBindViewListeners.add(listener);
 	}
 	
 	public class SivisoHolder extends RecyclerView.ViewHolder
@@ -130,6 +150,11 @@ public class ItemAdapter
 		onItemClickListeners.add(onItemClickListener);
 	}
 	
+	public interface OnBindViewListener
+	{
+		
+		void OnBindView(SivisoData currentSivisoData, View itemView);
+	}
 }
 
 

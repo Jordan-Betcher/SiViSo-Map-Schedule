@@ -9,30 +9,52 @@ import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
 import com.betcher.jordan.siviso.database.SivisoData;
 
-public class HighlightSelectionInList implements OnItemSelectedListener
+public class HighlightSelectionInList implements OnItemSelectedListener, ItemAdapter.OnBindViewListener
 {
 	
 	ItemAdapter itemAdapter;
 	LinearLayoutManager linearLayoutManager;
 	private View highlightedView = null;
 	private int previousViewColor = 0;
+	private SivisoData currentSelect = null;
 	
 	public HighlightSelectionInList(ItemAdapter itemAdapter, LinearLayoutManager linearLayoutManager)
 	{
 		this.itemAdapter = itemAdapter;
 		this.linearLayoutManager = linearLayoutManager;
+		itemAdapter.addOnBindViewListener(this);
 	}
 	
 	@Override
 	public void onItemSelect(SivisoData selectedSivisoData)
 	{
+		currentSelect = selectedSivisoData;
 		int selectedPosition = itemAdapter.getPosition(selectedSivisoData);
-		linearLayoutManager.scrollToPosition(selectedPosition);
-		View view = linearLayoutManager.getChildAt(selectedPosition);
+		View view = linearLayoutManager.findViewByPosition(selectedPosition);
 		
-		RevertSelectedViewHighlight();
-		Highlight(view);
-		
+		if(view == null)
+		{
+			linearLayoutManager.scrollToPosition(selectedPosition);
+			/*
+			The linear layout manager will eventually scroll,
+			that will create a view that will need to bound in itemAdapter,
+			which will call this class as a listener,
+			which will check the currentSelect,
+			which will then call the highlight methods
+			AN: This is so long an annoying
+			 */
+		}
+		else if(!linearLayoutManager.isViewPartiallyVisible(view, true, true))
+		{
+			linearLayoutManager.scrollToPosition(selectedPosition);
+			RevertSelectedViewHighlight();
+			Highlight(view);
+		}
+		else
+		{
+			RevertSelectedViewHighlight();
+			Highlight(view);
+		}
 	}
 	
 	@Override
@@ -50,9 +72,20 @@ public class HighlightSelectionInList implements OnItemSelectedListener
 	
 	private void RevertSelectedViewHighlight()
 	{
+		currentSelect = null;
 		if(highlightedView != null)
 		{
 			highlightedView.setBackgroundColor(previousViewColor);
+		}
+	}
+	
+	@Override
+	public void OnBindView(SivisoData currentSivisoData, View itemView)
+	{
+		if(currentSelect == currentSivisoData)
+		{
+			RevertSelectedViewHighlight();
+			Highlight(itemView);
 		}
 	}
 }
