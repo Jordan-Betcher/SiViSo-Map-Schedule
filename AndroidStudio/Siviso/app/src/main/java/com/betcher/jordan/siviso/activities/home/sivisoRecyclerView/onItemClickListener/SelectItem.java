@@ -4,21 +4,21 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.actions.home.ZoomToSelected;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemClickListener;
 import com.betcher.jordan.siviso.database.SivisoData;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Circle;
 
 import java.util.ArrayList;
 
 public class SelectItem
 		implements OnItemClickListener
 {
-	private View selectedView = null;
-	private int previousViewColor = 0;
-	private int highlightColor = Color.LTGRAY;
 	private SivisoData selectedSiviso = null;
 	private ItemAdapter sivisoRecyclerViewItemAdapter;
 	
@@ -32,16 +32,7 @@ public class SelectItem
 	{
 		if (itemPosition != RecyclerView.NO_POSITION)
 		{
-			if(selectedView != null)
-			{
-				selectedView.setBackgroundColor(previousViewColor);
-			}
-			
 			selectedSiviso = sivisoRecyclerViewItemAdapter.getItem(itemPosition);
-			selectedView = view;
-			previousViewColor = ((ColorDrawable)view.getBackground()).getColor();
-			view.setBackgroundColor(highlightColor);
-			
 			callAllOnSelectItemListeners(selectedSiviso);
 		}
 	}
@@ -49,26 +40,6 @@ public class SelectItem
 	public SivisoData getSelectedSiviso()
 	{
 		return selectedSiviso;
-	}
-	
-	public boolean getIsSivisoSelected()
-	{
-		if (selectedSiviso != null && sivisoRecyclerViewItemAdapter.containItem(selectedSiviso))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	public void unselect()
-	{
-		if(selectedView != null)
-		{
-			selectedView.setBackgroundColor(previousViewColor);
-		}
 	}
 	
 	ArrayList<OnItemSelectedListener> onItemSelectedListeners = new ArrayList<>();
@@ -84,5 +55,18 @@ public class SelectItem
 	public void addOnItemSelectListener(OnItemSelectedListener onItemClickListener)
 	{
 		onItemSelectedListeners.add(onItemClickListener);
+	}
+	
+	public void deselect()
+	{
+		if(selectedSiviso != null)
+		{
+			for (OnItemSelectedListener onItemClickListener: onItemSelectedListeners)
+			{
+				onItemClickListener.onItemDeselect();
+			}
+			
+			selectedSiviso = null;
+		}
 	}
 }

@@ -20,4 +20,10 @@ public class EnableButton implements OnItemSelectedListener
 	{
 		button.setEnabled(true);
 	}
+	
+	@Override
+	public void onItemDeselect()
+	{
+		button.setEnabled(false);
+	}
 }

@@ -21,4 +21,6 @@ public class Defaults
 	public static final String EXTRA_NAME_SIVISO = "siviso";
 	public static final String EXTRA_NAME_LATITUDE = "latitude";
 	public static final String EXTRA_NAME_LONGITUDE = "longitude";
+	
+	public static final int ITEM_SELECT_HIGHLIGHT_COLOR = Color.LTGRAY;
 }

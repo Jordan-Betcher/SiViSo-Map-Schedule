@@ -7,4 +7,6 @@ import com.betcher.jordan.siviso.database.SivisoData;
 public interface OnItemSelectedListener
 {
 	void onItemSelect(SivisoData selectedSivisoData);
+	
+	void onItemDeselect();
 }
