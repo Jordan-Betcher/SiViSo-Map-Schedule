@@ -23,6 +23,22 @@ Optional:
     
 
 Research
+    Overview of services 
+    https://www.vogella.com/tutorials/AndroidServices/article.html
+
+    How to enable developer settings in android emulator
+    Build model and click it 7 times then developer options will open in about phone in settings
+    https://stackoverflow.com/questions/5523718/how-to-check-all-the-running-services-in-android
+
+    Which Service to use
+    https://stackoverflow.com/questions/53252792/what-are-differences-between-jobintentservice-and-intentservice
+
+    Run GPS in service
+    https://youtu.be/lvcGh2ZgHeA
+
+    Android Service OnStartCommand Vs OnCreate
+    https://stackoverflow.com/questions/14182014/android-oncreate-or-onstartcommand-for-starting-service
+
     On Change Focus Listener aka when the user switches from typing in the textview
     https://www.tutorialspoint.com/how-can-i-know-when-an-edittext-loses-focus-in-android
 
