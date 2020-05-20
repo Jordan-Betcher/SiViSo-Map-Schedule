@@ -60,7 +60,6 @@ public class Siviso extends JobIntentService
 		super.onStartCommand(intent, flags, startId);
 		addLocationListener();
 		createNotification("0");
-		
 		return START_NOT_STICKY;
 	}
 	

@@ -1,7 +1,9 @@
 package com.betcher.jordan.exampleservice.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,8 @@ public class Home extends AppCompatActivity
 	private static final String TAG = "Home";
 	public static final int REQUEST_LOCATION_PERMISSION = 1;
 	
+	private static final String PREFS_NAME = "com.betcher.jordan.exampleservice.activities.preferences";
+	
 	Switch switchOffOn;
 	
 	Siviso sivisoService;
@@ -36,6 +40,17 @@ public class Home extends AppCompatActivity
 		
 		
 		sivisoService = Siviso.getInstance();
+		SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		boolean isServiceRunning = prefs.getBoolean("isServiceRunning", false);
+		
+		if(isServiceRunning)
+		{
+			startSivisoService();
+			switchOffOn.setChecked(true);
+			
+		}
+		
+		Log.d(TAG, "onCreate: " + isServiceRunning);
 	}
 	
 	private void runPermissions()
@@ -54,27 +69,33 @@ public class Home extends AppCompatActivity
 	
 	public void onOffOnClicked(View view)
 	{
-		if(switchOffOn.isChecked())
+		if (switchOffOn.isChecked())
 		{
-			startSivisoActivity();
+			startSivisoService();
 		}
 		else
 		{
-			stopSivisoActivity();
+			stopSivisoService();
 		}
 		
 	}
 	
-	private void startSivisoActivity()
+	private void startSivisoService()
 	{
 		Log.d(TAG, "startSivisoActivity: Start");
 		Intent startSivisoService = new Intent(this, Siviso.class);
 		ContextCompat.startForegroundService(this, startSivisoService);
+		
+		SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		prefs.edit().putBoolean("isServiceRunning", true).apply();
 	}
 	
-	private void stopSivisoActivity()
+	private void stopSivisoService()
 	{
 		Log.d(TAG, "stopSivisoActivity: Stop");
 		stopService(new Intent(this, Siviso.class));
+		
+		SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		prefs.edit().putBoolean("isServiceRunning", false).apply();
 	}
 }
