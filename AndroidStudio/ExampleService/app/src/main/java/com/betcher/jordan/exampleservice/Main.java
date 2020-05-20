@@ -15,19 +15,22 @@ public class Main extends Application
 	{
 		super.onCreate();
 		
-		createNotificationChannel();
+		//createNotificationChannel();
 	}
 	
 	private void createNotificationChannel()
 	{
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			NotificationChannel serviceChannel = new NotificationChannel(
-					NOTIFICATION_CHANNEL_ID,
-					NOTIFICATION_CHANNEL_NAME,
-					NotificationManager.IMPORTANCE_DEFAULT
-			);
 			NotificationManager manager = getSystemService(NotificationManager.class);
-			manager.createNotificationChannel(serviceChannel);
+			if(manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID) == null)
+			{
+				NotificationChannel serviceChannel = new NotificationChannel(
+						NOTIFICATION_CHANNEL_ID,
+						NOTIFICATION_CHANNEL_NAME,
+						NotificationManager.IMPORTANCE_DEFAULT
+				);
+				manager.createNotificationChannel(serviceChannel);
+			}
 		}
 	}
 }

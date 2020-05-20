@@ -23,6 +23,10 @@ Optional:
     
 
 Research
+    Check if service is running
+    Don't, instead use global variable
+    https://stackoverflow.com/questions/600207/how-to-check-if-a-service-is-running-on-android
+
     Overview of services 
     https://www.vogella.com/tutorials/AndroidServices/article.html
 

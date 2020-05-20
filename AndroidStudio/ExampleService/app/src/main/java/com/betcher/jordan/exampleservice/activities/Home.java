@@ -34,7 +34,8 @@ public class Home extends AppCompatActivity
 		
 		runPermissions();
 		
-		sivisoService = new Siviso();
+		
+		sivisoService = Siviso.getInstance();
 	}
 	
 	private void runPermissions()

@@ -9,9 +9,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +30,18 @@ public class Siviso extends JobIntentService
 {
 	private static final String TAG = "Siviso";
 	
+	private static Siviso instance;
+	
+	public static Siviso getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new Siviso();
+		}
+		
+		return instance;
+	}
+	
 	private LocationListener listener;
 	private LocationManager locationManager;
 	Notification notification;
@@ -35,9 +50,7 @@ public class Siviso extends JobIntentService
 	public void onCreate()
 	{
 		super.onCreate();
-		createNotification("0");
 		
-		addLocationListener();
 	}
 	
 	@Override
@@ -45,6 +58,9 @@ public class Siviso extends JobIntentService
 	{
 		Log.d(TAG, "onStartCommand: ");
 		super.onStartCommand(intent, flags, startId);
+		addLocationListener();
+		createNotification("0");
+		
 		return START_NOT_STICKY;
 	}
 	
@@ -80,12 +96,20 @@ public class Siviso extends JobIntentService
 			@Override
 			public void onLocationChanged(Location location)
 			{
-				String message = "onLocationChanged: Seconds: " +
-				                 Calendar.getInstance().getTime().getSeconds();
+				final String message = "onLocationChanged: Seconds: " +
+				                       Calendar.getInstance().getTime().getSeconds() + " Lat: " + location.getLatitude() + " Lng: " + location.getLongitude();
 				
 				Log.d(TAG, message
 				      );
 				createNotification(message);
+				Handler handler = new Handler(Looper.getMainLooper());
+				handler.post(new Runnable() {
+					
+					@Override
+					public void run() {
+						Toast.makeText(Siviso.this.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+					}
+				});
 			}
 			
 			@Override
