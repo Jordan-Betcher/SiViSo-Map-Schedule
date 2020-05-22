@@ -23,6 +23,14 @@ Optional:
     
 
 Research
+    Distance measurement of both android map circle radius and location.distanceto are in meters
+
+    Ask Permissions to change ringer mode
+    https://stackoverflow.com/questions/39151453/in-android-7-api-level-24-my-app-is-not-allowed-to-mute-phone-set-ringer-mode
+
+    Change ringer mode
+    https://stackoverflow.com/questions/29208366/how-to-enable-and-disable-vibration-mode-programmatically
+
     Check if service is running
     Don't, instead use global variable
     https://stackoverflow.com/questions/600207/how-to-check-if-a-service-is-running-on-android
@@ -53,7 +61,10 @@ Research
     https://www.youtube.com/watch?v=0cg09tlAAQ0&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118&index=3
     
     Distance between to LatLng
-    Use Sphere Util https://stackoverflow.com/questions/14394366/find-distance-between-two-points-on-map-using-google-map-api-v2/15351351#15351351
+    Instead just use location
+    https://stackoverflow.com/questions/17983865/making-a-location-object-in-android-with-latitude-and-longitude-values
+    Use Sphere Util
+    https://stackoverflow.com/questions/8832071/how-can-i-get-the-distance-between-two-point-by-latlng    https://stackoverflow.com/questions/14394366/find-distance-between-two-points-on-map-using-google-map-api-v2/15351351#15351351
 
     Go to new activity
     https://stackoverflow.com/questions/4186021/how-to-start-new-activity-on-button-click

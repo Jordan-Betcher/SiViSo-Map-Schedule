@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -23,8 +24,6 @@ import androidx.core.app.NotificationCompat;
 
 import com.betcher.jordan.exampleservice.Main;
 import com.betcher.jordan.exampleservice.activities.Home;
-
-import java.util.Calendar;
 
 public class Siviso extends JobIntentService
 {
@@ -95,20 +94,29 @@ public class Siviso extends JobIntentService
 			@Override
 			public void onLocationChanged(Location location)
 			{
-				final String message = "onLocationChanged: Seconds: " +
-				                       Calendar.getInstance().getTime().getSeconds() + " Lat: " + location.getLatitude() + " Lng: " + location.getLongitude();
 				
-				Log.d(TAG, message
-				      );
+				//LatLng point = new LatLng(37.6354, -122.0224);
+				Location point = new Location("");//provider name is unnecessary
+				point.setLatitude(37.6354d);
+				point.setLongitude(-122.0224d);
+				
+				double distance = location.distanceTo(point);
+				AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+				String message = "";
+				
+				if(distance > 10000)
+				{
+					audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+					message = "Vibrate";
+				}
+				else
+				{
+					audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+					message = "Ringer";
+				}
+				
+				programmerFeedback(message);
 				createNotification(message);
-				Handler handler = new Handler(Looper.getMainLooper());
-				handler.post(new Runnable() {
-					
-					@Override
-					public void run() {
-						Toast.makeText(Siviso.this.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-					}
-				});
 			}
 			
 			@Override
@@ -134,6 +142,20 @@ public class Siviso extends JobIntentService
 		locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 		
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, listener);
+	}
+	
+	private void programmerFeedback(final String message)
+	{
+		Log.d(TAG, message );
+		
+		Handler handler = new Handler(Looper.getMainLooper());
+		handler.post(new Runnable() {
+			
+			@Override
+			public void run() {
+				Toast.makeText(Siviso.this.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 	
 	public void createNotification(String input)

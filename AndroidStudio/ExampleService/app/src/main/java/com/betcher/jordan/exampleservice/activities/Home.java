@@ -1,10 +1,12 @@
 package com.betcher.jordan.exampleservice.activities;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -47,7 +49,6 @@ public class Home extends AppCompatActivity
 		{
 			startSivisoService();
 			switchOffOn.setChecked(true);
-			
 		}
 		
 		Log.d(TAG, "onCreate: " + isServiceRunning);
@@ -64,6 +65,18 @@ public class Home extends AppCompatActivity
 					                                  {Manifest.permission.ACCESS_FINE_LOCATION},
 			                                  REQUEST_LOCATION_PERMISSION
 			                                 );
+		}
+		
+		NotificationManager notificationManager =
+				(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+		    && !notificationManager.isNotificationPolicyAccessGranted()) {
+			
+			Intent intent = new Intent(
+					android.provider.Settings
+							.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+			
+			startActivity(intent);
 		}
 	}
 	
