@@ -23,6 +23,9 @@ Optional:
     
 
 Research
+    Get running application's icon programmatically (eventually want to use the same siviso icon's as the phone it's on)
+    https://stackoverflow.com/questions/15567957/how-to-get-running-applications-icon-on-android-programmatically
+
     Distance measurement of both android map circle radius and location.distanceto are in meters
 
     Ask Permissions to change ringer mode
