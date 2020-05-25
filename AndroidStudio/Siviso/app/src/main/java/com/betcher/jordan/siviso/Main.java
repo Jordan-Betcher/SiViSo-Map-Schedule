@@ -1,20 +1,20 @@
-package com.betcher.jordan.exampleservice;
+package com.betcher.jordan.siviso;
 
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
+import android.util.Log;
 
 public class Main extends Application
 {
-	public static final String NOTIFICATION_CHANNEL_ID = "sivisoServiceChannel";
-	public static final String NOTIFICATION_CHANNEL_NAME = "Siviso Service Channel";
+	private static final String TAG = "Main";
 	
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
-		
+		Log.d(TAG, "onCreate: ");
 		createNotificationChannel();
 	}
 	
@@ -22,11 +22,12 @@ public class Main extends Application
 	{
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			NotificationManager manager = getSystemService(NotificationManager.class);
-			if(manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID) == null)
+			if(manager.getNotificationChannel(Defaults.NOTIFICATION_CHANNEL_ID) == null)
 			{
+				Log.d(TAG, "createNotificationChannel: Created Channel");
 				NotificationChannel serviceChannel = new NotificationChannel(
-						NOTIFICATION_CHANNEL_ID,
-						NOTIFICATION_CHANNEL_NAME,
+						Defaults.NOTIFICATION_CHANNEL_ID,
+						Defaults.NOTIFICATION_CHANNEL_NAME,
 						NotificationManager.IMPORTANCE_DEFAULT
 				);
 				manager.createNotificationChannel(serviceChannel);

@@ -23,4 +23,11 @@ public class Defaults
 	public static final String EXTRA_NAME_LONGITUDE = "longitude";
 	
 	public static final int ITEM_SELECT_HIGHLIGHT_COLOR = Color.LTGRAY;
+	
+	public static final String PREFERENCE_NAME = "com.betcher.jordan.exampleservice.activities.preferences";
+	
+	public static final int REQUEST_LOCATION_PERMISSION = 1;
+	
+	public static final String NOTIFICATION_CHANNEL_ID = "SivisoChannelID";
+	public static final String NOTIFICATION_CHANNEL_NAME = "Siviso";
 }

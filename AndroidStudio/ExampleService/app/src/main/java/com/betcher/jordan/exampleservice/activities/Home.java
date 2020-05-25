@@ -41,7 +41,7 @@ public class Home extends AppCompatActivity
 		runPermissions();
 		
 		
-		sivisoService = Siviso.getInstance();
+		sivisoService = new Siviso();
 		SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 		boolean isServiceRunning = prefs.getBoolean("isServiceRunning", false);
 		

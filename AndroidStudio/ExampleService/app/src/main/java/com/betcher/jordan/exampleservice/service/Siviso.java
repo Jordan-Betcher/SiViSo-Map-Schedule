@@ -18,17 +18,6 @@ public class Siviso extends Service
 	private LocationListener listener;
 	private LocationManager locationManager;
 	
-	private static Siviso instance;
-	public static Siviso getInstance()
-	{
-		if(instance == null)
-		{
-			instance = new Siviso();
-		}
-		
-		return instance;
-	}
-	
 	@Override
 	public void onCreate()
 	{
