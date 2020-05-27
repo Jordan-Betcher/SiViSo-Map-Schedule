@@ -4,11 +4,9 @@ import android.Manifest;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
@@ -16,7 +14,6 @@ import android.widget.Switch;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +24,8 @@ import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.home.SetMapHomePosition;
 import com.betcher.jordan.siviso.actions.home.StartActivityAdd;
 import com.betcher.jordan.siviso.actions.home.StartActivityEdit;
+import com.betcher.jordan.siviso.actions.home.StartSivisoService;
+import com.betcher.jordan.siviso.actions.home.StopSivisoService;
 import com.betcher.jordan.siviso.activities.home.sivisoMapCircles.SivisoMapCircles;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.SelectItem;
@@ -36,7 +35,6 @@ import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelect
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.TriggerSelectItem;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
-import com.betcher.jordan.siviso.service.Siviso;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -167,22 +165,11 @@ public class Home extends AppCompatActivity
 	{
 		if (switchOnOff.isChecked())
 		{
-			//StartSivisoService.run(this);
-			Log.d(TAG, "startSivisoActivity: Start");
-			Intent startSivisoService = new Intent(this, Siviso.class);
-			ContextCompat.startForegroundService(this, startSivisoService);
-			
-			SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-			prefs.edit().putBoolean("isServiceRunning", true).apply();
+			StartSivisoService.run(this);
 		}
 		else
 		{
-			//StopSivisoService.run(this);
-			Log.d(TAG, "stopSivisoActivity: Stop");
-			stopService(new Intent(this, Siviso.class));
-			
-			SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-			prefs.edit().putBoolean("isServiceRunning", false).apply();
+			StopSivisoService.run(this);
 		}
 	}
 }

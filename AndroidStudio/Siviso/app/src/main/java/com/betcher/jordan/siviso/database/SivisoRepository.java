@@ -1,6 +1,6 @@
 package com.betcher.jordan.siviso.database;
 
-import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
@@ -12,10 +12,19 @@ public class SivisoRepository
 	private SivisoDao sivisoDao;
 	private LiveData<List<SivisoData>> allSivisoData;
 	
-	public SivisoRepository(Application application) {
-		SivisoDatabase database = SivisoDatabase.getInstance(application);
-		sivisoDao = database.sivisoDao();
-		allSivisoData = sivisoDao.getAllSivisoData();
+	public static SivisoRepository instance;
+	
+	public static SivisoRepository getInstance(Context context)
+	{
+		if(instance == null)
+		{
+			instance = new SivisoRepository();
+			SivisoDatabase database = SivisoDatabase.getInstance(context);
+			instance.sivisoDao = database.sivisoDao();
+			instance.allSivisoData = instance.sivisoDao.getAllSivisoData();
+		}
+		
+		return instance;
 	}
 	
 	public void insert(SivisoData sivisoData) {

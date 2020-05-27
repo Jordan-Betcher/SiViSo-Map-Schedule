@@ -15,7 +15,7 @@ public class SivisoModel extends AndroidViewModel
 	
 	public SivisoModel(@NonNull Application application) {
 		super(application);
-		repository = new SivisoRepository(application);
+		repository = SivisoRepository.getInstance(application);
 		allSivisoData = repository.getAllSivisoData();
 	}
 	
