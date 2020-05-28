@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.actions.home.SetMapHomePosition;
+import com.betcher.jordan.siviso.actions.home.MapGoToCurrentLocation;
 import com.betcher.jordan.siviso.actions.home.StartActivityAdd;
 import com.betcher.jordan.siviso.actions.home.StartActivityEdit;
 import com.betcher.jordan.siviso.actions.home.StartSivisoService;
@@ -103,7 +103,8 @@ public class Home extends AppCompatActivity
 			public void onMapReady(GoogleMap googleMap)
 			{
 				map = googleMap;
-				SetMapHomePosition.run(map);
+				map.setMyLocationEnabled(true);
+				MapGoToCurrentLocation.run(Home.this, map);
 				
 				SivisoMapCircles sivisoMapCircles = new SivisoMapCircles(map);
 				sivisoModel.getAllSivisoData().observe(Home.this, sivisoMapCircles);

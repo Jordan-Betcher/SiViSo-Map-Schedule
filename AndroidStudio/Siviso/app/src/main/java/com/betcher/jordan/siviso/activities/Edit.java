@@ -1,8 +1,5 @@
 package com.betcher.jordan.siviso.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +7,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.CancelActivity;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.SelectSivisoOnMap;
 import com.betcher.jordan.siviso.actions.edit.SetMapEditPosition;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.SelectSivisoOnMap;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
 import com.google.android.gms.maps.GoogleMap;
@@ -62,6 +62,7 @@ public class Edit extends AppCompatActivity
 			public void onMapReady(GoogleMap googleMap)
 			{
 				map = googleMap;
+				map.setMyLocationEnabled(true);
 				selectSivisoOnMap = new SelectSivisoOnMap(map, buttonConfirmEdit);
 				map.setOnMapClickListener(selectSivisoOnMap);
 				

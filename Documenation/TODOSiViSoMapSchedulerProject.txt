@@ -23,6 +23,10 @@ Optional:
     
 
 Research
+    How to access a room database from a service
+    Make the class(sivisoRepository) containing the database dao , make that class a singleton
+    https://stackoverflow.com/questions/44708202/observe-livedata-from-foreground-service
+    
     Get running application's icon programmatically (eventually want to use the same siviso icon's as the phone it's on)
     https://stackoverflow.com/questions/15567957/how-to-get-running-applications-icon-on-android-programmatically
 
