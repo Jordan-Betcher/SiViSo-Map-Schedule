@@ -12,6 +12,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoRepository;
 
@@ -38,8 +39,6 @@ class LocationListenerSetSiviso implements LocationListener
 	@Override
 	public void onLocationChanged(Location currentLocation)
 	{
-		List<SivisoData> sivisoDatas = new ArrayList<>();
-		
 		if(sivisoRepository == null)
 		{
 			Log.d(TAG, "onLocationChanged: SivisoModel was null");
@@ -59,17 +58,54 @@ class LocationListenerSetSiviso implements LocationListener
 		{
 			Log.d(TAG, "onLocationChanged: Working SivisoModel.getAllSivisoData().getValue() ");
 			
-			sivisoDatas = sivisoRepository.getAllSivisoData().getValue();
-			for(SivisoData sivisoData : sivisoDatas)
-			{
+			List<SivisoData> sivisoDatas = sivisoRepository.getAllSivisoData().getValue();
+			ArrayList<String> possibleSoundSettings = getSivisoThatCollideWithCurrentLocation(sivisoDatas, currentLocation);
 			
-			}
-			
-			String showMessage = "The number of sivisoDatas: " + sivisoDatas.size();
-			programmerFeedback(showMessage);
-			
-			//*/
+			changeRingerMode(possibleSoundSettings);
 		}
+	}
+	
+	private void changeRingerMode(ArrayList<String> possibleSoundSettings)
+	{
+		String showMessage = "Number of Possible Sounds Settings: " + possibleSoundSettings.size();
+		if(possibleSoundSettings.contains("Silent"))
+		{
+			audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+			showMessage = "Silent";
+		}
+		else if(possibleSoundSettings.contains("Vibrate"))
+		{
+			audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+			showMessage = "Vibrate";
+		}
+		else if(possibleSoundSettings.contains("Sound"))
+		{
+			audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+			showMessage = "Sound";
+		}
+		
+		programmerFeedback(showMessage);
+	}
+	
+	private ArrayList<String> getSivisoThatCollideWithCurrentLocation(List<SivisoData> sivisoDatas, Location currentLocation)
+	{
+		ArrayList<String> sivisos = new ArrayList<>();
+		
+		for(SivisoData sivisoData : sivisoDatas)
+		{
+			Location sivisoLocation = new Location("");
+			sivisoLocation.setLatitude(sivisoData.getLatitude());
+			sivisoLocation.setLongitude(sivisoData.getLongitude());
+			
+			double distance = currentLocation.distanceTo(sivisoLocation);
+			
+			if(distance < Defaults.SIVISO_RADIUS)
+			{
+				sivisos.add(sivisoData.getSiviso());
+			}
+		}
+		
+		return sivisos;
 	}
 	
 	private void programmerFeedback(final String message)
