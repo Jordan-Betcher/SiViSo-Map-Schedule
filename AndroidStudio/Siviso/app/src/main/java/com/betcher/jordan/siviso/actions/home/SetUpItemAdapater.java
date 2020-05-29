@@ -25,6 +25,8 @@ public class SetUpItemAdapater
 			@Override
 			public void onChanged(@Nullable List<SivisoData> sivisoDatas)
 			{
+				
+				
 				itemAdapter.setSivisoDatas(sivisoDatas);
 			}
 		});

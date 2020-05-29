@@ -1,5 +1,7 @@
 package com.betcher.jordan.siviso.activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.home.CheckAndAskPermissions;
 import com.betcher.jordan.siviso.actions.home.MapGoToCurrentLocation;
@@ -57,7 +60,7 @@ public class Home extends AppCompatActivity
 		
 		CheckAndAskPermissions.run(this);
 		
-		switchOnOff = findViewById(R.id.switchOnOff);
+		switchOnOff = setupSwitchOnOff();
 		buttonDelete = findViewById(R.id.buttonDelete);
 		buttonEdit = findViewById(R.id.buttonEdit);
 		
@@ -91,6 +94,21 @@ public class Home extends AppCompatActivity
 				map.setOnCircleClickListener(new TriggerSelectItem(selectItem, sivisoMapCircles));
 			}
 		});
+	}
+	
+	private Switch setupSwitchOnOff()
+	{
+		Switch switchOnOff = findViewById(R.id.switchOnOff);
+		SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
+		boolean isServiceRunning = prefs.getBoolean("isServiceRunning", false);
+		
+		if(isServiceRunning)
+		{
+			StartSivisoService.run(this);
+			switchOnOff.setChecked(true);
+		}
+		
+		return switchOnOff;
 	}
 	
 	public void onClickButtonAdd(View view)

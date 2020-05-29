@@ -26,7 +26,6 @@ import com.google.android.material.textfield.TextInputEditText;
 public class Edit extends AppCompatActivity
 {
 	GoogleMap map;
-	AppCompatActivity activity;
 	Button buttonConfirmEdit;
 	SelectSivisoOnMap selectSivisoOnMap;
 	TextInputEditText inputName;
@@ -42,18 +41,23 @@ public class Edit extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit);
 		
-		activity = this;
 		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
 		buttonConfirmEdit = (Button) this.findViewById(R.id.buttonConfirmEdit);
 		inputName = this.findViewById(R.id.editName);
 		inputSiviso = this.findViewById(R.id.editSiviso);
 		
-		Intent intent = activity.getIntent();
+		Intent intent = this.getIntent();
 		selectedSivisoDataID  = intent.getIntExtra(Defaults.EXTRA_NAME_ID, -1);//Crashes if not found
 		String selectedSivisoDataName = intent.getStringExtra(Defaults.EXTRA_NAME_NAME);
 		String selectedSivisoDataSiviso = intent.getStringExtra(Defaults.EXTRA_NAME_SIVISO);
 		double selectedSivisoDataLatitude = intent.getDoubleExtra(Defaults.EXTRA_NAME_LATITUDE, 0);
 		double selectedSivisoDataLongitude = intent.getDoubleExtra(Defaults.EXTRA_NAME_LONGITUDE, 0);
+		
+		inputName.setText(selectedSivisoDataName);
+		
+		ArrayAdapter arrayAdapter = (ArrayAdapter) inputSiviso.getAdapter();
+		int arrayPositionOfSelectedSiviso = arrayAdapter.getPosition(selectedSivisoDataSiviso);
+		inputSiviso.setSelection(arrayPositionOfSelectedSiviso);
 		
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.editMap);
 		mapFragment.getMapAsync(new OnMapReadyCallback()
@@ -66,15 +70,9 @@ public class Edit extends AppCompatActivity
 				selectSivisoOnMap = new SelectSivisoOnMap(map, buttonConfirmEdit);
 				map.setOnMapClickListener(selectSivisoOnMap);
 				
-				SetMapEditPosition.run(activity, map, selectSivisoOnMap);
+				SetMapEditPosition.run(Edit.this, map, selectSivisoOnMap);
 			}
 		});
-		
-		inputName.setText(selectedSivisoDataName);
-		
-		ArrayAdapter arrayAdapter = (ArrayAdapter) inputSiviso.getAdapter();
-		int arrayPositionOfSelectedSiviso = arrayAdapter.getPosition(selectedSivisoDataSiviso);
-		inputSiviso.setSelection(arrayPositionOfSelectedSiviso);
 	}
 	
 	public void onClickButtonCancel(View view)

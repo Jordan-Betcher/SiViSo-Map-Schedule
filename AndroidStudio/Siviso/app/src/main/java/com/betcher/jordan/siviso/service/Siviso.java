@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.IBinder;
@@ -16,7 +17,6 @@ import androidx.core.app.NotificationCompat;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.activities.Home;
-import com.betcher.jordan.siviso.database.SivisoRepository;
 
 public class Siviso extends Service
 {
@@ -24,7 +24,6 @@ public class Siviso extends Service
 	
 	private LocationListener listener;
 	private LocationManager locationManager;
-	SivisoRepository sivisoRepository;
 	
 	@Override
 	public void onCreate()
@@ -39,6 +38,9 @@ public class Siviso extends Service
 	{
 		super.onStartCommand(intent, flags, startId);
 		createNotification("Siviso");
+		
+		SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
+		prefs.edit().putBoolean("isServiceRunning", true).apply();
 		
 		return START_NOT_STICKY;
 	}
@@ -61,13 +63,9 @@ public class Siviso extends Service
 		{
 			locationManager.removeUpdates(listener);
 		}
-	}
-	
-	@Nullable
-	@Override
-	public IBinder onBind(Intent intent)
-	{
-		return null;
+		
+		SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
+		prefs.edit().putBoolean("isServiceRunning", false).apply();
 	}
 	
 	public void createNotification(String input)
@@ -83,5 +81,12 @@ public class Siviso extends Service
 				.build();
 		
 		this.startForeground(2, notification);
+	}
+	
+	@Nullable
+	@Override
+	public IBinder onBind(Intent intent)
+	{
+		return null;
 	}
 }

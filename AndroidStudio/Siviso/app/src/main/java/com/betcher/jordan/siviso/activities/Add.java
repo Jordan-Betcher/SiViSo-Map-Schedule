@@ -41,6 +41,9 @@ public class Add extends AppCompatActivity
 		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
 		buttonConfirmAdd = (Button) this.findViewById(R.id.buttonConfirmAdd);
 		
+		inputName = this.findViewById(R.id.addName);
+		inputSiviso = this.findViewById(R.id.addSiviso);
+		
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.addMap);
 		mapFragment.getMapAsync(new OnMapReadyCallback()
 		{
@@ -54,9 +57,6 @@ public class Add extends AppCompatActivity
 				map.setOnMapClickListener(selectSivisoOnMap);
 			}
 		});
-		
-		inputName = this.findViewById(R.id.addName);
-		inputSiviso = this.findViewById(R.id.addSiviso);
 	}
 	
 	public void onClickButtonCancel(View view)
