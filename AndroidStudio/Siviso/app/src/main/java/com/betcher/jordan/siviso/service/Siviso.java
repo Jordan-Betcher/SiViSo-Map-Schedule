@@ -40,7 +40,7 @@ public class Siviso extends Service
 		createNotification("Siviso");
 		
 		SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		prefs.edit().putBoolean("isServiceRunning", true).apply();
+		prefs.edit().putBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, true).apply();
 		
 		return START_NOT_STICKY;
 	}
@@ -65,7 +65,7 @@ public class Siviso extends Service
 		}
 		
 		SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		prefs.edit().putBoolean("isServiceRunning", false).apply();
+		prefs.edit().putBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, false).apply();
 	}
 	
 	public void createNotification(String input)
@@ -75,7 +75,7 @@ public class Siviso extends Service
 		                                                        0, notificationIntent, 0);
 		Notification notification = new NotificationCompat.Builder(this,
 		                                                           Defaults.NOTIFICATION_CHANNEL_ID)
-				.setContentTitle("Title")
+				.setContentTitle("Title Test")
 				.setContentText(input)
 				.setContentIntent(pendingIntent)
 				.build();

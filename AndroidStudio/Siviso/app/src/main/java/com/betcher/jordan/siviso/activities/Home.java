@@ -100,7 +100,7 @@ public class Home extends AppCompatActivity
 	{
 		Switch switchOnOff = findViewById(R.id.switchOnOff);
 		SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		boolean isServiceRunning = prefs.getBoolean("isServiceRunning", false);
+		boolean isServiceRunning = prefs.getBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, false);
 		
 		if(isServiceRunning)
 		{

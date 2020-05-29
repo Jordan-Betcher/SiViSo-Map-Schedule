@@ -30,4 +30,7 @@ public class Defaults
 	
 	public static final String NOTIFICATION_CHANNEL_ID = "SivisoChannelID";
 	public static final String NOTIFICATION_CHANNEL_NAME = "Siviso";
+	public static final String PREFERENCE_KEY_DEFAULT_SIVISO = "DefaultSiviso";
+	public static final String DEFAULT_SIVISO_NAME = "Default";
+	public static final String PREFERENCE_KEY_IS_SERVICE_RUNNING = "isServiceRunning";
 }
