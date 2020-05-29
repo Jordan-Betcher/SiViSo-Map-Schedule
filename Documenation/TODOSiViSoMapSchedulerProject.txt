@@ -1,28 +1,32 @@
 SiViSo Map Scheduler
 Is a android application that allows you to go to silent, vibrate, and sound based on google map location
 
-Steps:
-[x]Edit
-    Takes in SivisoData and fills out form
-    Save Edits to database
-[]Show the Siviso on home
-    Add an observer on sivisoModel that sends the list of SivisoDatas to mapWrapper
-    Have mapWrapper draw all the SivisoDatas and delete and redraw each time that the method is called
+Steps:    
+[x]Create Service 
+	[x] Turn on and off
+[x]Service Accesses Database
+[x]Service Tracks current location
+[x]Service SiViSo's
+[x]Service SiViSo's depending on location and database
 
-    
-    
-Create Service 
-	Turn on and off
-Service Accesses Database
-Service Tracks current location
-Service SiViSo's
-Service SiViSo's depending on location and database
-
+Add Default
+    To prefs
+    To recyclerview
+        On Click takes you to current location
+        Not deletable
+    Only Siviso Editable
+    Service Siviso's on exit siviso area depending on default
+Siviso has editable radius
+Test on Phone
 
 Optional:
+Change Siviso from switch (words) to siviso icons
     
 
 Research
+    Show blue dot of google maps your location
+    https://stackoverflow.com/questions/30440777/show-blue-dots-icon-on-current-location-google-maps/30466050
+
     How to access a room database from a service
     Make the class(sivisoRepository) containing the database dao , make that class a singleton
     https://stackoverflow.com/questions/44708202/observe-livedata-from-foreground-service

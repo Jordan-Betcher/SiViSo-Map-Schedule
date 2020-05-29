@@ -91,6 +91,7 @@ public class Edit extends AppCompatActivity
 		SivisoData sivisoData = new SivisoData(name, siviso, latLng.latitude, latLng.longitude);
 		sivisoData.setId(selectedSivisoDataID);
 		sivisoModel.update(sivisoData);
+		
 		this.finish();
 	}
 }
