@@ -1,5 +1,6 @@
 package com.betcher.jordan.siviso.database;
 
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -59,4 +60,25 @@ public class SivisoData
 	
 	@Ignore
 	public LatLng getLatLng(){return new LatLng(latitude, longitude);}
+	
+	@Ignore
+	@Override
+	public boolean equals(@Nullable Object obj)
+	{
+		if(obj instanceof SivisoData)
+		{
+			SivisoData other = (SivisoData) obj;
+			
+			if(other.getName() == getName()
+			&& other.getSiviso() == getSiviso()
+			&& other.getId() == getId()
+			&& other.getLatitude() == getLatitude()
+			&& other.getLongitude() == getLongitude())
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }

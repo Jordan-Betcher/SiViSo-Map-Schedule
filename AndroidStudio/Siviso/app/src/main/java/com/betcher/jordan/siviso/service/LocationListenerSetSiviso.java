@@ -28,6 +28,7 @@ class LocationListenerSetSiviso implements LocationListener
 	Service context;
 	
 	SivisoRepository sivisoRepository;
+	private ArrayList<SivisoData> previousSivisoData;
 	
 	public LocationListenerSetSiviso(Siviso context)
 	{
@@ -59,37 +60,63 @@ class LocationListenerSetSiviso implements LocationListener
 			Log.d(TAG, "onLocationChanged: Working SivisoModel.getAllSivisoData().getValue() ");
 			
 			List<SivisoData> sivisoDatas = sivisoRepository.getAllSivisoData().getValue();
-			ArrayList<String> possibleSoundSettings = getSivisoThatCollideWithCurrentLocation(sivisoDatas, currentLocation);
+			ArrayList<SivisoData> collidedSiviso = getSivisoThatCollideWithCurrentLocation(sivisoDatas, currentLocation);
 			
-			changeRingerMode(possibleSoundSettings);
+			changeRingerMode(collidedSiviso);
 		}
 	}
 	
-	private void changeRingerMode(ArrayList<String> possibleSoundSettings)
+	private void changeRingerMode(ArrayList<SivisoData> collidedSivisoData)
 	{
-		String showMessage = "Number of Possible Sounds Settings: " + possibleSoundSettings.size();
-		if(possibleSoundSettings.contains("Silent"))
+		String showMessage = "Number of Possible Sounds Settings: " + collidedSivisoData.size();
+		
+		ArrayList<String> possibleSiviso = getPossibleSiviso(collidedSivisoData);
+		if(previousSivisoData == null || ! previousSivisoData.equals(collidedSivisoData))
+		{
+			previousSivisoData = collidedSivisoData;
+		}
+		else
+		{
+			return;
+		}
+		
+		if(collidedSivisoData.size() == 0)
+		{
+			return;
+		}
+		else if(possibleSiviso.contains("Silent"))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 			showMessage = "Silent";
 		}
-		else if(possibleSoundSettings.contains("Vibrate"))
+		else if(possibleSiviso.contains("Vibrate"))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
 			showMessage = "Vibrate";
 		}
-		else if(possibleSoundSettings.contains("Sound"))
+		else if(possibleSiviso.contains("Sound"))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 			showMessage = "Sound";
 		}
 		
+		
 		programmerFeedback(showMessage);
 	}
 	
-	private ArrayList<String> getSivisoThatCollideWithCurrentLocation(List<SivisoData> sivisoDatas, Location currentLocation)
+	private ArrayList<String> getPossibleSiviso(ArrayList<SivisoData> collidedSivisoData)
 	{
-		ArrayList<String> sivisos = new ArrayList<>();
+		ArrayList<String> possibleSiviso = new ArrayList<>();
+		for (SivisoData sivisoData : collidedSivisoData)
+		{
+			possibleSiviso.add(sivisoData.getSiviso());
+		}
+		return possibleSiviso;
+	}
+	
+	private ArrayList<SivisoData> getSivisoThatCollideWithCurrentLocation(List<SivisoData> sivisoDatas, Location currentLocation)
+	{
+		ArrayList<SivisoData> sivisos = new ArrayList<>();
 		
 		for(SivisoData sivisoData : sivisoDatas)
 		{
@@ -101,7 +128,7 @@ class LocationListenerSetSiviso implements LocationListener
 			
 			if(distance < Defaults.SIVISO_RADIUS)
 			{
-				sivisos.add(sivisoData.getSiviso());
+				sivisos.add(sivisoData);
 			}
 		}
 		
