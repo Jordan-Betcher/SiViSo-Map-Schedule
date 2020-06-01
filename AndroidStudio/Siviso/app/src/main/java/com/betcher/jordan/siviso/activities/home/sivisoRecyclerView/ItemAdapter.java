@@ -1,5 +1,6 @@
 package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +28,11 @@ public class ItemAdapter
 	
 	private ArrayList<OnBindViewListener> onBindViewListeners = new ArrayList<>();
 	private SivisoModel sivisoModel;
+	private Context context;
 	
-	public ItemAdapter(SivisoModel sivisoModel)
+	public ItemAdapter(Context context, SivisoModel sivisoModel)
 	{
+		this.context = context;
 		this.sivisoModel = sivisoModel;
 	}
 	
@@ -39,7 +42,7 @@ public class ItemAdapter
 	{
 		View itemView = LayoutInflater.from(parent.getContext())
 		                              .inflate(R.layout.list_item_siviso_data, parent, false);
-		return new SivisoHolder(itemView, sivisoModel);
+		return new SivisoHolder(itemView, context, sivisoModel);
 	}
 	
 	@Override
@@ -109,14 +112,14 @@ public class ItemAdapter
 		
 		OnItemClickListenerEditSiviso listener;
 		
-		public SivisoHolder(View itemView, SivisoModel sivisoModel)
+		public SivisoHolder(View itemView, Context context, SivisoModel sivisoModel)
 		{
 			super(itemView);
 			textViewName = itemView.findViewById(R.id.textViewHoldName);
 			spinnerSiviso = itemView.findViewById(R.id.spinnerHoldSiviso);
 			sivisoHolder = this;
 			
-			listener = new OnItemClickListenerEditSiviso(sivisoModel, spinnerSiviso);
+			listener = new OnItemClickListenerEditSiviso(context, sivisoModel, spinnerSiviso);
 			spinnerSiviso.setOnItemSelectedListener(listener);
 			
 			itemView.setOnClickListener(new View.OnClickListener(){

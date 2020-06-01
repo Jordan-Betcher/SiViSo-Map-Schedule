@@ -1,9 +1,12 @@
 package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
 import com.google.android.gms.maps.model.LatLng;
@@ -13,13 +16,15 @@ class OnItemClickListenerEditSiviso
 {
 	private static final String TAG = "OnItemClickListenerEdit";
 	SivisoData currentSivisoData;
+	private Context context;
 	private SivisoModel sivisoModel;
 	private Spinner spinnerSiviso;
 	
 	
-	public OnItemClickListenerEditSiviso(SivisoModel sivisoModel,
+	public OnItemClickListenerEditSiviso(Context context, SivisoModel sivisoModel,
 	                                     Spinner spinnerSiviso)
 	{
+		this.context = context;
 		this.sivisoModel = sivisoModel;
 		this.spinnerSiviso = spinnerSiviso;
 	}
@@ -31,14 +36,25 @@ class OnItemClickListenerEditSiviso
 	
 	private void editSivisoData()
 	{
+		
+		
 		String name = currentSivisoData.getName();
 		String siviso = spinnerSiviso.getSelectedItem().toString();
-		LatLng latLng = currentSivisoData.getLatLng();
 		
-		SivisoData sivisoData = new SivisoData(name, siviso, latLng.latitude, latLng.longitude);
-		sivisoData.setId(currentSivisoData.getId());
-		
-		sivisoModel.update(sivisoData);
+		if(name == Defaults.DEFAULT_SIVISO_NAME)
+		{
+			SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
+			prefs.edit().putString(Defaults.PREFERENCE_KEY_DEFAULT_SIVISO, siviso).apply();
+		}
+		else
+		{
+			LatLng latLng = currentSivisoData.getLatLng();
+			
+			SivisoData sivisoData = new SivisoData(name, siviso, latLng.latitude, latLng.longitude);
+			sivisoData.setId(currentSivisoData.getId());
+			
+			sivisoModel.update(sivisoData);
+		}
 	}
 	
 	

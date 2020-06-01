@@ -22,7 +22,7 @@ public class SetUpItemAdapater
 	                              SivisoModel sivisoModel,
 	                              RecyclerView recyclerViewSiviso)
 	{
-		final ItemAdapter itemAdapter = new ItemAdapter(sivisoModel);
+		final ItemAdapter itemAdapter = new ItemAdapter(home, sivisoModel);
 		recyclerViewSiviso.setAdapter(itemAdapter);
 		
 		sivisoModel.getAllSivisoData().observe(home, new Observer<List<SivisoData>>()

@@ -60,8 +60,6 @@ class LocationListenerSetSiviso implements LocationListener
 		}
 		else
 		{
-			Log.d(TAG, "onLocationChanged: Working SivisoModel.getAllSivisoData().getValue() ");
-			
 			List<SivisoData> sivisoDatas = sivisoRepository.getAllSivisoData().getValue();
 			ArrayList<SivisoData> collidedSiviso = getSivisoThatCollideWithCurrentLocation(sivisoDatas, currentLocation);
 			
