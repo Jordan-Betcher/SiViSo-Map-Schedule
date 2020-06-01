@@ -1,7 +1,9 @@
 package com.betcher.jordan.siviso.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.media.AudioManager;
@@ -28,7 +30,8 @@ class LocationListenerSetSiviso implements LocationListener
 	Service context;
 	
 	SivisoRepository sivisoRepository;
-	private ArrayList<SivisoData> previousSivisoData;
+	private ArrayList<SivisoData> previousSivisoData = new ArrayList<>();
+	private int settingBeforeAnyCollision = -1;
 	
 	public LocationListenerSetSiviso(Siviso context)
 	{
@@ -70,21 +73,54 @@ class LocationListenerSetSiviso implements LocationListener
 	{
 		String showMessage = "Number of Possible Sounds Settings: " + collidedSivisoData.size();
 		
-		ArrayList<String> possibleSiviso = getPossibleSiviso(collidedSivisoData);
-		if(previousSivisoData == null || ! previousSivisoData.equals(collidedSivisoData))
-		{
-			previousSivisoData = collidedSivisoData;
-		}
-		else
+		if(isRepeatingChange(collidedSivisoData))
 		{
 			return;
 		}
 		
+		ArrayList<String> possibleSiviso = getPossibleSiviso(collidedSivisoData);
+		
 		if(collidedSivisoData.size() == 0)
 		{
-			return;
+			SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
+			String defaultSiviso = prefs.getString(Defaults.PREFERENCE_KEY_DEFAULT_SIVISO, "None");
+			if(defaultSiviso == "None")
+			{
+				if(settingBeforeAnyCollision == -1)
+				{
+					//Do nothing
+				}
+				else
+				{
+					audioManager.setRingerMode(settingBeforeAnyCollision);
+					showMessage = "Returning";
+				}
+			}
+			else
+			{
+				ArrayList<String> newMode = new ArrayList<>();
+				newMode.add(defaultSiviso);
+				showMessage = setRingerMode(newMode);
+			}
 		}
-		else if(possibleSiviso.contains("Silent"))
+		else
+		{
+			if(previousSivisoData.size() == 0)
+			{
+				settingBeforeAnyCollision = audioManager.getRingerMode();
+			}
+			
+			showMessage = setRingerMode(possibleSiviso);
+		}
+		
+		previousSivisoData = collidedSivisoData;
+		programmerFeedback(showMessage);
+	}
+	
+	private String setRingerMode(ArrayList<String> possibleSiviso)
+	{
+		String showMessage = "Nothing";
+		if(possibleSiviso.contains("Silent"))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 			showMessage = "Silent";
@@ -100,8 +136,19 @@ class LocationListenerSetSiviso implements LocationListener
 			showMessage = "Sound";
 		}
 		
-		
-		programmerFeedback(showMessage);
+		return showMessage;
+	}
+	
+	private boolean isRepeatingChange(ArrayList<SivisoData> collidedSivisoData)
+	{
+		if(previousSivisoData.equals(collidedSivisoData))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	private ArrayList<String> getPossibleSiviso(ArrayList<SivisoData> collidedSivisoData)
