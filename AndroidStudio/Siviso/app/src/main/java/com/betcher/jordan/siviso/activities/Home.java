@@ -2,6 +2,7 @@ package com.betcher.jordan.siviso.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.home.CheckAndAskPermissions;
-import com.betcher.jordan.siviso.actions.home.MapGoToCurrentLocation;
+import com.betcher.jordan.siviso.actions.home.LocationListenerMapGoToCurrentLocation;
 import com.betcher.jordan.siviso.actions.home.SetUpItemAdapater;
 import com.betcher.jordan.siviso.actions.home.StartActivityAdd;
 import com.betcher.jordan.siviso.actions.home.StartActivityEdit;
@@ -26,6 +27,7 @@ import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.SelectItem;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.EnableButton;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.HighlightSelectionInList;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.ZoomToCurrentLocation;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.ZoomToSelect;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.TriggerSelectItem;
 import com.betcher.jordan.siviso.database.SivisoData;
@@ -72,9 +74,9 @@ public class Home extends AppCompatActivity
 		itemAdapter = SetUpItemAdapater.run(this, sivisoModel, recyclerViewSiviso);
 		selectItem = new SelectItem(itemAdapter);
 		itemAdapter.addOnItemClickedListener(selectItem);
-		selectItem.addOnItemSelectListener(new EnableButton(buttonDelete));
-		selectItem.addOnItemSelectListener(new EnableButton(buttonEdit));
-		selectItem.addOnItemSelectListener(new HighlightSelectionInList(itemAdapter, linearLayoutManager));
+		selectItem.addSelectListenerItem(new EnableButton(buttonDelete));
+		selectItem.addSelectListenerItem(new EnableButton(buttonEdit));
+		selectItem.addSelectListenerAll(new HighlightSelectionInList(itemAdapter, linearLayoutManager));
 		
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(
 				R.id.homeMap);
@@ -86,11 +88,20 @@ public class Home extends AppCompatActivity
 			{
 				map = googleMap;
 				map.setMyLocationEnabled(true);
-				MapGoToCurrentLocation.run(Home.this, map);
+				
+				LocationManager locationManager = (LocationManager) Home
+						.this
+						.getApplicationContext()
+						.getSystemService(Context.LOCATION_SERVICE);
+				
+				LocationListenerMapGoToCurrentLocation listener = new LocationListenerMapGoToCurrentLocation(locationManager, map);
+				listener.goToCurrentLocation();
+				
+				selectItem.addSelectListenerDefault(new ZoomToCurrentLocation(listener));
 				
 				SivisoMapCircles sivisoMapCircles = new SivisoMapCircles(map);
 				sivisoModel.getAllSivisoData().observe(Home.this, sivisoMapCircles);
-				selectItem.addOnItemSelectListener(new ZoomToSelect(map));
+				selectItem.addSelectListenerItem(new ZoomToSelect(map));
 				map.setOnCircleClickListener(new TriggerSelectItem(selectItem, sivisoMapCircles));
 			}
 		});
@@ -123,7 +134,7 @@ public class Home extends AppCompatActivity
 	public void onClickButtonDelete(View view)
 	{
 		sivisoModel.delete(selectItem.getSelectedSiviso());
-		selectItem.deselect();
+		selectItem.notifyDeselect();
 	}
 	
 	public void onClickButtonEdit(View view)

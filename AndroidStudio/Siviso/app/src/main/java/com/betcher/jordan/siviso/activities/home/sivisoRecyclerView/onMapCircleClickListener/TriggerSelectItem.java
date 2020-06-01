@@ -22,6 +22,6 @@ public class TriggerSelectItem implements GoogleMap.OnCircleClickListener
 	public void onCircleClick(Circle circle)
 	{
 		SivisoData selectedSiviso = sivisoMapCircles.getSiviso(circle);
-		selectItem.callAllOnSelectItemListeners(selectedSiviso);
+		selectItem.notifySelect(selectedSiviso);
 	}
 }

@@ -4,18 +4,21 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemClickListener;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemSelectListener;
 import com.betcher.jordan.siviso.database.SivisoData;
-
-import java.util.ArrayList;
 
 public class SelectItem
 		implements OnItemClickListener
 {
 	private SivisoData selectedSiviso = null;
 	private ItemAdapter sivisoRecyclerViewItemAdapter;
+	
+	private SelectItemListener selectListenersAll = new SelectItemListener();
+	private SelectItemListener selectListenersDefault = new SelectItemListener();
+	private SelectItemListener selectListenersItems = new SelectItemListener();
 	
 	public SelectItem(ItemAdapter sivisoRecyclerViewItemAdapter)
 	{
@@ -28,7 +31,19 @@ public class SelectItem
 		if (itemPosition != RecyclerView.NO_POSITION)
 		{
 			selectedSiviso = sivisoRecyclerViewItemAdapter.getItem(itemPosition);
-			callAllOnSelectItemListeners(selectedSiviso);
+			notifySelect(selectedSiviso);
+		}
+	}
+	
+	private boolean isDefault(SivisoData selectedSiviso)
+	{
+		if(selectedSiviso.getName().equals(Defaults.DEFAULT_SIVISO_NAME))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 	
@@ -37,28 +52,48 @@ public class SelectItem
 		return selectedSiviso;
 	}
 	
-	ArrayList<OnItemSelectListener> onItemSelectListeners = new ArrayList<>();
-	
-	public void callAllOnSelectItemListeners(SivisoData selectedSiviso)
+	public void addSelectListenerAll(OnItemSelectListener onItemClickListener)
 	{
-		for (OnItemSelectListener onItemClickListener: onItemSelectListeners)
+		selectListenersAll.add(onItemClickListener);
+	}
+	
+	public void addSelectListenerDefault(OnItemSelectListener onItemClickListener)
+	{
+		selectListenersDefault.add(onItemClickListener);
+	}
+	
+	public void addSelectListenerItem(OnItemSelectListener onItemClickListener)
+	{
+		selectListenersItems.add(onItemClickListener);
+	}
+	
+	public void notifySelect(SivisoData selectedSiviso)
+	{
+		selectListenersAll.notifySelect(selectedSiviso);
+		
+		if(isDefault(selectedSiviso))
 		{
-			onItemClickListener.onItemSelect(selectedSiviso);
+			selectListenersDefault.notifySelect(selectedSiviso);
+		}
+		else
+		{
+			selectListenersItems.notifySelect(selectedSiviso);
 		}
 	}
 	
-	public void addOnItemSelectListener(OnItemSelectListener onItemClickListener)
-	{
-		onItemSelectListeners.add(onItemClickListener);
-	}
-	
-	public void deselect()
+	public void notifyDeselect()
 	{
 		if(selectedSiviso != null)
 		{
-			for (OnItemSelectListener onItemClickListener: onItemSelectListeners)
+			selectListenersAll.notifyDeselect();
+			
+			if(isDefault(selectedSiviso))
 			{
-				onItemClickListener.onItemDeselect();
+				selectListenersDefault.notifyDeselect();
+			}
+			else
+			{
+				selectListenersItems.notifyDeselect();
 			}
 			
 			selectedSiviso = null;
