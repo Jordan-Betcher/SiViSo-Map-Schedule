@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.database.SivisoData;
+import com.betcher.jordan.siviso.database.SivisoModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,12 @@ public class ItemAdapter
 	private List<SivisoData> sivisoDatas = new ArrayList<>();
 	
 	private ArrayList<OnBindViewListener> onBindViewListeners = new ArrayList<>();
+	private SivisoModel sivisoModel;
+	
+	public ItemAdapter(SivisoModel sivisoModel)
+	{
+		this.sivisoModel = sivisoModel;
+	}
 	
 	@NonNull
 	@Override
@@ -32,15 +39,14 @@ public class ItemAdapter
 	{
 		View itemView = LayoutInflater.from(parent.getContext())
 		                              .inflate(R.layout.list_item_siviso_data, parent, false);
-		return new SivisoHolder(itemView);
+		return new SivisoHolder(itemView, sivisoModel);
 	}
 	
 	@Override
 	public void onBindViewHolder(@NonNull SivisoHolder holder, int position)
 	{
 		SivisoData currentSivisoData = sivisoDatas.get(position);
-		holder.setName(currentSivisoData.getName());
-		holder.setSiviso(currentSivisoData.getSiviso());
+		holder.setSivisoData(currentSivisoData);
 		
 		callAllOnBindViewListeners(currentSivisoData, holder.itemView);
 	}
@@ -101,12 +107,17 @@ public class ItemAdapter
 		private Spinner spinnerSiviso;
 		SivisoHolder sivisoHolder;
 		
-		public SivisoHolder(View itemView)
+		OnItemClickListenerEditSiviso listener;
+		
+		public SivisoHolder(View itemView, SivisoModel sivisoModel)
 		{
 			super(itemView);
 			textViewName = itemView.findViewById(R.id.textViewHoldName);
 			spinnerSiviso = itemView.findViewById(R.id.spinnerHoldSiviso);
 			sivisoHolder = this;
+			
+			listener = new OnItemClickListenerEditSiviso(sivisoModel, spinnerSiviso);
+			spinnerSiviso.setOnItemSelectedListener(listener);
 			
 			itemView.setOnClickListener(new View.OnClickListener(){
 				
@@ -128,16 +139,23 @@ public class ItemAdapter
 			});
 		}
 		
-		public void setName(String name)
+		private void setName(String name)
 		{
 			textViewName.setText(name);
 		}
 		
-		public void setSiviso(String siviso)
+		private void setSiviso(String siviso)
 		{
 			ArrayAdapter arrayAdapter = (ArrayAdapter) spinnerSiviso.getAdapter();
 			int arrayPositionOfSiviso = arrayAdapter.getPosition(siviso);
 			spinnerSiviso.setSelection(arrayPositionOfSiviso);
+		}
+		
+		public void setSivisoData(SivisoData currentSivisoData)
+		{
+			setName(currentSivisoData.getName());
+			setSiviso(currentSivisoData.getSiviso());
+			listener.setSivisoData(currentSivisoData);
 		}
 	}
 	
