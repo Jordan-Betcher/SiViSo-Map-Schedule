@@ -122,8 +122,8 @@ public class Home extends AppCompatActivity
 	
 	public void onClickButtonDelete(View view)
 	{
-		selectItem.deselect();
 		sivisoModel.delete(selectItem.getSelectedSiviso());
+		selectItem.deselect();
 	}
 	
 	public void onClickButtonEdit(View view)
