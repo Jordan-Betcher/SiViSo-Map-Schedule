@@ -1,29 +1,56 @@
 SiViSo Map Scheduler
 Is a android application that allows you to go to silent, vibrate, and sound based on google map location
 
-Steps:    
-[x]Create Service 
-	[x] Turn on and off
-[x]Service Accesses Database
-[x]Service Tracks current location
-[x]Service SiViSo's
-[x]Service SiViSo's depending on location and database
+Steps:
+[x]Add Default
+    [x]To prefs
+    [x]To recyclerview
+        [x]Shown
+        [x]On Click takes you to current location
+        [x]Not deletable
+    [x]Only Siviso Editable
+    [x]Service Siviso's on exit siviso area depending on default
+[x]Siviso editable inside recyclerview
+[x]Test on Phone
 
-Add Default
-    To prefs
-    To recyclerview
-        On Click takes you to current location
-        Not deletable
-    Only Siviso Editable
-    Service Siviso's on exit siviso area depending on default
+Create a company
+    Website
+    Legal Stuff
+    Github
+
+Test on multiple API levels
+Create Siviso Free to publish
 Siviso has editable radius
-Test on Phone
+Siviso Circle highlights when current location is in it.
+Notification when changing ringtone
+Create Siviso to publish
+
+To publish need
+    Create a Siviso logo
+    Permission checks for all versions
+    Version Number
+    Tutorial on how to use
+    Google Play
+Learn how updates work
 
 Optional:
 Change Siviso from switch (words) to siviso icons
-    
+Settings
+    Make the option to have current ringtone match the default sivso when not colliding
+    Make sound / vibrate when eatering sound if have notification
+    ? Mute "other media" volume as well
+    Improve battery use by asking less (rate at which it checks the location)
+? Change Default to Exit or OnExit
+Add max volume option
+Make sound's volume adjustable
+
+
+
 
 Research
+    Tell when do not disturb changes
+    https://stackoverflow.com/questions/37620889/what-to-listen-for-to-detect-do-not-disturb-mode-changes-in-android
+
     Show blue dot of google maps your location
     https://stackoverflow.com/questions/30440777/show-blue-dots-icon-on-current-location-google-maps/30466050
 
