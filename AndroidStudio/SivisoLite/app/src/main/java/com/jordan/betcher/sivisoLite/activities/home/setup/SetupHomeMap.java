@@ -1,4 +1,4 @@
-package com.jordan.betcher.sivisoLite.activities.home;
+package com.jordan.betcher.sivisoLite.activities.home.setup;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
