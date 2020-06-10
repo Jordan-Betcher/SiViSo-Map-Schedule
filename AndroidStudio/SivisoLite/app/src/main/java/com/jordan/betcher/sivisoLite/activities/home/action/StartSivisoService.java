@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 
 import androidx.core.content.ContextCompat;
 
-import com.jordan.betcher.sivisoLite.activities.Defaults;
-import com.jordan.betcher.sivisoLite.activities.service.SivisoService;
+import com.jordan.betcher.sivisoLite.Defaults;
+import com.jordan.betcher.sivisoLite.SivisoService;
 
 public class StartSivisoService
 {

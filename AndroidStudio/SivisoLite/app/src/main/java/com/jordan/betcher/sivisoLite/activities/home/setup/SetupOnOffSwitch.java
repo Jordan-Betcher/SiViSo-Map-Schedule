@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Switch;
 
-import com.jordan.betcher.sivisoLite.activities.Defaults;
+import com.jordan.betcher.sivisoLite.Defaults;
 import com.jordan.betcher.sivisoLite.activities.home.action.StartSivisoService;
 
 public class SetupOnOffSwitch

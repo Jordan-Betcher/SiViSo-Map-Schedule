@@ -1,4 +1,4 @@
-package com.jordan.betcher.sivisoLite.activities;
+package com.jordan.betcher.sivisoLite;
 
 public class Defaults
 {

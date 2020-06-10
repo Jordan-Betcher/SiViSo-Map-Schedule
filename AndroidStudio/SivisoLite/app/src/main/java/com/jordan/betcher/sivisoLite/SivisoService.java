@@ -1,4 +1,4 @@
-package com.jordan.betcher.sivisoLite.activities.service;
+package com.jordan.betcher.sivisoLite;
 
 import android.app.Service;
 import android.content.Intent;

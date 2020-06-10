@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.jordan.betcher.sivisoLite.activities.Defaults;
-import com.jordan.betcher.sivisoLite.activities.service.SivisoService;
+import com.jordan.betcher.sivisoLite.Defaults;
+import com.jordan.betcher.sivisoLite.SivisoService;
 
 public class StopSivisoService
 {
