@@ -1,5 +1,6 @@
 package com.betcher.jordan.siviso.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -62,6 +63,7 @@ public class Edit extends AppCompatActivity
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.editMap);
 		mapFragment.getMapAsync(new OnMapReadyCallback()
 		{
+			@SuppressLint("MissingPermission")
 			@Override
 			public void onMapReady(GoogleMap googleMap)
 			{

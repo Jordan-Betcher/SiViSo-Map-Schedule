@@ -1,24 +1,57 @@
 package com.jordan.betcher.sivisoLite.siviso;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-public class Siviso
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+public enum Siviso
 {
-	static ArrayList<String> sivisos = createSivisos();
+	NONE("None"),
+	SILENT("Silent"),
+	VIBRATE("Vibrate"),
+	SOUND("Sound"),
+	MAX("Max");
 	
-	private static ArrayList<String> createSivisos()
+	private String name;
+	
+	Siviso(String name)
 	{
-		ArrayList<String> tempSivisos = new ArrayList<>();
-		tempSivisos.add("None");
-		tempSivisos.add("Silent");
-		tempSivisos.add("Vibrate");
-		tempSivisos.add("Sound");
-		tempSivisos.add("Max");
-		
-		return tempSivisos;
+		this.name = name;
 	}
 	
-	public static ArrayList<String> getArray()
+	@Override
+	public String toString()
+	{
+		return name;
+	}
+	
+	private static ArrayList<String> sivisos = createArrayListOfSivisos();
+	
+	private static ArrayList<String> createArrayListOfSivisos()
+	{
+		Siviso[] sivisoEnums = Siviso.values();
+		ArrayList<String> listOfSiviso = new ArrayList<>();
+		
+		for (Siviso sivisoEnum : sivisoEnums)
+		{
+			String siviso = sivisoEnum.toString();
+			listOfSiviso.add(siviso);
+		}
+		
+		return listOfSiviso;
+	}
+	
+	public static int getPositionOf(Siviso siviso)
+	{
+		return sivisos.indexOf(siviso.toString());
+	}
+	
+	public static ArrayList<String> getArrayList()
 	{
 		return sivisos;
 	}
