@@ -26,6 +26,11 @@ public class ListenerCircleHandler implements GoogleMap.OnMapClickListener
 		PreferencesForSivisoLite.setHomeExists(home, true);
 		PreferencesForSivisoLite.setHomeLatLng(home, latLng);
 		
+		if(circle != null)
+		{
+			circle.remove();
+		}
+		
 		CircleOptions circleOptions = new CircleOptions();
 		circleOptions.center(latLng);
 		circleOptions.radius(Defaults.SIVISO_RADIUS);
