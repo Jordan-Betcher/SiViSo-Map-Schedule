@@ -1,5 +1,6 @@
 package com.betcher.jordan.siviso.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
@@ -84,6 +85,7 @@ public class Home extends AppCompatActivity
 		
 		mapFragment.getMapAsync(new OnMapReadyCallback()
 		{
+			@SuppressLint("MissingPermission")
 			@Override
 			public void onMapReady(GoogleMap googleMap)
 			{

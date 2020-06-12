@@ -17,11 +17,11 @@ public class CheckAndAskPermissions
 	
 	public static void run(Home home)
 	{
-		permissionFineLcoation(home);
+		permissionFineLocation(home);
 		permissionNotificationPolicy(home);
 	}
 	
-	private static void permissionFineLcoation(Home home)
+	private static void permissionFineLocation(Home home)
 	{
 		if (ActivityCompat.checkSelfPermission(home, Manifest.permission.ACCESS_FINE_LOCATION) !=
 		    PackageManager.PERMISSION_GRANTED &&

@@ -15,6 +15,7 @@ import com.jordan.betcher.sivisoLite.activities.home.action.StartSivisoService;
 import com.jordan.betcher.sivisoLite.activities.home.action.StopSivisoService;
 import com.jordan.betcher.sivisoLite.activities.home.setup.SetupHomeMap;
 import com.jordan.betcher.sivisoLite.activities.home.setup.SetupOnOffSwitch;
+import com.jordan.betcher.sivisoLite.activities.home.setup.SetupPermissions;
 import com.jordan.betcher.sivisoLite.activities.home.setup.SetupSivisoSpinnerDefault;
 import com.jordan.betcher.sivisoLite.activities.home.setup.SetupSivisoSpinnerHome;
 
@@ -29,6 +30,8 @@ public class Home extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+		
+		SetupPermissions.run(this);
 		
 		switchOnOff = findViewById(R.id.switchOnOff);
 		spinnerDefault = findViewById(R.id.spinnerDefault);
