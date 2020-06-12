@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import androidx.core.content.ContextCompat;
 
 import com.jordan.betcher.sivisoLite.Defaults;
+import com.jordan.betcher.sivisoLite.PreferencesForSivisoLite;
 import com.jordan.betcher.sivisoLite.SivisoService;
 
 public class StartSivisoService
@@ -16,7 +17,6 @@ public class StartSivisoService
 		Intent startSivisoService = new Intent(context, SivisoService.class);
 		ContextCompat.startForegroundService(context, startSivisoService);
 		
-		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		prefs.edit().putBoolean("isServiceRunning", true).apply();
+		PreferencesForSivisoLite.setIsServiceRunning(context, true);
 	}
 }

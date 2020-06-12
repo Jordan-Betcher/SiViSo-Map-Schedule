@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import com.jordan.betcher.sivisoLite.Defaults;
+import com.jordan.betcher.sivisoLite.PreferencesForSivisoLite;
 import com.jordan.betcher.sivisoLite.R;
 import com.jordan.betcher.sivisoLite.activities.home.action.StartSivisoService;
 import com.jordan.betcher.sivisoLite.activities.home.action.StopSivisoService;
@@ -58,19 +59,11 @@ public class Home extends AppCompatActivity
 	
 	public void onSpinnerDefaultClicked(View view)
 	{
-		SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		prefs
-			.edit()
-			.putInt(Defaults.PREFERENCE_KEY_SPINNER_DEFAULT, spinnerDefault.getSelectedItemPosition())
-			.apply();
+		PreferencesForSivisoLite.setDefaultSiviso(this, spinnerDefault.getSelectedItemPosition());
 	}
 	
 	public void onSpinnerHomeClicked(View view)
 	{
-		SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		prefs
-			.edit()
-			.putInt(Defaults.PREFERENCE_KEY_SPINNER_HOME, spinnerHome.getSelectedItemPosition())
-			.apply();
+		PreferencesForSivisoLite.setHomeSiviso(this, spinnerHome.getSelectedItemPosition());
 	}
 }

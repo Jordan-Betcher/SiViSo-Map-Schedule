@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.jordan.betcher.sivisoLite.Defaults;
+import com.jordan.betcher.sivisoLite.PreferencesForSivisoLite;
 import com.jordan.betcher.sivisoLite.SivisoService;
 
 public class StopSivisoService
@@ -13,7 +14,6 @@ public class StopSivisoService
 	{
 		context.stopService(new Intent(context, SivisoService.class));
 		
-		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		prefs.edit().putBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, false).apply();
+		PreferencesForSivisoLite.setIsServiceRunning(context, false);
 	}
 }

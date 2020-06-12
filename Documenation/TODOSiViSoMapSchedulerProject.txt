@@ -13,13 +13,10 @@ Steps:
 [x]Siviso editable inside recyclerview
 [x]Test on Phone
 
-Create a company
-    Website
-    Legal Stuff
-    Github
+
 
 Test on multiple API levels
-Create Siviso Free to publish
+Create Siviso Lite to publish
 Siviso has editable radius
 Siviso Circle highlights when current location is in it.
 Notification when changing ringtone
@@ -28,22 +25,33 @@ Create Siviso to publish
 To publish need
     Create a Siviso logo
     Permission checks for all versions
-    Version Number
+    [x]Version Number... 1.0 ...
     Tutorial on how to use
     Google Play
-Learn how updates work
+Learn how updates work (I think you just upload new apk)
 
 Optional:
 Change Siviso from switch (words) to siviso icons
+Current location color change depending on current do not disturb mode
 Settings
     Make the option to have current ringtone match the default sivso when not colliding
     Make sound / vibrate when eatering sound if have notification
     ? Mute "other media" volume as well
-    Improve battery use by asking less (rate at which it checks the location)
+    Improve battery use 
+        by asking less (rate at which it checks the location)
+        by increasing min distance move before call
+    ? Quiets all instead of changing do not distrub
 ? Change Default to Exit or OnExit
 Add max volume option
 Make sound's volume adjustable
-
+Make the siviso circle have no fill but instead have thicker lines
+Create a company when make enough to warrent it
+    Website
+    Legal Stuff
+        Tradmark
+            Logo
+            Name
+    Github
 
 
 

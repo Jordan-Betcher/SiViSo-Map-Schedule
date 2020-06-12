@@ -5,14 +5,14 @@ import android.content.SharedPreferences;
 import android.widget.Switch;
 
 import com.jordan.betcher.sivisoLite.Defaults;
+import com.jordan.betcher.sivisoLite.PreferencesForSivisoLite;
 import com.jordan.betcher.sivisoLite.activities.home.action.StartSivisoService;
 
 public class SetupOnOffSwitch
 {
 	public static void run(Context context, Switch switchOnOff)
 	{
-		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		boolean isServiceRunning = prefs.getBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, false);
+		boolean isServiceRunning = PreferencesForSivisoLite.getIsServiceRunning(context);
 		
 		if(isServiceRunning)
 		{
