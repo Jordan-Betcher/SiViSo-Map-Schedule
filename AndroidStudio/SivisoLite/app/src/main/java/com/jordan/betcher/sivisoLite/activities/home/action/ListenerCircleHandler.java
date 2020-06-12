@@ -18,10 +18,20 @@ public class ListenerCircleHandler implements GoogleMap.OnMapClickListener
 	{
 		this.home = home;
 		this.map = map;
+		
+		if(PreferencesForSivisoLite.getHomeExists(home) == true)
+		{
+			createOnlyOneCircle(PreferencesForSivisoLite.getHomeLatLng(home));
+		}
 	}
 	
 	@Override
 	public void onMapClick(LatLng latLng)
+	{
+		createOnlyOneCircle(latLng);
+	}
+	
+	private void createOnlyOneCircle(LatLng latLng)
 	{
 		PreferencesForSivisoLite.setHomeExists(home, true);
 		PreferencesForSivisoLite.setHomeLatLng(home, latLng);

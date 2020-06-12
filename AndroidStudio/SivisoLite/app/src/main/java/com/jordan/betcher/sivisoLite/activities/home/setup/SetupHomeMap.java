@@ -53,17 +53,6 @@ public class SetupHomeMap
 			GoToCurrentLocation.run(locationManager, map);
 			
 			map.setOnMapClickListener(new ListenerCircleHandler(home, map));
-			
-			/*
-			if(PreferencesForSivisoLite.getHomeExists(home) == true)
-			{
-				Circle circle = map.addCircle(new CircleOptions().center(PreferencesForSivisoLite.getHomeLatLng(home))
-				                                       .radius(Defaults.SIVISO_RADIUS)
-				                                       .fillColor(Defaults.SIVISO_FILL_COLOR)
-				                                       .strokeColor(Defaults.SIVISO_STROKE_COLOR)
-				                                       .strokeWidth(Defaults.SIVISO_STROKE_WIDTH));
-				circle.setClickable(true);
-			}//*/
 		}
 	}
 }
