@@ -16,4 +16,6 @@ public class Defaults
 	public static final int SIVISO_FILL_COLOR = Color.argb(70, 50, 50, 50);
 	public static final float SIVISO_STROKE_WIDTH = 1f;
 	public static final int SIVISO_STROKE_COLOR = Color.BLACK;
+	public static final int DEFAULT_HOME_HIGHLIGHT_COLOR = Color.LTGRAY;
+	public static final int DEFAULT_HOME_NORMAL_COLOR = Color.WHITE;
 }

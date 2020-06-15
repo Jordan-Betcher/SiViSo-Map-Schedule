@@ -58,6 +58,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:onClick="onCardDefaultClicked"
+        app:cardBackgroundColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeMap">
@@ -87,6 +89,7 @@
         android:id="@+id/cardViewHome"
         android:layout_width="0dp"
         android:layout_height="32dp"
+        android:onClick="onCardHomeClicked"
         app:layout_constraintEnd_toEndOf="@+id/cardViewDefault"
         app:layout_constraintStart_toStartOf="@+id/cardViewDefault"
         app:layout_constraintTop_toBottomOf="@+id/cardViewDefault">

@@ -2,18 +2,13 @@ SiViSo Map Scheduler
 Is a android application that allows you to go to silent, vibrate, and sound based on google map location
 
 Steps:
-[x]Add Default
-    [x]To prefs
-    [x]To recyclerview
-        [x]Shown
-        [x]On Click takes you to current location
-        [x]Not deletable
-    [x]Only Siviso Editable
-    [x]Service Siviso's on exit siviso area depending on default
-[x]Siviso editable inside recyclerview
-[x]Test on Phone
+[x]Select default / home card takes you to current location / home
 
 
+Siviso Lite
+Service
+	Add location listener
+		Checks location in home or not and sets dnd depending on it
 
 Test on multiple API levels
 Create Siviso Lite to publish
@@ -35,12 +30,12 @@ Change Siviso from switch (words) to siviso icons
 Current location color change depending on current do not disturb mode
 Settings
     Make the option to have current ringtone match the default sivso when not colliding
-    Make sound / vibrate when eatering sound if have notification
-    ? Mute "other media" volume as well
-    Improve battery use 
-        by asking less (rate at which it checks the location)
-        by increasing min distance move before call
-    ? Quiets all instead of changing do not distrub
+    Make sound / vibrate when eatering sound if have notification (instead recommend install notification reminder)
+    ? Mute "other media" volume as well (instead tell that it depends on do not disturb settings)
+    Improve battery use with these settings
+        by asking less (rate at which it checks the location) (i.e. once a minute)
+        by increasing min distance move before checking
+    ? Quiets all instead of changing do not distrub (change "other" volume as well)
 ? Change Default to Exit or OnExit
 Add max volume option
 Make sound's volume adjustable

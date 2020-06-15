@@ -1,9 +1,8 @@
 package com.jordan.betcher.sivisoLite.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
@@ -14,7 +13,7 @@ import com.jordan.betcher.sivisoLite.PreferencesForSivisoLite;
 import com.jordan.betcher.sivisoLite.R;
 import com.jordan.betcher.sivisoLite.activities.home.action.StartSivisoService;
 import com.jordan.betcher.sivisoLite.activities.home.action.StopSivisoService;
-import com.jordan.betcher.sivisoLite.activities.home.setup.SetupHomeMap;
+import com.jordan.betcher.sivisoLite.activities.home.setup.MapWrapper;
 import com.jordan.betcher.sivisoLite.activities.home.setup.SetupOnOffSwitch;
 import com.jordan.betcher.sivisoLite.activities.home.setup.SetupPermissions;
 import com.jordan.betcher.sivisoLite.activities.home.setup.SetupSivisoSpinnerDefault;
@@ -25,6 +24,11 @@ public class Home extends AppCompatActivity
 	Switch switchOnOff;
 	Spinner spinnerDefault;
 	Spinner spinnerHome;
+	
+	CardView cardViewDefault;
+	CardView cardViewHome;
+	
+	MapWrapper mapWrapper;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -37,9 +41,12 @@ public class Home extends AppCompatActivity
 		switchOnOff = findViewById(R.id.switchOnOff);
 		spinnerDefault = findViewById(R.id.spinnerDefault);
 		spinnerHome = findViewById(R.id.spinnerHome);
+		cardViewDefault = findViewById(R.id.cardViewDefault);
+		cardViewHome = findViewById(R.id.cardViewHome);
+		
+		mapWrapper = new MapWrapper(this);
 		
 		SetupOnOffSwitch.run(this, switchOnOff);
-		SetupHomeMap.run(this);
 		SetupSivisoSpinnerDefault.run(this, spinnerDefault);
 		SetupSivisoSpinnerHome.run(this, spinnerHome);
 		
@@ -65,5 +72,21 @@ public class Home extends AppCompatActivity
 	public void onSpinnerHomeClicked(View view)
 	{
 		PreferencesForSivisoLite.setHomeSiviso(this, spinnerHome.getSelectedItemPosition());
+	}
+	
+	public void onCardDefaultClicked(View view)
+	{
+		cardViewDefault.setBackgroundColor(Defaults.DEFAULT_HOME_HIGHLIGHT_COLOR);
+		cardViewHome.setBackgroundColor(Defaults.DEFAULT_HOME_NORMAL_COLOR);
+		
+		mapWrapper.goToCurrentLocation();
+	}
+	
+	public void onCardHomeClicked(View view)
+	{
+		cardViewHome.setBackgroundColor(Defaults.DEFAULT_HOME_HIGHLIGHT_COLOR);
+		cardViewDefault.setBackgroundColor(Defaults.DEFAULT_HOME_NORMAL_COLOR);
+		
+		mapWrapper.goToHomeLocation();
 	}
 }
