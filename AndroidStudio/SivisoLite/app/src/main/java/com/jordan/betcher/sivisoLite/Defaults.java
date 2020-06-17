@@ -18,4 +18,6 @@ public class Defaults
 	public static final int SIVISO_STROKE_COLOR = Color.BLACK;
 	public static final int DEFAULT_HOME_HIGHLIGHT_COLOR = Color.LTGRAY;
 	public static final int DEFAULT_HOME_NORMAL_COLOR = Color.WHITE;
+	public static final String NOTIFICATION_CHANNEL_ID = "sivisoLiteNotificationChannel";
+	public static final CharSequence NOTIFICATION_CHANNEL_NAME = "Siviso Lite";
 }

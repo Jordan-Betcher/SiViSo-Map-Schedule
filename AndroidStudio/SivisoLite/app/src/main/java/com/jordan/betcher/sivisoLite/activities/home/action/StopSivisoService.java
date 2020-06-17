@@ -2,11 +2,9 @@ package com.jordan.betcher.sivisoLite.activities.home.action;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 
-import com.jordan.betcher.sivisoLite.Defaults;
 import com.jordan.betcher.sivisoLite.PreferencesForSivisoLite;
-import com.jordan.betcher.sivisoLite.SivisoService;
+import com.jordan.betcher.sivisoLite.service.SivisoService;
 
 public class StopSivisoService
 {
