@@ -2,20 +2,23 @@ SiViSo Map Scheduler
 Is a android application that allows you to go to silent, vibrate, and sound based on google map location
 
 Steps:
-[x]Select default / home card takes you to current location / home
+[x]Service
+	[x]Add location listener
+		[x]Checks location in home or not and sets dnd depending on it
 
 
 Siviso Lite
-Service
-	Add location listener
-		Checks location in home or not and sets dnd depending on it
-
-Test on multiple API levels
+    Siviso Circle highlights when current location is in it.
+    settings
+        Siviso has editable radius
 Create Siviso Lite to publish
-Siviso has editable radius
-Siviso Circle highlights when current location is in it.
-Notification when changing ringtone
-Create Siviso to publish
+Test on multiple API levels
+Refactor Siviso to publish
+    add and edit
+        Siviso has editable radius
+    Siviso Circle highlights when current location is in it.
+    setting
+        Notification when changing ringtone
 
 To publish need
     Create a Siviso logo
@@ -23,6 +26,11 @@ To publish need
     [x]Version Number... 1.0 ...
     Tutorial on how to use
     Google Play
+    Description
+        Have you ever been annoyed at having to remember to silence your phone?
+        
+        About
+            When I was a college student I wished that my phone would default to silence when I was on campus
 Learn how updates work (I think you just upload new apk)
 
 Optional:
@@ -36,6 +44,7 @@ Settings
         by asking less (rate at which it checks the location) (i.e. once a minute)
         by increasing min distance move before checking
     ? Quiets all instead of changing do not distrub (change "other" volume as well)
+    ? Override manual / other app changes by constantly changing based on asking rate
 ? Change Default to Exit or OnExit
 Add max volume option
 Make sound's volume adjustable
@@ -51,6 +60,9 @@ Create a company when make enough to warrent it
 
 
 Research
+    On Spinner item select / click
+    https://android--code.blogspot.com/2015/08/android-spinner-onitemselected.html
+
     Tell when do not disturb changes
     https://stackoverflow.com/questions/37620889/what-to-listen-for-to-detect-do-not-disturb-mode-changes-in-android
 

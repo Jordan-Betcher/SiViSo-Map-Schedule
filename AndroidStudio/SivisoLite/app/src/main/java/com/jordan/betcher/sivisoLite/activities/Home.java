@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Switch;
 
@@ -49,7 +50,37 @@ public class Home extends AppCompatActivity
 		SetupOnOffSwitch.run(this, switchOnOff);
 		SetupSivisoSpinnerDefault.run(this, spinnerDefault);
 		SetupSivisoSpinnerHome.run(this, spinnerHome);
+		spinnerDefault.setOnItemSelectedListener(
+		new AdapterView.OnItemSelectedListener(){
+			@Override
+			public void onItemSelected(
+			AdapterView<?> parent, View view, int position, long id)
+			{
+				onSpinnerDefaultClicked(view);
+			}
+			
+			@Override
+			public void onNothingSelected(AdapterView<?> parent)
+			{
+			
+			}
+		});
 		
+		spinnerHome.setOnItemSelectedListener(
+		new AdapterView.OnItemSelectedListener(){
+			@Override
+			public void onItemSelected(
+			AdapterView<?> parent, View view, int position, long id)
+			{
+				onSpinnerHomeClicked(view);
+			}
+			
+			@Override
+			public void onNothingSelected(AdapterView<?> parent)
+			{
+			
+			}
+		});
 	}
 	
 	public void onOnOffSwitchClicked(View view)
