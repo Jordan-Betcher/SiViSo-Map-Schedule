@@ -1,7 +1,11 @@
 package com.jordan.betcher.sivisoLite.activities.home.setup;
 
 import android.Manifest;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import androidx.core.app.ActivityCompat;
 
@@ -12,8 +16,8 @@ public class SetupPermissions
 {
 	public static void run(Home home)
 	{
-		
 		permissionFineLocation(home);
+		permissionNotificationPolicy(home);
 	}
 	
 	private static void permissionFineLocation(Home home)
@@ -36,6 +40,23 @@ public class SetupPermissions
 				},
 				Defaults.REQUEST_LOCATION_PERMISSION
 			);
+		}
+	}
+	
+	private static void permissionNotificationPolicy(Home home)
+	{
+		NotificationManager notificationManager =
+		(NotificationManager) home.getSystemService(
+		Context.NOTIFICATION_SERVICE);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+		    && !notificationManager.isNotificationPolicyAccessGranted())
+		{
+			
+			Intent intent = new Intent(
+			android.provider.Settings
+			.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+			
+			home.startActivity(intent);
 		}
 	}
 }

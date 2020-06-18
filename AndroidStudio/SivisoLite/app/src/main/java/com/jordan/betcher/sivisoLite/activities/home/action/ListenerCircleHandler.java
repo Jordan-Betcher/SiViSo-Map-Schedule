@@ -43,10 +43,10 @@ public class ListenerCircleHandler implements GoogleMap.OnMapClickListener
 		
 		CircleOptions circleOptions = new CircleOptions();
 		circleOptions.center(latLng);
-		circleOptions.radius(Defaults.SIVISO_RADIUS);
-		circleOptions.fillColor(Defaults.SIVISO_FILL_COLOR);
-		circleOptions.strokeColor(Defaults.SIVISO_STROKE_COLOR);
-		circleOptions.strokeWidth(Defaults.SIVISO_STROKE_WIDTH);
+		circleOptions.radius(Defaults.HOME_RADIUS);
+		circleOptions.fillColor(Defaults.HOME_FILL_COLOR);
+		circleOptions.strokeColor(Defaults.HOME_STROKE_COLOR);
+		circleOptions.strokeWidth(Defaults.HOME_STROKE_WIDTH);
 		
 		circle = map.addCircle(circleOptions);
 	}

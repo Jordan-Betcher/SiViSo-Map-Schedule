@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.jordan.betcher.sivisoLite.activities.Home;
+import com.jordan.betcher.sivisoLite.service.SivisoService;
 import com.jordan.betcher.sivisoLite.siviso.Siviso;
 
 public class PreferencesForSivisoLite
@@ -24,35 +25,45 @@ public class PreferencesForSivisoLite
 	public static final Siviso DEFAULT_HOME_SIVISO = Siviso.VIBRATE;
 	
 	
-	
-	public static int getDefaultSiviso(Context context)
+	public static Siviso getDefaultSiviso(Context context)
 	{
 		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-		int sivisoForDefault = prefs.getInt(KEY_DEFAULT_SIVISO, Siviso.getPositionOf(
-				DEFAULT_DEFAULT_SIVISO));
 		
-		return sivisoForDefault;
+		int defaultValue = Siviso.getPositionOf(DEFAULT_DEFAULT_SIVISO);
+		int sivisoAsPosition = prefs
+		.getInt(KEY_DEFAULT_SIVISO, defaultValue);
+		
+		Siviso siviso = Siviso.getFromPosition(sivisoAsPosition);
+		
+		return siviso;
 	}
 	
-	public static int getHomeSiviso(Context context)
+	public static Siviso getHomeSiviso(Context context)
 	{
-		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-		int sivisoForHome = prefs.getInt(KEY_HOME_SIVISO, Siviso.getPositionOf(DEFAULT_HOME_SIVISO));
+		SharedPreferences prefs = context
+		.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		int defaultValue = Siviso.getPositionOf(DEFAULT_HOME_SIVISO);
+		int sivisoAsPosition = prefs.getInt(KEY_HOME_SIVISO, defaultValue);
 		
-		return sivisoForHome;
+		Siviso siviso = Siviso.getFromPosition(sivisoAsPosition);
+		return siviso;
 	}
 	
 	public static boolean getIsServiceRunning(Context context)
 	{
-		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-		boolean isServiceRunning = prefs.getBoolean(KEY_IS_SERVICE_RUNNING, false);
+		SharedPreferences prefs = context
+		.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		boolean isServiceRunning = prefs
+		.getBoolean(KEY_IS_SERVICE_RUNNING, false);
 		
 		return isServiceRunning;
 	}
 	
-	public static void setIsServiceRunning(Context context, boolean isServiceRunning)
+	public static void setIsServiceRunning(
+	Context context, boolean isServiceRunning)
 	{
-		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences prefs = context
+		.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 		
 		prefs
 		.edit()
@@ -62,24 +73,31 @@ public class PreferencesForSivisoLite
 	
 	public static boolean getHomeExists(Context context)
 	{
-		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-		boolean doesHomeExist = prefs.getBoolean(KEY_HOME_EXISTS, false);
+		SharedPreferences prefs = context
+		.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		boolean doesHomeExist = prefs
+		.getBoolean(KEY_HOME_EXISTS, false);
 		
 		return doesHomeExist;
 	}
 	
 	public static LatLng getHomeLatLng(Context context)
 	{
-		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-		double latitude = Double.parseDouble(prefs.getString(KEY_HOME_LATITUDE, "0"));
-		double longitude = Double.parseDouble(prefs.getString(KEY_HOME_LONGITUDE, "0"));
+		SharedPreferences prefs = context
+		.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		double latitude = Double
+		.parseDouble(prefs.getString(KEY_HOME_LATITUDE, "0"));
+		double longitude = Double
+		.parseDouble(prefs.getString(KEY_HOME_LONGITUDE, "0"));
 		
 		return new LatLng(latitude, longitude);
 	}
 	
-	public static void setHomeExists(Context context, boolean homeExists)
+	public static void setHomeExists(
+	Context context, boolean homeExists)
 	{
-		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences prefs = context
+		.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 		
 		prefs
 		.edit()
@@ -89,7 +107,8 @@ public class PreferencesForSivisoLite
 	
 	public static void setHomeLatLng(Context context, LatLng latLng)
 	{
-		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences prefs = context
+		.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 		
 		prefs
 		.edit()
@@ -102,23 +121,26 @@ public class PreferencesForSivisoLite
 		.apply();
 	}
 	
-	public static void setDefaultSiviso(Context context, int sivisoAsInt)
+	public static void setDefaultSiviso(
+	Context context, int sivisoAsInt)
 	{
-		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences prefs = context
+		.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 		
 		prefs
 		.edit()
-		.putInt(KEY_HOME_SIVISO, sivisoAsInt)
+		.putInt(KEY_DEFAULT_SIVISO, sivisoAsInt)
 		.apply();
 	}
 	
 	public static void setHomeSiviso(Context context, int sivisoAsInt)
 	{
-		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences prefs = context
+		.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 		
 		prefs
 		.edit()
-		.putInt(KEY_DEFAULT_SIVISO, sivisoAsInt)
+		.putInt(KEY_HOME_SIVISO, sivisoAsInt)
 		.apply();
 	}
 }

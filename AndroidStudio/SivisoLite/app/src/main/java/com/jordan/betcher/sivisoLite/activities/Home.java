@@ -76,16 +76,16 @@ public class Home extends AppCompatActivity
 	
 	public void onCardDefaultClicked(View view)
 	{
-		cardViewDefault.setBackgroundColor(Defaults.DEFAULT_HOME_HIGHLIGHT_COLOR);
-		cardViewHome.setBackgroundColor(Defaults.DEFAULT_HOME_NORMAL_COLOR);
+		cardViewDefault.setBackgroundColor(Defaults.CARD_HIGHLIGHT_COLOR);
+		cardViewHome.setBackgroundColor(Defaults.CARD_NORMAL_COLOR);
 		
 		mapWrapper.goToCurrentLocation();
 	}
 	
 	public void onCardHomeClicked(View view)
 	{
-		cardViewHome.setBackgroundColor(Defaults.DEFAULT_HOME_HIGHLIGHT_COLOR);
-		cardViewDefault.setBackgroundColor(Defaults.DEFAULT_HOME_NORMAL_COLOR);
+		cardViewHome.setBackgroundColor(Defaults.CARD_HIGHLIGHT_COLOR);
+		cardViewDefault.setBackgroundColor(Defaults.CARD_NORMAL_COLOR);
 		
 		mapWrapper.goToHomeLocation();
 	}

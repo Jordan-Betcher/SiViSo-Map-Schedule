@@ -19,6 +19,8 @@ public class SetupSivisoSpinnerHome
 		adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
 		spinnerHome.setAdapter(adapter);
 		
-		spinnerHome.setSelection(PreferencesForSivisoLite.getHomeSiviso(home));
+		Siviso sivisoHome = PreferencesForSivisoLite.getHomeSiviso(home);
+		int positionHome = Siviso.getPositionOf(sivisoHome);
+		spinnerHome.setSelection(positionHome);
 	}
 }

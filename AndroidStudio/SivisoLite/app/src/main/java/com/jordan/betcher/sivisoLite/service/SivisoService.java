@@ -1,15 +1,20 @@
 package com.jordan.betcher.sivisoLite.service;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
 import com.jordan.betcher.sivisoLite.Defaults;
@@ -18,24 +23,24 @@ import com.jordan.betcher.sivisoLite.activities.Home;
 
 public class SivisoService extends Service
 {
+	SivisoCollision sivisoCollision;
+	LocationManager locationManager;
 	
+	@SuppressLint("MissingPermission")
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
 		createNotification("Siviso");
-	}
-	
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId)
-	{
-		super.onStartCommand(intent, flags, startId);
-		createNotification("Siviso");
+		sivisoCollision = new SivisoCollision(this);
+		locationManager = (LocationManager) getApplicationContext()
+		.getSystemService(Context.LOCATION_SERVICE);
 		
-		//SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		//prefs.edit().putBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, true).apply();
-		
-		return START_NOT_STICKY;
+		locationManager
+		.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+		                        Defaults.SERVICE_MIN_CHECK_TIME,
+		                        Defaults.SERVICE_MIN_CHECK_DISTANCE,
+		                        sivisoCollision);
 	}
 	
 	public void createNotification(String input)
