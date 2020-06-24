@@ -12,6 +12,7 @@ import android.widget.Switch;
 import com.jordan.betcher.sivisoLite.Defaults;
 import com.jordan.betcher.sivisoLite.PreferencesForSivisoLite;
 import com.jordan.betcher.sivisoLite.R;
+import com.jordan.betcher.sivisoLite.activities.home.OpenSettingsActivity;
 import com.jordan.betcher.sivisoLite.activities.home.action.StartSivisoService;
 import com.jordan.betcher.sivisoLite.activities.home.action.StopSivisoService;
 import com.jordan.betcher.sivisoLite.activities.home.setup.MapWrapper;
@@ -81,6 +82,11 @@ public class Home extends AppCompatActivity
 			
 			}
 		});
+	}
+	
+	public void onSettingButtonClicked(View view)
+	{
+		OpenSettingsActivity.run(this);
 	}
 	
 	public void onOnOffSwitchClicked(View view)
