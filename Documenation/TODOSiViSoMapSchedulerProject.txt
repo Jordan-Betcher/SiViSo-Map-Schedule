@@ -5,12 +5,18 @@ Steps:
 [x]Service
 	[x]Add location listener
 		[x]Checks location in home or not and sets dnd depending on it
+    []Update Collision on SivisoData change OR Restart Service when sivisoData changed
+Battery Options Test
+    [x]3min 5 meters -> 0%
+    [x]3min 0 meters -> 28% (636mAh)
+    [x]3sec 5 meters -> 33% (459mAh)
+    [x]3sec 0 meters -> 40%
 
 
 Siviso Lite
-    Siviso Circle highlights when current location is in it.
+    Map Siviso Circle highlights when current location is in it.
     settings
-        Siviso has editable radius
+        Radius Size
 Create Siviso Lite to publish
 Test on multiple API levels
 Refactor Siviso to publish
@@ -30,17 +36,23 @@ To publish need
         Have you ever been annoyed at having to remember to silence your phone?
         
         About
-            When I was a college student I wished that my phone would default to silence when I was on campus
+            When I was a college student I wished that my phone would default to silence. Or when I went to church, the library, etc... There are scheduling apps, one is even built into the phone, but sometimes I would go over / under schedule.
+        
+        Recommend
+        - Notification Reminder
+            An app that reminds you about missed notifcations. It works with Siviso because once siviso goes to sound the notifcations will tell you if you missed anything.
 Learn how updates work (I think you just upload new apk)
 
 Optional:
 Change Siviso from switch (words) to siviso icons
 Current location color change depending on current do not disturb mode
-Settings
+[]Settings (Do I need these now?)
+    []Radius
+    []Zoom
     Make the option to have current ringtone match the default sivso when not colliding
-    Make sound / vibrate when eatering sound if have notification (instead recommend install notification reminder)
+    x Make sound / vibrate when eatering sound if have notification (instead recommend install notification reminder)
     ? Mute "other media" volume as well (instead tell that it depends on do not disturb settings)
-    Improve battery use with these settings
+    ? Improve battery use with these settings
         by asking less (rate at which it checks the location) (i.e. once a minute)
         by increasing min distance move before checking
     ? Quiets all instead of changing do not distrub (change "other" volume as well)
@@ -60,6 +72,9 @@ Create a company when make enough to warrent it
 
 
 Research
+    Reload Activty
+    https://stackoverflow.com/questions/3053761/reload-activity-in-android
+
     On Spinner item select / click
     https://android--code.blogspot.com/2015/08/android-spinner-onitemselected.html
 

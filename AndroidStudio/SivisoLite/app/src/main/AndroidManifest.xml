@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".activities.Settings"
             android:label="@string/title_activity_settings"></activity>
 
         <meta-data

@@ -27,6 +27,6 @@ public class Defaults
 	public static final String NOTIFICATION_CHANNEL_ID = "sivisoLiteNotificationChannel";
 	public static final CharSequence NOTIFICATION_CHANNEL_NAME = "Siviso Lite";
 	
-	public static final long SERVICE_MIN_CHECK_TIME = 3 * SECOND;
-	public static final float SERVICE_MIN_CHECK_DISTANCE = 5;
+	public static final long SERVICE_MIN_CHECK_TIME = 30 * SECOND;
+	public static final float SERVICE_MIN_CHECK_DISTANCE = 10;
 }
