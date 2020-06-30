@@ -1,10 +1,12 @@
 package com.jordan.betcher.sivisoLite;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
+import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.maps.model.LatLng;
-import com.jordan.betcher.sivisoLite.activities.Home;
 import com.jordan.betcher.sivisoLite.service.SivisoService;
 import com.jordan.betcher.sivisoLite.siviso.Siviso;
 
@@ -103,6 +105,8 @@ public class PreferencesForSivisoLite
 		.edit()
 		.putBoolean(KEY_HOME_EXISTS, homeExists)
 		.apply();
+		
+		refreshSivisoService(context);
 	}
 	
 	public static void setHomeLatLng(Context context, LatLng latLng)
@@ -119,6 +123,8 @@ public class PreferencesForSivisoLite
 		.edit()
 		.putString(KEY_HOME_LONGITUDE, latLng.longitude + "")
 		.apply();
+		
+		refreshSivisoService(context);
 	}
 	
 	public static void setDefaultSiviso(
@@ -131,6 +137,8 @@ public class PreferencesForSivisoLite
 		.edit()
 		.putInt(KEY_DEFAULT_SIVISO, sivisoAsInt)
 		.apply();
+		
+		refreshSivisoService(context);
 	}
 	
 	public static void setHomeSiviso(Context context, int sivisoAsInt)
@@ -142,5 +150,20 @@ public class PreferencesForSivisoLite
 		.edit()
 		.putInt(KEY_HOME_SIVISO, sivisoAsInt)
 		.apply();
+		
+		refreshSivisoService(context);
+	}
+	
+	private static void refreshSivisoService(Context context)
+	{
+		boolean isServiceRunning = getIsServiceRunning(context);
+		
+		if(isServiceRunning)
+		{
+			Intent startSivisoService = new Intent(context, SivisoService.class);
+			
+			ContextCompat
+			.startForegroundService(context, startSivisoService);
+		}
 	}
 }

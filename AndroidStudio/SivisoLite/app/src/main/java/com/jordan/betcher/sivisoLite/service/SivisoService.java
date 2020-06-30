@@ -26,12 +26,17 @@ public class SivisoService extends Service
 	SivisoCollision sivisoCollision;
 	LocationManager locationManager;
 	
-	@SuppressLint("MissingPermission")
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
 		createNotification("Siviso");
+		createAndAttachSivisoCollision();
+	}
+	
+	@SuppressLint("MissingPermission")
+	private void createAndAttachSivisoCollision()
+	{
 		sivisoCollision = new SivisoCollision(this);
 		locationManager = (LocationManager) getApplicationContext()
 		.getSystemService(Context.LOCATION_SERVICE);
@@ -41,6 +46,18 @@ public class SivisoService extends Service
 		                        Defaults.SERVICE_MIN_CHECK_TIME,
 		                        Defaults.SERVICE_MIN_CHECK_DISTANCE,
 		                        sivisoCollision);
+	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId)
+	{
+		if (locationManager != null)
+		{
+			locationManager.removeUpdates(sivisoCollision);
+			createAndAttachSivisoCollision();
+		}
+		
+		return super.onStartCommand(intent, flags, startId);
 	}
 	
 	public void createNotification(String input)
@@ -70,6 +87,11 @@ public class SivisoService extends Service
 	public void onDestroy()
 	{
 		super.onDestroy();
+		
+		if (locationManager != null)
+		{
+			locationManager.removeUpdates(sivisoCollision);
+		}
 		
 		PreferencesForSivisoLite.setIsServiceRunning(this, false);
 	}
