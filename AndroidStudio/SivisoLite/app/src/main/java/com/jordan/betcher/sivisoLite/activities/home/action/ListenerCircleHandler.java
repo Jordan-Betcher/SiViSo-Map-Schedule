@@ -21,33 +21,38 @@ public class ListenerCircleHandler implements GoogleMap.OnMapClickListener
 		
 		if(PreferencesForSivisoLite.getHomeExists(home) == true)
 		{
-			createOnlyOneCircle(PreferencesForSivisoLite.getHomeLatLng(home));
+			createCircle(PreferencesForSivisoLite.getHomeLatLng(home));
 		}
 	}
 	
 	@Override
 	public void onMapClick(LatLng latLng)
 	{
-		createOnlyOneCircle(latLng);
+		if(circle != null)
+		{
+			//circle.remove();
+			circle.setCenter(latLng);
+		}
+		else
+		{
+			createCircle(latLng);
+		}
 	}
 	
-	private void createOnlyOneCircle(LatLng latLng)
+	private void createCircle(LatLng latLng)
 	{
 		PreferencesForSivisoLite.setHomeExists(home, true);
 		PreferencesForSivisoLite.setHomeLatLng(home, latLng);
 		
-		if(circle != null)
-		{
-			circle.remove();
-		}
 		
 		CircleOptions circleOptions = new CircleOptions();
 		circleOptions.center(latLng);
 		circleOptions.radius(Defaults.HOME_RADIUS);
-		circleOptions.fillColor(Defaults.HOME_FILL_COLOR);
+		circleOptions.fillColor(Defaults.SIVISO_TO_INTEGER.get(PreferencesForSivisoLite.getHomeSiviso(home)));
 		circleOptions.strokeColor(Defaults.HOME_STROKE_COLOR);
 		circleOptions.strokeWidth(Defaults.HOME_STROKE_WIDTH);
 		
-		circle = map.addCircle(circleOptions);
+		circle = map.addCircle(circleOptions); //somehow get location listener access to circle
+		// use circle.setStrokeColor(color);
 	}
 }
