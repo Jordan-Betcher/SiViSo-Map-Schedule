@@ -71,7 +71,7 @@ class SivisoCollision implements LocationListener
 				int distanceToEdge = (int) Math.ceil(Defaults.HOME_RADIUS - distanceToCenterHome);
 				locationManager
 				.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-				                        0,
+				                        10 * Defaults.SECOND,
 				                        distanceToEdge,
 				                        this);
 			}
@@ -91,7 +91,7 @@ class SivisoCollision implements LocationListener
 				int distanceToEdge = (int) Math.ceil(distanceToCenterHome - Defaults.HOME_RADIUS);
 				locationManager
 				.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-				                        0,
+				                        10 * Defaults.SECOND,
 				                        distanceToEdge,
 				                        this);
 			}
@@ -184,6 +184,12 @@ class SivisoCollision implements LocationListener
 		{
 			locationManager.removeUpdates(this);
 		}
+	}
+	
+	public void refresh()
+	{
+		lastLocation = LastLocation.NONE;
+		start();
 	}
 	
 	private enum LastLocation
