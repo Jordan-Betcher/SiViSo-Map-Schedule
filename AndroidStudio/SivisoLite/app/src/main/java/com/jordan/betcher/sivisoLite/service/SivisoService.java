@@ -37,7 +37,7 @@ public class SivisoService extends Service
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId)
 	{
-		//Have to create a new sivisoCollision in order to force a rerun
+		//Have to create a new sivisoCollision in order to force a rerun, maybe bc of lastlocation?
 		sivisoCollision.stop();
 		sivisoCollision = new SivisoCollision(this);
 		sivisoCollision.start();

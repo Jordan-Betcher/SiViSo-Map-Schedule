@@ -54,9 +54,9 @@ class SivisoCollision implements LocationListener
 		locationHome.setLatitude(latLngHome.latitude);
 		locationHome.setLongitude(latLngHome.longitude);
 		
-		double distance = location.distanceTo(locationHome);
+		double distanceToCenterHome = location.distanceTo(locationHome);
 		
-		if(distance <= Defaults.HOME_RADIUS)
+		if(isCurrentLocationInsideHome(distanceToCenterHome))
 		{
 			if(LastLocation.HOME == lastLocation)
 			{
@@ -68,6 +68,12 @@ class SivisoCollision implements LocationListener
 				Siviso siviso = PreferencesForSivisoLite
 				.getHomeSiviso(context);
 				setRingtone(siviso);
+				int distanceToEdge = (int) Math.ceil(Defaults.HOME_RADIUS - distanceToCenterHome);
+				locationManager
+				.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+				                        0,
+				                        distanceToEdge,
+				                        this);
 			}
 		}
 		else
@@ -82,14 +88,21 @@ class SivisoCollision implements LocationListener
 				Siviso siviso = PreferencesForSivisoLite
 				.getDefaultSiviso(context);
 				setRingtone(siviso);
+				int distanceToEdge = (int) Math.ceil(distanceToCenterHome - Defaults.HOME_RADIUS);
+				locationManager
+				.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+				                        0,
+				                        distanceToEdge,
+				                        this);
 			}
 		}
-		locationManager.removeUpdates(this);
-		locationManager
-		.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-		                        10,
-		                        10,
-		                        this);
+		
+		
+	}
+	
+	private boolean isCurrentLocationInsideHome(double distanceToHome)
+	{
+		return distanceToHome  <= Defaults.HOME_RADIUS;
 	}
 	
 	private void setRingtone(Siviso siviso)
