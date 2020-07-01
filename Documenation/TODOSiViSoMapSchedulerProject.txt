@@ -5,14 +5,19 @@ Steps:
 [x]Service
 	[x]Add location listener
 		[x]Checks location in home or not and sets dnd depending on it
-    []Update Collision on SivisoData change OR Restart Service when sivisoData changed
-Battery Options Test
-    [x]3min 5 meters -> 0%
-    [x]3min 0 meters -> 28% (636mAh)
-    [x]3sec 5 meters -> 33% (459mAh)
-    [x]3sec 0 meters -> 40%
+    [x]Start Command
+        On preference set home or default
+        .call service start command
+        .restarts listener
 
+Listener min distance algorithem
+    Default
+        distance to nearest siviso area meters - 10
+    Siviso Area
+        radius - (distance to center)
 
+Handle Permissions not granted (search "@SuppressLint("MissingPermission")")
+        
 Siviso Lite
     Map Siviso Circle highlights when current location is in it.
     settings

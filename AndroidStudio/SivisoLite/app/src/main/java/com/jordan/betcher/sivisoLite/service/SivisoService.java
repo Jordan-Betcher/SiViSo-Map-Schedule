@@ -24,38 +24,23 @@ import com.jordan.betcher.sivisoLite.activities.Home;
 public class SivisoService extends Service
 {
 	SivisoCollision sivisoCollision;
-	LocationManager locationManager;
 	
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
 		createNotification("Siviso");
-		createAndAttachSivisoCollision();
-	}
-	
-	@SuppressLint("MissingPermission")
-	private void createAndAttachSivisoCollision()
-	{
 		sivisoCollision = new SivisoCollision(this);
-		locationManager = (LocationManager) getApplicationContext()
-		.getSystemService(Context.LOCATION_SERVICE);
-		
-		locationManager
-		.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-		                        Defaults.SERVICE_MIN_CHECK_TIME,
-		                        Defaults.SERVICE_MIN_CHECK_DISTANCE,
-		                        sivisoCollision);
+		sivisoCollision.start();
 	}
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId)
 	{
-		if (locationManager != null)
-		{
-			locationManager.removeUpdates(sivisoCollision);
-			createAndAttachSivisoCollision();
-		}
+		//Have to create a new sivisoCollision in order to force a rerun
+		sivisoCollision.stop();
+		sivisoCollision = new SivisoCollision(this);
+		sivisoCollision.start();
 		
 		return super.onStartCommand(intent, flags, startId);
 	}
@@ -67,7 +52,7 @@ public class SivisoService extends Service
 		                                                        0, notificationIntent, 0);
 		Notification notification = new NotificationCompat.Builder(this,
 		                                                           Defaults.NOTIFICATION_CHANNEL_ID)
-		.setContentTitle("Title Test")
+		.setContentTitle("Siviso Lite Start")
 		.setContentText(input)
 		.setContentIntent(pendingIntent)
 		.build();
@@ -88,10 +73,7 @@ public class SivisoService extends Service
 	{
 		super.onDestroy();
 		
-		if (locationManager != null)
-		{
-			locationManager.removeUpdates(sivisoCollision);
-		}
+		sivisoCollision.stop();
 		
 		PreferencesForSivisoLite.setIsServiceRunning(this, false);
 	}

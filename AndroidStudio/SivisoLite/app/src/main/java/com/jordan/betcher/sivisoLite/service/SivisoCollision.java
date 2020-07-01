@@ -1,13 +1,20 @@
 package com.jordan.betcher.sivisoLite.service;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.jordan.betcher.sivisoLite.Defaults;
@@ -22,14 +29,22 @@ class SivisoCollision implements LocationListener
 	LastLocation lastLocation = LastLocation.NONE;
 	AudioManager audioManager;
 	int ringerModeBeforeAnyCollision;
+	LocationManager locationManager;
 	
+	@SuppressLint("MissingPermission")
 	public SivisoCollision(SivisoService context)
 	{
 		this.context = context;
-		this.audioManager = (AudioManager) context.getSystemService(AUDIO_SERVICE);
-		this.ringerModeBeforeAnyCollision = audioManager.getRingerMode();
+		this.audioManager = (AudioManager) context
+		.getSystemService(AUDIO_SERVICE);
+		this.ringerModeBeforeAnyCollision = audioManager
+		.getRingerMode();
+		locationManager = (LocationManager) context
+		.getApplicationContext()
+		.getSystemService(Context.LOCATION_SERVICE);
 	}
 	
+	@SuppressLint("MissingPermission")
 	@Override
 	public void onLocationChanged(Location location)
 	{
@@ -69,6 +84,12 @@ class SivisoCollision implements LocationListener
 				setRingtone(siviso);
 			}
 		}
+		locationManager.removeUpdates(this);
+		locationManager
+		.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+		                        10,
+		                        10,
+		                        this);
 	}
 	
 	private void setRingtone(Siviso siviso)
@@ -108,7 +129,8 @@ class SivisoCollision implements LocationListener
 			public void run()
 			{
 				Toast
-				.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+				.makeText(context.getApplicationContext(), message,
+				          Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -130,6 +152,25 @@ class SivisoCollision implements LocationListener
 	public void onProviderDisabled(String provider)
 	{
 	
+	}
+	
+	@SuppressLint("MissingPermission")
+	public void start()
+	{
+		if(locationManager != null)
+		{
+			locationManager
+			.requestSingleUpdate(LocationManager.GPS_PROVIDER,
+			                     this, null);
+		}
+	}
+	
+	public void stop()
+	{
+		if(locationManager != null)
+		{
+			locationManager.removeUpdates(this);
+		}
 	}
 	
 	private enum LastLocation
