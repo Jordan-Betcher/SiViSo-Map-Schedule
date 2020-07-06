@@ -1,6 +1,7 @@
 package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener;
 
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,13 +13,17 @@ public class SelectSivisoOnMap implements GoogleMap.OnMapClickListener
 {
 	Button buttonConfirmAdd;
 	GoogleMap map;
+	Spinner inputSiviso;
 	
 	Circle selected = null;
 	
-	public SelectSivisoOnMap(GoogleMap map, Button buttonConfirmAdd)
+	public SelectSivisoOnMap(
+	GoogleMap map, Button buttonConfirmAdd,
+	Spinner inputSiviso)
 	{
 		this.buttonConfirmAdd = buttonConfirmAdd;
 		this.map = map;
+		this.inputSiviso = inputSiviso;
 	}
 	
 	@Override
@@ -31,9 +36,11 @@ public class SelectSivisoOnMap implements GoogleMap.OnMapClickListener
 			clearSelected();
 		}
 		
+		String siviso = inputSiviso.getSelectedItem().toString();
+		
 		selected = map.addCircle(new CircleOptions().center(latLng)
 		                                            .radius(Defaults.SIVISO_RADIUS)
-		                                            .fillColor(Defaults.SIVISO_FILL_COLOR)
+		                                            .fillColor(Defaults.SIVISO_TO_COLOR.get(siviso))
 		                                            .strokeColor(Defaults.SIVISO_STROKE_COLOR)
 		                                            .strokeWidth(Defaults.SIVISO_STROKE_WIDTH)
 		                        )

@@ -1,12 +1,11 @@
 package com.betcher.jordan.siviso.activities.home.sivisoMapCircles;
 
-import androidx.annotation.Nullable;
+import android.util.Log;
+
 import androidx.lifecycle.Observer;
 
 import com.betcher.jordan.siviso.Defaults;
-import com.betcher.jordan.siviso.activities.Home;
 import com.betcher.jordan.siviso.database.SivisoData;
-import com.betcher.jordan.siviso.database.SivisoModel;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -18,6 +17,7 @@ import java.util.List;
 public class SivisoMapCircles
 		implements Observer<List<SivisoData>>
 {
+	private static final String TAG = "SivisoMapCircles";
 	GoogleMap map;
 	HashMap<Circle, SivisoData> circleSivisoData = new HashMap<>();
 	
@@ -41,9 +41,11 @@ public class SivisoMapCircles
 			double longitude = sivisoData.getLongitude();
 			LatLng latLng = new LatLng(latitude, longitude);
 			
+			Log.d(TAG, "createSivisoCircles: " + sivisoData.getSiviso());
+			
 			Circle sivisoMapCircles  = map.addCircle(new CircleOptions().center(latLng)
 			                                                            .radius(Defaults.SIVISO_RADIUS)
-			                                                            .fillColor(Defaults.SIVISO_FILL_COLOR)
+			                                                            .fillColor(Defaults.SIVISO_TO_COLOR.get(sivisoData.getSiviso()))
 			                                                            .strokeColor(Defaults.SIVISO_STROKE_COLOR)
 			                                                            .strokeWidth(Defaults.SIVISO_STROKE_WIDTH)
 			                                        );

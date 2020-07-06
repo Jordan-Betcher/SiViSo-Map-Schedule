@@ -4,6 +4,8 @@ import android.graphics.Color;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.HashMap;
+
 public class Defaults
 {
 	public static final LatLng HOME_LATLNG = new LatLng(47.797649,-122.2117209);
@@ -11,9 +13,19 @@ public class Defaults
 	
 	public static final float SIVISO_ZOOM = 17f;
 	public static final double SIVISO_RADIUS = 70;
-	public static final int SIVISO_FILL_COLOR = Color.argb(70, 50, 50, 50);
 	public static final float SIVISO_STROKE_WIDTH = 1f;
 	public static final int SIVISO_STROKE_COLOR = Color.BLACK;
+	public static final HashMap<String, Integer> SIVISO_TO_COLOR = createSivisoToIntegerHashMap();
+	private static HashMap<String, Integer> createSivisoToIntegerHashMap()
+	{
+		HashMap<String, Integer> sivisoToInteger = new HashMap<>();
+		sivisoToInteger.put("None", Color.argb(120, 0, 0, 0));
+		sivisoToInteger.put("Silent", Color.argb(120, 0, 255, 0));
+		sivisoToInteger.put("Vibrate", Color.argb(120, 255, 255, 0));
+		sivisoToInteger.put("Sound", Color.argb(120, 255, 0, 0));
+		
+		return sivisoToInteger;
+	}
 	
 	public static final String DATABASE_NAME = "Siviso";
 	public static final String EXTRA_NAME_ID = "id";

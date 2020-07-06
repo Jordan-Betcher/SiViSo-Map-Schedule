@@ -1,5 +1,6 @@
 package com.betcher.jordan.siviso.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,13 +48,14 @@ public class Add extends AppCompatActivity
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.addMap);
 		mapFragment.getMapAsync(new OnMapReadyCallback()
 		{
+			@SuppressLint("MissingPermission")
 			@Override
 			public void onMapReady(GoogleMap googleMap)
 			{
 				map = googleMap;
 				map.setMyLocationEnabled(true);
 				SetMapAddPosition.run(activity, map);
-				selectSivisoOnMap = new SelectSivisoOnMap(map, buttonConfirmAdd);
+				selectSivisoOnMap = new SelectSivisoOnMap(map, buttonConfirmAdd, inputSiviso);
 				map.setOnMapClickListener(selectSivisoOnMap);
 			}
 		});

@@ -69,7 +69,8 @@ public class Edit extends AppCompatActivity
 			{
 				map = googleMap;
 				map.setMyLocationEnabled(true);
-				selectSivisoOnMap = new SelectSivisoOnMap(map, buttonConfirmEdit);
+				selectSivisoOnMap = new SelectSivisoOnMap(map, buttonConfirmEdit,
+				                                          inputSiviso);
 				map.setOnMapClickListener(selectSivisoOnMap);
 				
 				SetMapEditPosition.run(Edit.this, map, selectSivisoOnMap);

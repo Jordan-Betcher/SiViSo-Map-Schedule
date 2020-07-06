@@ -48,11 +48,11 @@ public class ListenerCircleHandler implements GoogleMap.OnMapClickListener
 		CircleOptions circleOptions = new CircleOptions();
 		circleOptions.center(latLng);
 		circleOptions.radius(Defaults.HOME_RADIUS);
-		circleOptions.fillColor(Defaults.SIVISO_TO_INTEGER.get(PreferencesForSivisoLite.getHomeSiviso(home)));
+		circleOptions.fillColor(Defaults.HOME_FILL_COLOR);
 		circleOptions.strokeColor(Defaults.HOME_STROKE_COLOR);
 		circleOptions.strokeWidth(Defaults.HOME_STROKE_WIDTH);
 		
 		circle = map.addCircle(circleOptions); //somehow get location listener access to circle
-		// use circle.setStrokeColor(color);
+		// use circle.setFillColor(color);
 	}
 }

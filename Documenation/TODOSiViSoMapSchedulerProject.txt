@@ -8,14 +8,16 @@ Steps:
     [x]Siviso Area
         radius - (distance to center)
 
-Siviso Lite
-    Remove Setting button
+[x]Siviso Lite
+    [x]Remove Setting
 
 Move Circle Color to Siviso
     Map circle fill depending on siviso
         Silent = gray
         Vibrate = green
         Sound = orange
+        Move to Siviso
+        Remove from Siviso Lite
 
 Siviso
     Move buttons to bottom of screen
