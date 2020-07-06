@@ -8,12 +8,21 @@ Steps:
     [x]Siviso Area
         radius - (distance to center)
 
-        
 Siviso Lite
+    Remove Setting button
+
+Move Circle Color to Siviso
     Map circle fill depending on siviso
-    Map circle fill more opaque when location is in it
+        Silent = gray
+        Vibrate = green
+        Sound = orange
+
+Siviso
+    Move buttons to bottom of screen
+    Add alorithem to Service
+    
+
 Refactor
-    Siviso Circle highlights when current location is in it.
     Handle Permissions not granted (search "@SuppressLint("MissingPermission")")
 
 To publish need
@@ -36,7 +45,8 @@ Learn how updates work (I think you just upload new apk)
 
 Optional:
 Change Siviso from switch (words) to siviso icons
-Current location color change depending on current do not disturb mode
+? indicate current mode (i.e. Current location color change depending on current do not disturb mode)
+? Siviso Circle highlights when current location is in it.
 []Settings (Do I need these now?)
     []Radius (SivisoLite only has 1 area, were siviso this would be default but idividually editable
     []Zoom
