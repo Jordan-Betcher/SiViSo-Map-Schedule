@@ -36,11 +36,11 @@
     <fragment
         android:id="@+id/homeMap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="379dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintDimensionRatio="h,1:1"
@@ -48,6 +48,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeTitle"
         tools:context=".Locations" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSiviso"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfirmAdd"
+        app:layout_constraintEnd_toEndOf="@+id/buttonEdit"
+        app:layout_constraintStart_toStartOf="@+id/buttonDelete"
+        app:layout_constraintTop_toBottomOf="@+id/homeMap" />
 
     <Button
         android:id="@+id/buttonConfirmAdd"
@@ -66,9 +76,10 @@
         android:text="@string/text_for_button_add"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeMap" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonDelete"
@@ -76,13 +87,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
         android:enabled="false"
         android:onClick="onClickButtonDelete"
         android:text="@string/text_for_button_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonConfirmAdd" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonEdit"
@@ -93,18 +105,9 @@
         android:enabled="false"
         android:onClick="onClickButtonEdit"
         android:text="@string/text_for_button_edit"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonDelete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonDelete"
-        app:layout_constraintTop_toBottomOf="@+id/buttonConfirmAdd" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewSiviso"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/buttonEdit"
-        app:layout_constraintStart_toStartOf="@+id/buttonDelete"
-        app:layout_constraintTop_toBottomOf="@+id/buttonDelete" />
+        app:layout_constraintStart_toEndOf="@+id/buttonDelete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

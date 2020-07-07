@@ -12,15 +12,16 @@ Steps:
     [x] Remove fill color depending on siviso (to advandced for lite version)        
 
 Siviso
-    Map circle fill depending on siviso
-        [x] Create
-        [] Update Database
-    Move buttons to bottom of screen
+    [x] Map circle fill depending on siviso
+        [x] On Create
+        [x] On Update Database
+    [x] Move buttons to bottom of screen
     Add alorithem to Service
+    Add/Edit should have same layout
     
-
 Refactor
     Handle Permissions not granted (search "@SuppressLint("MissingPermission")")
+    Popup explaining asking for permissions
 
 To publish need
     Test on multiple API levels
