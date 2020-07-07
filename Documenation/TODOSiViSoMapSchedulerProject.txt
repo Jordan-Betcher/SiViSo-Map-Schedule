@@ -7,19 +7,14 @@ Steps:
         distance to nearest siviso area meters - 10
     [x]Siviso Area
         radius - (distance to center)
-
 [x]Siviso Lite
     [x]Remove Setting
-
-Move Circle Color to Siviso
-    Map circle fill depending on siviso
-        Silent = gray
-        Vibrate = green
-        Sound = orange
-        Move to Siviso
-        Remove from Siviso Lite
+    [x] Remove fill color depending on siviso (to advandced for lite version)        
 
 Siviso
+    Map circle fill depending on siviso
+        [x] Create
+        [] Update Database
     Move buttons to bottom of screen
     Add alorithem to Service
     

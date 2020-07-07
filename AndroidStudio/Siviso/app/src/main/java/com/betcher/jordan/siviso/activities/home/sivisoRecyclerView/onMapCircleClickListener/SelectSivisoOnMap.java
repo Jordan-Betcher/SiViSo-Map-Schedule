@@ -1,5 +1,7 @@
 package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener;
 
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -45,6 +47,23 @@ public class SelectSivisoOnMap implements GoogleMap.OnMapClickListener
 		                                            .strokeWidth(Defaults.SIVISO_STROKE_WIDTH)
 		                        )
 		;
+		
+		inputSiviso.setOnItemSelectedListener(
+		new AdapterView.OnItemSelectedListener(){
+			@Override
+			public void onItemSelected(
+			AdapterView<?> parent, View view, int position, long id)
+			{
+				String siviso = parent.getSelectedItem().toString();
+				selected.setFillColor(Defaults.SIVISO_TO_COLOR.get(siviso));
+			}
+			
+			@Override
+			public void onNothingSelected(AdapterView<?> parent)
+			{
+			
+			}
+		});
 	}
 	
 	private void clearSelected()
