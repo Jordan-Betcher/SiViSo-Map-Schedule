@@ -29,7 +29,7 @@ public class SivisoService extends Service
 	public void onCreate()
 	{
 		super.onCreate();
-		createNotification("Siviso");
+		createNotification("Siviso Lite");
 		sivisoCollision = new SivisoCollision(this);
 		sivisoCollision.start();
 	}

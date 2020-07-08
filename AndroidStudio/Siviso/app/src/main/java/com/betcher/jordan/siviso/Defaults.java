@@ -14,15 +14,15 @@ public class Defaults
 	public static final float SIVISO_ZOOM = 17f;
 	public static final double SIVISO_RADIUS = 70;
 	public static final float SIVISO_STROKE_WIDTH = 1f;
-	public static final int SIVISO_STROKE_COLOR = Color.BLACK;
+	public static final int SIVISO_STROKE_COLOR = Color.TRANSPARENT;
 	public static final HashMap<String, Integer> SIVISO_TO_COLOR = createSivisoToIntegerHashMap();
 	private static HashMap<String, Integer> createSivisoToIntegerHashMap()
 	{
 		HashMap<String, Integer> sivisoToInteger = new HashMap<>();
-		sivisoToInteger.put("None", Color.argb(120, 0, 0, 0));
-		sivisoToInteger.put("Silent", Color.argb(120, 0, 255, 0));
-		sivisoToInteger.put("Vibrate", Color.argb(120, 255, 255, 0));
-		sivisoToInteger.put("Sound", Color.argb(120, 255, 0, 0));
+		sivisoToInteger.put("None", Color.argb(120, 255, 255, 255));
+		sivisoToInteger.put("Silent", Color.argb(200, 99, 106, 133));
+		sivisoToInteger.put("Vibrate", Color.argb(200, 131, 199, 167));
+		sivisoToInteger.put("Sound", Color.argb(200, 182, 250, 150));
 		
 		return sivisoToInteger;
 	}
