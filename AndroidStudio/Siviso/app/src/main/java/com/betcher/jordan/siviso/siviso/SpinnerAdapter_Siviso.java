@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.betcher.jordan.siviso.Defaults;
-
 import java.util.ArrayList;
 
 public class SpinnerAdapter_Siviso extends BaseAdapter
@@ -55,13 +53,13 @@ public class SpinnerAdapter_Siviso extends BaseAdapter
 	public View getView(
 	int index, View convertView, ViewGroup parent)
 	{
-		String siviso = items.get(index);
+		String sivisoName = items.get(index);
 		LayoutInflater inflater = LayoutInflater.from(context);
 		convertView = inflater.inflate(android.R.layout.simple_spinner_item, null);
 		
 		TextView row = (TextView) convertView.findViewById(android.R.id.text1);
-		row.setBackgroundColor(Defaults.SIVISO_TO_COLOR.get(siviso));
-		row.setText(siviso);
+		row.setBackgroundColor(Siviso.color(sivisoName));
+		row.setText(sivisoName);
 		
 		return row;
 	}

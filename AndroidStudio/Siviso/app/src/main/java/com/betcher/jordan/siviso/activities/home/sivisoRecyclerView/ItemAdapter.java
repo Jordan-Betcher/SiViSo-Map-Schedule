@@ -152,7 +152,7 @@ public class ItemAdapter
 		private void setSiviso(String siviso)
 		{
 			spinnerSiviso.setSelection(
-			Siviso.getIndex(siviso));
+			Siviso.index(siviso));
 		}
 		
 		public void setSivisoData(SivisoData currentSivisoData)

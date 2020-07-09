@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.database.SivisoData;
+import com.betcher.jordan.siviso.siviso.Siviso;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -45,7 +46,8 @@ public class SivisoMapCircles
 			
 			Circle sivisoMapCircles  = map.addCircle(new CircleOptions().center(latLng)
 			                                                            .radius(Defaults.SIVISO_RADIUS)
-			                                                            .fillColor(Defaults.SIVISO_TO_COLOR.get(sivisoData.getSiviso()))
+			                                                            .fillColor(
+			                                                            Siviso.color(sivisoData.getSiviso()))
 			                                                            .strokeColor(Defaults.SIVISO_STROKE_COLOR)
 			                                                            .strokeWidth(Defaults.SIVISO_STROKE_WIDTH)
 			                                        );

@@ -1,15 +1,15 @@
 package com.betcher.jordan.siviso.siviso;
 
-import android.graphics.Color;
+import com.betcher.jordan.siviso.Defaults;
 
 import java.util.HashMap;
 
 public enum Siviso
 {
-	None(Color.argb(120, 255, 255, 255)),
-	Silent(Color.argb(120, 255, 255, 255)),
-	Vibrate(Color.argb(120, 255, 255, 255)),
-	Sound(Color.argb(120, 255, 255, 255));
+	None(Defaults.SIVISO_COLOR_NONE),
+	Silent(Defaults.SIVISO_COLOR_SILENT),
+	Vibrate(Defaults.SIVISO_COLOR_VIBRATE),
+	Sound(Defaults.SIVISO_COLOR_SOUND);
 	
 	int color;
 	Siviso(int color)
@@ -18,20 +18,6 @@ public enum Siviso
 	}
 	
 	static Siviso[] sivisos = Siviso.values();
-	static HashMap<Siviso, Integer> sivisoIndex = createSivisoIndex();
-	private static HashMap<Siviso, Integer> createSivisoIndex()
-	{
-		HashMap<Siviso, Integer> sivisoIndex = new HashMap<>();
-		
-		for(int index = 0; index < sivisos.length; index++)
-		{
-			Siviso siviso = sivisos[index];
-			sivisoIndex.put(siviso, index);
-		}
-		
-		return sivisoIndex;
-	}
-	
 	
 	static HashMap<String, Integer> nameIndex = createNameIndex();
 	private static HashMap<String, Integer> createNameIndex()
@@ -48,13 +34,18 @@ public enum Siviso
 		return nameIndex;
 	}
 	
-	public int getIndex(Siviso siviso)
+	public static int color(String sivisoName)
 	{
-		return sivisoIndex.get(siviso);
+		return sivisos[nameIndex.get(sivisoName)].color;
 	}
 	
-	public static int getIndex(String name)
+	public static int index(String name)
 	{
 		return nameIndex.get(name);
+	}
+	
+	public static Siviso siviso(String sivisoName)
+	{
+		return sivisos[nameIndex.get(sivisoName)];
 	}
 }
