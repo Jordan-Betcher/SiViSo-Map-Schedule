@@ -16,6 +16,11 @@ public class Defaults
 	public static final float SIVISO_STROKE_WIDTH = 1f;
 	public static final int SIVISO_STROKE_COLOR = Color.TRANSPARENT;
 	public static final HashMap<String, Integer> SIVISO_TO_COLOR = createSivisoToIntegerHashMap();
+	
+	//second in milliseconds
+	public static final long SECOND = 1000;
+	public static final long SERVICE_MIN_TIME = 10*SECOND;
+	
 	private static HashMap<String, Integer> createSivisoToIntegerHashMap()
 	{
 		HashMap<String, Integer> sivisoToInteger = new HashMap<>();

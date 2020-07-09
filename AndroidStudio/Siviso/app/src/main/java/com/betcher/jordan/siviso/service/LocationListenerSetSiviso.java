@@ -1,11 +1,13 @@
 package com.betcher.jordan.siviso.service;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +21,7 @@ import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static android.content.Context.AUDIO_SERVICE;
@@ -26,20 +29,29 @@ import static android.content.Context.AUDIO_SERVICE;
 class LocationListenerSetSiviso implements LocationListener
 {
 	private static final String TAG = "LocationListenerSetSivi";
-	AudioManager audioManager;
 	Service context;
+	LocationManager locationManager;
+	AudioManager audioManager;
 	
 	SivisoRepository sivisoRepository;
-	private ArrayList<SivisoData> previousSivisoData = new ArrayList<>();
-	private int settingBeforeAnyCollision = -1;
+	private boolean previousIsNone = true;
+	private int noneRingMode = -1;
 	
 	public LocationListenerSetSiviso(Siviso context)
 	{
 		this.context = context;
 		this.audioManager = (AudioManager) context.getSystemService(AUDIO_SERVICE);
 		sivisoRepository = SivisoRepository.getInstance(context.getApplicationContext());
+		
+		locationManager = (LocationManager) context
+		.getApplicationContext()
+		.getSystemService(Context.LOCATION_SERVICE);
+		
+		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
+		prefs.edit().putBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, true).apply();
 	}
 	
+	@SuppressLint("MissingPermission")
 	@Override
 	public void onLocationChanged(Location currentLocation)
 	{
@@ -61,92 +73,152 @@ class LocationListenerSetSiviso implements LocationListener
 		else
 		{
 			List<SivisoData> sivisoDatas = sivisoRepository.getAllSivisoData().getValue();
-			ArrayList<SivisoData> collidedSiviso = getSivisoThatCollideWithCurrentLocation(sivisoDatas, currentLocation);
+			HashMap<String, ArrayList<Double>> collidedSivisos = new HashMap<>(3);
+			collidedSivisos.put("Silent", new ArrayList<Double>());
+			collidedSivisos.put("Vibrate", new ArrayList<Double>());
+			collidedSivisos.put("Sound", new ArrayList<Double>());
 			
-			changeRingerMode(collidedSiviso);
-		}
-	}
-	
-	private void changeRingerMode(ArrayList<SivisoData> collidedSivisoData)
-	{
-		String showMessage = "Number of Possible Sounds Settings: " + collidedSivisoData.size();
-		
-		if(isRepeatingChange(collidedSivisoData))
-		{
-			return;
-		}
-		
-		ArrayList<String> possibleSiviso = getPossibleSiviso(collidedSivisoData);
-		
-		if(collidedSivisoData.size() == 0)
-		{
-			SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-			String defaultSiviso = prefs.getString(Defaults.PREFERENCE_KEY_DEFAULT_SIVISO, "None");
-			if(defaultSiviso == "None")
+			double distance_closestSiviso = -1;
+			
+			//get closest Siviso that isn't none and sort sivisos that current location is in
+			for(SivisoData sivisoData : sivisoDatas)
 			{
-				if(settingBeforeAnyCollision == -1)
+				if(sivisoData.getSiviso().equals("None"))
 				{
-					//Do nothing
+					continue;
 				}
-				else
+				
+				Location sivisoLocation = new Location("");
+				sivisoLocation.setLatitude(sivisoData.getLatitude());
+				sivisoLocation.setLongitude(sivisoData.getLongitude());
+				double distance = currentLocation.distanceTo(sivisoLocation);
+				
+				if(distance < Defaults.SIVISO_RADIUS)
 				{
-					audioManager.setRingerMode(settingBeforeAnyCollision);
-					showMessage = "Returning";
+					Log.d(TAG, "onLocationChanged: " + sivisoData.getSiviso());
+					ArrayList<Double> distances = collidedSivisos.get(sivisoData.getSiviso());
+					distances.add(distance);
 				}
+				
+				if(distance < distance_closestSiviso || distance_closestSiviso == -1)
+				{
+					distance_closestSiviso = distance;
+				}
+			}
+			
+			if(collidedSivisos.get("Silent").size() > 0)
+			{
+				if(previousIsNone)
+				{
+					previousIsNone = false;
+					None_SaveRingMode();
+				}
+				
+				audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+				
+				Update(collidedSivisos.get("Silent"));
+				
+				programmerFeedback("Silent");
+			}
+			else if(collidedSivisos.get("Vibrate").size() > 0)
+			{
+				if(previousIsNone)
+				{
+					previousIsNone = false;
+					None_SaveRingMode();
+				}
+				
+				audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+				
+				Update(collidedSivisos.get("Vibrate"));
+				
+				programmerFeedback("Vibrate");
+			}
+			else if(collidedSivisos.get("Sound").size() > 0)
+			{
+				if(previousIsNone)
+				{
+					previousIsNone = false;
+					None_SaveRingMode();
+				}
+				
+				audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+				
+				Update(collidedSivisos.get("Sound"));
+				
+				programmerFeedback("Sound");
 			}
 			else
 			{
-				ArrayList<String> newMode = new ArrayList<>();
-				newMode.add(defaultSiviso);
-				showMessage = setRingerMode(newMode);
+				RevertToRingMode_None();
+				
+				locationManager
+				.requestLocationUpdates
+				(
+				LocationManager.GPS_PROVIDER,
+				Defaults.SERVICE_MIN_TIME,
+				(float) distance_closestSiviso,
+				this
+				);
+				
+				
+				programmerFeedback("None");
 			}
 		}
-		else
+	}
+	
+	@SuppressLint("MissingPermission")
+	private void Update(ArrayList<Double> distances_Siviso)
+	{
+		double distance_closestSiviso = Defaults.SIVISO_RADIUS;
+		
+		for(double distance : distances_Siviso)
 		{
-			if(previousSivisoData.size() == 0)
+			if(distance < distance_closestSiviso)
 			{
-				settingBeforeAnyCollision = audioManager.getRingerMode();
+				distance_closestSiviso = distance;
 			}
-			
-			showMessage = setRingerMode(possibleSiviso);
 		}
 		
-		previousSivisoData = collidedSivisoData;
-		programmerFeedback(showMessage);
+		locationManager
+		.requestLocationUpdates
+		(
+		LocationManager.GPS_PROVIDER,
+		Defaults.SERVICE_MIN_TIME,
+		(float) distance_closestSiviso,
+		this
+		);
 	}
 	
-	private String setRingerMode(ArrayList<String> possibleSiviso)
+	private void RevertToRingMode_None()
 	{
-		String showMessage = "Nothing";
-		if(possibleSiviso.contains("Silent"))
-		{
-			audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-			showMessage = "Silent";
-		}
-		else if(possibleSiviso.contains("Vibrate"))
-		{
-			audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
-			showMessage = "Vibrate";
-		}
-		else if(possibleSiviso.contains("Sound"))
-		{
-			audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-			showMessage = "Sound";
-		}
+		previousIsNone = true;
 		
-		return showMessage;
-	}
-	
-	private boolean isRepeatingChange(ArrayList<SivisoData> collidedSivisoData)
-	{
-		if(previousSivisoData.equals(collidedSivisoData))
+		//String defaultSiviso = Preferences_Siviso.DefaultSiviso()
+		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
+		String defaultSiviso = prefs.getString(Defaults.PREFERENCE_KEY_DEFAULT_SIVISO, "None");
+		
+		if(defaultSiviso == "None")
 		{
-			return true;
+			if(noneRingMode == -1)
+			{
+				//Do nothing
+			}
+			else
+			{
+				audioManager.setRingerMode(noneRingMode);
+			}
 		}
 		else
 		{
-			return false;
+			ArrayList<String> newMode = new ArrayList<>();
+			newMode.add(defaultSiviso);
 		}
+	}
+	
+	private void None_SaveRingMode()
+	{
+		noneRingMode = audioManager.getRingerMode();
 	}
 	
 	private ArrayList<String> getPossibleSiviso(ArrayList<SivisoData> collidedSivisoData)
@@ -214,5 +286,34 @@ class LocationListenerSetSiviso implements LocationListener
 		Intent intentProviderSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 		intentProviderSettings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intentProviderSettings);
+	}
+	
+	
+	@SuppressLint("MissingPermission")
+	public void start()
+	{
+		if(locationManager != null)
+		{
+			locationManager
+			.requestSingleUpdate(LocationManager.GPS_PROVIDER,
+			                     this, null);
+		}
+	}
+	
+	public void refresh()
+	{
+		previousIsNone = true;
+		start();
+	}
+	
+	public void stop()
+	{
+		if (locationManager != null)
+		{
+			locationManager.removeUpdates(this);
+		}
+		
+		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
+		prefs.edit().putBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, false).apply();
 	}
 }
