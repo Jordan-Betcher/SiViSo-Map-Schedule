@@ -9,7 +9,7 @@ Siviso
         [x] On Update Database
     [x] Move buttons to bottom of screen
     [x] Add alorithem to Service
-    Add/Edit should have same layout
+    [x] Add/Edit should have same layout
     Color of spinner matches siviso colors
     Refactor Siviso
         Enum, number, string
@@ -67,6 +67,10 @@ Create a company when make enough to warrent it
 
 
 Research
+    Spinner Individual Item Color
+    Add custom BaseAdapter to spinner
+    https://stackoverflow.com/questions/23370412/android-spinner-different-background-for-each-row
+
     Reload Activty
     https://stackoverflow.com/questions/3053761/reload-activity-in-android
 

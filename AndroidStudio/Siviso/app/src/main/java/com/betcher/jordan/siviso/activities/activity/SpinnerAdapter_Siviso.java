@@ -57,11 +57,10 @@ public class SpinnerAdapter_Siviso extends BaseAdapter
 	{
 		String siviso = items.get(index);
 		LayoutInflater inflater = LayoutInflater.from(context);
-		convertView = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, null);
+		convertView = inflater.inflate(android.R.layout.simple_spinner_item, null);
 		
 		TextView row = (TextView) convertView.findViewById(android.R.id.text1);
 		row.setBackgroundColor(Defaults.SIVISO_TO_COLOR.get(siviso));
-		row.setTextSize(20f);
 		row.setText(siviso);
 		
 		return row;

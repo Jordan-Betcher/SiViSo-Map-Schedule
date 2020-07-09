@@ -15,6 +15,7 @@ import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.CancelActivity;
 import com.betcher.jordan.siviso.actions.edit.SetMapEditPosition;
+import com.betcher.jordan.siviso.activities.activity.SpinnerAdapter_Siviso;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.SelectSivisoOnMap;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
@@ -46,6 +47,7 @@ public class Edit extends AppCompatActivity
 		buttonConfirmEdit = (Button) this.findViewById(R.id.buttonConfirmEdit);
 		inputName = this.findViewById(R.id.editName);
 		inputSiviso = this.findViewById(R.id.editSiviso);
+		inputSiviso.setAdapter(new SpinnerAdapter_Siviso(this));
 		
 		Intent intent = this.getIntent();
 		selectedSivisoDataID  = intent.getIntExtra(Defaults.EXTRA_NAME_ID, -1);//Crashes if not found
