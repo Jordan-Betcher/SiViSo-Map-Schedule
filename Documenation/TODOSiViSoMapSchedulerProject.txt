@@ -1,23 +1,19 @@
 SiViSo Map Scheduler
 Is a android application that allows you to go to silent, vibrate, and sound based on google map location
 
-Steps:
-[x]Listener min distance algorithem
-    [x]Default
-        distance to nearest siviso area meters - 10
-    [x]Siviso Area
-        radius - (distance to center)
-[x]Siviso Lite
-    [x]Remove Setting
-    [x] Remove fill color depending on siviso (to advandced for lite version)        
+Steps:      
 
 Siviso
     [x] Map circle fill depending on siviso
         [x] On Create
         [x] On Update Database
     [x] Move buttons to bottom of screen
-    Add alorithem to Service
+    [x] Add alorithem to Service
     Add/Edit should have same layout
+    Color of spinner matches siviso colors
+    Refactor Siviso
+        Enum, number, string
+    Preferences
     
 Refactor
     Handle Permissions not granted (search "@SuppressLint("MissingPermission")")

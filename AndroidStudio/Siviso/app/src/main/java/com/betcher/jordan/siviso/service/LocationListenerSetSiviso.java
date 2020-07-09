@@ -34,7 +34,7 @@ class LocationListenerSetSiviso implements LocationListener
 	AudioManager audioManager;
 	
 	SivisoRepository sivisoRepository;
-	private boolean previousIsNone = true;
+	private String previousSiviso = "None";
 	private int noneRingMode = -1;
 	
 	public LocationListenerSetSiviso(Siviso context)
@@ -108,49 +108,64 @@ class LocationListenerSetSiviso implements LocationListener
 			
 			if(collidedSivisos.get("Silent").size() > 0)
 			{
-				if(previousIsNone)
+				if(previousSiviso.equals("None"))
 				{
-					previousIsNone = false;
 					None_SaveRingMode();
 				}
 				
-				audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+				if(!previousSiviso.equals("Silent"))
+				{
+					programmerFeedback("Silent");
+					previousSiviso = "Silent";
+					
+					audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+				}
 				
 				Update(collidedSivisos.get("Silent"));
-				
-				programmerFeedback("Silent");
 			}
 			else if(collidedSivisos.get("Vibrate").size() > 0)
 			{
-				if(previousIsNone)
+				if(previousSiviso.equals("None"))
 				{
-					previousIsNone = false;
 					None_SaveRingMode();
 				}
 				
-				audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+				if(!previousSiviso.equals("Vibrate"))
+				{
+					programmerFeedback("Vibrate");
+					previousSiviso = "Vibrate";
+					
+					audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+				}
 				
 				Update(collidedSivisos.get("Vibrate"));
-				
-				programmerFeedback("Vibrate");
 			}
 			else if(collidedSivisos.get("Sound").size() > 0)
 			{
-				if(previousIsNone)
+				if(previousSiviso.equals("None"))
 				{
-					previousIsNone = false;
 					None_SaveRingMode();
 				}
 				
-				audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+				if(!previousSiviso.equals("Sound"))
+				{
+					programmerFeedback("Sound");
+					previousSiviso = "Sound";
+					
+					audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+				}
 				
 				Update(collidedSivisos.get("Sound"));
-				
-				programmerFeedback("Sound");
 			}
 			else
 			{
-				RevertToRingMode_None();
+				if(!previousSiviso.equals("None"))
+				{
+					programmerFeedback("None");
+					previousSiviso = "None";
+					
+					RevertToRingMode_None();
+				}
 				
 				locationManager
 				.requestLocationUpdates
@@ -160,9 +175,6 @@ class LocationListenerSetSiviso implements LocationListener
 				(float) distance_closestSiviso,
 				this
 				);
-				
-				
-				programmerFeedback("None");
 			}
 		}
 	}
@@ -192,13 +204,11 @@ class LocationListenerSetSiviso implements LocationListener
 	
 	private void RevertToRingMode_None()
 	{
-		previousIsNone = true;
-		
 		//String defaultSiviso = Preferences_Siviso.DefaultSiviso()
 		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
 		String defaultSiviso = prefs.getString(Defaults.PREFERENCE_KEY_DEFAULT_SIVISO, "None");
 		
-		if(defaultSiviso == "None")
+		if(defaultSiviso.equals("None"))
 		{
 			if(noneRingMode == -1)
 			{
@@ -302,7 +312,7 @@ class LocationListenerSetSiviso implements LocationListener
 	
 	public void refresh()
 	{
-		previousIsNone = true;
+		previousSiviso = "None";
 		start();
 	}
 	

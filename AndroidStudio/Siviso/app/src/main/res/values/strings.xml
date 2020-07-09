@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">SiViSo</string>
-    <string name="title_home">SiViSo</string>
-    <string name="title_add">SiViSo Add</string>
-    <string name="title_edit">SiViSo Edit</string>
+    <string name="app_name">Siviso</string>
+    <string name="title_home">Siviso</string>
+    <string name="title_add">Add</string>
+    <string name="title_edit">Edit</string>
     <string name="text_for_switch_on_off">Off/On</string>
     <string name="text_for_button_add">+</string>
     <string name="text_for_button_delete">Delete</string>
