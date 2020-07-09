@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".service.Siviso"></service>
+        <service android:name=".service.Service_ManageRingMode"></service>
     </application>
 
 </manifest>

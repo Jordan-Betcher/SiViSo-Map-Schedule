@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -15,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
+import com.betcher.jordan.siviso.siviso.Siviso;
+import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +122,7 @@ public class ItemAdapter
 			
 			listener = new OnItemClickListenerEditSiviso(context, sivisoModel, spinnerSiviso);
 			spinnerSiviso.setOnItemSelectedListener(listener);
+			spinnerSiviso.setAdapter(new SpinnerAdapter_Siviso(context));
 			
 			itemView.setOnClickListener(new View.OnClickListener(){
 				
@@ -149,9 +151,8 @@ public class ItemAdapter
 		
 		private void setSiviso(String siviso)
 		{
-			ArrayAdapter arrayAdapter = (ArrayAdapter) spinnerSiviso.getAdapter();
-			int arrayPositionOfSiviso = arrayAdapter.getPosition(siviso);
-			spinnerSiviso.setSelection(arrayPositionOfSiviso);
+			spinnerSiviso.setSelection(
+			Siviso.getIndex(siviso));
 		}
 		
 		public void setSivisoData(SivisoData currentSivisoData)

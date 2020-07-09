@@ -26,7 +26,7 @@ import java.util.List;
 
 import static android.content.Context.AUDIO_SERVICE;
 
-class LocationListenerSetSiviso implements LocationListener
+class LocationListener_ManageRingMode implements LocationListener
 {
 	private static final String TAG = "LocationListenerSetSivi";
 	Service context;
@@ -37,7 +37,8 @@ class LocationListenerSetSiviso implements LocationListener
 	private String previousSiviso = "None";
 	private int noneRingMode = -1;
 	
-	public LocationListenerSetSiviso(Siviso context)
+	public LocationListener_ManageRingMode(
+	Service_ManageRingMode context)
 	{
 		this.context = context;
 		this.audioManager = (AudioManager) context.getSystemService(AUDIO_SERVICE);
@@ -80,7 +81,7 @@ class LocationListenerSetSiviso implements LocationListener
 			
 			double distance_closestSiviso = -1;
 			
-			//get closest Siviso that isn't none and sort sivisos that current location is in
+			//get closest Service_ManageRingMode that isn't none and sort sivisos that current location is in
 			for(SivisoData sivisoData : sivisoDatas)
 			{
 				if(sivisoData.getSiviso().equals("None"))

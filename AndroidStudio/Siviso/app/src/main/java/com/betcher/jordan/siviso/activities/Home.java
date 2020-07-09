@@ -82,7 +82,6 @@ public class Home extends AppCompatActivity
 		
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(
 				R.id.homeMap);
-		
 		mapFragment.getMapAsync(new OnMapReadyCallback()
 		{
 			@SuppressLint("MissingPermission")

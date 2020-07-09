@@ -8,7 +8,7 @@ import android.util.Log;
 import androidx.core.content.ContextCompat;
 
 import com.betcher.jordan.siviso.Defaults;
-import com.betcher.jordan.siviso.service.Siviso;
+import com.betcher.jordan.siviso.service.Service_ManageRingMode;
 
 public class StartSivisoService
 {
@@ -16,8 +16,8 @@ public class StartSivisoService
 	
 	public static void run(Context context)
 	{
-		Log.d(TAG, "run: Starting Siviso Service");
-		Intent startSivisoService = new Intent(context, Siviso.class);
+		Log.d(TAG, "run: Starting Service_ManageRingMode Service");
+		Intent startSivisoService = new Intent(context, Service_ManageRingMode.class);
 		ContextCompat.startForegroundService(context, startSivisoService);
 		
 		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);

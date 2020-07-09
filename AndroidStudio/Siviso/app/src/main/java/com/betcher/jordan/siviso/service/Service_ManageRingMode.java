@@ -12,18 +12,18 @@ import androidx.core.app.NotificationCompat;
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.activities.Home;
 
-public class Siviso extends Service
+public class Service_ManageRingMode extends Service
 {
-	private static final String TAG = "Siviso";
+	private static final String TAG = "Service_ManageRingMode";
 	
-	private LocationListenerSetSiviso listener;
+	private LocationListener_ManageRingMode listener;
 	
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
-		createNotification("Siviso");
-		listener = new LocationListenerSetSiviso(this);
+		createNotification("Service_ManageRingMode");
+		listener = new LocationListener_ManageRingMode(this);
 		listener.start();
 	}
 	

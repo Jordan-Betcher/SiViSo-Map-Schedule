@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.activity;
+package com.betcher.jordan.siviso.siviso;
 
 import android.content.Context;
 import android.view.LayoutInflater;
