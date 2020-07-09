@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.actions.CancelActivity;
 import com.betcher.jordan.siviso.actions.add.SetMapAddPosition;
+import com.betcher.jordan.siviso.activities.activity.SpinnerAdapter_Siviso;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.SelectSivisoOnMap;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
@@ -44,6 +45,8 @@ public class Add extends AppCompatActivity
 		
 		inputName = this.findViewById(R.id.addName);
 		inputSiviso = this.findViewById(R.id.addSiviso);
+		
+		inputSiviso.setAdapter(new SpinnerAdapter_Siviso(this));
 		
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.addMap);
 		mapFragment.getMapAsync(new OnMapReadyCallback()
