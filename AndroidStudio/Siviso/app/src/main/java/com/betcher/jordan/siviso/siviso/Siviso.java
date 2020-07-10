@@ -48,4 +48,14 @@ public enum Siviso
 	{
 		return sivisos[nameIndex.get(sivisoName)];
 	}
+	
+	public int index()
+	{
+		return nameIndex.get(name());
+	}
+	
+	public int color()
+	{
+		return color;
+	}
 }

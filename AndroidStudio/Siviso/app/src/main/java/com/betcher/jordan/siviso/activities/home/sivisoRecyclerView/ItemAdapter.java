@@ -149,16 +149,16 @@ public class ItemAdapter
 			textViewName.setText(name);
 		}
 		
-		private void setSiviso(String siviso)
+		private void setSiviso(Siviso siviso)
 		{
 			spinnerSiviso.setSelection(
-			Siviso.index(siviso));
+			siviso.index());
 		}
 		
 		public void setSivisoData(SivisoData currentSivisoData)
 		{
-			setName(currentSivisoData.getName());
-			setSiviso(currentSivisoData.getSiviso());
+			setName(currentSivisoData.name());
+			setSiviso(currentSivisoData.siviso());
 			listener.setSivisoData(currentSivisoData);
 		}
 	}

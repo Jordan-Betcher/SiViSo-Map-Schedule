@@ -37,7 +37,7 @@ public class SelectItem
 	
 	private boolean isDefault(SivisoData selectedSiviso)
 	{
-		if(selectedSiviso.getName().equals(Defaults.DEFAULT_SIVISO_NAME))
+		if(selectedSiviso.name().equals(Defaults.DEFAULT_SIVISO_NAME))
 		{
 			return true;
 		}

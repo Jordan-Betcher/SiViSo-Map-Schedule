@@ -12,11 +12,11 @@ public class StartActivityEdit
 	public static void run(Home home, SivisoData selectedSiviso)
 	{
 		Intent myIntent = new Intent(home, Edit.class);
-		myIntent.putExtra(Defaults.EXTRA_NAME_ID, selectedSiviso.getId());
-		myIntent.putExtra(Defaults.EXTRA_NAME_NAME, selectedSiviso.getName());
-		myIntent.putExtra(Defaults.EXTRA_NAME_SIVISO, selectedSiviso.getSiviso());
-		myIntent.putExtra(Defaults.EXTRA_NAME_LATITUDE, selectedSiviso.getLatitude());
-		myIntent.putExtra(Defaults.EXTRA_NAME_LONGITUDE, selectedSiviso.getLongitude());
+		myIntent.putExtra(Defaults.EXTRA_NAME_ID, selectedSiviso.id());
+		myIntent.putExtra(Defaults.EXTRA_NAME_NAME, selectedSiviso.name());
+		myIntent.putExtra(Defaults.EXTRA_NAME_SIVISO, selectedSiviso.siviso().name());
+		myIntent.putExtra(Defaults.EXTRA_NAME_LATITUDE, selectedSiviso.latitude());
+		myIntent.putExtra(Defaults.EXTRA_NAME_LONGITUDE, selectedSiviso.longitude());
 		home.startActivity(myIntent);
 	}
 }

@@ -6,6 +6,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.betcher.jordan.siviso.Defaults;
+import com.betcher.jordan.siviso.siviso.Siviso;
 import com.google.android.gms.maps.model.LatLng;
 
 @Entity(tableName = Defaults.DATABASE_NAME)
@@ -15,14 +16,14 @@ public class SivisoData
 	@PrimaryKey(autoGenerate = true)
 	private int id;
 	private String name;
-	private String siviso;
+	private String sivisoName;
 	private double latitude;
 	private double longitude;
 	
-	public SivisoData(String name, String siviso, double latitude, double longitude)
+	public SivisoData(String name, String sivisoName, double latitude, double longitude)
 	{
 		this.name = name;
-		this.siviso = siviso;
+		this.sivisoName = sivisoName;
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
@@ -32,34 +33,35 @@ public class SivisoData
 		this.id = id;
 	}
 	
-	
-	public int getId()
+	public int id()
 	{
 		return id;
 	}
 	
-	public String getName()
+	public String name()
 	{
 		return name;
 	}
 	
-	public String getSiviso()
+	String sivisoName()
 	{
-		return siviso;
+		return sivisoName;
 	}
 	
-	public double getLatitude()
+	public double latitude()
 	{
 		return latitude;
 	}
 	
-	public double getLongitude()
+	public double longitude()
 	{
 		return longitude;
 	}
 	
 	@Ignore
-	public LatLng getLatLng(){return new LatLng(latitude, longitude);}
+	public LatLng latLng(){return new LatLng(latitude, longitude);}
+	@Ignore
+	public Siviso siviso(){return Siviso.siviso(sivisoName);}
 	
 	@Ignore
 	@Override
@@ -69,11 +71,11 @@ public class SivisoData
 		{
 			SivisoData other = (SivisoData) obj;
 			
-			if(other.getName() == getName()
-			&& other.getSiviso() == getSiviso()
-			&& other.getId() == getId()
-			&& other.getLatitude() == getLatitude()
-			&& other.getLongitude() == getLongitude())
+			if(other.name() == name()
+			&& other.sivisoName() == sivisoName()
+			&& other.id() == id()
+			&& other.latitude() == latitude()
+			&& other.longitude() == longitude())
 			{
 				return true;
 			}

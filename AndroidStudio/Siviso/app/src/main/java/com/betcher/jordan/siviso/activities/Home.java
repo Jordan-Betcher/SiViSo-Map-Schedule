@@ -160,6 +160,6 @@ public class Home extends AppCompatActivity
 	
 	public void onSelect(View view)
 	{
-		Toast.makeText(this, selectItem.getSelectedSiviso().getName(), Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, selectItem.getSelectedSiviso().name(), Toast.LENGTH_SHORT).show();
 	}
 }

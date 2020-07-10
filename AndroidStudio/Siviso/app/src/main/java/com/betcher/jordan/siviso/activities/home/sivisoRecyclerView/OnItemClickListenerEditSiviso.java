@@ -38,7 +38,7 @@ class OnItemClickListenerEditSiviso
 	{
 		
 		
-		String name = currentSivisoData.getName();
+		String name = currentSivisoData.name();
 		String siviso = spinnerSiviso.getSelectedItem().toString();
 		
 		if(name == Defaults.DEFAULT_SIVISO_NAME)
@@ -48,10 +48,10 @@ class OnItemClickListenerEditSiviso
 		}
 		else
 		{
-			LatLng latLng = currentSivisoData.getLatLng();
+			LatLng latLng = currentSivisoData.latLng();
 			
 			SivisoData sivisoData = new SivisoData(name, siviso, latLng.latitude, latLng.longitude);
-			sivisoData.setId(currentSivisoData.getId());
+			sivisoData.setId(currentSivisoData.id());
 			
 			sivisoModel.update(sivisoData);
 		}

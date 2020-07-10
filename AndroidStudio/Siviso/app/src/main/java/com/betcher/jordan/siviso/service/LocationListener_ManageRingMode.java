@@ -85,20 +85,19 @@ class LocationListener_ManageRingMode implements LocationListener
 			//get closest Service_ManageRingMode that isn't none and sort sivisos that current location is in
 			for(SivisoData sivisoData : sivisoDatas)
 			{
-				if(sivisoData.getSiviso().equals("None"))
+				if(sivisoData.siviso().equals("None"))
 				{
 					continue;
 				}
 				
 				Location sivisoLocation = new Location("");
-				sivisoLocation.setLatitude(sivisoData.getLatitude());
-				sivisoLocation.setLongitude(sivisoData.getLongitude());
+				sivisoLocation.setLatitude(sivisoData.latitude());
+				sivisoLocation.setLongitude(sivisoData.longitude());
 				double distance = currentLocation.distanceTo(sivisoLocation);
 				
 				if(distance < Defaults.SIVISO_RADIUS)
 				{
-					Log.d(TAG, "onLocationChanged: " + sivisoData.getSiviso());
-					ArrayList<Double> distances = collidedSivisos.get(Siviso.siviso(sivisoData.getSiviso()));
+					ArrayList<Double> distances = collidedSivisos.get(sivisoData.siviso());
 					distances.add(distance);
 				}
 				
@@ -231,37 +230,6 @@ class LocationListener_ManageRingMode implements LocationListener
 	private void None_SaveRingMode()
 	{
 		noneRingMode = audioManager.getRingerMode();
-	}
-	
-	private ArrayList<String> getPossibleSiviso(ArrayList<SivisoData> collidedSivisoData)
-	{
-		ArrayList<String> possibleSiviso = new ArrayList<>();
-		for (SivisoData sivisoData : collidedSivisoData)
-		{
-			possibleSiviso.add(sivisoData.getSiviso());
-		}
-		return possibleSiviso;
-	}
-	
-	private ArrayList<SivisoData> getSivisoThatCollideWithCurrentLocation(List<SivisoData> sivisoDatas, Location currentLocation)
-	{
-		ArrayList<SivisoData> sivisos = new ArrayList<>();
-		
-		for(SivisoData sivisoData : sivisoDatas)
-		{
-			Location sivisoLocation = new Location("");
-			sivisoLocation.setLatitude(sivisoData.getLatitude());
-			sivisoLocation.setLongitude(sivisoData.getLongitude());
-			
-			double distance = currentLocation.distanceTo(sivisoLocation);
-			
-			if(distance < Defaults.SIVISO_RADIUS)
-			{
-				sivisos.add(sivisoData);
-			}
-		}
-		
-		return sivisos;
 	}
 	
 	private void programmerFeedback(final String message)

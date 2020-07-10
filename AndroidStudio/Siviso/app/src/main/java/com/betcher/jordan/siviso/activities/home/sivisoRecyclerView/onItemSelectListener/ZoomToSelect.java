@@ -17,7 +17,7 @@ public class ZoomToSelect implements OnItemSelectListener
 	@Override
 	public void onItemSelect(SivisoData selectedSivisoData)
 	{
-		map.moveCamera(CameraUpdateFactory.newLatLng(selectedSivisoData.getLatLng()));
+		map.moveCamera(CameraUpdateFactory.newLatLng(selectedSivisoData.latLng()));
 	}
 	
 	@Override
