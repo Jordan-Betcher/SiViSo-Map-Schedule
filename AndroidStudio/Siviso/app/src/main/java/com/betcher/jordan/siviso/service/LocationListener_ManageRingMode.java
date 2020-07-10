@@ -85,7 +85,7 @@ class LocationListener_ManageRingMode implements LocationListener
 			//get closest Service_ManageRingMode that isn't none and sort sivisos that current location is in
 			for(SivisoData sivisoData : sivisoDatas)
 			{
-				if(sivisoData.siviso().equals("None"))
+				if(sivisoData.siviso().equals(Siviso.None))
 				{
 					continue;
 				}
@@ -207,9 +207,10 @@ class LocationListener_ManageRingMode implements LocationListener
 	{
 		//String defaultSiviso = Preferences_Siviso.DefaultSiviso()
 		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		String defaultSiviso = prefs.getString(Defaults.PREFERENCE_KEY_DEFAULT_SIVISO, "None");
+		String defaultSivisoName = prefs.getString(Defaults.PREFERENCE_KEY_DEFAULT_SIVISO, "None");
+		Siviso defaultSiviso = Siviso.siviso(defaultSivisoName);
 		
-		if(defaultSiviso.equals("None"))
+		if(defaultSiviso.equals(Siviso.None))
 		{
 			if(noneRingMode == -1)
 			{
@@ -220,10 +221,17 @@ class LocationListener_ManageRingMode implements LocationListener
 				audioManager.setRingerMode(noneRingMode);
 			}
 		}
-		else
+		else if(defaultSiviso.equals(Siviso.Silent))
 		{
-			ArrayList<String> newMode = new ArrayList<>();
-			newMode.add(defaultSiviso);
+			audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+		}
+		else if(defaultSiviso.equals(Siviso.Vibrate))
+		{
+			audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+		}
+		else if(defaultSiviso.equals(Siviso.Sound))
+		{
+			audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 		}
 	}
 	
