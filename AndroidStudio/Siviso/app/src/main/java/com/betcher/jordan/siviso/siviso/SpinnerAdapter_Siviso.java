@@ -1,15 +1,14 @@
 package com.betcher.jordan.siviso.siviso;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-public class SpinnerAdapter_Siviso extends BaseAdapter
+public class SpinnerAdapter_Siviso extends ArrayAdapter
 {
 	Context context;
 	
@@ -17,51 +16,27 @@ public class SpinnerAdapter_Siviso extends BaseAdapter
 	
 	public SpinnerAdapter_Siviso(Context context)
 	{
-		this.context = context;
+		super(context, android.R.layout.simple_spinner_dropdown_item, Siviso.sivisos);
 	}
 	
-	@Override
-	public int getCount()
-	{
-		return Siviso.Count();
-	}
-	
-	@Override
-	public Object getItem(int index)
-	{
-		return Siviso.siviso(index);
-	}
-	
-	@Override
-	public long getItemId(int index)
-	{
-		return index;
-	}
-	
-	
+	@NonNull
 	@Override
 	public View getView(
-	int index, View convertView, ViewGroup parent)
+	int position, @Nullable View convertView,
+	@NonNull ViewGroup parent)
 	{
-		LayoutInflater inflater = LayoutInflater.from(context);
-		
-		if(convertView == null)
-		{
-			convertView = inflater
-			.inflate(spinnerLayoutItem, null);
-		}
-		
-		TextView row = (TextView) convertView.findViewById(android.R.id.text1);
-		
-		ConstraintLayout.LayoutParams layoutParams_fillSpaceProvided
-		= new ConstraintLayout.LayoutParams(
-			ConstraintLayout.LayoutParams.MATCH_PARENT
-			, ConstraintLayout.LayoutParams.MATCH_PARENT);
-		
-		row.setLayoutParams(layoutParams_fillSpaceProvided);
-		row.setBackgroundColor(Siviso.color(index));
-		row.setText(Siviso.name(index));
-		
-		return convertView;
+		View view = super.getView(position, convertView, parent);
+		view.setBackgroundColor(Siviso.color(position));
+		return view;
+	}
+	
+	@Override
+	public View getDropDownView(
+	int position, @Nullable View convertView,
+	@NonNull ViewGroup parent)
+	{
+		View view = super.getDropDownView(position, convertView, parent);
+		view.setBackgroundColor(Siviso.color(position));
+		return view;
 	}
 }
