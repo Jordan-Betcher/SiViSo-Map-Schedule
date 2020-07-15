@@ -49,6 +49,26 @@ public enum Siviso
 		return sivisos[nameIndex.get(sivisoName)];
 	}
 	
+	public static int Count()
+	{
+		return sivisos.length;
+	}
+	
+	public static Siviso siviso(int index)
+	{
+		return sivisos[index];
+	}
+	
+	public static int color(int index)
+	{
+		return sivisos[index].color();
+	}
+	
+	public static String name(int index)
+	{
+		return sivisos[index].name();
+	}
+	
 	public int index()
 	{
 		return nameIndex.get(name());

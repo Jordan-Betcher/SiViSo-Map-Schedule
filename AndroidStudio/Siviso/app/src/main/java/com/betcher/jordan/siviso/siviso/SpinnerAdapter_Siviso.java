@@ -7,24 +7,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class SpinnerAdapter_Siviso extends BaseAdapter
 {
 	Context context;
 	
-	ArrayList<String> items = createItems();
-	private ArrayList<String> createItems()
-	{
-		ArrayList<String> items = new ArrayList<>();
-		
-		items.add("None");
-		items.add("Silent");
-		items.add("Vibrate");
-		items.add("Sound");
-		
-		return items;
-	}
+	int spinnerLayoutItem = android.R.layout.simple_spinner_dropdown_item;
 	
 	public SpinnerAdapter_Siviso(Context context)
 	{
@@ -34,13 +23,13 @@ public class SpinnerAdapter_Siviso extends BaseAdapter
 	@Override
 	public int getCount()
 	{
-		return items.size();
+		return Siviso.Count();
 	}
 	
 	@Override
 	public Object getItem(int index)
 	{
-		return items.get(index);
+		return Siviso.siviso(index);
 	}
 	
 	@Override
@@ -49,18 +38,30 @@ public class SpinnerAdapter_Siviso extends BaseAdapter
 		return index;
 	}
 	
+	
 	@Override
 	public View getView(
 	int index, View convertView, ViewGroup parent)
 	{
-		String sivisoName = items.get(index);
 		LayoutInflater inflater = LayoutInflater.from(context);
-		convertView = inflater.inflate(android.R.layout.simple_spinner_item, null);
+		
+		if(convertView == null)
+		{
+			convertView = inflater
+			.inflate(spinnerLayoutItem, null);
+		}
 		
 		TextView row = (TextView) convertView.findViewById(android.R.id.text1);
-		row.setBackgroundColor(Siviso.color(sivisoName));
-		row.setText(sivisoName);
 		
-		return row;
+		ConstraintLayout.LayoutParams layoutParams_fillSpaceProvided
+		= new ConstraintLayout.LayoutParams(
+			ConstraintLayout.LayoutParams.MATCH_PARENT
+			, ConstraintLayout.LayoutParams.MATCH_PARENT);
+		
+		row.setLayoutParams(layoutParams_fillSpaceProvided);
+		row.setBackgroundColor(Siviso.color(index));
+		row.setText(Siviso.name(index));
+		
+		return convertView;
 	}
 }
