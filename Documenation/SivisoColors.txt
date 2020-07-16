@@ -1,0 +1,3 @@
+blue gray - silent : 99, 106, 133
+greenish blue - vibrate : 131, 199, 167
+Green - sound : 182, 250, 150
