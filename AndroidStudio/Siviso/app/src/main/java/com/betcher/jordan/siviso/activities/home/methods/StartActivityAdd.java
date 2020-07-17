@@ -1,12 +1,10 @@
-package com.betcher.jordan.siviso.actions.home;
+package com.betcher.jordan.siviso.activities.home.methods;
 
 import android.content.Intent;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.activities.Add;
 import com.betcher.jordan.siviso.activities.Home;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
 
 public class StartActivityAdd
 {

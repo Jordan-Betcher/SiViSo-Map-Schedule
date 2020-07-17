@@ -1,8 +1,6 @@
-package com.betcher.jordan.siviso.actions;
+package com.betcher.jordan.siviso.activities.methods;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.betcher.jordan.siviso.activities.Add;
 
 public class CancelActivity
 {

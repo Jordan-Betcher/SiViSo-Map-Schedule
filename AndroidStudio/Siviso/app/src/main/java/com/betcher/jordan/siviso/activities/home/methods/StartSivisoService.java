@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.actions.home;
+package com.betcher.jordan.siviso.activities.home.methods;
 
 import android.content.Context;
 import android.content.Intent;

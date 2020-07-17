@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.actions.CancelActivity;
-import com.betcher.jordan.siviso.actions.add.SetMapAddPosition;
+import com.betcher.jordan.siviso.activities.methods.CancelActivity;
+import com.betcher.jordan.siviso.activities.add.methods.SetMapAddPosition;
 import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.SelectSivisoOnMap;
 import com.betcher.jordan.siviso.database.SivisoData;

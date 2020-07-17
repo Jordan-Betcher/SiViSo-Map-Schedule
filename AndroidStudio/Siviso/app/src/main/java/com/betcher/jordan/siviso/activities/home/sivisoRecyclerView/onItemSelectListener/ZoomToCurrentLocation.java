@@ -1,6 +1,6 @@
 package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener;
 
-import com.betcher.jordan.siviso.actions.home.LocationListenerMapGoToCurrentLocation;
+import com.betcher.jordan.siviso.activities.home.methods.LocationListenerMapGoToCurrentLocation;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemSelectListener;
 import com.betcher.jordan.siviso.database.SivisoData;
 
