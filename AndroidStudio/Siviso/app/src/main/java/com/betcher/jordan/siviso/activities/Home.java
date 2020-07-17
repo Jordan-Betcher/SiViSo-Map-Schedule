@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.Defaults;
+import com.betcher.jordan.siviso.Preferences_Siviso;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.activities.home.methods.CheckAndAskPermissions;
 import com.betcher.jordan.siviso.activities.home.methods.LocationListenerMapGoToCurrentLocation;
@@ -112,8 +113,7 @@ public class Home extends AppCompatActivity
 	private Switch setupSwitchOnOff()
 	{
 		Switch switchOnOff = findViewById(R.id.switchOnOff);
-		SharedPreferences prefs = this.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		boolean isServiceRunning = prefs.getBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, false);
+		boolean isServiceRunning = Preferences_Siviso.isServiceRunning(this);
 		
 		if(isServiceRunning)
 		{

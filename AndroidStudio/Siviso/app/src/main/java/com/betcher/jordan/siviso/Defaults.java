@@ -24,15 +24,11 @@ public class Defaults
 	
 	public static final int ITEM_SELECT_HIGHLIGHT_COLOR = Color.LTGRAY;
 	
-	public static final String PREFERENCE_NAME = "com.betcher.jordan.exampleservice.activities.preferences";
-	
 	public static final int REQUEST_LOCATION_PERMISSION = 1;
 	
 	public static final String NOTIFICATION_CHANNEL_ID = "SivisoChannelID";
 	public static final String NOTIFICATION_CHANNEL_NAME = "Siviso";
-	public static final String PREFERENCE_KEY_DEFAULT_SIVISO = "DefaultSiviso";
 	public static final String DEFAULT_SIVISO_NAME = "Default";
-	public static final String PREFERENCE_KEY_IS_SERVICE_RUNNING = "isServiceRunning";
 	
 	public static final int SIVISO_COLOR_NONE = Color.argb(120, 255, 255, 255);
 	public static final int SIVISO_COLOR_SILENT = Color.argb(200, 99, 106, 133);

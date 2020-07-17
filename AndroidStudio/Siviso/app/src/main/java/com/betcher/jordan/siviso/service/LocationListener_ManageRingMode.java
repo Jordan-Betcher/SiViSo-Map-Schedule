@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -17,6 +16,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.betcher.jordan.siviso.Defaults;
+import com.betcher.jordan.siviso.Preferences_Siviso;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoRepository;
 import com.betcher.jordan.siviso.siviso.Siviso;
@@ -49,8 +49,7 @@ class LocationListener_ManageRingMode implements LocationListener
 		.getApplicationContext()
 		.getSystemService(Context.LOCATION_SERVICE);
 		
-		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		prefs.edit().putBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, true).apply();
+		Preferences_Siviso.saveIsServiceRunning(context, true);
 	}
 	
 	@SuppressLint("MissingPermission")
@@ -203,9 +202,7 @@ class LocationListener_ManageRingMode implements LocationListener
 	
 	private void ManageDefaultRingMode()
 	{
-		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		String defaultSivisoName = prefs.getString(Defaults.PREFERENCE_KEY_DEFAULT_SIVISO, "None");
-		Siviso defaultSiviso = Siviso.siviso(defaultSivisoName);
+		Siviso defaultSiviso = Preferences_Siviso.defaultSiviso(context);
 		
 		if(defaultSiviso.equals(previousSiviso))
 		{
@@ -300,7 +297,6 @@ class LocationListener_ManageRingMode implements LocationListener
 			locationManager.removeUpdates(this);
 		}
 		
-		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		prefs.edit().putBoolean(Defaults.PREFERENCE_KEY_IS_SERVICE_RUNNING, false).apply();
+		Preferences_Siviso.saveIsServiceRunning(context, false);
 	}
 }

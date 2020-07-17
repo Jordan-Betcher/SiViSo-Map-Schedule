@@ -2,12 +2,11 @@ package com.betcher.jordan.siviso.activities.home.methods;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
-import com.betcher.jordan.siviso.Defaults;
+import com.betcher.jordan.siviso.Preferences_Siviso;
 import com.betcher.jordan.siviso.service.Service_ManageRingMode;
 
 public class StartSivisoService
@@ -20,7 +19,6 @@ public class StartSivisoService
 		Intent startSivisoService = new Intent(context, Service_ManageRingMode.class);
 		ContextCompat.startForegroundService(context, startSivisoService);
 		
-		SharedPreferences prefs = context.getSharedPreferences(Defaults.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		prefs.edit().putBoolean("isServiceRunning", true).apply();
+		Preferences_Siviso.saveIsServiceRunning(context, true);
 	}
 }
