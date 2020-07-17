@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.Permissions">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Permissions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_fineLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="ACCESS_FINE_LOCATION"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button_fineLocation_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:onClick="clickFineLocationAccept"
+        android:text="Accept"
+        app:layout_constraintBottom_toBottomOf="@+id/button_fineLocation_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_fineLocation_details" />
+
+    <Button
+        android:id="@+id/button_fineLocation_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:onClick="clickFineLocationDetails"
+        android:text="Details"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_fineLocation"
+        app:layout_constraintEnd_toStartOf="@+id/button_fineLocation_accept"
+        app:layout_constraintTop_toTopOf="@+id/textView_fineLocation" />
+
+    <TextView
+        android:id="@+id/textView_fineLocation_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="ACCESS_FINE_LOCATION allows the application to show your current location on the map and it allows the application to check to see if you are in the area(s) you've set for silence, vibrate, or sound."
+        app:layout_constraintEnd_toEndOf="@+id/button_fineLocation_accept"
+        app:layout_constraintStart_toStartOf="@+id/textView_fineLocation"
+        app:layout_constraintTop_toBottomOf="@+id/button_fineLocation_details" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

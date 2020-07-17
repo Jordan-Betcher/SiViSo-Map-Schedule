@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.Edit"></activity>
+        <activity android:name=".activities.Permissions"></activity>
+        <activity android:name=".activities.Edit" />
         <activity android:name=".activities.Add" />
 
         <meta-data
@@ -28,7 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".service.Service_ManageRingMode"></service>
+
+        <service android:name=".service.Service_ManageRingMode" />
     </application>
 
 </manifest>

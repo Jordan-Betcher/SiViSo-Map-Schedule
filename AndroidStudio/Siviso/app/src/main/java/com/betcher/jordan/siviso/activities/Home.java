@@ -1,9 +1,13 @@
 package com.betcher.jordan.siviso.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.NotificationManager;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,14 +15,13 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.Preferences_Siviso;
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.activities.home.methods.CheckAndAskPermissions;
 import com.betcher.jordan.siviso.activities.home.methods.LocationListenerMapGoToCurrentLocation;
 import com.betcher.jordan.siviso.activities.home.methods.SetUpItemAdapater;
 import com.betcher.jordan.siviso.activities.home.methods.StartActivityAdd;
@@ -61,53 +64,30 @@ public class Home extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_home);
 		
-		CheckAndAskPermissions.run(this);
+		boolean granted_fineLocation = ActivityCompat
+		                               .checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+		                               PackageManager.PERMISSION_GRANTED;
 		
-		switchOnOff = setupSwitchOnOff();
-		buttonDelete = findViewById(R.id.buttonDelete);
-		buttonEdit = findViewById(R.id.buttonEdit);
+		NotificationManager notificationManager =
+		(NotificationManager) this.getSystemService(
+		Context.NOTIFICATION_SERVICE);
 		
-		recyclerViewSiviso = findViewById(R.id.recyclerViewSiviso);
-		linearLayoutManager = new LinearLayoutManager(this);
-		recyclerViewSiviso.setLayoutManager(linearLayoutManager);
+		boolean granted_notificationPolicy =
+		Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+		&& notificationManager.isNotificationPolicyAccessGranted();
 		
-		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
-		itemAdapter = SetUpItemAdapater.run(this, sivisoModel, recyclerViewSiviso);
-		selectItem = new SelectItem(itemAdapter);
-		itemAdapter.addOnItemClickedListener(selectItem);
-		selectItem.addSelectListenerItem(new EnableButton(buttonDelete));
-		selectItem.addSelectListenerItem(new EnableButton(buttonEdit));
-		selectItem.addSelectListenerAll(new HighlightSelectionInList(itemAdapter, linearLayoutManager));
-		
-		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(
-				R.id.homeMap);
-		mapFragment.getMapAsync(new OnMapReadyCallback()
+		if(false == granted_fineLocation)
 		{
-			@SuppressLint("MissingPermission")
-			@Override
-			public void onMapReady(GoogleMap googleMap)
-			{
-				map = googleMap;
-				map.setMyLocationEnabled(true);
-				
-				LocationManager locationManager = (LocationManager) Home
-						.this
-						.getApplicationContext()
-						.getSystemService(Context.LOCATION_SERVICE);
-				
-				LocationListenerMapGoToCurrentLocation listener = new LocationListenerMapGoToCurrentLocation(locationManager, map);
-				listener.goToCurrentLocation();
-				
-				selectItem.addSelectListenerDefault(new ZoomToCurrentLocation(listener));
-				
-				SivisoMapCircles sivisoMapCircles = new SivisoMapCircles(map);
-				sivisoModel.getAllSivisoData().observe(Home.this, sivisoMapCircles);
-				selectItem.addSelectListenerItem(new ZoomToSelect(map));
-				map.setOnCircleClickListener(new TriggerSelectItem(selectItem, sivisoMapCircles));
-			}
-		});
+			Intent intent_permissions = new Intent(this, Permissions.class);
+			this.startActivityForResult(intent_permissions, 1);
+		}
+		else
+		{
+			init();
+		}
 	}
 	
 	private Switch setupSwitchOnOff()
@@ -161,5 +141,61 @@ public class Home extends AppCompatActivity
 	public void onSelect(View view)
 	{
 		Toast.makeText(this, selectItem.getSelectedSiviso().name(), Toast.LENGTH_SHORT).show();
+	}
+	
+	@Override
+	protected void onActivityResult (int requestCode,
+	                                 int resultCode,
+	                                 Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		init();
+	}
+	
+	private void init()
+	{
+		switchOnOff = setupSwitchOnOff();
+		buttonDelete = findViewById(R.id.buttonDelete);
+		buttonEdit = findViewById(R.id.buttonEdit);
+		
+		recyclerViewSiviso = findViewById(R.id.recyclerViewSiviso);
+		linearLayoutManager = new LinearLayoutManager(this);
+		recyclerViewSiviso.setLayoutManager(linearLayoutManager);
+		
+		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
+		itemAdapter = SetUpItemAdapater.run(this, sivisoModel, recyclerViewSiviso);
+		selectItem = new SelectItem(itemAdapter);
+		itemAdapter.addOnItemClickedListener(selectItem);
+		selectItem.addSelectListenerItem(new EnableButton(buttonDelete));
+		selectItem.addSelectListenerItem(new EnableButton(buttonEdit));
+		selectItem.addSelectListenerAll(new HighlightSelectionInList(itemAdapter, linearLayoutManager));
+		
+		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(
+		R.id.homeMap);
+		mapFragment.getMapAsync(new OnMapReadyCallback()
+		{
+			@SuppressLint("MissingPermission")
+			@Override
+			public void onMapReady(GoogleMap googleMap)
+			{
+				map = googleMap;
+				map.setMyLocationEnabled(true);
+				
+				LocationManager locationManager = (LocationManager) Home
+				.this
+				.getApplicationContext()
+				.getSystemService(Context.LOCATION_SERVICE);
+				
+				LocationListenerMapGoToCurrentLocation listener = new LocationListenerMapGoToCurrentLocation(locationManager, map);
+				listener.goToCurrentLocation();
+				
+				selectItem.addSelectListenerDefault(new ZoomToCurrentLocation(listener));
+				
+				SivisoMapCircles sivisoMapCircles = new SivisoMapCircles(map);
+				sivisoModel.getAllSivisoData().observe(Home.this, sivisoMapCircles);
+				selectItem.addSelectListenerItem(new ZoomToSelect(map));
+				map.setOnCircleClickListener(new TriggerSelectItem(selectItem, sivisoMapCircles));
+			}
+		});
 	}
 }
