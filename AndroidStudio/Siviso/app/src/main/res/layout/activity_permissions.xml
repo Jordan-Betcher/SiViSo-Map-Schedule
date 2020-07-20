@@ -61,6 +61,59 @@
         android:text="ACCESS_FINE_LOCATION allows the application to show your current location on the map and it allows the application to check to see if you are in the area(s) you've set for silence, vibrate, or sound."
         app:layout_constraintEnd_toEndOf="@+id/button_fineLocation_accept"
         app:layout_constraintStart_toStartOf="@+id/textView_fineLocation"
-        app:layout_constraintTop_toBottomOf="@+id/button_fineLocation_details" />
+        app:layout_constraintTop_toBottomOf="@+id/button_fineLocation_accept" />
+
+    <TextView
+        android:id="@+id/textView_notificationPolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="NOTIFICATION_POLICY"
+        app:layout_constraintStart_toStartOf="@+id/textView_fineLocation"
+        app:layout_constraintTop_toBottomOf="@+id/textView_fineLocation_details" />
+
+    <Button
+        android:id="@+id/button_notificationPolicy_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:onClick="clickNotificationPolicyDetails"
+        android:text="Details"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_notificationPolicy"
+        app:layout_constraintEnd_toStartOf="@+id/button_notificationPolicy_accept"
+        app:layout_constraintTop_toTopOf="@+id/textView_notificationPolicy"
+        app:layout_constraintVertical_bias="0.586" />
+
+    <Button
+        android:id="@+id/button_notificationPolicy_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickNotificationPolicyAccept"
+        android:text="Accept"
+        app:layout_constraintBottom_toBottomOf="@+id/button_notificationPolicy_details"
+        app:layout_constraintEnd_toEndOf="@+id/button_fineLocation_accept"
+        app:layout_constraintTop_toTopOf="@+id/button_notificationPolicy_details" />
+
+    <TextView
+        android:id="@+id/textView_notificationPolicy_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text='NOTICIATION_POLICY allos the application to change the do not disturb mode which the app uses to silence, vibrate, or modify the sound settings of your phone. \n\nThis will open settings so that you can the do not disturb to allow for this app "Siviso"'
+        app:layout_constraintEnd_toEndOf="@+id/button_notificationPolicy_accept"
+        app:layout_constraintStart_toStartOf="@+id/textView_notificationPolicy"
+        app:layout_constraintTop_toBottomOf="@+id/button_notificationPolicy_accept" />
+
+    <Button
+        android:id="@+id/button_OpenSiviso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:onClick="clickOpenSiviso"
+        android:text="Open Siviso"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button_notificationPolicy_accept"
+        app:layout_constraintStart_toStartOf="@+id/textView_notificationPolicy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

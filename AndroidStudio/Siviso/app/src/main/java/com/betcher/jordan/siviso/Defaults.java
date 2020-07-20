@@ -34,4 +34,7 @@ public class Defaults
 	public static final int SIVISO_COLOR_SILENT = Color.argb(200, 99, 106, 133);
 	public static final int SIVISO_COLOR_VIBRATE = Color.argb(200, 131, 199, 167);
 	public static final int SIVISO_COLOR_SOUND = Color.argb(200, 182, 250, 150);
+	
+	public static final int PERMISSIONS_OPEN_SIVISO_ACCEPTED_COLOR = Color.argb(255, 0, 150, 0);
+	public static final int PERMISSIONS_OPEN_SIVISO_NOT_ACCEPTED_COLOR = Color.argb(255, 200, 0, 0);
 }

@@ -65,8 +65,6 @@ public class Home extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.activity_home);
-		
 		boolean granted_fineLocation = ActivityCompat
 		                               .checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
 		                               PackageManager.PERMISSION_GRANTED;
@@ -79,7 +77,7 @@ public class Home extends AppCompatActivity
 		Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
 		&& notificationManager.isNotificationPolicyAccessGranted();
 		
-		if(false == granted_fineLocation)
+		if(false == granted_fineLocation || false == granted_notificationPolicy)
 		{
 			Intent intent_permissions = new Intent(this, Permissions.class);
 			this.startActivityForResult(intent_permissions, 1);
@@ -154,6 +152,7 @@ public class Home extends AppCompatActivity
 	
 	private void init()
 	{
+		setContentView(R.layout.activity_home);
 		switchOnOff = setupSwitchOnOff();
 		buttonDelete = findViewById(R.id.buttonDelete);
 		buttonEdit = findViewById(R.id.buttonEdit);

@@ -1,29 +1,29 @@
 package com.betcher.jordan.siviso.activities;
 
-import android.Manifest;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.activities.methods.CancelActivity;
+import com.betcher.jordan.siviso.activities.permissions.PermissionFineLocation;
+import com.betcher.jordan.siviso.activities.permissions.PermissionNotificationPolicy;
+import com.betcher.jordan.siviso.activities.permissions.UiOfPermissions;
 
 public class Permissions extends AppCompatActivity
 {
-    PermissionsRow fineLocation;
-    //PermissionsRow notificationPolicy;
+    PermissionFineLocation fineLocation;
+    UiOfPermissions uiOfFineLocationUI;
     
-    boolean granted_fineLocation;
-    boolean granted_notificationPolicy;
+    PermissionNotificationPolicy notificationPolicy;
+    UiOfPermissions uiOfNotificationPolicy;
+    
+    Button openSiviso;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,92 +31,125 @@ public class Permissions extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permissions);
     
-        granted_fineLocation = ActivityCompat
-                                .checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                               PackageManager.PERMISSION_GRANTED;
+        uiOfFineLocationUI = createUiOfFineLocation();
+        uiOfFineLocationUI.init();
+        fineLocation = new PermissionFineLocation(uiOfFineLocationUI);
+        fineLocation.initUI(this);
+    
+    
+        uiOfNotificationPolicy = createUiOfNotificationPolicy();
+        uiOfNotificationPolicy.init();
+        notificationPolicy = new PermissionNotificationPolicy(uiOfNotificationPolicy);
+        notificationPolicy.initUI(this);
+    
+        openSiviso = findViewById(R.id.button_OpenSiviso);
         
-        NotificationManager notificationManager =
-            (NotificationManager) this.getSystemService(
-            Context.NOTIFICATION_SERVICE);
-        granted_notificationPolicy =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-            && notificationManager.isNotificationPolicyAccessGranted();
-        
-        fineLocation = createPermissionRowFineLocation(granted_fineLocation);
+        if(allPermissionsGranted())
+        {
+            CancelActivity.run(this);
+        }
+        else
+        {
+            openSiviso.setEnabled(false);
+        }
+    }
+    
+    private boolean allPermissionsGranted()
+    {
+        if(true == fineLocation.isGranted(this) && true == notificationPolicy.isGranted(this))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    private UiOfPermissions createUiOfFineLocation()
+    {
+        TextView title = findViewById(R.id.textView_fineLocation);
+        Button toggleDetails = findViewById(R.id.button_fineLocation_details);
+        TextView detailsDisplay = findViewById(R.id.textView_fineLocation_details);
+        Button grantPermission = findViewById(R.id.button_fineLocation_accept);
+        UiOfPermissions uiOfFineLocationUI = new UiOfPermissions(title, toggleDetails, detailsDisplay, grantPermission);
+        return uiOfFineLocationUI;
+    }
+    
+    private UiOfPermissions createUiOfNotificationPolicy()
+    {
+        TextView title = findViewById(R.id.textView_notificationPolicy);
+        Button toggleDetails = findViewById(R.id.button_notificationPolicy_details);
+        TextView detailsDisplay = findViewById(R.id.textView_notificationPolicy_details);
+        Button grantPermission = findViewById(R.id.button_notificationPolicy_accept);
+        UiOfPermissions uiOfNotificationPolicy = new UiOfPermissions(title, toggleDetails, detailsDisplay, grantPermission);
+        return uiOfNotificationPolicy;
+    }
+    
+    public void clickFineLocationDetails(View view)
+    {
+        uiOfFineLocationUI.toggleDetails();
+    }
+    
+    public void clickFineLocationAccept(View view)
+    {
+        fineLocation.run(this);
         
         ifDone();
     }
     
     private void ifDone()
     {
-        if(true == granted_fineLocation)
+        if(allPermissionsGranted())
+        {
+            openSiviso.setEnabled(true);
+        }
+    }
+    
+    public void clickNotificationPolicyDetails(View view)
+    {
+        uiOfNotificationPolicy.toggleDetails();
+    }
+    
+    public void clickNotificationPolicyAccept(View view)
+    {
+        notificationPolicy.run(this);
+        
+        ifDone();
+    }
+    
+    
+    public void clickOpenSiviso(View view)
+    {
+        if(allPermissionsGranted())
         {
             CancelActivity.run(this);
         }
     }
     
-    private PermissionsRow createPermissionRowFineLocation(
-    boolean granted_fineLocation)
+    @Override
+    protected void onActivityResult(int requestCode,
+                                     int resultCode,
+                                     Intent data)
     {
-        Button toggleDetails = findViewById(R.id.button_fineLocation_details);
-        TextView detailsDisplay = findViewById(R.id.textView_fineLocation_details);
-        Button grantPermission = findViewById(R.id.button_fineLocation_accept);
-        PermissionsRow fineLocation = new PermissionsRow(toggleDetails, detailsDisplay, grantPermission, granted_fineLocation);
-        return fineLocation;
+        super.onActivityResult(requestCode, resultCode, data);
+        refresh();
     }
     
-    public void clickFineLocationDetails(View view)
+    @Override
+    public void onRequestPermissionsResult(
+    int requestCode, @NonNull String[] permissions,
+    @NonNull int[] grantResults)
     {
-        fineLocation.toggleDetails();
+        super.onRequestPermissionsResult(requestCode, permissions,
+                                         grantResults);
+        refresh();
     }
     
-    public void clickFineLocationAccept(View view)
+    public void refresh()
     {
-        ActivityCompat.requestPermissions(this, new String[]
-                                          {Manifest.permission.ACCESS_FINE_LOCATION},
-                                          Defaults.REQUEST_LOCATION_PERMISSION
-                                         );
-        
-        granted_fineLocation = ActivityCompat
-                               .checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                               PackageManager.PERMISSION_GRANTED;
-        
-        fineLocation.permission(granted_fineLocation);
+        fineLocation.refreshUI(this);
+        notificationPolicy.refreshUI(this);
         ifDone();
-    }
-    
-    
-    class PermissionsRow
-    {
-        Button toggleDetails;
-        TextView detailsDisplay;
-        Button grantPermission;
-        
-        public PermissionsRow(Button toggleDetails, TextView detailsDisplay, Button grantPermission, boolean granted)
-        {
-            this.toggleDetails = toggleDetails;
-            this.detailsDisplay = detailsDisplay;
-            this.grantPermission = grantPermission;
-            permission(granted);
-        }
-    
-        public void toggleDetails()
-        {
-            if(detailsDisplay.getVisibility() == TextView.VISIBLE)
-            {
-                detailsDisplay.setVisibility(TextView.INVISIBLE);
-            }
-            else
-            {
-                detailsDisplay.setVisibility(TextView.VISIBLE);
-            }
-        }
-        
-        public void permission(boolean granted)
-        {
-            toggleDetails.setEnabled(!granted);
-            detailsDisplay.setVisibility(TextView.INVISIBLE);
-            grantPermission.setEnabled(!granted);
-        }
     }
 }
