@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/editMap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="379dp"
@@ -39,7 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="@string/text_for_hint_name"
+        android:hint="@string/hint_name"
         android:inputType="textCapWords"
         android:singleLine="true"
         app:layout_constraintEnd_toStartOf="@+id/editSiviso"
@@ -62,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="onClickButtonCancel"
-        android:text="@string/text_for_button_cancel"
+        android:text="@string/button_cancel"
         app:layout_constraintEnd_toStartOf="@+id/buttonConfirmEdit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/editName"
@@ -73,7 +73,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="onClickButtonConfirmEdit"
-        android:text="@string/text_for_button_confirm_edit"
+        android:text="@string/button_confirm_edit"
         app:layout_constraintEnd_toEndOf="@+id/editSiviso"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonCancel"

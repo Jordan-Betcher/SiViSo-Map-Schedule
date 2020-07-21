@@ -23,10 +23,10 @@ Refactor Siviso and SivisoLite
             [x] Fine Location
             [x] Notification Policy
         [x]  Call Permissions in Home Startup
-    Mute "other sound" on Silent and Vibrate
-    ? [No, to much work] Make location listener it's own library that both pass in a database interface
-    On Location enter show (? popup message or map border color matches siviso or circle highlights, etc...)
     Refactor layout text into strings file
+    Refactor names of variables, classes,etc
+    Zoom in map so you can see the siviso areas
+    Remove siviso indicator
 
 To publish need
     Test on multiple API levels
@@ -44,6 +44,7 @@ To publish need
         Recommend
         - Notification Reminder
             An app that reminds you about missed notifcations. It works with Siviso because once siviso goes to sound the notifcations will tell you if you missed anything.
+        Instead recommend app that mutes app on silent/vibrate. Mute "other sound" on Silent and Vibrate
 Learn how updates work (I think you just upload new apk)
 
 Optional:
@@ -72,7 +73,8 @@ Create a company when make enough to warrent it
             Logo
             Name
     Github
-
+? [No, to much work] Make location listener it's own library that both pass in a database interface
+? [No, to much work for now] On Location enter show (? popup message or map border color matches siviso or circle highlights, etc...)
 
 
 Research

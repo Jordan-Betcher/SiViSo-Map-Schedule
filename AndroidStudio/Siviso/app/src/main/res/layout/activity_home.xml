@@ -27,13 +27,13 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:onClick="onOnOffSwitchClicked"
-        android:text="@string/text_for_switch_on_off"
+        android:text="@string/switch_on_off"
         android:textColorLink="#8BC34A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/homeMap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
@@ -43,7 +43,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeTitle"
@@ -73,7 +73,7 @@
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
-        android:text="@string/text_for_button_add"
+        android:text="@string/button_add"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
@@ -90,7 +90,7 @@
         android:layout_marginBottom="16dp"
         android:enabled="false"
         android:onClick="onClickButtonDelete"
-        android:text="@string/text_for_button_delete"
+        android:text="@string/button_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
         app:layout_constraintHorizontal_bias="0.5"
@@ -104,7 +104,7 @@
         android:layout_marginRight="16dp"
         android:enabled="false"
         android:onClick="onClickButtonEdit"
-        android:text="@string/text_for_button_edit"
+        android:text="@string/button_edit"
         app:layout_constraintBottom_toBottomOf="@+id/buttonDelete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

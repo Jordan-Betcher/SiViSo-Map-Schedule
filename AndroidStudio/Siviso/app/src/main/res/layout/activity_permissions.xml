@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Permissions"
+        android:text="@string/title_permissions"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +25,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:gravity="center"
-        android:text="ACCESS_FINE_LOCATION"
+        android:text="@string/permission_fine_location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -36,7 +36,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:onClick="clickFineLocationAccept"
-        android:text="Accept"
+        android:text="@string/button_fine_location_accept"
         app:layout_constraintBottom_toBottomOf="@+id/button_fineLocation_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/button_fineLocation_details" />
@@ -48,7 +48,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:onClick="clickFineLocationDetails"
-        android:text="Details"
+        android:text="@string/button_fine_location_details"
         app:layout_constraintBottom_toBottomOf="@+id/textView_fineLocation"
         app:layout_constraintEnd_toStartOf="@+id/button_fineLocation_accept"
         app:layout_constraintTop_toTopOf="@+id/textView_fineLocation" />
@@ -58,7 +58,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="ACCESS_FINE_LOCATION allows the application to show your current location on the map and it allows the application to check to see if you are in the area(s) you've set for silence, vibrate, or sound."
+        android:text="@string/fine_location_details"
         app:layout_constraintEnd_toEndOf="@+id/button_fineLocation_accept"
         app:layout_constraintStart_toStartOf="@+id/textView_fineLocation"
         app:layout_constraintTop_toBottomOf="@+id/button_fineLocation_accept" />
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="NOTIFICATION_POLICY"
+        android:text="@string/permission_notification_policy"
         app:layout_constraintStart_toStartOf="@+id/textView_fineLocation"
         app:layout_constraintTop_toBottomOf="@+id/textView_fineLocation_details" />
 
@@ -79,7 +79,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:onClick="clickNotificationPolicyDetails"
-        android:text="Details"
+        android:text="@string/button_notification_policy_details"
         app:layout_constraintBottom_toBottomOf="@+id/textView_notificationPolicy"
         app:layout_constraintEnd_toStartOf="@+id/button_notificationPolicy_accept"
         app:layout_constraintTop_toTopOf="@+id/textView_notificationPolicy"
@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="clickNotificationPolicyAccept"
-        android:text="Accept"
+        android:text="@string/button_notification_policy_accept"
         app:layout_constraintBottom_toBottomOf="@+id/button_notificationPolicy_details"
         app:layout_constraintEnd_toEndOf="@+id/button_fineLocation_accept"
         app:layout_constraintTop_toTopOf="@+id/button_notificationPolicy_details" />
@@ -100,7 +100,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text='NOTICIATION_POLICY allos the application to change the do not disturb mode which the app uses to silence, vibrate, or modify the sound settings of your phone. \n\nThis will open settings so that you can the do not disturb to allow for this app "Siviso"'
+        android:text="@string/notification_policy_details"
         app:layout_constraintEnd_toEndOf="@+id/button_notificationPolicy_accept"
         app:layout_constraintStart_toStartOf="@+id/textView_notificationPolicy"
         app:layout_constraintTop_toBottomOf="@+id/button_notificationPolicy_accept" />
@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:onClick="clickOpenSiviso"
-        android:text="Open Siviso"
+        android:text="@string/button_open_siviso"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/button_notificationPolicy_accept"
         app:layout_constraintStart_toStartOf="@+id/textView_notificationPolicy" />
