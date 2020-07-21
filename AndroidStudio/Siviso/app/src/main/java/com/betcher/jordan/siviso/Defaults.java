@@ -4,7 +4,7 @@ import android.graphics.Color;
 
 public class Defaults
 {
-	public static final float HOME_ZOOM = 14f;
+	public static final float HOME_ZOOM = 14.7f;
 	
 	public static final float SIVISO_ZOOM = 17f;
 	public static final double SIVISO_RADIUS = 70;
