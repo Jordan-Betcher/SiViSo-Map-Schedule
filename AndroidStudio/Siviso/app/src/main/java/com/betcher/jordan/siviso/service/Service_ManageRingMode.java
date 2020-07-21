@@ -48,7 +48,7 @@ public class Service_ManageRingMode extends Service
 		                                                        0, notificationIntent, 0);
 		Notification notification = new NotificationCompat.Builder(this,
 		                                                           Defaults.NOTIFICATION_CHANNEL_ID)
-				.setContentTitle("Title Test")
+				.setContentTitle("Siviso")
 				.setContentText(input)
 				.setContentIntent(pendingIntent)
 				.build();

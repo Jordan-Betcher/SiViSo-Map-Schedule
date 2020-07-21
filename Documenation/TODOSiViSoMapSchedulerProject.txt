@@ -17,16 +17,17 @@ Steps:
     [x] Name of Siviso Data first letter should be capped when you start typing
     [x] Preferences
     
-Refactor Siviso and SivisoLite
+Refactor Siviso
     [x] Handle Permissions not granted (search "@SuppressLint("MissingPermission")", not pragmatic)
         [x]  Create Request permissions Activity
             [x] Fine Location
             [x] Notification Policy
         [x]  Call Permissions in Home Startup
-    Refactor layout text into strings file
-    Refactor names of variables, classes,etc
-    Zoom in map so you can see the siviso areas
+    [x] Refactor layout text into strings file
+    [x] Zoom in map so you can see the siviso areas
     Remove siviso indicator
+    Refactor names of variables, classes, etc
+    Do the same for SivisoLite
 
 To publish need
     Test on multiple API levels

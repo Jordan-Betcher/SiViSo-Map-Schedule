@@ -9,11 +9,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.Preferences_Siviso;
@@ -184,17 +181,14 @@ class LocationListener_ManageRingMode implements LocationListener
 		else if(siviso.equals(Siviso.Silent))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-			programmerFeedback(siviso.name());
 		}
 		else if(siviso.equals(Siviso.Vibrate))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
-			programmerFeedback(siviso.name());
 		}
 		else if(siviso.equals(Siviso.Sound))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-			programmerFeedback(siviso.name());
 		}
 		
 		previousSiviso = siviso;
@@ -232,24 +226,6 @@ class LocationListener_ManageRingMode implements LocationListener
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 		}
-		
-		programmerFeedback(defaultSiviso.name());
-	}
-	
-	private void programmerFeedback(final String message)
-	{
-		Log.d(TAG, message);
-		
-		Handler handler = new Handler(Looper.getMainLooper());
-		handler.post(new Runnable()
-		{
-			
-			@Override
-			public void run()
-			{
-				Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-			}
-		});
 	}
 	
 	@Override
