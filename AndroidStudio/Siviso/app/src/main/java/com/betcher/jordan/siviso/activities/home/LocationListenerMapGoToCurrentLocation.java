@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.home.methods;
+package com.betcher.jordan.siviso.activities.home;
 
 import android.annotation.SuppressLint;
 import android.location.Location;

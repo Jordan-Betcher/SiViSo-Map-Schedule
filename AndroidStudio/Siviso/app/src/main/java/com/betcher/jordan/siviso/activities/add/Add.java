@@ -1,6 +1,7 @@
-package com.betcher.jordan.siviso.activities;
+package com.betcher.jordan.siviso.activities.add;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,13 +10,14 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.activities.methods.CancelActivity;
-import com.betcher.jordan.siviso.activities.add.methods.SetMapAddPosition;
-import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.SelectSivisoOnMap;
+import com.betcher.jordan.siviso.activities.methods.CancelActivity;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
+import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -57,7 +59,15 @@ public class Add extends AppCompatActivity
 			{
 				map = googleMap;
 				map.setMyLocationEnabled(true);
-				SetMapAddPosition.run(activity, map);
+				
+				//set map position
+				Intent intent = activity.getIntent();
+				Double latitude  = intent.getDoubleExtra(Defaults.EXTRA_NAME_LATITUDE, 0);
+				Double longitude  = intent.getDoubleExtra(Defaults.EXTRA_NAME_LONGITUDE, 0);
+				LatLng previousActivityLatLng = new LatLng(latitude, longitude);
+				map.moveCamera(CameraUpdateFactory
+				               .newLatLngZoom(previousActivityLatLng,
+				                              Defaults.SIVISO_ZOOM));
 				selectSivisoOnMap = new SelectSivisoOnMap(map, buttonConfirmAdd, inputSiviso);
 				map.setOnMapClickListener(selectSivisoOnMap);
 			}

@@ -1,6 +1,7 @@
-package com.betcher.jordan.siviso.activities;
+package com.betcher.jordan.siviso.activities.edit;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +14,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.activities.methods.CancelActivity;
-import com.betcher.jordan.siviso.activities.edit.methods.SetMapEditPosition;
-import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.SelectSivisoOnMap;
+import com.betcher.jordan.siviso.activities.methods.CancelActivity;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
+import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -36,6 +37,8 @@ public class Edit extends AppCompatActivity
 	SivisoModel sivisoModel;
 	
 	int selectedSivisoDataID;
+	
+	Activity activity;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +65,8 @@ public class Edit extends AppCompatActivity
 		int arrayPositionOfSelectedSiviso = arrayAdapter.getPosition(selectedSivisoDataSiviso);
 		inputSiviso.setSelection(arrayPositionOfSelectedSiviso);
 		
+		activity = this;
+		
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.editMap);
 		mapFragment.getMapAsync(new OnMapReadyCallback()
 		{
@@ -75,7 +80,17 @@ public class Edit extends AppCompatActivity
 				                                          inputSiviso);
 				map.setOnMapClickListener(selectSivisoOnMap);
 				
-				SetMapEditPosition.run(Edit.this, map, selectSivisoOnMap);
+				
+				//SetMapEditPosition
+				Intent intent = activity.getIntent();
+				Double latitude  = intent.getDoubleExtra(Defaults.EXTRA_NAME_LATITUDE, 0);
+				Double longitude  = intent.getDoubleExtra(Defaults.EXTRA_NAME_LONGITUDE, 0);
+				LatLng selectedSivisoDataLatLng = new LatLng(latitude, longitude);
+				map.moveCamera(CameraUpdateFactory
+				               .newLatLngZoom(selectedSivisoDataLatLng,
+				                              Defaults.SIVISO_ZOOM));
+				
+				selectSivisoOnMap.onMapClick(selectedSivisoDataLatLng);
 			}
 		});
 	}

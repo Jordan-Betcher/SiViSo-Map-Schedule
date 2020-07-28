@@ -15,14 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".activities.Permissions"></activity>
-        <activity android:name=".activities.Edit" />
-        <activity android:name=".activities.Add" />
+        <activity android:name=".activities.edit.Edit" />
+        <activity android:name=".activities.add.Add" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activities.Home">
+        <activity android:name=".activities.home.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

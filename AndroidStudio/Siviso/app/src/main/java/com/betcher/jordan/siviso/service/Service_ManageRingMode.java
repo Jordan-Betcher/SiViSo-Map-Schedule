@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.betcher.jordan.siviso.Defaults;
-import com.betcher.jordan.siviso.activities.Home;
+import com.betcher.jordan.siviso.activities.home.Home;
 
 public class Service_ManageRingMode extends Service
 {

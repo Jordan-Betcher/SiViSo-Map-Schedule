@@ -25,7 +25,7 @@ Refactor Siviso
         [x]  Call Permissions in Home Startup
     [x] Refactor layout text into strings file
     [x] Zoom in map so you can see the siviso areas
-    Remove siviso indicator
+    [x] Remove siviso indicator
     Refactor names of variables, classes, etc
     Do the same for SivisoLite
 
