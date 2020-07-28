@@ -29,8 +29,7 @@ import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.activities.Permissions;
 import com.betcher.jordan.siviso.activities.add.Add;
 import com.betcher.jordan.siviso.activities.edit.Edit;
-import com.betcher.jordan.siviso.activities.home.sivisoMapCircles.SivisoMapCircles;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.SelectItem;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.EnableButton;
 import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.HighlightSelectionInList;
@@ -55,7 +54,7 @@ public class Home extends AppCompatActivity
 	
 	GoogleMap map;
 	RecyclerView recyclerViewSiviso;
-	ItemAdapter itemAdapter;
+	RecyclerViewAdapter_Siviso itemAdapter;
 	SivisoModel sivisoModel;
 	
 	Switch switchOnOff;
@@ -193,7 +192,7 @@ public class Home extends AppCompatActivity
 		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
 		
 		//setupItemAdapter
-		itemAdapter = new ItemAdapter(this, sivisoModel);
+		itemAdapter = new RecyclerViewAdapter_Siviso(this, sivisoModel);
 		recyclerViewSiviso.setAdapter(itemAdapter);
 		
 		sivisoModel.getAllSivisoData().observe(this, new Observer<List<SivisoData>>()
@@ -201,15 +200,15 @@ public class Home extends AppCompatActivity
 			@Override
 			public void onChanged(@Nullable List<SivisoData> sivisoDatas)
 			{
-				ArrayList<SivisoData> shown = new ArrayList<>();
+				ArrayList<SivisoData> shownList_siviso = new ArrayList<>();
 				
 				Siviso defaultSiviso = Preferences_Siviso.defaultSiviso(Home.this);
 				SivisoData defaultSivisoData = new SivisoData(Defaults.DEFAULT_SIVISO_NAME, defaultSiviso.name(), 0, 0);
 				
-				shown.add(defaultSivisoData);
-				shown.addAll(sivisoDatas);
+				shownList_siviso.add(defaultSivisoData);
+				shownList_siviso.addAll(sivisoDatas);
 				
-				itemAdapter.setSivisoDatas(shown);
+				itemAdapter.setSivisoDatas(shownList_siviso);
 			}
 		});
 		

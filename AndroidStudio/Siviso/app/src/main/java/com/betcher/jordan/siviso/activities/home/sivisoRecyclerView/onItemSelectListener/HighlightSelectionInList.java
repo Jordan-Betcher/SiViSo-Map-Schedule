@@ -6,20 +6,20 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.betcher.jordan.siviso.Defaults;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemSelectListener;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
 import com.betcher.jordan.siviso.database.SivisoData;
 
-public class HighlightSelectionInList implements OnItemSelectListener, ItemAdapter.OnBindViewListener
+public class HighlightSelectionInList implements OnItemSelectListener, RecyclerViewAdapter_Siviso.OnBindViewListener
 {
 	
-	ItemAdapter itemAdapter;
+	RecyclerViewAdapter_Siviso itemAdapter;
 	LinearLayoutManager linearLayoutManager;
 	private View highlightedView = null;
 	private int previousViewColor = 0;
 	private SivisoData currentSelect = null;
 	
-	public HighlightSelectionInList(ItemAdapter itemAdapter, LinearLayoutManager linearLayoutManager)
+	public HighlightSelectionInList(
+	RecyclerViewAdapter_Siviso itemAdapter, LinearLayoutManager linearLayoutManager)
 	{
 		this.itemAdapter = itemAdapter;
 		this.linearLayoutManager = linearLayoutManager;

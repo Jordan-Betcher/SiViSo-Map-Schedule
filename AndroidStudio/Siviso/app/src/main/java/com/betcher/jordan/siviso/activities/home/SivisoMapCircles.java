@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.home.sivisoMapCircles;
+package com.betcher.jordan.siviso.activities.home;
 
 import androidx.lifecycle.Observer;
 

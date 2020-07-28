@@ -1,6 +1,6 @@
 package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener;
 
-import com.betcher.jordan.siviso.activities.home.sivisoMapCircles.SivisoMapCircles;
+import com.betcher.jordan.siviso.activities.home.SivisoMapCircles;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;

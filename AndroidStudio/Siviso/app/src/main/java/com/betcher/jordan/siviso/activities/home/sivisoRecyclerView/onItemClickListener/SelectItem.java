@@ -5,22 +5,22 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.Defaults;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.ItemAdapter;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemClickListener;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemSelectListener;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.OnItemSelectListener;
 import com.betcher.jordan.siviso.database.SivisoData;
 
 public class SelectItem
 		implements OnItemClickListener
 {
 	private SivisoData selectedSiviso = null;
-	private ItemAdapter sivisoRecyclerViewItemAdapter;
+	private RecyclerViewAdapter_Siviso sivisoRecyclerViewItemAdapter;
 	
 	private SelectItemListener selectListenersAll = new SelectItemListener();
 	private SelectItemListener selectListenersDefault = new SelectItemListener();
 	private SelectItemListener selectListenersItems = new SelectItemListener();
 	
-	public SelectItem(ItemAdapter sivisoRecyclerViewItemAdapter)
+	public SelectItem(
+	RecyclerViewAdapter_Siviso sivisoRecyclerViewItemAdapter)
 	{
 		this.sivisoRecyclerViewItemAdapter = sivisoRecyclerViewItemAdapter;
 	}

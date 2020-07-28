@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.R;
+import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener.OnItemClickListener;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
 import com.betcher.jordan.siviso.siviso.Siviso;
@@ -20,8 +21,8 @@ import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemAdapter
-		extends RecyclerView.Adapter<ItemAdapter.SivisoHolder>
+public class RecyclerViewAdapter_Siviso
+		extends RecyclerView.Adapter<RecyclerViewAdapter_Siviso.SivisoHolder>
 {
 	private static final String TAG = "SVSRecyclerViewAdapter";
 	
@@ -31,7 +32,7 @@ public class ItemAdapter
 	private SivisoModel sivisoModel;
 	private Context context;
 	
-	public ItemAdapter(Context context, SivisoModel sivisoModel)
+	public RecyclerViewAdapter_Siviso(Context context, SivisoModel sivisoModel)
 	{
 		this.context = context;
 		this.sivisoModel = sivisoModel;

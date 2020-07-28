@@ -1,6 +1,5 @@
 package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener;
 
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.OnItemSelectListener;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
