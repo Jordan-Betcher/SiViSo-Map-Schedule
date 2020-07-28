@@ -1,6 +1,6 @@
-package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener;
+package com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemClickListener;
 
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemSelectListener.OnItemSelectListener;
+import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemSelectListener.OnItemSelectListener;
 import com.betcher.jordan.siviso.database.SivisoData;
 
 import java.util.ArrayList;

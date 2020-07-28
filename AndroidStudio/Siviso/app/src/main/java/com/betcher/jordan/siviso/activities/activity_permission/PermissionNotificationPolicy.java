@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.permissions;
+package com.betcher.jordan.siviso.activities.activity_permission;
 
 import android.app.Activity;
 import android.app.NotificationManager;
@@ -8,7 +8,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-public class PermissionNotificationPolicy implements Permission
+class PermissionNotificationPolicy implements Permission
 {
 	UiOfPermissions uiOfPermissions;
 	

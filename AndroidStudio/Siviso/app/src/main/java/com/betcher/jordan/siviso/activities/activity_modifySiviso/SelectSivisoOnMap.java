@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener;
+package com.betcher.jordan.siviso.activities.activity_modifySiviso;
 
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 
-public class SelectSivisoOnMap implements GoogleMap.OnMapClickListener
+class SelectSivisoOnMap implements GoogleMap.OnMapClickListener
 {
 	Button buttonConfirmAdd;
 	GoogleMap map;

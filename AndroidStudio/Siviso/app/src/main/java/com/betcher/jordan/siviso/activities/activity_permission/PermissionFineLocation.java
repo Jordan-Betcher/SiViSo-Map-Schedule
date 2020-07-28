@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.permissions;
+package com.betcher.jordan.siviso.activities.activity_permission;
 
 import android.Manifest;
 import android.app.Activity;
@@ -9,7 +9,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.betcher.jordan.siviso.Defaults;
 
-public class PermissionFineLocation implements Permission
+class PermissionFineLocation implements Permission
 {
 	UiOfPermissions uiOfPermissions;
 	

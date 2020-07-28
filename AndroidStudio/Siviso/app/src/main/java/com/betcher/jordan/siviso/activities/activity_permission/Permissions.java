@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities;
+package com.betcher.jordan.siviso.activities.activity_permission;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.activities.methods.CancelActivity;
-import com.betcher.jordan.siviso.activities.permissions.PermissionFineLocation;
-import com.betcher.jordan.siviso.activities.permissions.PermissionNotificationPolicy;
-import com.betcher.jordan.siviso.activities.permissions.UiOfPermissions;
 
 public class Permissions extends AppCompatActivity
 {
@@ -46,7 +42,7 @@ public class Permissions extends AppCompatActivity
         
         if(allPermissionsGranted())
         {
-            CancelActivity.run(this);
+            this.finish();
         }
         else
         {
@@ -123,7 +119,7 @@ public class Permissions extends AppCompatActivity
     {
         if(allPermissionsGranted())
         {
-            CancelActivity.run(this);
+            this.finish();
         }
     }
     

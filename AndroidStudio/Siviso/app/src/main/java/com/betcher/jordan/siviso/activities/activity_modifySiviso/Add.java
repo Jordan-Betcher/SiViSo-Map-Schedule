@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.add;
+package com.betcher.jordan.siviso.activities.activity_modifySiviso;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,8 +12,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onMapCircleClickListener.SelectSivisoOnMap;
-import com.betcher.jordan.siviso.activities.methods.CancelActivity;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
 import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
@@ -76,7 +74,7 @@ public class Add extends AppCompatActivity
 	
 	public void onClickButtonCancel(View view)
 	{
-		CancelActivity.run(this);
+		this.finish();
 	}
 	
 	public void onClickButtonConfirmAdd(View view)

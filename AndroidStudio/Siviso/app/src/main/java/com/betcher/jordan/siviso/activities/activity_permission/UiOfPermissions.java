@@ -1,12 +1,11 @@
-package com.betcher.jordan.siviso.activities.permissions;
+package com.betcher.jordan.siviso.activities.activity_permission;
 
-import android.graphics.Color;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.betcher.jordan.siviso.Defaults;
 
-public class UiOfPermissions
+class UiOfPermissions
 {
     TextView title;
     Button toggleDetails;

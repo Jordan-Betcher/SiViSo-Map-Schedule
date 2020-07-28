@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.home;
+package com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso;
 
 import androidx.lifecycle.Observer;
 

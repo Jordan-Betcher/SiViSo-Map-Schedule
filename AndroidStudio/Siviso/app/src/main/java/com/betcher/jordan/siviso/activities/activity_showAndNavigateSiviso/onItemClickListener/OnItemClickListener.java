@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.home.sivisoRecyclerView.onItemClickListener;
+package com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemClickListener;
 
 import android.view.View;
 

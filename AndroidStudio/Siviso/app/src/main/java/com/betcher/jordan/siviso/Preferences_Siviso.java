@@ -3,7 +3,7 @@ package com.betcher.jordan.siviso;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.betcher.jordan.siviso.activities.home.Home;
+import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.Home;
 import com.betcher.jordan.siviso.siviso.Siviso;
 
 public class Preferences_Siviso

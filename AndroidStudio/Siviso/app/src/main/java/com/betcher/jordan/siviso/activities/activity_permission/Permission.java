@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.permissions;
+package com.betcher.jordan.siviso.activities.activity_permission;
 
 import android.app.Activity;
 import android.content.Context;
