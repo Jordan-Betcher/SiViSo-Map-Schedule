@@ -16,7 +16,6 @@ import android.widget.Switch;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,7 +35,6 @@ import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener
 import com.betcher.jordan.siviso.activities.activity_siviso.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
-import com.betcher.jordan.siviso.service.Service_ManageRingMode;
 import com.betcher.jordan.siviso.siviso.Siviso;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -55,7 +53,7 @@ public class Activity_Siviso extends AppCompatActivity
 	RecyclerViewAdapter_Siviso itemAdapter;
 	SivisoModel sivisoModel;
 	
-	Switch sivisoServiceSwitch;
+	SivisoServiceSwitch sivisoServiceSwitch;
 	Button buttonDelete;
 	Button buttonEdit;
 	
@@ -92,20 +90,6 @@ public class Activity_Siviso extends AppCompatActivity
 		}
 	}
 	
-	private Switch setupSivisoServiceSwitch()
-	{
-		Switch switchOnOff = findViewById(R.id.switchOnOff);
-		boolean isServiceRunning = Preferences_Siviso.isServiceRunning(this);
-		
-		if(isServiceRunning)
-		{
-			startSivisoService();
-			switchOnOff.setChecked(true);
-		}
-		
-		return switchOnOff;
-	}
-	
 	public void onClickButtonAdd(View view) //this should be a class that implements onClickListener and is appended to buttonAdd in constructor
 	{
 		runActivityAdd();
@@ -117,6 +101,7 @@ public class Activity_Siviso extends AppCompatActivity
 		Activity_Add.run(this, mapPosition);
 	}
 	
+	
 	public void onClickButtonDelete(View view) //Same as onClickButtonAdd
 	{
 		deleteSelectedItemAndDeselectIt();
@@ -127,6 +112,7 @@ public class Activity_Siviso extends AppCompatActivity
 		sivisoModel.delete(selectItem.getSelectedSiviso());
 		selectItem.notifyDeselect();
 	}
+	
 	
 	public void onClickButtonEdit(View view)
 	{
@@ -141,36 +127,9 @@ public class Activity_Siviso extends AppCompatActivity
 	
 	public void onOnOffSwitchClicked(View view) // should be put into the onOffSwitch class
 	{
-		if (isSivisoServiceSwitchOn())
-		{
-			startSivisoService();
-		}
-		else
-		{
-			stopSivisoService();
-		}
+		sivisoServiceSwitch.refresh();
 	}
 	
-	private boolean isSivisoServiceSwitchOn()
-	{
-		return sivisoServiceSwitch.isChecked();
-	}
-	
-	private void stopSivisoService()
-	{
-		this.stopService(new Intent(this, Service_ManageRingMode.class));
-		Preferences_Siviso.saveIsServiceRunning(this, false);
-	}
-	
-	private void startSivisoService()
-	{
-		Intent startSivisoService = new Intent(this,
-		                                       Service_ManageRingMode.class);
-		ContextCompat
-		.startForegroundService(this, startSivisoService);
-		
-		Preferences_Siviso.saveIsServiceRunning(this, true);
-	}
 	
 	//get rid of this and have permissions activity be called first
 	//this class is called after permissions activity is done
@@ -186,7 +145,11 @@ public class Activity_Siviso extends AppCompatActivity
 	private void init()
 	{
 		setContentView(R.layout.activity_siviso);
-		sivisoServiceSwitch = setupSivisoServiceSwitch();
+		
+		//init sivisoServiceSwitch
+		Switch onOffSwitch = findViewById(R.id.switchOnOff);
+		sivisoServiceSwitch = new SivisoServiceSwitch(this, onOffSwitch);
+		
 		buttonDelete = findViewById(R.id.buttonDelete);
 		buttonEdit = findViewById(R.id.buttonEdit);
 		
