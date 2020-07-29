@@ -24,7 +24,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class Edit extends AppCompatActivity
+public class Activity_Edit extends AppCompatActivity
 {
 	GoogleMap map;
 	Button buttonConfirmEdit;

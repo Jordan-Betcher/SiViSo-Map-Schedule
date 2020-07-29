@@ -1,12 +1,12 @@
-package com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemClickListener;
+package com.betcher.jordan.siviso.activities.activity_siviso.onItemClickListener;
 
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.Defaults;
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemSelectListener.OnItemSelectListener;
+import com.betcher.jordan.siviso.activities.activity_siviso.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
+import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.OnItemSelectListener;
 import com.betcher.jordan.siviso.database.SivisoData;
 
 public class SelectItem

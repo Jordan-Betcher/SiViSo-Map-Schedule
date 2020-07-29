@@ -14,15 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.activity_permission.Permissions"></activity>
-        <activity android:name=".activities.activity_modifySiviso.Edit" />
-        <activity android:name=".activities.activity_modifySiviso.Add" />
+        <activity android:name=".activities.activity_permission.Activity_Permissions"></activity>
+        <activity android:name=".activities.activity_modifySiviso.Activity_Edit" />
+        <activity android:name=".activities.activity_modifySiviso.Activity_Add" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activities.activity_showAndNavigateSiviso.Home">
+        <activity android:name=".activities.activity_siviso.Activity_Siviso">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.betcher.jordan.siviso.R;
 
-public class Permissions extends AppCompatActivity
+public class Activity_Permissions extends AppCompatActivity
 {
     PermissionFineLocation fineLocation;
     UiOfPermissions uiOfFineLocationUI;

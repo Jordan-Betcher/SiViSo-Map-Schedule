@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.activity_showAndNavigateSiviso.Home">
+    tools:context=".activities.activity_siviso.Activity_Siviso">
 
     <TextView
         android:id="@+id/homeTitle"

@@ -22,7 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class Add extends AppCompatActivity
+public class Activity_Add extends AppCompatActivity
 {
 	GoogleMap map;
 	AppCompatActivity activity;

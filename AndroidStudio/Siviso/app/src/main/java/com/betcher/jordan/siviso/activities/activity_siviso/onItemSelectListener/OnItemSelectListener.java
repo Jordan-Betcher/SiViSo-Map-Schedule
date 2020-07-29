@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemSelectListener;
+package com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener;
 
 import com.betcher.jordan.siviso.database.SivisoData;
 

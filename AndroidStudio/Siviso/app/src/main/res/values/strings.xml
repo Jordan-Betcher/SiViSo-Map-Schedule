@@ -1,23 +1,23 @@
 <resources>
     <!--AndroidManifest-->
     <string name="app_name">Siviso</string>
-    <!--Activity Home-->
+    <!--Activity Activity_Siviso-->
     <string name="title_home">Siviso</string>
     <string name="switch_on_off">Off/On</string>
     <string name="default_location">Default</string>
     <string name="button_delete">Delete</string>
     <string name="button_edit">Edit</string>
     <string name="button_add">+</string>
-    <!--In Add and Edit-->
+    <!--In Activity_Add and Activity_Edit-->
     <string name="hint_name">Name</string>
     <string name="button_cancel">Cancel</string>
-    <!--Activity Add-->
+    <!--Activity Activity_Add-->
     <string name="title_add">Add</string>
     <string name="button_confirm_add">Add</string>
-    <!--Activity Edit-->
+    <!--Activity Activity_Edit-->
     <string name="title_edit">Edit</string>
     <string name="button_confirm_edit">Confirm</string>
-    <!--Activity Permissions-->
+    <!--Activity Activity_Permissions-->
     <string name="title_permissions">Permissions</string>
 
     <string name="permission_fine_location">ACCESS_FINE_LOCATION</string>

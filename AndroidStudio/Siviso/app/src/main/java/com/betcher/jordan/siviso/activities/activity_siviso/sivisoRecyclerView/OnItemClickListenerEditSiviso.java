@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.sivisoRecyclerView;
+package com.betcher.jordan.siviso.activities.activity_siviso.sivisoRecyclerView;
 
 import android.content.Context;
 import android.view.View;

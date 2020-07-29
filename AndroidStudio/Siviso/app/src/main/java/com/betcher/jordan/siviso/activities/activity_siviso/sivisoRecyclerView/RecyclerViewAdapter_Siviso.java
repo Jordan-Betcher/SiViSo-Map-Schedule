@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.sivisoRecyclerView;
+package com.betcher.jordan.siviso.activities.activity_siviso.sivisoRecyclerView;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemClickListener.OnItemClickListener;
+import com.betcher.jordan.siviso.activities.activity_siviso.onItemClickListener.OnItemClickListener;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
 import com.betcher.jordan.siviso.siviso.Siviso;

@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso;
+package com.betcher.jordan.siviso.activities.activity_siviso;
 
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.google.android.gms.maps.GoogleMap;
@@ -7,11 +7,11 @@ import com.google.android.gms.maps.model.Circle;
 public class TriggerSelectItem implements GoogleMap.OnCircleClickListener
 {
 	private static final String TAG = "TriggerSelectItem";
-	com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemClickListener.SelectItem selectItem;
+	com.betcher.jordan.siviso.activities.activity_siviso.onItemClickListener.SelectItem selectItem;
 	SivisoMapCircles sivisoMapCircles;
 	
 	public TriggerSelectItem(
-	com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemClickListener.SelectItem selectItem,
+	com.betcher.jordan.siviso.activities.activity_siviso.onItemClickListener.SelectItem selectItem,
 	SivisoMapCircles sivisoMapCircles)
 	{
 		this.selectItem = selectItem;

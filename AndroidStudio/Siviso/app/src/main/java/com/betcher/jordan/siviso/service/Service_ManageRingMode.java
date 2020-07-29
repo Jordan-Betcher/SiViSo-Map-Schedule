@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.betcher.jordan.siviso.Defaults;
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.Home;
+import com.betcher.jordan.siviso.activities.activity_siviso.Activity_Siviso;
 
 public class Service_ManageRingMode extends Service
 {
@@ -43,7 +43,7 @@ public class Service_ManageRingMode extends Service
 	
 	public void createNotification(String input)
 	{
-		Intent notificationIntent = new Intent(this, Home.class);
+		Intent notificationIntent = new Intent(this, Activity_Siviso.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this,
 		                                                        0, notificationIntent, 0);
 		Notification notification = new NotificationCompat.Builder(this,

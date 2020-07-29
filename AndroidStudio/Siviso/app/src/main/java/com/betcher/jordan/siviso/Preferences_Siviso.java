@@ -3,7 +3,7 @@ package com.betcher.jordan.siviso;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.Home;
+import com.betcher.jordan.siviso.activities.activity_siviso.Activity_Siviso;
 import com.betcher.jordan.siviso.siviso.Siviso;
 
 public class Preferences_Siviso
@@ -14,9 +14,11 @@ public class Preferences_Siviso
 	
 	private static final String PREFERENCE_KEY_DEFAULT_SIVISO = "DefaultSiviso";
 	
-	public static boolean isServiceRunning(Home home)
+	public static boolean isServiceRunning(
+	Activity_Siviso activitySiviso)
 	{
-		SharedPreferences prefs = home.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences prefs = activitySiviso
+		.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 		boolean isServiceRunning = prefs.getBoolean(PREFERENCE_KEY_IS_SERVICE_RUNNING, false);
 		return isServiceRunning;
 	}

@@ -1,4 +1,4 @@
-package com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso;
+package com.betcher.jordan.siviso.activities.activity_siviso;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -26,15 +26,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.Preferences_Siviso;
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.activities.activity_permission.Permissions;
-import com.betcher.jordan.siviso.activities.activity_modifySiviso.Add;
-import com.betcher.jordan.siviso.activities.activity_modifySiviso.Edit;
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemClickListener.SelectItem;
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemSelectListener.EnableButton;
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemSelectListener.HighlightSelectionInList;
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemSelectListener.ZoomToCurrentLocation;
-import com.betcher.jordan.siviso.activities.activity_showAndNavigateSiviso.onItemSelectListener.ZoomToSelect;
+import com.betcher.jordan.siviso.activities.activity_modifySiviso.Activity_Add;
+import com.betcher.jordan.siviso.activities.activity_modifySiviso.Activity_Edit;
+import com.betcher.jordan.siviso.activities.activity_permission.Activity_Permissions;
+import com.betcher.jordan.siviso.activities.activity_siviso.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
+import com.betcher.jordan.siviso.activities.activity_siviso.onItemClickListener.SelectItem;
+import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.EnableButton;
+import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.HighlightSelectionInList;
+import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.ZoomToCurrentLocation;
+import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.ZoomToSelect;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
 import com.betcher.jordan.siviso.service.Service_ManageRingMode;
@@ -47,9 +47,9 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends AppCompatActivity
+public class Activity_Siviso extends AppCompatActivity
 {
-	private static final String TAG = "Home";
+	private static final String TAG = "Activity_Siviso";
 	
 	GoogleMap map;
 	RecyclerView recyclerViewSiviso;
@@ -81,10 +81,10 @@ public class Home extends AppCompatActivity
 		Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
 		&& notificationManager.isNotificationPolicyAccessGranted();
 		
-		if(false == granted_fineLocation || false == granted_notificationPolicy) //Permissions.allPermissionsGranted(this)
+		if(false == granted_fineLocation || false == granted_notificationPolicy) //Activity_Permissions.allPermissionsGranted(this)
 		{
-			//startActivityPermissions() //Permissions activity should be started first and then go to home
-			Intent intent_permissions = new Intent(this, Permissions.class);
+			//startActivityPermissions() //Activity_Permissions activity should be started first and then go to home
+			Intent intent_permissions = new Intent(this, Activity_Permissions.class);
 			this.startActivityForResult(intent_permissions, 1);
 		}
 		else
@@ -122,7 +122,7 @@ public class Home extends AppCompatActivity
 		double longitude = mapPosition.longitude;
 		
 		//StartActivityAdd.run(this, latitude, longitude);
-		Intent myIntent = new Intent(this, Add.class);
+		Intent myIntent = new Intent(this, Activity_Add.class);
 		myIntent.putExtra(Defaults.EXTRA_NAME_LATITUDE, latitude);
 		myIntent.putExtra(Defaults.EXTRA_NAME_LONGITUDE, longitude);
 		this.startActivity(myIntent);
@@ -139,7 +139,7 @@ public class Home extends AppCompatActivity
 		SivisoData selectedSivisoData = selectItem.getSelectedSiviso();
 		
 		//StartActivityEdit.run(this, selectedItem);
-		Intent myIntent = new Intent(this, Edit.class);
+		Intent myIntent = new Intent(this, Activity_Edit.class);
 		myIntent.putExtra(Defaults.EXTRA_NAME_ID, selectedSivisoData.id());
 		myIntent.putExtra(Defaults.EXTRA_NAME_NAME, selectedSivisoData.name());
 		myIntent.putExtra(Defaults.EXTRA_NAME_SIVISO, selectedSivisoData.siviso().name());
@@ -179,7 +179,7 @@ public class Home extends AppCompatActivity
 	
 	private void init()
 	{
-		setContentView(R.layout.activity_home);
+		setContentView(R.layout.activity_siviso);
 		switchOnOff = setupSwitchOnOff();
 		buttonDelete = findViewById(R.id.buttonDelete);
 		buttonEdit = findViewById(R.id.buttonEdit);
@@ -201,7 +201,8 @@ public class Home extends AppCompatActivity
 			{
 				ArrayList<SivisoData> shownList_siviso = new ArrayList<>();
 				
-				Siviso defaultSiviso = Preferences_Siviso.defaultSiviso(Home.this);
+				Siviso defaultSiviso = Preferences_Siviso.defaultSiviso(
+				Activity_Siviso.this);
 				SivisoData defaultSivisoData = new SivisoData(Defaults.DEFAULT_SIVISO_NAME, defaultSiviso.name(), 0, 0);
 				
 				shownList_siviso.add(defaultSivisoData);
@@ -228,7 +229,7 @@ public class Home extends AppCompatActivity
 				map = googleMap;
 				map.setMyLocationEnabled(true);
 				
-				LocationManager locationManager = (LocationManager) Home
+				LocationManager locationManager = (LocationManager) Activity_Siviso
 				.this
 				.getApplicationContext()
 				.getSystemService(Context.LOCATION_SERVICE);
@@ -239,7 +240,8 @@ public class Home extends AppCompatActivity
 				selectItem.addSelectListenerDefault(new ZoomToCurrentLocation(listener));
 				
 				SivisoMapCircles sivisoMapCircles = new SivisoMapCircles(map);
-				sivisoModel.getAllSivisoData().observe(Home.this, sivisoMapCircles);
+				sivisoModel.getAllSivisoData().observe(
+				Activity_Siviso.this, sivisoMapCircles);
 				selectItem.addSelectListenerItem(new ZoomToSelect(map));
 				map.setOnCircleClickListener(new TriggerSelectItem(selectItem, sivisoMapCircles));
 			}
