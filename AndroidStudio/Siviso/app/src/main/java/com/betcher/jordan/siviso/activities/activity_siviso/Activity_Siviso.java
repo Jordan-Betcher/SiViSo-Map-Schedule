@@ -108,23 +108,13 @@ public class Activity_Siviso extends AppCompatActivity
 	
 	public void onClickButtonAdd(View view) //this should be a class that implements onClickListener and is appended to buttonAdd in constructor
 	{
-		openActivityAdd();
+		runActivityAdd();
 	}
 	
-	private void openActivityAdd()
-	{
-		Intent addActivityIntent = new Intent(this, Activity_Add.class);
-		addMapPositionToIntent(addActivityIntent);
-		this.startActivity(addActivityIntent);
-	}
-	
-	private void addMapPositionToIntent(Intent addIntent)
+	private void runActivityAdd()
 	{
 		LatLng mapPosition = map.getCameraPosition().target;
-		double latitude = mapPosition.latitude;
-		double longitude = mapPosition.longitude;
-		addIntent.putExtra(Activity_Add.EXTRA_NAME_LATITUDE, latitude);
-		addIntent.putExtra(Activity_Add.EXTRA_NAME_LONGITUDE, longitude);
+		Activity_Add.run(this, mapPosition);
 	}
 	
 	public void onClickButtonDelete(View view) //Same as onClickButtonAdd

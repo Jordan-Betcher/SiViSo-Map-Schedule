@@ -1,6 +1,7 @@
 package com.betcher.jordan.siviso.activities.activity_modifySiviso;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,8 +25,6 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class Activity_Add extends AppCompatActivity
 {
-	public static final String EXTRA_NAME_LATITUDE = "latitude";
-	public static final String EXTRA_NAME_LONGITUDE = "longitude";
 	
 	GoogleMap map;
 	AppCompatActivity activity;
@@ -63,8 +62,10 @@ public class Activity_Add extends AppCompatActivity
 				
 				//set map position
 				Intent intent = activity.getIntent();
-				Double latitude  = intent.getDoubleExtra(EXTRA_NAME_LATITUDE, 0);
-				Double longitude  = intent.getDoubleExtra(EXTRA_NAME_LONGITUDE, 0);
+				Double latitude  = intent.getDoubleExtra(
+				IntentBuilder.EXTRA_NAME_LATITUDE, 0);
+				Double longitude  = intent.getDoubleExtra(
+				IntentBuilder.EXTRA_NAME_LONGITUDE, 0);
 				LatLng previousActivityLatLng = new LatLng(latitude, longitude);
 				map.moveCamera(CameraUpdateFactory
 				               .newLatLngZoom(previousActivityLatLng,
@@ -89,5 +90,41 @@ public class Activity_Add extends AppCompatActivity
 		SivisoData sivisoData = new SivisoData(name, siviso, latLng.latitude, latLng.longitude);
 		sivisoModel.insert(sivisoData);
 		this.finish();
+	}
+	
+	
+	public static void run(Context context, LatLng mapPosition)
+	{
+		IntentBuilder intentBuilder = new IntentBuilder(context);
+		intentBuilder.putExtraLatLng(mapPosition);
+		intentBuilder.runIntent();
+	}
+	
+	private static class IntentBuilder
+	{
+		final Class<Activity_Add> INTENT_CLASS = Activity_Add.class;
+		
+		static final String EXTRA_NAME_LATITUDE = "latitude";
+		static final String EXTRA_NAME_LONGITUDE = "longitude";
+		
+		Context context;
+		Intent intent;
+		
+		public IntentBuilder(Context context)
+		{
+			this.context = context;
+			intent = new Intent(context, INTENT_CLASS);
+		}
+		
+		public void putExtraLatLng(LatLng latLng)
+		{
+			intent.putExtra(EXTRA_NAME_LATITUDE, latLng.latitude);
+			intent.putExtra(EXTRA_NAME_LONGITUDE, latLng.longitude);
+		}
+		
+		public void runIntent()
+		{
+			context.startActivity(intent);
+		}
 	}
 }
