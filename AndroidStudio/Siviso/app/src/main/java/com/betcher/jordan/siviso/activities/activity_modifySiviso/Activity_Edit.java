@@ -2,6 +2,7 @@ package com.betcher.jordan.siviso.activities.activity_modifySiviso;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -116,4 +117,40 @@ public class Activity_Edit extends AppCompatActivity
 		
 		this.finish();
 	}
+	
+	public static void run(Context context, SivisoData sivisoData)
+	{
+		IntentBuilder_EditActivity editActivityIntent = new IntentBuilder_EditActivity(context);
+		editActivityIntent.putExtraSivisoData(sivisoData);
+		editActivityIntent.runIntent();
+	}
+	
+	private static class IntentBuilder_EditActivity
+	{
+		final Class<Activity_Edit> INTENT_CLASS = Activity_Edit.class;
+		
+		Context context;
+		Intent intent;
+		
+		public IntentBuilder_EditActivity(Context context)
+		{
+			this.context = context;
+			intent = new Intent(context, INTENT_CLASS);
+		}
+		
+		public void putExtraSivisoData(SivisoData sivisoData)
+		{
+			intent.putExtra(EXTRA_NAME_ID, sivisoData.id());
+			intent.putExtra(EXTRA_NAME_NAME, sivisoData.name());
+			intent.putExtra(EXTRA_NAME_SIVISO, sivisoData.siviso().name());
+			intent.putExtra(EXTRA_NAME_LATITUDE, sivisoData.latitude());
+			intent.putExtra(EXTRA_NAME_LONGITUDE, sivisoData.longitude());
+		}
+		
+		public void runIntent()
+		{
+			context.startActivity(intent);
+		}
+	}
 }
+

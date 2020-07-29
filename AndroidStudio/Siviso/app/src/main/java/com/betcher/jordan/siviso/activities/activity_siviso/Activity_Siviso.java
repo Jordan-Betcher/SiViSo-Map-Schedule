@@ -26,7 +26,7 @@ import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.Preferences_Siviso;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.activities.activity_modifySiviso.Activity_Add;
-import com.betcher.jordan.siviso.activities.activity_modifySiviso.IntentBuilder_EditActivity;
+import com.betcher.jordan.siviso.activities.activity_modifySiviso.Activity_Edit;
 import com.betcher.jordan.siviso.activities.activity_permission.Activity_Permissions;
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemClickListener.SelectItem;
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.EnableButton;
@@ -138,16 +138,15 @@ public class Activity_Siviso extends AppCompatActivity
 		selectItem.notifyDeselect();
 	}
 	
-	public void onClickButtonEdit(View view) //Same as onClickButtonAdd
+	public void onClickButtonEdit(View view)
 	{
-		openActivityEdit();
+		runActivityEdit();
 	}
 	
-	private void openActivityEdit()
+	private void runActivityEdit()
 	{
-		IntentBuilder_EditActivity editActivityIntent = new IntentBuilder_EditActivity(this);
-		editActivityIntent.putExtraSivisoData(selectItem.getSelectedSiviso());
-		editActivityIntent.runIntent();
+		SivisoData selectedSivisoData = selectItem.getSelectedSiviso();
+		Activity_Edit.run(this, selectedSivisoData);
 	}
 	
 	public void onOnOffSwitchClicked(View view) // should be put into the onOffSwitch class
