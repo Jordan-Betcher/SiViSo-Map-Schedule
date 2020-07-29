@@ -53,10 +53,6 @@ public class Activity_Siviso extends AppCompatActivity
 	RecyclerViewAdapter_Siviso itemAdapter;
 	SivisoModel sivisoModel;
 	
-	SivisoServiceSwitch sivisoServiceSwitch;
-	Button buttonDelete;
-	Button buttonEdit;
-	
 	SelectItem selectItem;
 	
 	LinearLayoutManager linearLayoutManager;
@@ -90,47 +86,6 @@ public class Activity_Siviso extends AppCompatActivity
 		}
 	}
 	
-	public void onClickButtonAdd(View view) //this should be a class that implements onClickListener and is appended to buttonAdd in constructor
-	{
-		runActivityAdd();
-	}
-	
-	private void runActivityAdd()
-	{
-		LatLng mapPosition = map.getCameraPosition().target;
-		Activity_Add.run(this, mapPosition);
-	}
-	
-	
-	public void onClickButtonDelete(View view) //Same as onClickButtonAdd
-	{
-		deleteSelectedItemAndDeselectIt();
-	}
-	
-	private void deleteSelectedItemAndDeselectIt()
-	{
-		sivisoModel.delete(selectItem.getSelectedSiviso());
-		selectItem.notifyDeselect();
-	}
-	
-	
-	public void onClickButtonEdit(View view)
-	{
-		runActivityEdit();
-	}
-	
-	private void runActivityEdit()
-	{
-		SivisoData selectedSivisoData = selectItem.getSelectedSiviso();
-		Activity_Edit.run(this, selectedSivisoData);
-	}
-	
-	public void onOnOffSwitchClicked(View view) // should be put into the onOffSwitch class
-	{
-		sivisoServiceSwitch.refresh();
-	}
-	
-	
 	//get rid of this and have permissions activity be called first
 	//this class is called after permissions activity is done
 	@Override
@@ -148,10 +103,17 @@ public class Activity_Siviso extends AppCompatActivity
 		
 		//init sivisoServiceSwitch
 		Switch onOffSwitch = findViewById(R.id.switchOnOff);
-		sivisoServiceSwitch = new SivisoServiceSwitch(this, onOffSwitch);
+		SivisoServiceSwitch sivisoServiceSwitch = new SivisoServiceSwitch(this, onOffSwitch);
+		onOffSwitch.setOnClickListener(new RefreshSivisoServiceSwitch(sivisoServiceSwitch));
 		
-		buttonDelete = findViewById(R.id.buttonDelete);
-		buttonEdit = findViewById(R.id.buttonEdit);
+		Button buttonDelete = findViewById(R.id.buttonDelete);
+		buttonDelete.setOnClickListener(new DeleteSelectedItem());
+		
+		Button buttonEdit = findViewById(R.id.buttonEdit);
+		buttonEdit.setOnClickListener(new RunActivityEdit(this));
+		
+		Button buttonAdd = findViewById(R.id.buttonAdd);
+		buttonAdd.setOnClickListener(new RunActivityAdd(this));
 		
 		recyclerViewSiviso = findViewById(R.id.recyclerViewSiviso);
 		linearLayoutManager = new LinearLayoutManager(this);
@@ -215,5 +177,68 @@ public class Activity_Siviso extends AppCompatActivity
 				map.setOnCircleClickListener(new TriggerSelectItem(selectItem, sivisoMapCircles));
 			}
 		});
+	}
+	
+	private class RefreshSivisoServiceSwitch
+	implements View.OnClickListener
+	{
+		SivisoServiceSwitch sivisoServiceSwitch;
+		
+		public RefreshSivisoServiceSwitch(SivisoServiceSwitch sivisoServiceSwitch)
+		{
+			this.sivisoServiceSwitch = sivisoServiceSwitch;
+		}
+		
+		@Override
+		public void onClick(View v)
+		{
+			sivisoServiceSwitch.refresh();
+		}
+	}
+	
+	private class DeleteSelectedItem implements View.OnClickListener
+	{
+		@Override
+		public void onClick(View v)
+		{
+			sivisoModel.delete(selectItem.selectedSivisoData());
+			selectItem.notifyDeselect();
+		}
+	}
+	
+	private class RunActivityEdit implements View.OnClickListener
+	{
+		Context context;
+		
+		public RunActivityEdit(
+		Context context)
+		{
+			this.context = context;
+		}
+		
+		@Override
+		public void onClick(View v)
+		{
+			SivisoData selectedSivisoData = selectItem.selectedSivisoData();
+			Activity_Edit.run(context, selectedSivisoData);
+		}
+	}
+	
+	private class RunActivityAdd implements View.OnClickListener
+	{
+		Context context;
+		
+		public RunActivityAdd(
+		Context context)
+		{
+			this.context = context;
+		}
+		
+		@Override
+		public void onClick(View v)
+		{
+			LatLng currentLatLng = map.getCameraPosition().target;
+			Activity_Add.run(context, currentLatLng);
+		}
 	}
 }

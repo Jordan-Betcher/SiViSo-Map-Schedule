@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -17,6 +16,7 @@ import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.database.SivisoData;
 import com.betcher.jordan.siviso.database.SivisoModel;
+import com.betcher.jordan.siviso.siviso.Siviso;
 import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -49,7 +49,9 @@ public class Activity_Edit extends AppCompatActivity
 		buttonConfirmEdit = (Button) this.findViewById(R.id.buttonConfirmEdit);
 		inputName = this.findViewById(R.id.editName);
 		inputSiviso = this.findViewById(R.id.editSiviso);
-		inputSiviso.setAdapter(new SpinnerAdapter_Siviso(this));
+		
+		SpinnerAdapter_Siviso spinnerAdapter_siviso = new SpinnerAdapter_Siviso(this);
+		inputSiviso.setAdapter(spinnerAdapter_siviso);
 		
 		Intent intent = this.getIntent();
 		selectedSivisoDataID  = intent.getIntExtra(IntentBuilder.EXTRA_NAME_ID, -1);//Crashes if not found
@@ -60,9 +62,8 @@ public class Activity_Edit extends AppCompatActivity
 		
 		inputName.setText(selectedSivisoDataName);
 		
-		ArrayAdapter arrayAdapter = (ArrayAdapter) inputSiviso.getAdapter();
-		int arrayPositionOfSelectedSiviso = arrayAdapter.getPosition(selectedSivisoDataSiviso);
-		inputSiviso.setSelection(arrayPositionOfSelectedSiviso);
+		int index_siviso = Siviso.index(selectedSivisoDataSiviso);
+		inputSiviso.setSelection(index_siviso);
 		
 		activity = this;
 		

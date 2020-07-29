@@ -43,7 +43,7 @@ public class Activity_Add extends AppCompatActivity
 		
 		activity = this;
 		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
-		buttonConfirmAdd = (Button) this.findViewById(R.id.buttonConfirmAdd);
+		buttonConfirmAdd = (Button) this.findViewById(R.id.buttonAdd);
 		
 		inputName = this.findViewById(R.id.addName);
 		inputSiviso = this.findViewById(R.id.addSiviso);

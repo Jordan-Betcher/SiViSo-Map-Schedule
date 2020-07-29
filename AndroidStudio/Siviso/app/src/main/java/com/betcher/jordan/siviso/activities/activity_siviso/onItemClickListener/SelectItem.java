@@ -47,7 +47,7 @@ public class SelectItem
 		}
 	}
 	
-	public SivisoData getSelectedSiviso()
+	public SivisoData selectedSivisoData()
 	{
 		return selectedSiviso;
 	}
