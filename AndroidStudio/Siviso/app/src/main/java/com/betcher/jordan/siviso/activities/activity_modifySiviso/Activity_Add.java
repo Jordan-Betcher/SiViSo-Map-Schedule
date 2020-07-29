@@ -24,6 +24,9 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class Activity_Add extends AppCompatActivity
 {
+	public static final String EXTRA_NAME_LATITUDE = "latitude";
+	public static final String EXTRA_NAME_LONGITUDE = "longitude";
+	
 	GoogleMap map;
 	AppCompatActivity activity;
 	Button buttonConfirmAdd;
@@ -60,8 +63,8 @@ public class Activity_Add extends AppCompatActivity
 				
 				//set map position
 				Intent intent = activity.getIntent();
-				Double latitude  = intent.getDoubleExtra(Defaults.EXTRA_NAME_LATITUDE, 0);
-				Double longitude  = intent.getDoubleExtra(Defaults.EXTRA_NAME_LONGITUDE, 0);
+				Double latitude  = intent.getDoubleExtra(EXTRA_NAME_LATITUDE, 0);
+				Double longitude  = intent.getDoubleExtra(EXTRA_NAME_LONGITUDE, 0);
 				LatLng previousActivityLatLng = new LatLng(latitude, longitude);
 				map.moveCamera(CameraUpdateFactory
 				               .newLatLngZoom(previousActivityLatLng,

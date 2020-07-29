@@ -16,11 +16,6 @@ public class Defaults
 	public static final long SERVICE_MIN_TIME = 10*SECOND;
 	
 	public static final String DATABASE_NAME = "Siviso";
-	public static final String EXTRA_NAME_ID = "id";
-	public static final String EXTRA_NAME_NAME = "name";
-	public static final String EXTRA_NAME_SIVISO = "siviso";
-	public static final String EXTRA_NAME_LATITUDE = "latitude";
-	public static final String EXTRA_NAME_LONGITUDE = "longitude";
 	
 	public static final int ITEM_SELECT_HIGHLIGHT_COLOR = Color.LTGRAY;
 	

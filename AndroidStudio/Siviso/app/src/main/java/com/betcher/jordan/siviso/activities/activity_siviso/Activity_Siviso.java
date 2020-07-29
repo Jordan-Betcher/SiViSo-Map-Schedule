@@ -26,7 +26,7 @@ import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.Preferences_Siviso;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.activities.activity_modifySiviso.Activity_Add;
-import com.betcher.jordan.siviso.activities.activity_modifySiviso.Activity_Edit;
+import com.betcher.jordan.siviso.activities.activity_modifySiviso.IntentBuilder_EditActivity;
 import com.betcher.jordan.siviso.activities.activity_permission.Activity_Permissions;
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemClickListener.SelectItem;
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.EnableButton;
@@ -123,8 +123,8 @@ public class Activity_Siviso extends AppCompatActivity
 		LatLng mapPosition = map.getCameraPosition().target;
 		double latitude = mapPosition.latitude;
 		double longitude = mapPosition.longitude;
-		addIntent.putExtra(Defaults.EXTRA_NAME_LATITUDE, latitude);
-		addIntent.putExtra(Defaults.EXTRA_NAME_LONGITUDE, longitude);
+		addIntent.putExtra(Activity_Add.EXTRA_NAME_LATITUDE, latitude);
+		addIntent.putExtra(Activity_Add.EXTRA_NAME_LONGITUDE, longitude);
 	}
 	
 	public void onClickButtonDelete(View view) //Same as onClickButtonAdd
@@ -145,19 +145,9 @@ public class Activity_Siviso extends AppCompatActivity
 	
 	private void openActivityEdit()
 	{
-		Intent editActivityIntent = new Intent(this, Activity_Edit.class);
-		addSivisoDataToIntent(editActivityIntent);
-		this.startActivity(editActivityIntent);
-	}
-	
-	private void addSivisoDataToIntent(Intent intent)
-	{
-		SivisoData selectedSivisoData = selectItem.getSelectedSiviso();
-		intent.putExtra(Defaults.EXTRA_NAME_ID, selectedSivisoData.id());
-		intent.putExtra(Defaults.EXTRA_NAME_NAME, selectedSivisoData.name());
-		intent.putExtra(Defaults.EXTRA_NAME_SIVISO, selectedSivisoData.siviso().name());
-		intent.putExtra(Defaults.EXTRA_NAME_LATITUDE, selectedSivisoData.latitude());
-		intent.putExtra(Defaults.EXTRA_NAME_LONGITUDE, selectedSivisoData.longitude());
+		IntentBuilder_EditActivity editActivityIntent = new IntentBuilder_EditActivity(this);
+		editActivityIntent.putExtraSivisoData(selectItem.getSelectedSiviso());
+		editActivityIntent.runIntent();
 	}
 	
 	public void onOnOffSwitchClicked(View view) // should be put into the onOffSwitch class

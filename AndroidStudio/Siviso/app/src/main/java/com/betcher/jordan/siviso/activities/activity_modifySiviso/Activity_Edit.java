@@ -26,6 +26,12 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class Activity_Edit extends AppCompatActivity
 {
+	public static final String EXTRA_NAME_ID = "id";
+	public static final String EXTRA_NAME_NAME = "name";
+	public static final String EXTRA_NAME_SIVISO = "siviso";
+	public static final String EXTRA_NAME_LATITUDE = "latitude";
+	public static final String EXTRA_NAME_LONGITUDE = "longitude";
+	
 	GoogleMap map;
 	Button buttonConfirmEdit;
 	SelectSivisoOnMap selectSivisoOnMap;
@@ -51,11 +57,11 @@ public class Activity_Edit extends AppCompatActivity
 		inputSiviso.setAdapter(new SpinnerAdapter_Siviso(this));
 		
 		Intent intent = this.getIntent();
-		selectedSivisoDataID  = intent.getIntExtra(Defaults.EXTRA_NAME_ID, -1);//Crashes if not found
-		String selectedSivisoDataName = intent.getStringExtra(Defaults.EXTRA_NAME_NAME);
-		String selectedSivisoDataSiviso = intent.getStringExtra(Defaults.EXTRA_NAME_SIVISO);
-		double selectedSivisoDataLatitude = intent.getDoubleExtra(Defaults.EXTRA_NAME_LATITUDE, 0);
-		double selectedSivisoDataLongitude = intent.getDoubleExtra(Defaults.EXTRA_NAME_LONGITUDE, 0);
+		selectedSivisoDataID  = intent.getIntExtra(EXTRA_NAME_ID, -1);//Crashes if not found
+		String selectedSivisoDataName = intent.getStringExtra(EXTRA_NAME_NAME);
+		String selectedSivisoDataSiviso = intent.getStringExtra(EXTRA_NAME_SIVISO);
+		double selectedSivisoDataLatitude = intent.getDoubleExtra(EXTRA_NAME_LATITUDE, 0);
+		double selectedSivisoDataLongitude = intent.getDoubleExtra(EXTRA_NAME_LONGITUDE, 0);
 		
 		inputName.setText(selectedSivisoDataName);
 		
@@ -81,8 +87,8 @@ public class Activity_Edit extends AppCompatActivity
 				
 				//SetMapEditPosition
 				Intent intent = activity.getIntent();
-				Double latitude  = intent.getDoubleExtra(Defaults.EXTRA_NAME_LATITUDE, 0);
-				Double longitude  = intent.getDoubleExtra(Defaults.EXTRA_NAME_LONGITUDE, 0);
+				Double latitude  = intent.getDoubleExtra(EXTRA_NAME_LATITUDE, 0);
+				Double longitude  = intent.getDoubleExtra(EXTRA_NAME_LONGITUDE, 0);
 				LatLng selectedSivisoDataLatLng = new LatLng(latitude, longitude);
 				map.moveCamera(CameraUpdateFactory
 				               .newLatLngZoom(selectedSivisoDataLatLng,
