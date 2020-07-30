@@ -67,7 +67,7 @@ class PermissionNotificationPolicy implements Permission
 		return (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M);
 	}
 	
-	public boolean isGranted(Context context)
+	public static boolean isGranted(Context context)
 	{
 		NotificationManager notificationManager =
 		(NotificationManager) context.getSystemService(

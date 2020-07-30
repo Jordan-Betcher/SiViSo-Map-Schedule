@@ -1,5 +1,6 @@
 package com.betcher.jordan.siviso.activities.activity_permission;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.betcher.jordan.siviso.R;
+import com.betcher.jordan.siviso.activities.activity_siviso.Activity_Siviso;
 
 public class Activity_Permissions extends AppCompatActivity
 {
@@ -39,20 +41,20 @@ public class Activity_Permissions extends AppCompatActivity
         notificationPolicy.initUI(this);
     
         openSiviso = findViewById(R.id.button_OpenSiviso);
+    
+        openSiviso.setEnabled(false);
+        ifDone();
         
         if(allPermissionsGranted())
         {
             this.finish();
-        }
-        else
-        {
-            openSiviso.setEnabled(false);
+            Activity_Siviso.run(this);
         }
     }
     
-    private boolean allPermissionsGranted()
+    public static boolean allPermissionsGranted(Context context)
     {
-        if(true == fineLocation.isGranted(this) && true == notificationPolicy.isGranted(this))
+        if(true == PermissionFineLocation.isGranted(context) && true == PermissionNotificationPolicy.isGranted(context))
         {
             return true;
         }
@@ -60,6 +62,11 @@ public class Activity_Permissions extends AppCompatActivity
         {
             return false;
         }
+    }
+    
+    private boolean allPermissionsGranted()
+    {
+        return allPermissionsGranted(this);
     }
     
     private UiOfPermissions createUiOfFineLocation()
@@ -120,6 +127,7 @@ public class Activity_Permissions extends AppCompatActivity
         if(allPermissionsGranted())
         {
             this.finish();
+            Activity_Siviso.run(this);
         }
     }
     

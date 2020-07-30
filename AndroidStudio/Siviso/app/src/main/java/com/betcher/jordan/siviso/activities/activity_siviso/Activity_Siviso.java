@@ -1,13 +1,9 @@
 package com.betcher.jordan.siviso.activities.activity_siviso;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +11,6 @@ import android.widget.Switch;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,37 +52,30 @@ public class Activity_Siviso extends AppCompatActivity
 	
 	LinearLayoutManager linearLayoutManager;
 	
+	public static void run(Context context)
+	{
+		Intent sivisoActivityIntent = new Intent(context, Activity_Siviso.class);
+		context.startActivity(sivisoActivityIntent);
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		
-		boolean granted_fineLocation = ActivityCompat
-		                               .checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-		                               PackageManager.PERMISSION_GRANTED;
-		
-		NotificationManager notificationManager =
-		(NotificationManager) this.getSystemService(
-		Context.NOTIFICATION_SERVICE);
-		
-		boolean granted_notificationPolicy =
-		Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-		&& notificationManager.isNotificationPolicyAccessGranted();
-		
-		if(false == granted_fineLocation || false == granted_notificationPolicy) //Activity_Permissions.allPermissionsGranted(this)
+		boolean allPermissionsGranted = Activity_Permissions.allPermissionsGranted(this);
+		if(allPermissionsGranted)
+		{
+			init();
+		}
+		else
 		{
 			//startActivityPermissions() //Activity_Permissions activity should be started first and then go to home
 			Intent intent_permissions = new Intent(this, Activity_Permissions.class);
 			this.startActivityForResult(intent_permissions, 1);
 		}
-		else
-		{
-			init();
-		}
 	}
 	
-	//get rid of this and have permissions activity be called first
-	//this class is called after permissions activity is done
 	@Override
 	protected void onActivityResult (int requestCode,
 	                                 int resultCode,
@@ -149,6 +137,11 @@ public class Activity_Siviso extends AppCompatActivity
 		selectItem.addSelectListenerItem(new EnableButton(buttonEdit));
 		selectItem.addSelectListenerAll(new HighlightSelectionInList(itemAdapter, linearLayoutManager));
 		
+		createMap();
+	}
+	
+	private void createMap()
+	{
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(
 		R.id.homeMap);
 		mapFragment.getMapAsync(new OnMapReadyCallback()

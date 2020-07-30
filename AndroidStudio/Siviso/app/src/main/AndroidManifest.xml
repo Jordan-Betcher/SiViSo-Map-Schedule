@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.activity_permission.Activity_Permissions"></activity>
+        <activity android:name=".activities.activity_siviso.Activity_Siviso"></activity>
         <activity android:name=".activities.activity_modifySiviso.Activity_Edit" />
         <activity android:name=".activities.activity_modifySiviso.Activity_Add" />
 
@@ -22,7 +22,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activities.activity_siviso.Activity_Siviso">
+        <activity android:name=".activities.activity_permission.Activity_Permissions">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

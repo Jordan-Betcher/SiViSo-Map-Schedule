@@ -56,13 +56,14 @@ class PermissionFineLocation implements Permission
 		                                 );
 	}
 	
-	public boolean isGranted(Context context)
+	public static boolean isGranted(Context context)
 	{
 		boolean granted_fineLocation = ActivityCompat
 		                               .checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) ==
 		                               PackageManager.PERMISSION_GRANTED;
 		return granted_fineLocation;
 	}
+	
 	
 	public void refreshUI(Activity activity)
 	{
