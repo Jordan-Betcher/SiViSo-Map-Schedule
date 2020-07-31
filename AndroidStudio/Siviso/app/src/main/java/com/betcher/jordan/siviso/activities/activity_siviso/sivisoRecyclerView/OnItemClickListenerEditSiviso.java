@@ -7,8 +7,8 @@ import android.widget.Spinner;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.Preferences_Siviso;
-import com.betcher.jordan.siviso.database.SivisoData;
-import com.betcher.jordan.siviso.database.SivisoModel;
+import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
+import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
 import com.betcher.jordan.siviso.siviso.Siviso;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -16,13 +16,13 @@ class OnItemClickListenerEditSiviso
 		implements AdapterView.OnItemSelectedListener
 {
 	private static final String TAG = "OnItemClickListenerEdit";
-	SivisoData currentSivisoData;
+	DatabaseFormatted_Siviso currentSivisoData;
 	private Context context;
-	private SivisoModel sivisoModel;
+	private AndroidViewModel_Siviso sivisoModel;
 	private Spinner spinnerSiviso;
 	
 	
-	public OnItemClickListenerEditSiviso(Context context, SivisoModel sivisoModel,
+	public OnItemClickListenerEditSiviso(Context context, AndroidViewModel_Siviso sivisoModel,
 	                                     Spinner spinnerSiviso)
 	{
 		this.context = context;
@@ -30,7 +30,8 @@ class OnItemClickListenerEditSiviso
 		this.spinnerSiviso = spinnerSiviso;
 	}
 	
-	public void setSivisoData(SivisoData currentSivisoData)
+	public void setSivisoData(
+	DatabaseFormatted_Siviso currentSivisoData)
 	{
 		this.currentSivisoData = currentSivisoData;
 	}
@@ -51,7 +52,7 @@ class OnItemClickListenerEditSiviso
 		{
 			LatLng latLng = currentSivisoData.latLng();
 			
-			SivisoData sivisoData = new SivisoData(name, siviso.name(), latLng.latitude, latLng.longitude);
+			DatabaseFormatted_Siviso sivisoData = new DatabaseFormatted_Siviso(name, siviso.name(), latLng.latitude, latLng.longitude);
 			sivisoData.setId(currentSivisoData.id());
 			
 			sivisoModel.update(sivisoData);

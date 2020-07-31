@@ -10,20 +10,20 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface SivisoDao
+public interface Dao_Siviso
 {
 	@Insert
-	void insert(SivisoData sivisoData);
+	void insert(DatabaseFormatted_Siviso sivisoData);
 	
 	@Update
-	void update(SivisoData sivisoData);
+	void update(DatabaseFormatted_Siviso sivisoData);
 	
 	@Delete
-	void delete(SivisoData sivisoData);
+	void delete(DatabaseFormatted_Siviso sivisoData);
 	
 	@Query("DELETE FROM Siviso")
 	void deleteAllSivisoData();
 	
 	@Query("SELECT * FROM Siviso ORDER BY name DESC")
-	LiveData<List<SivisoData>> getAllSivisoData();
+	LiveData<List<DatabaseFormatted_Siviso>> getAllSivisoData();
 }

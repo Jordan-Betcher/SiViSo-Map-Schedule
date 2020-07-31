@@ -28,8 +28,8 @@ import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.ZoomToCurrentLocation;
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.ZoomToSelect;
 import com.betcher.jordan.siviso.activities.activity_siviso.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
-import com.betcher.jordan.siviso.database.SivisoData;
-import com.betcher.jordan.siviso.database.SivisoModel;
+import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
+import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
 import com.betcher.jordan.siviso.siviso.Siviso;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -46,7 +46,7 @@ public class Activity_Siviso extends AppCompatActivity
 	GoogleMap map;
 	RecyclerView recyclerViewSiviso;
 	RecyclerViewAdapter_Siviso itemAdapter;
-	SivisoModel sivisoModel;
+	AndroidViewModel_Siviso sivisoModel;
 	
 	SelectItem selectItem;
 	
@@ -101,22 +101,23 @@ public class Activity_Siviso extends AppCompatActivity
 		linearLayoutManager = new LinearLayoutManager(this);
 		recyclerViewSiviso.setLayoutManager(linearLayoutManager);
 		
-		sivisoModel = ViewModelProviders.of(this).get(SivisoModel.class);
+		sivisoModel = ViewModelProviders.of(this).get(
+		AndroidViewModel_Siviso.class);
 		
 		//setupItemAdapter
 		itemAdapter = new RecyclerViewAdapter_Siviso(this, sivisoModel);
 		recyclerViewSiviso.setAdapter(itemAdapter);
 		
-		sivisoModel.getAllSivisoData().observe(this, new Observer<List<SivisoData>>()
+		sivisoModel.getAllSivisoData().observe(this, new Observer<List<DatabaseFormatted_Siviso>>()
 		{
 			@Override
-			public void onChanged(@Nullable List<SivisoData> sivisoDatas)
+			public void onChanged(@Nullable List<DatabaseFormatted_Siviso> sivisoDatas)
 			{
-				ArrayList<SivisoData> shownList_siviso = new ArrayList<>();
+				ArrayList<DatabaseFormatted_Siviso> shownList_siviso = new ArrayList<>();
 				
 				Siviso defaultSiviso = Preferences_Siviso.defaultSiviso(
 				Activity_Siviso.this);
-				SivisoData defaultSivisoData = new SivisoData(Defaults.DEFAULT_SIVISO_NAME, defaultSiviso.name(), 0, 0);
+				DatabaseFormatted_Siviso defaultSivisoData = new DatabaseFormatted_Siviso(Defaults.DEFAULT_SIVISO_NAME, defaultSiviso.name(), 0, 0);
 				
 				shownList_siviso.add(defaultSivisoData);
 				shownList_siviso.addAll(sivisoDatas);
@@ -233,7 +234,7 @@ public class Activity_Siviso extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			SivisoData selectedSivisoData = selectItem.selectedSivisoData();
+			DatabaseFormatted_Siviso selectedSivisoData = selectItem.selectedSivisoData();
 			Activity_Edit.run(context, selectedSivisoData);
 		}
 	}

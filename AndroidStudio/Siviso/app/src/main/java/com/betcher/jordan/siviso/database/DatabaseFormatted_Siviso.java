@@ -10,7 +10,7 @@ import com.betcher.jordan.siviso.siviso.Siviso;
 import com.google.android.gms.maps.model.LatLng;
 
 @Entity(tableName = Defaults.DATABASE_NAME)
-public class SivisoData
+public class DatabaseFormatted_Siviso
 {
 	
 	@PrimaryKey(autoGenerate = true)
@@ -20,7 +20,7 @@ public class SivisoData
 	private double latitude;
 	private double longitude;
 	
-	public SivisoData(String name, String sivisoName, double latitude, double longitude)
+	public DatabaseFormatted_Siviso(String name, String sivisoName, double latitude, double longitude)
 	{
 		this.name = name;
 		this.sivisoName = sivisoName;
@@ -67,9 +67,9 @@ public class SivisoData
 	@Override
 	public boolean equals(@Nullable Object obj)
 	{
-		if(obj instanceof SivisoData)
+		if(obj instanceof DatabaseFormatted_Siviso)
 		{
-			SivisoData other = (SivisoData) obj;
+			DatabaseFormatted_Siviso other = (DatabaseFormatted_Siviso) obj;
 			
 			if(other.name() == name()
 			&& other.sivisoName() == sivisoName()

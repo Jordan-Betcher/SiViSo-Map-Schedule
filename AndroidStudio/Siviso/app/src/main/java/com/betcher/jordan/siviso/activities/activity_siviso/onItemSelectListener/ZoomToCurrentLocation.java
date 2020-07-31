@@ -1,7 +1,7 @@
 package com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener;
 
 import com.betcher.jordan.siviso.activities.activity_siviso.LocationListenerMapGoToCurrentLocation;
-import com.betcher.jordan.siviso.database.SivisoData;
+import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
 
 public class ZoomToCurrentLocation implements OnItemSelectListener
 {
@@ -12,7 +12,8 @@ public class ZoomToCurrentLocation implements OnItemSelectListener
 	}
 	
 	@Override
-	public void onItemSelect(SivisoData selectedSivisoData)
+	public void onItemSelect(
+	DatabaseFormatted_Siviso selectedSivisoData)
 	{
 		locationListenerMapGoToCurrentLocation.goToCurrentLocation();
 	}

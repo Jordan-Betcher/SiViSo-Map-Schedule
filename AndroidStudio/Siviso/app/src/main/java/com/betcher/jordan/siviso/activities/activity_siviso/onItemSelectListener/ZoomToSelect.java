@@ -1,6 +1,6 @@
 package com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener;
 
-import com.betcher.jordan.siviso.database.SivisoData;
+import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 
@@ -14,7 +14,8 @@ public class ZoomToSelect implements OnItemSelectListener
 	}
 	
 	@Override
-	public void onItemSelect(SivisoData selectedSivisoData)
+	public void onItemSelect(
+	DatabaseFormatted_Siviso selectedSivisoData)
 	{
 		map.moveCamera(CameraUpdateFactory.newLatLng(selectedSivisoData.latLng()));
 	}

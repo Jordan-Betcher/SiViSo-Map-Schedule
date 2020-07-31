@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.activities.activity_siviso.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.OnItemSelectListener;
-import com.betcher.jordan.siviso.database.SivisoData;
+import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
 
 public class SelectItem
 		implements OnItemClickListener
 {
-	private SivisoData selectedSiviso = null;
+	private DatabaseFormatted_Siviso selectedSiviso = null;
 	private RecyclerViewAdapter_Siviso sivisoRecyclerViewItemAdapter;
 	
 	private SelectItemListener selectListenersAll = new SelectItemListener();
@@ -35,7 +35,7 @@ public class SelectItem
 		}
 	}
 	
-	private boolean isDefault(SivisoData selectedSiviso)
+	private boolean isDefault(DatabaseFormatted_Siviso selectedSiviso)
 	{
 		if(selectedSiviso.name().equals(Defaults.DEFAULT_SIVISO_NAME))
 		{
@@ -47,7 +47,7 @@ public class SelectItem
 		}
 	}
 	
-	public SivisoData selectedSivisoData()
+	public DatabaseFormatted_Siviso selectedSivisoData()
 	{
 		return selectedSiviso;
 	}
@@ -67,7 +67,7 @@ public class SelectItem
 		selectListenersItems.add(onItemClickListener);
 	}
 	
-	public void notifySelect(SivisoData selectedSiviso)
+	public void notifySelect(DatabaseFormatted_Siviso selectedSiviso)
 	{
 		selectListenersAll.notifySelect(selectedSiviso);
 		

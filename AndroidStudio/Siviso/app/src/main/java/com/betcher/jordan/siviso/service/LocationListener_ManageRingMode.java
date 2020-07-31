@@ -14,8 +14,8 @@ import android.util.Log;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.Preferences_Siviso;
-import com.betcher.jordan.siviso.database.SivisoData;
-import com.betcher.jordan.siviso.database.SivisoRepository;
+import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
+import com.betcher.jordan.siviso.database.Respository_Siviso;
 import com.betcher.jordan.siviso.siviso.Siviso;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ class LocationListener_ManageRingMode implements LocationListener
 	LocationManager locationManager;
 	AudioManager audioManager;
 	
-	SivisoRepository sivisoRepository;
+	Respository_Siviso sivisoRepository;
 	private Siviso previousSiviso = Siviso.None;
 	private int noneRingMode = -1;
 	
@@ -40,7 +40,8 @@ class LocationListener_ManageRingMode implements LocationListener
 	{
 		this.context = context;
 		this.audioManager = (AudioManager) context.getSystemService(AUDIO_SERVICE);
-		sivisoRepository = SivisoRepository.getInstance(context.getApplicationContext());
+		sivisoRepository = Respository_Siviso
+		.getInstance(context.getApplicationContext());
 		
 		locationManager = (LocationManager) context
 		.getApplicationContext()
@@ -55,22 +56,22 @@ class LocationListener_ManageRingMode implements LocationListener
 	{
 		if(sivisoRepository == null)
 		{
-			Log.d(TAG, "onLocationChanged: SivisoModel was null");
+			Log.d(TAG, "onLocationChanged: AndroidViewModel_Siviso was null");
 			return;
 		}
 		else if (sivisoRepository.getAllSivisoData() == null)
 		{
-			Log.d(TAG, "onLocationChanged: SivisoModel.getAllSivisoData() was null");
+			Log.d(TAG, "onLocationChanged: AndroidViewModel_Siviso.getAllSivisoData() was null");
 			return;
 		}
 		else if (sivisoRepository.getAllSivisoData().getValue() == null)
 		{
-			Log.d(TAG, "onLocationChanged: SivisoModel.getAllSivisoData().getValue() was null");
+			Log.d(TAG, "onLocationChanged: AndroidViewModel_Siviso.getAllSivisoData().getValue() was null");
 			return;
 		}
 		else
 		{
-			List<SivisoData> sivisoDatas = sivisoRepository.getAllSivisoData().getValue();
+			List<DatabaseFormatted_Siviso> sivisoDatas = sivisoRepository.getAllSivisoData().getValue();
 			HashMap<Siviso, ArrayList<Double>> collidedSivisos = new HashMap<>(3);
 			collidedSivisos.put(Siviso.Silent, new ArrayList<Double>());
 			collidedSivisos.put(Siviso.Vibrate, new ArrayList<Double>());
@@ -79,7 +80,7 @@ class LocationListener_ManageRingMode implements LocationListener
 			double distance_closestSiviso = -1;
 			
 			//get closest Service_ManageRingMode that isn't none and sort sivisos that current location is in
-			for(SivisoData sivisoData : sivisoDatas)
+			for(DatabaseFormatted_Siviso sivisoData : sivisoDatas)
 			{
 				if(sivisoData.siviso().equals(Siviso.None))
 				{

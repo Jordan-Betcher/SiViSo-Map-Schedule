@@ -2,7 +2,7 @@ package com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListene
 
 import android.widget.Button;
 
-import com.betcher.jordan.siviso.database.SivisoData;
+import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
 
 public class EnableButton implements OnItemSelectListener
 {
@@ -14,7 +14,8 @@ public class EnableButton implements OnItemSelectListener
 	}
 	
 	@Override
-	public void onItemSelect(SivisoData selectedSivisoData)
+	public void onItemSelect(
+	DatabaseFormatted_Siviso selectedSivisoData)
 	{
 		button.setEnabled(true);
 	}
