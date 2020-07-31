@@ -10,7 +10,7 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface Dao_Siviso
+interface Dao_Siviso
 {
 	@Insert
 	void insert(TableRow_Siviso sivisoData);

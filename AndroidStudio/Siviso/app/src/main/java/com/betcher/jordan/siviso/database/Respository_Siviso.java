@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class Respository_Siviso
+class Respository_Siviso
 {
 	private Dao_Siviso sivisoDao;
 	private LiveData<List<TableRow_Siviso>> allSivisoData;

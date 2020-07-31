@@ -7,7 +7,7 @@ import android.widget.Spinner;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.Preferences_Siviso;
-import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
+import com.betcher.jordan.siviso.database.SivisoDatabase;
 import com.betcher.jordan.siviso.database.TableRow_Siviso;
 import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 import com.google.android.gms.maps.model.LatLng;
@@ -18,11 +18,11 @@ class OnItemClickListenerEditSiviso
 	private static final String TAG = "OnItemClickListenerEdit";
 	TableRow_Siviso currentSivisoData;
 	private Context context;
-	private AndroidViewModel_Siviso sivisoModel;
+	private SivisoDatabase sivisoModel;
 	private Spinner spinnerSiviso;
 	
 	
-	public OnItemClickListenerEditSiviso(Context context, AndroidViewModel_Siviso sivisoModel,
+	public OnItemClickListenerEditSiviso(Context context, SivisoDatabase sivisoModel,
 	                                     Spinner spinnerSiviso)
 	{
 		this.context = context;

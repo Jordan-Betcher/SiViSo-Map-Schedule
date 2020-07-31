@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemClickListener.OnItemClickListener;
-import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
+import com.betcher.jordan.siviso.database.SivisoDatabase;
 import com.betcher.jordan.siviso.database.TableRow_Siviso;
 import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
@@ -29,10 +29,10 @@ public class RecyclerViewAdapter_Siviso
 	private List<TableRow_Siviso> sivisoDatas = new ArrayList<>();
 	
 	private ArrayList<OnBindViewListener> onBindViewListeners = new ArrayList<>();
-	private AndroidViewModel_Siviso sivisoModel;
+	private SivisoDatabase sivisoModel;
 	private Context context;
 	
-	public RecyclerViewAdapter_Siviso(Context context, AndroidViewModel_Siviso sivisoModel)
+	public RecyclerViewAdapter_Siviso(Context context, SivisoDatabase sivisoModel)
 	{
 		this.context = context;
 		this.sivisoModel = sivisoModel;
@@ -116,7 +116,7 @@ public class RecyclerViewAdapter_Siviso
 		
 		OnItemClickListenerEditSiviso listener;
 		
-		public SivisoHolder(View itemView, Context context, AndroidViewModel_Siviso sivisoModel)
+		public SivisoHolder(View itemView, Context context, SivisoDatabase sivisoModel)
 		{
 			super(itemView);
 			textViewName = itemView.findViewById(R.id.textViewHoldName);

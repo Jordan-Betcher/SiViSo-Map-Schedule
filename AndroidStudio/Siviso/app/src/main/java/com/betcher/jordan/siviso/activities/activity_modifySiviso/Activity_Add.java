@@ -9,11 +9,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
+import com.betcher.jordan.siviso.database.SivisoDatabase;
 import com.betcher.jordan.siviso.database.TableRow_Siviso;
 import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,7 +32,7 @@ public class Activity_Add extends AppCompatActivity
 	TextInputEditText inputName;
 	Spinner inputSiviso;
 	
-	AndroidViewModel_Siviso sivisoModel;
+	SivisoDatabase sivisoModel;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -42,8 +41,7 @@ public class Activity_Add extends AppCompatActivity
 		setContentView(R.layout.activity_add);
 		
 		activity = this;
-		sivisoModel = ViewModelProviders.of(this).get(
-		AndroidViewModel_Siviso.class);
+		sivisoModel = new SivisoDatabase(getApplication());
 		buttonConfirmAdd = (Button) this.findViewById(R.id.buttonAdd);
 		
 		inputName = this.findViewById(R.id.addName);

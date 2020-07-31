@@ -12,7 +12,6 @@ import android.widget.Switch;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +27,7 @@ import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.ZoomToCurrentLocation;
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.ZoomToSelect;
 import com.betcher.jordan.siviso.activities.activity_siviso.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
-import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
+import com.betcher.jordan.siviso.database.SivisoDatabase;
 import com.betcher.jordan.siviso.database.TableRow_Siviso;
 import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 import com.google.android.gms.maps.GoogleMap;
@@ -46,7 +45,7 @@ public class Activity_Siviso extends AppCompatActivity
 	GoogleMap map;
 	RecyclerView recyclerViewSiviso;
 	RecyclerViewAdapter_Siviso itemAdapter;
-	AndroidViewModel_Siviso sivisoModel;
+	SivisoDatabase sivisoModel;
 	
 	SelectItem selectItem;
 	
@@ -101,8 +100,7 @@ public class Activity_Siviso extends AppCompatActivity
 		linearLayoutManager = new LinearLayoutManager(this);
 		recyclerViewSiviso.setLayoutManager(linearLayoutManager);
 		
-		sivisoModel = ViewModelProviders.of(this).get(
-		AndroidViewModel_Siviso.class);
+		sivisoModel = new SivisoDatabase(getApplication());
 		
 		//setupItemAdapter
 		itemAdapter = new RecyclerViewAdapter_Siviso(this, sivisoModel);

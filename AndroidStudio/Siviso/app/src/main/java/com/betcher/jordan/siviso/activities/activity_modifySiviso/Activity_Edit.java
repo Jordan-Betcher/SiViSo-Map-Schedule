@@ -10,11 +10,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
+import com.betcher.jordan.siviso.database.SivisoDatabase;
 import com.betcher.jordan.siviso.database.TableRow_Siviso;
 import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
@@ -33,7 +32,7 @@ public class Activity_Edit extends AppCompatActivity
 	TextInputEditText inputName;
 	Spinner inputSiviso;
 	
-	AndroidViewModel_Siviso sivisoModel;
+	SivisoDatabase sivisoModel;
 	
 	int selectedSivisoDataID;
 	
@@ -45,8 +44,7 @@ public class Activity_Edit extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit);
 		
-		sivisoModel = ViewModelProviders.of(this).get(
-		AndroidViewModel_Siviso.class);
+		sivisoModel = new SivisoDatabase(getApplication());
 		buttonConfirmEdit = (Button) this.findViewById(R.id.buttonConfirmEdit);
 		inputName = this.findViewById(R.id.editName);
 		inputSiviso = this.findViewById(R.id.editSiviso);

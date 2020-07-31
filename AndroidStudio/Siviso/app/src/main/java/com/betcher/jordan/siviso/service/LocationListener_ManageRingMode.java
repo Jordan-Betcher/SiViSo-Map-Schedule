@@ -14,8 +14,8 @@ import android.util.Log;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.Preferences_Siviso;
+import com.betcher.jordan.siviso.database.SivisoDatabase;
 import com.betcher.jordan.siviso.database.TableRow_Siviso;
-import com.betcher.jordan.siviso.database.Respository_Siviso;
 import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ class LocationListener_ManageRingMode implements LocationListener
 	LocationManager locationManager;
 	AudioManager audioManager;
 	
-	Respository_Siviso sivisoRepository;
+	SivisoDatabase sivisoDatabase;
 	private SivisoRingmode previousSivisoRingmode = SivisoRingmode.None;
 	private int noneRingMode = -1;
 	
@@ -40,8 +40,7 @@ class LocationListener_ManageRingMode implements LocationListener
 	{
 		this.context = context;
 		this.audioManager = (AudioManager) context.getSystemService(AUDIO_SERVICE);
-		sivisoRepository = Respository_Siviso
-		.getInstance(context.getApplicationContext());
+		sivisoDatabase = new SivisoDatabase(context.getApplication());
 		
 		locationManager = (LocationManager) context
 		.getApplicationContext()
@@ -54,24 +53,24 @@ class LocationListener_ManageRingMode implements LocationListener
 	@Override
 	public void onLocationChanged(Location currentLocation)
 	{
-		if(sivisoRepository == null)
+		if(sivisoDatabase == null)
 		{
-			Log.d(TAG, "onLocationChanged: AndroidViewModel_Siviso was null");
+			Log.d(TAG, "onLocationChanged: SivisoDatabase was null");
 			return;
 		}
-		else if (sivisoRepository.getAllSivisoData() == null)
+		else if (sivisoDatabase.getAllSivisoData() == null)
 		{
-			Log.d(TAG, "onLocationChanged: AndroidViewModel_Siviso.getAllSivisoData() was null");
+			Log.d(TAG, "onLocationChanged: SivisoDatabase.getAllSivisoData() was null");
 			return;
 		}
-		else if (sivisoRepository.getAllSivisoData().getValue() == null)
+		else if (sivisoDatabase.getAllSivisoData().getValue() == null)
 		{
-			Log.d(TAG, "onLocationChanged: AndroidViewModel_Siviso.getAllSivisoData().getValue() was null");
+			Log.d(TAG, "onLocationChanged: SivisoDatabase.getAllSivisoData().getValue() was null");
 			return;
 		}
 		else
 		{
-			List<TableRow_Siviso> sivisoDatas = sivisoRepository.getAllSivisoData().getValue();
+			List<TableRow_Siviso> sivisoDatas = sivisoDatabase.getAllSivisoData().getValue();
 			HashMap<SivisoRingmode, ArrayList<Double>> collidedSivisos = new HashMap<>(3);
 			collidedSivisos.put(SivisoRingmode.Silent, new ArrayList<Double>());
 			collidedSivisos.put(SivisoRingmode.Vibrate, new ArrayList<Double>());
