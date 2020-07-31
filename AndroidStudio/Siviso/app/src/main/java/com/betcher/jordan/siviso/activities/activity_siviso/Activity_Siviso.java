@@ -89,19 +89,13 @@ public class Activity_Siviso extends AppCompatActivity
 	{
 		setContentView(R.layout.activity_siviso);
 		
-		//init sivisoServiceSwitch
-		Switch onOffSwitch = findViewById(R.id.switchOnOff);
-		SivisoServiceSwitch sivisoServiceSwitch = new SivisoServiceSwitch(this, onOffSwitch);
-		onOffSwitch.setOnClickListener(new RefreshSivisoServiceSwitch(sivisoServiceSwitch));
+		setupOnOffSwitch();
 		
-		Button buttonDelete = findViewById(R.id.buttonDelete);
-		buttonDelete.setOnClickListener(new DeleteSelectedItem());
+		Button buttonDelete = setupDeleteButton();
 		
-		Button buttonEdit = findViewById(R.id.buttonEdit);
-		buttonEdit.setOnClickListener(new RunActivityEdit(this));
+		Button buttonEdit = setupEditButton();
 		
-		Button buttonAdd = findViewById(R.id.buttonAdd);
-		buttonAdd.setOnClickListener(new RunActivityAdd(this));
+		setupAddButton();
 		
 		recyclerViewSiviso = findViewById(R.id.recyclerViewSiviso);
 		linearLayoutManager = new LinearLayoutManager(this);
@@ -138,6 +132,33 @@ public class Activity_Siviso extends AppCompatActivity
 		selectItem.addSelectListenerAll(new HighlightSelectionInList(itemAdapter, linearLayoutManager));
 		
 		createMap();
+	}
+	
+	private void setupAddButton()
+	{
+		Button buttonAdd = findViewById(R.id.buttonAdd);
+		buttonAdd.setOnClickListener(new RunActivityAdd(this));
+	}
+	
+	private Button setupEditButton()
+	{
+		Button buttonEdit = findViewById(R.id.buttonEdit);
+		buttonEdit.setOnClickListener(new RunActivityEdit(this));
+		return buttonEdit;
+	}
+	
+	private Button setupDeleteButton()
+	{
+		Button buttonDelete = findViewById(R.id.buttonDelete);
+		buttonDelete.setOnClickListener(new DeleteSelectedItem());
+		return buttonDelete;
+	}
+	
+	private void setupOnOffSwitch()
+	{
+		Switch onOffSwitch = findViewById(R.id.switchOnOff);
+		SivisoServiceSwitch sivisoServiceSwitch = new SivisoServiceSwitch(this, onOffSwitch);
+		onOffSwitch.setOnClickListener(new RefreshSivisoServiceSwitch(sivisoServiceSwitch));
 	}
 	
 	private void createMap()
