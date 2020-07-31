@@ -11,7 +11,7 @@ import java.util.List;
 public class AndroidViewModel_Siviso extends AndroidViewModel
 {
 	private Respository_Siviso repository;
-	private LiveData<List<DatabaseFormatted_Siviso>> allSivisoData;
+	private LiveData<List<TableRow_Siviso>> allSivisoData;
 	
 	public AndroidViewModel_Siviso(@NonNull Application application) {
 		super(application);
@@ -19,15 +19,15 @@ public class AndroidViewModel_Siviso extends AndroidViewModel
 		allSivisoData = repository.getAllSivisoData();
 	}
 	
-	public void insert(DatabaseFormatted_Siviso sivisoData) {
+	public void insert(TableRow_Siviso sivisoData) {
 		repository.insert(sivisoData);
 	}
 	
-	public void update(DatabaseFormatted_Siviso sivisoData) {
+	public void update(TableRow_Siviso sivisoData) {
 		repository.update(sivisoData);
 	}
 	
-	public void delete(DatabaseFormatted_Siviso sivisoData) {
+	public void delete(TableRow_Siviso sivisoData) {
 		repository.delete(sivisoData);
 	}
 	
@@ -35,7 +35,7 @@ public class AndroidViewModel_Siviso extends AndroidViewModel
 		repository.deleteAllSivisoData();
 	}
 	
-	public LiveData<List<DatabaseFormatted_Siviso>> getAllSivisoData() {
+	public LiveData<List<TableRow_Siviso>> getAllSivisoData() {
 		return allSivisoData;
 	}
 }

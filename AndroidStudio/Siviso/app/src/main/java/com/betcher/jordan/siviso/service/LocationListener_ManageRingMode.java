@@ -14,9 +14,9 @@ import android.util.Log;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.Preferences_Siviso;
-import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
+import com.betcher.jordan.siviso.database.TableRow_Siviso;
 import com.betcher.jordan.siviso.database.Respository_Siviso;
-import com.betcher.jordan.siviso.siviso.Siviso;
+import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ class LocationListener_ManageRingMode implements LocationListener
 	AudioManager audioManager;
 	
 	Respository_Siviso sivisoRepository;
-	private Siviso previousSiviso = Siviso.None;
+	private SivisoRingmode previousSivisoRingmode = SivisoRingmode.None;
 	private int noneRingMode = -1;
 	
 	public LocationListener_ManageRingMode(
@@ -71,18 +71,18 @@ class LocationListener_ManageRingMode implements LocationListener
 		}
 		else
 		{
-			List<DatabaseFormatted_Siviso> sivisoDatas = sivisoRepository.getAllSivisoData().getValue();
-			HashMap<Siviso, ArrayList<Double>> collidedSivisos = new HashMap<>(3);
-			collidedSivisos.put(Siviso.Silent, new ArrayList<Double>());
-			collidedSivisos.put(Siviso.Vibrate, new ArrayList<Double>());
-			collidedSivisos.put(Siviso.Sound, new ArrayList<Double>());
+			List<TableRow_Siviso> sivisoDatas = sivisoRepository.getAllSivisoData().getValue();
+			HashMap<SivisoRingmode, ArrayList<Double>> collidedSivisos = new HashMap<>(3);
+			collidedSivisos.put(SivisoRingmode.Silent, new ArrayList<Double>());
+			collidedSivisos.put(SivisoRingmode.Vibrate, new ArrayList<Double>());
+			collidedSivisos.put(SivisoRingmode.Sound, new ArrayList<Double>());
 			
 			double distance_closestSiviso = -1;
 			
 			//get closest Service_ManageRingMode that isn't none and sort sivisos that current location is in
-			for(DatabaseFormatted_Siviso sivisoData : sivisoDatas)
+			for(TableRow_Siviso sivisoData : sivisoDatas)
 			{
-				if(sivisoData.siviso().equals(Siviso.None))
+				if(sivisoData.siviso().equals(SivisoRingmode.None))
 				{
 					continue;
 				}
@@ -104,27 +104,27 @@ class LocationListener_ManageRingMode implements LocationListener
 				}
 			}
 			
-			if(collidedSivisos.get(Siviso.Silent).size() > 0)
+			if(collidedSivisos.get(SivisoRingmode.Silent).size() > 0)
 			{
-				ManageRingMode(Siviso.Silent);
+				ManageRingMode(SivisoRingmode.Silent);
 				
-				Update(collidedSivisos.get(Siviso.Silent));
+				Update(collidedSivisos.get(SivisoRingmode.Silent));
 			}
-			else if(collidedSivisos.get(Siviso.Vibrate).size() > 0)
+			else if(collidedSivisos.get(SivisoRingmode.Vibrate).size() > 0)
 			{
-				ManageRingMode(Siviso.Vibrate);
+				ManageRingMode(SivisoRingmode.Vibrate);
 				
-				Update(collidedSivisos.get(Siviso.Vibrate));
+				Update(collidedSivisos.get(SivisoRingmode.Vibrate));
 			}
-			else if(collidedSivisos.get(Siviso.Sound).size() > 0)
+			else if(collidedSivisos.get(SivisoRingmode.Sound).size() > 0)
 			{
-				ManageRingMode(Siviso.Sound);
+				ManageRingMode(SivisoRingmode.Sound);
 				
-				Update(collidedSivisos.get(Siviso.Sound));
+				Update(collidedSivisos.get(SivisoRingmode.Sound));
 			}
 			else
 			{
-				ManageRingMode(Siviso.None);
+				ManageRingMode(SivisoRingmode.None);
 				
 				locationManager
 				.requestLocationUpdates
@@ -161,50 +161,50 @@ class LocationListener_ManageRingMode implements LocationListener
 		);
 	}
 	
-	private void ManageRingMode(Siviso siviso)
+	private void ManageRingMode(SivisoRingmode sivisoRingmode)
 	{
-		if(previousSiviso.equals(siviso))
+		if(previousSivisoRingmode.equals(sivisoRingmode))
 		{
 			return;
 		}
 		
 		
-		if(previousSiviso.equals(Siviso.None))
+		if(previousSivisoRingmode.equals(SivisoRingmode.None))
 		{
 			noneRingMode = audioManager.getRingerMode();
 		}
 		
 		
-		if(siviso.equals(Siviso.None))
+		if(sivisoRingmode.equals(SivisoRingmode.None))
 		{
 			ManageDefaultRingMode();
 		}
-		else if(siviso.equals(Siviso.Silent))
+		else if(sivisoRingmode.equals(SivisoRingmode.Silent))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 		}
-		else if(siviso.equals(Siviso.Vibrate))
+		else if(sivisoRingmode.equals(SivisoRingmode.Vibrate))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
 		}
-		else if(siviso.equals(Siviso.Sound))
+		else if(sivisoRingmode.equals(SivisoRingmode.Sound))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 		}
 		
-		previousSiviso = siviso;
+		previousSivisoRingmode = sivisoRingmode;
 	}
 	
 	private void ManageDefaultRingMode()
 	{
-		Siviso defaultSiviso = Preferences_Siviso.defaultSiviso(context);
+		SivisoRingmode defaultSivisoRingmode = Preferences_Siviso.defaultSiviso(context);
 		
-		if(defaultSiviso.equals(previousSiviso))
+		if(defaultSivisoRingmode.equals(previousSivisoRingmode))
 		{
 			return;
 		}
 		
-		if(defaultSiviso.equals(Siviso.None))
+		if(defaultSivisoRingmode.equals(SivisoRingmode.None))
 		{
 			if(noneRingMode == -1)
 			{
@@ -215,15 +215,15 @@ class LocationListener_ManageRingMode implements LocationListener
 				audioManager.setRingerMode(noneRingMode);
 			}
 		}
-		else if(defaultSiviso.equals(Siviso.Silent))
+		else if(defaultSivisoRingmode.equals(SivisoRingmode.Silent))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 		}
-		else if(defaultSiviso.equals(Siviso.Vibrate))
+		else if(defaultSivisoRingmode.equals(SivisoRingmode.Vibrate))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
 		}
-		else if(defaultSiviso.equals(Siviso.Sound))
+		else if(defaultSivisoRingmode.equals(SivisoRingmode.Sound))
 		{
 			audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 		}
@@ -263,7 +263,7 @@ class LocationListener_ManageRingMode implements LocationListener
 	
 	public void refresh()
 	{
-		previousSiviso = Siviso.None;
+		previousSivisoRingmode = SivisoRingmode.None;
 		start();
 	}
 	

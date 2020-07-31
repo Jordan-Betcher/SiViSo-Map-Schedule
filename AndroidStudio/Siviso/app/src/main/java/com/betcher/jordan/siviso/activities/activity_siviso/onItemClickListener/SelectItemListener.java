@@ -1,7 +1,7 @@
 package com.betcher.jordan.siviso.activities.activity_siviso.onItemClickListener;
 
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.OnItemSelectListener;
-import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
+import com.betcher.jordan.siviso.database.TableRow_Siviso;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class SelectItemListener
 	
 	ArrayList<OnItemSelectListener> onItemSelectListeners = new ArrayList<>();
 	
-	public void notifySelect(DatabaseFormatted_Siviso selectedSiviso)
+	public void notifySelect(TableRow_Siviso selectedSiviso)
 	{
 		for (OnItemSelectListener onItemClickListener: onItemSelectListeners)
 		{

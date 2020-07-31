@@ -15,14 +15,12 @@ public class Defaults
 	public static final long SECOND = 1000;
 	public static final long SERVICE_MIN_TIME = 10*SECOND;
 	
-	public static final String DATABASE_NAME = "Siviso";
-	
 	public static final int ITEM_SELECT_HIGHLIGHT_COLOR = Color.LTGRAY;
 	
 	public static final int REQUEST_LOCATION_PERMISSION = 1;
 	
 	public static final String NOTIFICATION_CHANNEL_ID = "SivisoChannelID";
-	public static final String NOTIFICATION_CHANNEL_NAME = "Siviso";
+	public static final String NOTIFICATION_CHANNEL_NAME = "SivisoRingmode";
 	public static final String DEFAULT_SIVISO_NAME = "Default";
 	
 	public static final int SIVISO_COLOR_NONE = Color.argb(120, 255, 255, 255);

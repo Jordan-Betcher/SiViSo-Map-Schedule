@@ -13,17 +13,17 @@ import java.util.List;
 public interface Dao_Siviso
 {
 	@Insert
-	void insert(DatabaseFormatted_Siviso sivisoData);
+	void insert(TableRow_Siviso sivisoData);
 	
 	@Update
-	void update(DatabaseFormatted_Siviso sivisoData);
+	void update(TableRow_Siviso sivisoData);
 	
 	@Delete
-	void delete(DatabaseFormatted_Siviso sivisoData);
+	void delete(TableRow_Siviso sivisoData);
 	
-	@Query("DELETE FROM Siviso")
+	@Query("DELETE FROM " + TableRow_Siviso.TABLE_NAME)
 	void deleteAllSivisoData();
 	
-	@Query("SELECT * FROM Siviso ORDER BY name DESC")
-	LiveData<List<DatabaseFormatted_Siviso>> getAllSivisoData();
+	@Query("SELECT * FROM " + TableRow_Siviso.TABLE_NAME + " ORDER BY name DESC")
+	LiveData<List<TableRow_Siviso>> getAllSivisoData();
 }

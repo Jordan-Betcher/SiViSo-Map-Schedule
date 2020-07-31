@@ -10,7 +10,7 @@ import java.util.List;
 public class Respository_Siviso
 {
 	private Dao_Siviso sivisoDao;
-	private LiveData<List<DatabaseFormatted_Siviso>> allSivisoData;
+	private LiveData<List<TableRow_Siviso>> allSivisoData;
 	
 	public static Respository_Siviso instance;
 	
@@ -28,15 +28,15 @@ public class Respository_Siviso
 		return instance;
 	}
 	
-	public void insert(DatabaseFormatted_Siviso sivisoData) {
+	public void insert(TableRow_Siviso sivisoData) {
 		new InsertNoteAsyncTask(sivisoDao).execute(sivisoData);
 	}
 	
-	public void update(DatabaseFormatted_Siviso sivisoData) {
+	public void update(TableRow_Siviso sivisoData) {
 		new UpdateNoteAsyncTask(sivisoDao).execute(sivisoData);
 	}
 	
-	public void delete(DatabaseFormatted_Siviso sivisoData) {
+	public void delete(TableRow_Siviso sivisoData) {
 		new DeleteNoteAsyncTask(sivisoDao).execute(sivisoData);
 	}
 	
@@ -44,11 +44,11 @@ public class Respository_Siviso
 		new DeleteAllNotesAsyncTask(sivisoDao).execute();
 	}
 	
-	public LiveData<List<DatabaseFormatted_Siviso>> getAllSivisoData() {
+	public LiveData<List<TableRow_Siviso>> getAllSivisoData() {
 		return allSivisoData;
 	}
 	
-	private static class InsertNoteAsyncTask extends AsyncTask<DatabaseFormatted_Siviso, Void, Void> {
+	private static class InsertNoteAsyncTask extends AsyncTask<TableRow_Siviso, Void, Void> {
 		private Dao_Siviso sivisoDao;
 		
 		private InsertNoteAsyncTask(Dao_Siviso sivisoDao) {
@@ -57,13 +57,13 @@ public class Respository_Siviso
 		
 		@Override
 		protected Void doInBackground(
-		DatabaseFormatted_Siviso... sivisoDatas) {
+		TableRow_Siviso... sivisoDatas) {
 			sivisoDao.insert(sivisoDatas[0]);
 			return null;
 		}
 	}
 	
-	private static class UpdateNoteAsyncTask extends AsyncTask<DatabaseFormatted_Siviso, Void, Void> {
+	private static class UpdateNoteAsyncTask extends AsyncTask<TableRow_Siviso, Void, Void> {
 		private Dao_Siviso sivisoDao;
 		
 		private UpdateNoteAsyncTask(Dao_Siviso sivisoDao) {
@@ -72,13 +72,13 @@ public class Respository_Siviso
 		
 		@Override
 		protected Void doInBackground(
-		DatabaseFormatted_Siviso... sivisoDatas) {
+		TableRow_Siviso... sivisoDatas) {
 			sivisoDao.update(sivisoDatas[0]);
 			return null;
 		}
 	}
 	
-	private static class DeleteNoteAsyncTask extends AsyncTask<DatabaseFormatted_Siviso, Void, Void> {
+	private static class DeleteNoteAsyncTask extends AsyncTask<TableRow_Siviso, Void, Void> {
 		private Dao_Siviso sivisoDao;
 		
 		private DeleteNoteAsyncTask(Dao_Siviso sivisoDao) {
@@ -87,7 +87,7 @@ public class Respository_Siviso
 		
 		@Override
 		protected Void doInBackground(
-		DatabaseFormatted_Siviso... sivisoDatas) {
+		TableRow_Siviso... sivisoDatas) {
 			sivisoDao.delete(sivisoDatas[0]);
 			return null;
 		}

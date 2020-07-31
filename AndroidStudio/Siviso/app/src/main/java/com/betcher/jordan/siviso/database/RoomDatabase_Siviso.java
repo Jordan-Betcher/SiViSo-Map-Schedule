@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {DatabaseFormatted_Siviso.class}, version = 3)
+@Database(entities = {TableRow_Siviso.class}, version = 4)
 public abstract class RoomDatabase_Siviso extends RoomDatabase
 {
 	private static final String TAG = "RoomDatabase_Siviso";

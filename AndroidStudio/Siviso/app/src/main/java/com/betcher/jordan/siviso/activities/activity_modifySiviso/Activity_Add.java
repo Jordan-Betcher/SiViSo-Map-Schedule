@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
-import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
+import com.betcher.jordan.siviso.database.TableRow_Siviso;
 import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -88,7 +88,7 @@ public class Activity_Add extends AppCompatActivity
 		String siviso = inputSiviso.getSelectedItem().toString();
 		LatLng latLng = selectSivisoOnMap.getSelectedLatLng();
 		
-		DatabaseFormatted_Siviso sivisoData = new DatabaseFormatted_Siviso(name, siviso, latLng.latitude, latLng.longitude);
+		TableRow_Siviso sivisoData = new TableRow_Siviso(name, siviso, latLng.latitude, latLng.longitude);
 		sivisoModel.insert(sivisoData);
 		this.finish();
 	}

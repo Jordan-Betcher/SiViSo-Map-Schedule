@@ -14,9 +14,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.R;
-import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
 import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
-import com.betcher.jordan.siviso.siviso.Siviso;
+import com.betcher.jordan.siviso.database.TableRow_Siviso;
+import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -63,7 +63,8 @@ public class Activity_Edit extends AppCompatActivity
 		
 		inputName.setText(selectedSivisoDataName);
 		
-		int index_siviso = Siviso.index(selectedSivisoDataSiviso);
+		int index_siviso = SivisoRingmode
+		.index(selectedSivisoDataSiviso);
 		inputSiviso.setSelection(index_siviso);
 		
 		activity = this;
@@ -107,14 +108,14 @@ public class Activity_Edit extends AppCompatActivity
 		String siviso = inputSiviso.getSelectedItem().toString();
 		LatLng latLng = selectSivisoOnMap.getSelectedLatLng();
 		
-		DatabaseFormatted_Siviso sivisoData = new DatabaseFormatted_Siviso(name, siviso, latLng.latitude, latLng.longitude);
+		TableRow_Siviso sivisoData = new TableRow_Siviso(name, siviso, latLng.latitude, latLng.longitude);
 		sivisoData.setId(selectedSivisoDataID);
 		sivisoModel.update(sivisoData);
 		
 		this.finish();
 	}
 	
-	public static void run(Context context, DatabaseFormatted_Siviso sivisoData)
+	public static void run(Context context, TableRow_Siviso sivisoData)
 	{
 		IntentBuilder intentBuilder = new IntentBuilder(context);
 		intentBuilder.putExtraSivisoData(sivisoData);
@@ -141,7 +142,7 @@ public class Activity_Edit extends AppCompatActivity
 		}
 		
 		public void putExtraSivisoData(
-		DatabaseFormatted_Siviso sivisoData)
+		TableRow_Siviso sivisoData)
 		{
 			intent.putExtra(EXTRA_NAME_ID, sivisoData.id());
 			intent.putExtra(EXTRA_NAME_NAME, sivisoData.name());

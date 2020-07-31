@@ -3,7 +3,7 @@ package com.betcher.jordan.siviso;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.betcher.jordan.siviso.siviso.Siviso;
+import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 
 public class Preferences_Siviso
 {
@@ -28,17 +28,19 @@ public class Preferences_Siviso
 		prefs.edit().putBoolean(PREFERENCE_KEY_IS_SERVICE_RUNNING, newIsServiceRunning).apply();
 	}
 	
-	public static void saveDefaultSiviso(Context context, Siviso siviso)
+	public static void saveDefaultSiviso(Context context, SivisoRingmode sivisoRingmode)
 	{
 		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-		prefs.edit().putString(PREFERENCE_KEY_DEFAULT_SIVISO, siviso.name()).apply();
+		prefs.edit().putString(PREFERENCE_KEY_DEFAULT_SIVISO, sivisoRingmode
+		.name()).apply();
 	}
 	
-	public static Siviso defaultSiviso(Context context)
+	public static SivisoRingmode defaultSiviso(Context context)
 	{
 		SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-		String defaultSivisoName = prefs.getString(PREFERENCE_KEY_DEFAULT_SIVISO, Siviso.None.name());
-		Siviso defaultSiviso = Siviso.siviso(defaultSivisoName);
-		return  defaultSiviso;
+		String defaultSivisoName = prefs.getString(PREFERENCE_KEY_DEFAULT_SIVISO, SivisoRingmode.None.name());
+		SivisoRingmode defaultSivisoRingmode = SivisoRingmode
+		.siviso(defaultSivisoName);
+		return defaultSivisoRingmode;
 	}
 }

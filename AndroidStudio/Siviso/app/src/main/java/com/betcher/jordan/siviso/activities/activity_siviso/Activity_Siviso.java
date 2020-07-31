@@ -29,8 +29,8 @@ import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemSelectListener.ZoomToSelect;
 import com.betcher.jordan.siviso.activities.activity_siviso.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
 import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
-import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
-import com.betcher.jordan.siviso.siviso.Siviso;
+import com.betcher.jordan.siviso.database.TableRow_Siviso;
+import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -108,16 +108,17 @@ public class Activity_Siviso extends AppCompatActivity
 		itemAdapter = new RecyclerViewAdapter_Siviso(this, sivisoModel);
 		recyclerViewSiviso.setAdapter(itemAdapter);
 		
-		sivisoModel.getAllSivisoData().observe(this, new Observer<List<DatabaseFormatted_Siviso>>()
+		sivisoModel.getAllSivisoData().observe(this, new Observer<List<TableRow_Siviso>>()
 		{
 			@Override
-			public void onChanged(@Nullable List<DatabaseFormatted_Siviso> sivisoDatas)
+			public void onChanged(@Nullable List<TableRow_Siviso> sivisoDatas)
 			{
-				ArrayList<DatabaseFormatted_Siviso> shownList_siviso = new ArrayList<>();
+				ArrayList<TableRow_Siviso> shownList_siviso = new ArrayList<>();
 				
-				Siviso defaultSiviso = Preferences_Siviso.defaultSiviso(
+				SivisoRingmode defaultSivisoRingmode = Preferences_Siviso.defaultSiviso(
 				Activity_Siviso.this);
-				DatabaseFormatted_Siviso defaultSivisoData = new DatabaseFormatted_Siviso(Defaults.DEFAULT_SIVISO_NAME, defaultSiviso.name(), 0, 0);
+				TableRow_Siviso defaultSivisoData = new TableRow_Siviso(Defaults.DEFAULT_SIVISO_NAME, defaultSivisoRingmode
+				.name(), 0, 0);
 				
 				shownList_siviso.add(defaultSivisoData);
 				shownList_siviso.addAll(sivisoDatas);
@@ -234,7 +235,7 @@ public class Activity_Siviso extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			DatabaseFormatted_Siviso selectedSivisoData = selectItem.selectedSivisoData();
+			TableRow_Siviso selectedSivisoData = selectItem.selectedSivisoData();
 			Activity_Edit.run(context, selectedSivisoData);
 		}
 	}

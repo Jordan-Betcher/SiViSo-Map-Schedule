@@ -5,13 +5,14 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.betcher.jordan.siviso.Defaults;
-import com.betcher.jordan.siviso.siviso.Siviso;
+import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 import com.google.android.gms.maps.model.LatLng;
 
-@Entity(tableName = Defaults.DATABASE_NAME)
-public class DatabaseFormatted_Siviso
+@Entity(tableName = TableRow_Siviso.TABLE_NAME)
+public class TableRow_Siviso
 {
+	@Ignore
+	public static final String TABLE_NAME = "SivisoTable";
 	
 	@PrimaryKey(autoGenerate = true)
 	private int id;
@@ -20,7 +21,7 @@ public class DatabaseFormatted_Siviso
 	private double latitude;
 	private double longitude;
 	
-	public DatabaseFormatted_Siviso(String name, String sivisoName, double latitude, double longitude)
+	public TableRow_Siviso(String name, String sivisoName, double latitude, double longitude)
 	{
 		this.name = name;
 		this.sivisoName = sivisoName;
@@ -61,15 +62,16 @@ public class DatabaseFormatted_Siviso
 	@Ignore
 	public LatLng latLng(){return new LatLng(latitude, longitude);}
 	@Ignore
-	public Siviso siviso(){return Siviso.siviso(sivisoName);}
+	public SivisoRingmode siviso(){return SivisoRingmode
+	.siviso(sivisoName);}
 	
 	@Ignore
 	@Override
 	public boolean equals(@Nullable Object obj)
 	{
-		if(obj instanceof DatabaseFormatted_Siviso)
+		if(obj instanceof TableRow_Siviso)
 		{
-			DatabaseFormatted_Siviso other = (DatabaseFormatted_Siviso) obj;
+			TableRow_Siviso other = (TableRow_Siviso) obj;
 			
 			if(other.name() == name()
 			&& other.sivisoName() == sivisoName()

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.betcher.jordan.siviso.Defaults;
 import com.betcher.jordan.siviso.activities.activity_siviso.sivisoRecyclerView.RecyclerViewAdapter_Siviso;
-import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
+import com.betcher.jordan.siviso.database.TableRow_Siviso;
 
 public class HighlightSelectionInList implements OnItemSelectListener, RecyclerViewAdapter_Siviso.OnBindViewListener
 {
@@ -16,7 +16,7 @@ public class HighlightSelectionInList implements OnItemSelectListener, RecyclerV
 	LinearLayoutManager linearLayoutManager;
 	private View highlightedView = null;
 	private int previousViewColor = 0;
-	private DatabaseFormatted_Siviso currentSelect = null;
+	private TableRow_Siviso currentSelect = null;
 	
 	public HighlightSelectionInList(
 	RecyclerViewAdapter_Siviso itemAdapter, LinearLayoutManager linearLayoutManager)
@@ -28,7 +28,7 @@ public class HighlightSelectionInList implements OnItemSelectListener, RecyclerV
 	
 	@Override
 	public void onItemSelect(
-	DatabaseFormatted_Siviso selectedSivisoData)
+	TableRow_Siviso selectedSivisoData)
 	{
 		currentSelect = selectedSivisoData;
 		int selectedPosition = itemAdapter.getPosition(selectedSivisoData);
@@ -87,7 +87,7 @@ public class HighlightSelectionInList implements OnItemSelectListener, RecyclerV
 	}
 	
 	@Override
-	public void OnBindView(DatabaseFormatted_Siviso currentSivisoData, View itemView)
+	public void OnBindView(TableRow_Siviso currentSivisoData, View itemView)
 	{
 		if(currentSelect == currentSivisoData)
 		{

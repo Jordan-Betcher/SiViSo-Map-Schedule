@@ -1,6 +1,6 @@
 package com.betcher.jordan.siviso.activities.activity_siviso;
 
-import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
+import com.betcher.jordan.siviso.database.TableRow_Siviso;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 
@@ -21,7 +21,7 @@ public class TriggerSelectItem implements GoogleMap.OnCircleClickListener
 	@Override
 	public void onCircleClick(Circle circle)
 	{
-		DatabaseFormatted_Siviso selectedSiviso = sivisoMapCircles.getSiviso(circle);
+		TableRow_Siviso selectedSiviso = sivisoMapCircles.getSiviso(circle);
 		selectItem.notifySelect(selectedSiviso);
 	}
 }

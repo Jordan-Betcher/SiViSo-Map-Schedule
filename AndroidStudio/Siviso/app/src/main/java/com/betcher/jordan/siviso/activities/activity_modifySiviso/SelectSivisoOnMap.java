@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.betcher.jordan.siviso.Defaults;
-import com.betcher.jordan.siviso.siviso.Siviso;
+import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -43,7 +43,9 @@ class SelectSivisoOnMap implements GoogleMap.OnMapClickListener
 		
 		selected = map.addCircle(new CircleOptions().center(latLng)
 		                                            .radius(Defaults.SIVISO_RADIUS)
-		                                            .fillColor(Siviso.color(sivisoName))
+		                                            .fillColor(
+		                                            SivisoRingmode
+		                                            .color(sivisoName))
 		                                            .strokeColor(Defaults.SIVISO_STROKE_COLOR)
 		                                            .strokeWidth(Defaults.SIVISO_STROKE_WIDTH)
 		                        )
@@ -56,7 +58,8 @@ class SelectSivisoOnMap implements GoogleMap.OnMapClickListener
 			AdapterView<?> parent, View view, int position, long id)
 			{
 				String sivisoName = parent.getSelectedItem().toString();
-				selected.setFillColor(Siviso.color(sivisoName));
+				selected.setFillColor(
+				SivisoRingmode.color(sivisoName));
 			}
 			
 			@Override

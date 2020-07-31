@@ -16,7 +16,7 @@ public class SpinnerAdapter_Siviso extends ArrayAdapter
 	
 	public SpinnerAdapter_Siviso(Context context)
 	{
-		super(context, android.R.layout.simple_spinner_dropdown_item, Siviso.sivisos);
+		super(context, android.R.layout.simple_spinner_dropdown_item, SivisoRingmode.sivisoRingmodes);
 	}
 	
 	@NonNull
@@ -26,7 +26,7 @@ public class SpinnerAdapter_Siviso extends ArrayAdapter
 	@NonNull ViewGroup parent)
 	{
 		View view = super.getView(position, convertView, parent);
-		view.setBackgroundColor(Siviso.color(position));
+		view.setBackgroundColor(SivisoRingmode.color(position));
 		return view;
 	}
 	
@@ -36,7 +36,7 @@ public class SpinnerAdapter_Siviso extends ArrayAdapter
 	@NonNull ViewGroup parent)
 	{
 		View view = super.getDropDownView(position, convertView, parent);
-		view.setBackgroundColor(Siviso.color(position));
+		view.setBackgroundColor(SivisoRingmode.color(position));
 		return view;
 	}
 }

@@ -4,7 +4,7 @@ import com.betcher.jordan.siviso.Defaults;
 
 import java.util.HashMap;
 
-public enum Siviso
+public enum SivisoRingmode
 {
 	None(Defaults.SIVISO_COLOR_NONE),
 	Silent(Defaults.SIVISO_COLOR_SILENT),
@@ -12,22 +12,22 @@ public enum Siviso
 	Sound(Defaults.SIVISO_COLOR_SOUND);
 	
 	int color;
-	Siviso(int color)
+	SivisoRingmode(int color)
 	{
 		this.color = color;
 	}
 	
-	static Siviso[] sivisos = Siviso.values();
+	static SivisoRingmode[] sivisoRingmodes = SivisoRingmode.values();
 	
 	static HashMap<String, Integer> nameIndex = createNameIndex();
 	private static HashMap<String, Integer> createNameIndex()
 	{
 		HashMap<String, Integer> nameIndex = new HashMap<>();
 		
-		for(int index = 0; index < sivisos.length; index++)
+		for(int index = 0; index < sivisoRingmodes.length; index++)
 		{
-			Siviso siviso = sivisos[index];
-			String name = siviso.name();
+			SivisoRingmode sivisoRingmode = sivisoRingmodes[index];
+			String name = sivisoRingmode.name();
 			nameIndex.put(name, index);
 		}
 		
@@ -36,7 +36,7 @@ public enum Siviso
 	
 	public static int color(String sivisoName)
 	{
-		return sivisos[nameIndex.get(sivisoName)].color;
+		return sivisoRingmodes[nameIndex.get(sivisoName)].color;
 	}
 	
 	public static int index(String name)
@@ -44,29 +44,29 @@ public enum Siviso
 		return nameIndex.get(name);
 	}
 	
-	public static Siviso siviso(String sivisoName)
+	public static SivisoRingmode siviso(String sivisoName)
 	{
-		return sivisos[nameIndex.get(sivisoName)];
+		return sivisoRingmodes[nameIndex.get(sivisoName)];
 	}
 	
 	public static int Count()
 	{
-		return sivisos.length;
+		return sivisoRingmodes.length;
 	}
 	
-	public static Siviso siviso(int index)
+	public static SivisoRingmode siviso(int index)
 	{
-		return sivisos[index];
+		return sivisoRingmodes[index];
 	}
 	
 	public static int color(int index)
 	{
-		return sivisos[index].color();
+		return sivisoRingmodes[index].color();
 	}
 	
 	public static String name(int index)
 	{
-		return sivisos[index].name();
+		return sivisoRingmodes[index].name();
 	}
 	
 	public int index()

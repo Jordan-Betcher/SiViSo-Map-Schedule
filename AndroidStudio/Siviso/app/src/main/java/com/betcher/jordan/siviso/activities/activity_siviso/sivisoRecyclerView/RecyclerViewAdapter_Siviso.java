@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.betcher.jordan.siviso.R;
 import com.betcher.jordan.siviso.activities.activity_siviso.onItemClickListener.OnItemClickListener;
-import com.betcher.jordan.siviso.database.DatabaseFormatted_Siviso;
 import com.betcher.jordan.siviso.database.AndroidViewModel_Siviso;
-import com.betcher.jordan.siviso.siviso.Siviso;
+import com.betcher.jordan.siviso.database.TableRow_Siviso;
+import com.betcher.jordan.siviso.siviso.SivisoRingmode;
 import com.betcher.jordan.siviso.siviso.SpinnerAdapter_Siviso;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class RecyclerViewAdapter_Siviso
 {
 	private static final String TAG = "SVSRecyclerViewAdapter";
 	
-	private List<DatabaseFormatted_Siviso> sivisoDatas = new ArrayList<>();
+	private List<TableRow_Siviso> sivisoDatas = new ArrayList<>();
 	
 	private ArrayList<OnBindViewListener> onBindViewListeners = new ArrayList<>();
 	private AndroidViewModel_Siviso sivisoModel;
@@ -50,14 +50,14 @@ public class RecyclerViewAdapter_Siviso
 	@Override
 	public void onBindViewHolder(@NonNull SivisoHolder holder, int position)
 	{
-		DatabaseFormatted_Siviso currentSivisoData = sivisoDatas.get(position);
+		TableRow_Siviso currentSivisoData = sivisoDatas.get(position);
 		holder.setSivisoData(currentSivisoData);
 		
 		callAllOnBindViewListeners(currentSivisoData, holder.itemView);
 	}
 	
 	private void callAllOnBindViewListeners(
-	DatabaseFormatted_Siviso currentSivisoData, View itemView)
+	TableRow_Siviso currentSivisoData, View itemView)
 	{
 		for (OnBindViewListener listener : onBindViewListeners
 		     )
@@ -73,20 +73,20 @@ public class RecyclerViewAdapter_Siviso
 		return sivisoDatas.size();
 	}
 	
-	public void setSivisoDatas(List<DatabaseFormatted_Siviso> sivisoDatas)
+	public void setSivisoDatas(List<TableRow_Siviso> sivisoDatas)
 	{
 		this.sivisoDatas = sivisoDatas;
 		notifyDataSetChanged();
 		Log.d(TAG, "setSivisoDatas: " + sivisoDatas.size());
 	}
 	
-	public DatabaseFormatted_Siviso getItem(int itemPosition)
+	public TableRow_Siviso getItem(int itemPosition)
 	{
 		return sivisoDatas.get(itemPosition);
 	}
 	
 	public boolean containItem(
-	DatabaseFormatted_Siviso selectedSiviso)
+	TableRow_Siviso selectedSiviso)
 	{
 		if(sivisoDatas.contains(selectedSiviso))
 		{
@@ -98,7 +98,7 @@ public class RecyclerViewAdapter_Siviso
 		}
 	}
 	
-	public int getPosition(DatabaseFormatted_Siviso selectedSiviso)
+	public int getPosition(TableRow_Siviso selectedSiviso)
 	{
 		return sivisoDatas.indexOf(selectedSiviso);
 	}
@@ -152,14 +152,14 @@ public class RecyclerViewAdapter_Siviso
 			textViewName.setText(name);
 		}
 		
-		private void setSiviso(Siviso siviso)
+		private void setSiviso(SivisoRingmode sivisoRingmode)
 		{
 			spinnerSiviso.setSelection(
-			siviso.index());
+			sivisoRingmode.index());
 		}
 		
 		public void setSivisoData(
-		DatabaseFormatted_Siviso currentSivisoData)
+		TableRow_Siviso currentSivisoData)
 		{
 			setName(currentSivisoData.name());
 			setSiviso(currentSivisoData.siviso());
@@ -177,7 +177,7 @@ public class RecyclerViewAdapter_Siviso
 	public interface OnBindViewListener
 	{
 		
-		void OnBindView(DatabaseFormatted_Siviso currentSivisoData, View itemView);
+		void OnBindView(TableRow_Siviso currentSivisoData, View itemView);
 	}
 }
 
