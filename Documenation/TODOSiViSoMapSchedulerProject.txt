@@ -2,21 +2,18 @@ SiViSo Map Scheduler
 Is a android application that allows you to go to silent, vibrate, and sound based on google map location
 
 Steps:      
+SivisoLite
+    Permissions Activity
+    Refactor layout text into strings file
+    Remove siviso programmatic indicator
+    Service start sticky so on restart phone remakes service
+    Color matching siviso
+Put Siviso Lite up for beta
+Use create a new SivisoLite using test driven development
 
-[x] Siviso
-    [x] Map circle fill depending on siviso
-        [x] On Create
-        [x] On Update Database
-    [x] Move buttons to bottom of screen
-    [x] Add alorithem to Service
-    [x] Add/Edit should have same layout
-    [x] Color of spinner matches siviso colors
-        [x]set view size
-    [x]Refactor Siviso
-        [x]Enum, number, string
-    [x] Name of Siviso Data first letter should be capped when you start typing
-    [x] Preferences
-    
+
+
+
 Refactor Siviso
     [x] Handle Permissions not granted (search "@SuppressLint("MissingPermission")", not pragmatic)
         [x]  Create Request permissions Activity
@@ -25,9 +22,18 @@ Refactor Siviso
         [x]  Call Permissions in Home Startup
     [x] Refactor layout text into strings file
     [x] Zoom in map so you can see the siviso areas
-    [x] Remove siviso indicator
     Refactor names of variables, classes, etc
+        Watch clean code / naming lectures
+        Reread book Clean Code
+        look at whole code and how I would figure out the context, and then from there everything else
+        Learn how to test
+        Do everything fro
+    On Restart start siviso
     Do the same for SivisoLite
+    
+Siviso 
+    Radius changes with zoom in add and edit
+    
 
 To publish need
     Test on multiple API levels
@@ -79,6 +85,16 @@ Create a company when make enough to warrent it
 
 
 Research
+    Save and Load Class/Object to file
+    https://stackoverflow.com/questions/4118751/how-do-i-serialize-an-object-and-save-it-to-a-file-in-android
+
+    Detect File Modification
+    https://stackoverflow.com/questions/7387007/how-to-detect-file-modification
+
+    Start service after bootup
+    https://stackoverflow.com/questions/27499431/how-to-set-the-priority-of-android-service
+    https://stackoverflow.com/questions/2784441/trying-to-start-a-service-on-boot-on-android?answertab=active#tab-top
+
     Spinner Individual Item Color
     Add custom BaseAdapter to spinner
     https://stackoverflow.com/questions/23370412/android-spinner-different-background-for-each-row
