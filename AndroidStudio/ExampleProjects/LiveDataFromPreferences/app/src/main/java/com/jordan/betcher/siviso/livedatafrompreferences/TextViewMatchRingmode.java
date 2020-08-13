@@ -4,12 +4,12 @@ import android.widget.TextView;
 
 import androidx.lifecycle.Observer;
 
-public class ObserverTextViewRingmode
+public class TextViewMatchRingmode
 implements Observer<Home>
 {
 	TextView textView;
 	
-	public ObserverTextViewRingmode(TextView textView)
+	public TextViewMatchRingmode(TextView textView)
 	{
 		this.textView = textView;
 	}
