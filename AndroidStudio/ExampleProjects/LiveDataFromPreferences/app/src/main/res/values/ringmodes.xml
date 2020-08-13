@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="ringmodes">
+        <item>@array/none</item>
+        <item>@array/silent</item>
+        <item>@array/vibrate</item>
+        <item>@array/sound</item>
+    </array>
+    <array name="none">
+        <item>None</item>
+        <item>@color/none</item>
+        <item name="alpha_for_color">120</item>
+    </array>
+    <array name="silent">
+        <item>Silent</item>
+        <item>@color/silent</item>
+        <item name="alpha_for_color">200</item>
+    </array>
+    <array name="vibrate">
+        <item>Vibrate</item>
+        <item>@color/vibrate</item>
+        <item name="alpha_for_color">200</item>
+    </array>
+    <array name="sound">
+        <item>Sound</item>
+        <item>@color/sound</item>
+        <item name="alpha_for_color">200</item>
+    </array>
+</resources>

@@ -1,16 +1,16 @@
 package com.jordan.betcher.siviso.livedatafrompreferences;
 
 import android.os.Bundle;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LiveData;
 
 public class Activity_Main extends AppCompatActivity
 {
-
-	View view;
 	Model model;
 	
 	@Override
@@ -19,35 +19,29 @@ public class Activity_Main extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		TextView longitude = findViewById(R.id.textView_Longitude);
-		TextView latitude = findViewById(R.id.textView_Latitude);
-		
-		CardView rowDefault = findViewById(R.id.cardViewDefault);
-		CardView rowHome = findViewById(R.id.cardViewHome);
-		Spinner ringmodeDefault = findViewById(R.id.spinnerDefault);
-		Spinner ringmodeHome = findViewById(R.id.spinnerHome);
-		
-		rowDefault.setOnClickListener(
-		new android.view.View.OnClickListener(){
+		Spinner ringmodeHome = findViewById(R.id.spinner_homeRingmode);
+		int spinnerLayout = android.R.layout.simple_spinner_dropdown_item;
+		ringmodeHome.setAdapter(new ArrayAdapter<Ringmode>(this, spinnerLayout, Ringmode.values()));
+		ringmodeHome.setOnItemSelectedListener(
+		new AdapterView.OnItemSelectedListener(){
 			@Override
-			public void onClick(android.view.View v)
+			public void onItemSelected(
+			AdapterView<?> parent, android.view.View view,
+			int position, long id)
 			{
-				view.SelectDefault();
+				model.updateHomeRingmode(Ringmode.values()[position]);
+			}
+			
+			@Override
+			public void onNothingSelected(AdapterView<?> parent)
+			{
+			
 			}
 		});
 		
-		rowHome.setOnClickListener(
-		new android.view.View.OnClickListener(){
-			@Override
-			public void onClick(android.view.View v)
-			{
-				view.SelectHome();
-			}
-		});
-		
-		//ringmodeDefault.setAdapter(new SpinnerAdapterRingmodeColors(model));
-		
-		View view = new View();
+		TextView ringmode = findViewById(R.id.textView_ringmode);
 		Model model = new Model();
+		LiveData<Home> homeLiveData = model.home();
+		homeLiveData.observe(this, new ObserverTextViewRingmode(ringmode));
 	}
 }

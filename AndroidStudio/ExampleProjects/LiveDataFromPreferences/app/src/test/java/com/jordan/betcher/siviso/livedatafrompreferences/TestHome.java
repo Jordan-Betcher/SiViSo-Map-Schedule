@@ -1,10 +1,8 @@
 package com.jordan.betcher.siviso.livedatafrompreferences;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TestHome
 {
@@ -26,26 +24,5 @@ public class TestHome
 		Ringmode ringmode = home.ringmode();
 		
 		assertEquals(Ringmode.Silent, ringmode);
-	}
-	
-	@Test
-	public void LatLng_StartNull_null()
-	{
-		Home home = new Home(Ringmode.None);
-		
-		LatLng latLng = home.latLng();
-		
-		assertEquals(null, latLng);
-	}
-	
-	@Test
-	public void SetLatLng_StoreLatLng00_LatLng00()
-	{
-		Home home = new Home(Ringmode.None);
-		home.setLatLng(0,0);
-		
-		LatLng latLng = home.latLng();
-		
-		assertEquals(new LatLng(0,0), latLng);
 	}
 }

@@ -7,59 +7,34 @@
     tools:context=".Activity_Main">
 
     <TextView
-        android:id="@+id/textView_latLng"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView_ringmode"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:text="LatLng "
+        android:layout_marginEnd="256dp"
+        android:layout_marginRight="256dp"
+        android:text="Siviso"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.542" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewDefault"
+        android:id="@+id/cardView_home"
         android:layout_width="0dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        app:cardBackgroundColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_latLng">
+        app:layout_constraintTop_toBottomOf="@+id/textView_ringmode">
 
         <TextView
-            android:id="@+id/textViewDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingLeft="8dp"
-            android:text="Default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/spinnerDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:gravity="center"
-            android:paddingRight="8dp" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewHome"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/cardViewDefault"
-        app:layout_constraintStart_toStartOf="@+id/cardViewDefault"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewDefault">
-
-        <TextView
-            android:id="@+id/textViewHome"
+            android:id="@+id/textView_home"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -70,7 +45,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/spinnerHome"
+            android:id="@+id/spinner_homeRingmode"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="right"
@@ -78,21 +53,5 @@
             android:paddingRight="8dp" />
 
     </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/textView_Longitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Longitude:  "
-        app:layout_constraintStart_toEndOf="@+id/textView_latLng"
-        app:layout_constraintTop_toTopOf="@+id/textView_latLng" />
-
-    <TextView
-        android:id="@+id/textView_Latitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latitude:  "
-        app:layout_constraintStart_toEndOf="@+id/textView_Longitude"
-        app:layout_constraintTop_toTopOf="@+id/textView_Longitude" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
