@@ -25,4 +25,25 @@ public class TestHome
 		
 		assertEquals(Ringmode.Silent, ringmode);
 	}
+	
+	@Test
+	public void equals_None_None()
+	{
+		Home home = new Home(Ringmode.None);
+		
+		Home expected = new Home(Ringmode.None);
+		
+		assertEquals(expected, home);
+	}
+	
+	@Test
+	public void equals_Silent_Silent()
+	{
+		Home home = new Home(Ringmode.Silent);
+		
+		Home expected = new Home(Ringmode.Silent);
+		
+		assertEquals(expected, home);
+	}
+	
 }

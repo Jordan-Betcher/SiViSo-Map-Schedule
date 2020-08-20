@@ -85,6 +85,10 @@ Create a company when make enough to warrent it
 
 
 Research
+    Test LiveData, Instant task executor rule and how to get it.
+    https://jeroenmols.com/blog/2019/01/17/livedatajunit5/
+    https://stackoverflow.com/questions/48049131/cannot-resolve-symbol-instanttaskexecutorrule
+
     Save and Load Class/Object to file
     https://stackoverflow.com/questions/4118751/how-do-i-serialize-an-object-and-save-it-to-a-file-in-android
 

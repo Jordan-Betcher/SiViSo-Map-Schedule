@@ -10,4 +10,13 @@ public class Home
 	{
 		return ringmode;
 	}
+	
+	@Override
+	public boolean equals(Object o)
+	{
+		if(this == o){ return true; }
+		if(!(o instanceof Home)){ return false; }
+		Home home = (Home) o;
+		return ringmode == home.ringmode;
+	}
 }

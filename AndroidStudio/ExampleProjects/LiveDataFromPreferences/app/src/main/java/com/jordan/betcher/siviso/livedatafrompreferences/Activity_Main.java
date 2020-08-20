@@ -10,8 +10,6 @@ import androidx.lifecycle.LiveData;
 
 public class Activity_Main extends AppCompatActivity
 {
-	Model model;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -26,7 +24,7 @@ public class Activity_Main extends AppCompatActivity
 		ringmodeHome.setOnItemSelectedListener(new UpdateHomeRingmode(model));
 		
 		TextView ringmode = findViewById(R.id.textView_ringmode);
-		LiveData<Home> homeLiveData = model.home();
+		LiveData<Home> homeLiveData = model.homeLiveData();
 		homeLiveData.observe(this, new TextViewMatchRingmode(ringmode));
 	}
 }
